@@ -1,0 +1,78 @@
+package nex.vts.backend.RepoImpl;
+
+import nex.vts.backend.Model.User;
+import nex.vts.backend.Repository.UserRepo;
+import oracle.jdbc.OracleTypes;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+@Repository
+public class UserRepoImpl implements UserRepo {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplete;
+    SimpleJdbcCall getAllStatesJdbcCall;
+
+
+    public UserRepoImpl(DataSource dataSource) {
+
+        this.getAllStatesJdbcCall = new SimpleJdbcCall(dataSource);
+    }
+
+    @Override
+    public List<User> findAll() {
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        try {
+            Map<String, Object> result = getAllStatesJdbcCall.withProcedureName("get_data_users")
+                    .declareParameters(new SqlOutParameter("p_result_cursor", OracleTypes.CURSOR))
+                    .execute(100);
+
+            JSONObject json = new JSONObject(result);
+            String out = json.get("p_result_cursor").toString();
+            JSONArray jsonArray = new JSONArray(out);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonData = jsonArray.getJSONObject(i);
+                userArrayList.add(new User(
+                        jsonData.optLong("USER_ID"),
+                        jsonData.optInt("IS_ACTIVE"),
+                        jsonData.optString("USERNAME"),
+                        jsonData.optString("PASSWORD"),
+                        jsonData.optString("EMAIL"),
+                        jsonData.optString("ROLES")));
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("You are trying to pass wrong type of arguments ,please check arguments index position with procedure arguments index position, and try to pass write f DataType. Please check Error massage.\nError massage: " + e.getMessage());
+
+        } catch (BadSqlGrammarException e) {
+            System.err.println("Please check your procedure Name and number of arguments. Please check Error massage.\nError massage: " + e.getMessage());
+
+        } catch (JSONException e) {
+            System.err.println("Please check your output cursor name, must be similar with oracle procedure out cursor. Please check Error massage.\nError massage: " + e.getMessage());
+
+        } catch (NullPointerException e) {
+            System.err.println(" Please check your SimpleJdbcCall object, might be dataSource is not assigned.  Please check Error massage.\nError massage: " + e.getMessage());
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Please check your number of parameter that you are trying to pass as arguments, pass right number of parameter.  Please check Error massage.\nError massage: " + e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println("Exception Occurred: " + e.getMessage());
+
+        }
+
+        return userArrayList;
+    }
+}
