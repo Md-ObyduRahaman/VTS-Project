@@ -6,6 +6,8 @@ import nex.vts.backend.Model.AuthRequest;
 import nex.vts.backend.Model.Response.BaseResponse;
 import nex.vts.backend.Model.Response.LoginResponse;
 import nex.vts.backend.Model.User;
+import nex.vts.backend.Model.vehicleList.VehicleList;
+import nex.vts.backend.Model.vehicleList.VehiclelistItem;
 import nex.vts.backend.Repository.UserRepo;
 import nex.vts.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,25 +84,32 @@ public class UserLoginController {
 
     }
 
-    @PostMapping("/vehicle-list")
+    @GetMapping(value = "/vehicle-list",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('User')")
+    public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
+        VehicleList vehicleObject =new VehicleList();
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatus(true);
 
-    public String getVehicleList(@RequestBody AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
-        } else {
-            throw new UsernameNotFoundException("invalid user request !");
-        }
+        ArrayList<VehiclelistItem> vehiclelistItems = new ArrayList<>();
+        VehiclelistItem vehiclelistItems1 = new VehiclelistItem("Toyota","Blue","16479","Active", "Z605");
+        VehiclelistItem vehiclelistItems2 = new VehiclelistItem("BMW","Black","452466","In-Active", "L457");
+
+        vehiclelistItems.add(vehiclelistItems1);
+        vehiclelistItems.add(vehiclelistItems2);
+
+        vehicleObject.setVehiclelist(vehiclelistItems);
+
+        baseResponse.setData(vehicleObject);
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
 
     public static String getCurrentDateTime() {
-
         ZoneId dhaka = ZoneId.of("Asia/Dhaka");
         ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dhakaTime.format(formatter);
     }
-
     //driver-detals
 }
