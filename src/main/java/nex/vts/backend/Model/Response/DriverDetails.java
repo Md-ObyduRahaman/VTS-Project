@@ -1,8 +1,12 @@
-package nex.vts.backend.Model.driverList;
+package nex.vts.backend.Model.Response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-public class DriverListItem{
+@AllArgsConstructor
+@NoArgsConstructor
+public class DriverDetails {
 
 	@JsonProperty("Father Name")
 	private String fatherName;

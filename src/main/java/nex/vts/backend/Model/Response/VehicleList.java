@@ -1,9 +1,8 @@
-package nex.vts.backend.Model.vehicleList;
+package nex.vts.backend.Model.Response;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import nex.vts.backend.Model.Response.BaseResponse;
 
 public class VehicleList  {
 

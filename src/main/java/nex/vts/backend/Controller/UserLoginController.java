@@ -6,8 +6,10 @@ import nex.vts.backend.Model.AuthRequest;
 import nex.vts.backend.Model.Response.BaseResponse;
 import nex.vts.backend.Model.Response.LoginResponse;
 import nex.vts.backend.Model.User;
-import nex.vts.backend.Model.vehicleList.VehicleList;
-import nex.vts.backend.Model.vehicleList.VehiclelistItem;
+import nex.vts.backend.Model.Response.DriverData;
+import nex.vts.backend.Model.Response.DriverDetails;
+import nex.vts.backend.Model.Response.VehicleList;
+import nex.vts.backend.Model.Response.VehiclelistItem;
 import nex.vts.backend.Repository.UserRepo;
 import nex.vts.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZoneId;
@@ -84,16 +85,16 @@ public class UserLoginController {
 
     }
 
-    @GetMapping(value = "/vehicle-list",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/vehicle-list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('User')")
     public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
-        VehicleList vehicleObject =new VehicleList();
+        VehicleList vehicleObject = new VehicleList();
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatus(true);
 
         ArrayList<VehiclelistItem> vehiclelistItems = new ArrayList<>();
-        VehiclelistItem vehiclelistItems1 = new VehiclelistItem("Toyota","Blue","16479","Active", "Z605");
-        VehiclelistItem vehiclelistItems2 = new VehiclelistItem("BMW","Black","452466","In-Active", "L457");
+        VehiclelistItem vehiclelistItems1 = new VehiclelistItem("Toyota", "Blue", "16479", "Active", "Z605");
+        VehiclelistItem vehiclelistItems2 = new VehiclelistItem("BMW", "Black", "452466", "In-Active", "L457");
 
         vehiclelistItems.add(vehiclelistItems1);
         vehiclelistItems.add(vehiclelistItems2);
@@ -111,5 +112,56 @@ public class UserLoginController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dhakaTime.format(formatter);
     }
-    //driver-detals
+
+    @GetMapping(value = "users/{user_id}/vehicle/{vehicle_id}/driver_info", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('User')")
+    public ResponseEntity<String> getDriverList(@PathVariable("user_id") String user_id, @PathVariable("vehicle_id") String vehicle_id) throws JsonProcessingException {
+
+        DriverData driverData = new DriverData();
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatus(true);
+      //  System.out.println("Encoded Data :" + obfuscatePartnerId(user_id));
+        System.out.println("decoded Data :" + deObfuscatePartnerId(Long.parseLong(user_id)));
+
+        DriverDetails driverDetails = new DriverDetails("Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
+
+        driverData.setDriverList(driverDetails);
+        baseResponse.setData(driverData);
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+
+    }
+
+    public static Long obfuscatePartnerId(String strUserId) {
+
+        try {
+            Long User_id = Long.parseLong(strUserId);
+            System.out.println("Converted Long value: " + User_id);
+            Long firstId = User_id * 2 * 3 * 7;
+            System.out.println("firstId Value: " + firstId);
+            Long secondId = 7L * 8L * 9L;
+            System.out.println("secondId Value: " + secondId);
+
+            Long finalId = firstId + secondId;
+            System.out.println("finalId Value: " + finalId);
+            return finalId;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Couldn't convert to Long.");
+            return null;
+        }
+
+    }
+
+    public static Long deObfuscatePartnerId(Long finalId) {
+        Long secondId = 7L * 8L * 9L;
+        Long newlId = finalId - secondId;
+        System.out.println("finalId Value: " + newlId);
+
+        Long result = newlId / (3 * 2 * 7);
+        System.out.println("result Value: " + result);
+        return result;
+
+    }
+
+
 }

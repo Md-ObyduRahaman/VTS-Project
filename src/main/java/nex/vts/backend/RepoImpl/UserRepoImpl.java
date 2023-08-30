@@ -98,6 +98,11 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
+    public Optional<User> findById(Integer userID) {
+        return Optional.empty();
+    }
+
+    @Override
     public int save(User user) {
         user.setPASSWORD(passwordEncoder.encode(user.getPASSWORD()));
         return jdbcTemplete.update(
