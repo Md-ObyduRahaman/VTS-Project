@@ -80,6 +80,30 @@ public class UserLoginController {
 
     }
 
+    @PostMapping(value = "/RefreshToken", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> RefreshAuthAndGetToken(@RequestBody AuthRequest authRequest) throws JsonProcessingException {
+        Authentication RefreshAuthentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        if (RefreshAuthentication.isAuthenticated()) {
+            BaseResponse baseResponse = new BaseResponse();
+            baseResponse.setStatus(true);
+            LoginResponse loginResponse = new LoginResponse();
+            loginResponse.setServerDateTime(getCurrentDateTime());
+            loginResponse.setToken(jwtService.generateToken(authRequest.getUsername()));
+            baseResponse.setData(loginResponse);
+            return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        } else {
+            BaseResponse baseResponse = new BaseResponse();
+            baseResponse.setStatus(false);
+            baseResponse.setErrorMsg("invalid user request !");
+            baseResponse.setErrorCode(999);
+            return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+
+            //throw new UsernameNotFoundException("invalid user request !");
+        }
+
+
+    }
+
     @GetMapping(value = "/vehicle-list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('User')")
     public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
