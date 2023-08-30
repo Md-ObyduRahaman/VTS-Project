@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DriverDetails {
 
+	@JsonProperty("driverId")
+	private Long driverId;
+
 	@JsonProperty("Father Name")
 	private String fatherName;
 
