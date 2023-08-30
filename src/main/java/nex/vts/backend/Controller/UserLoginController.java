@@ -3,13 +3,8 @@ package nex.vts.backend.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.Model.AuthRequest;
-import nex.vts.backend.Model.Response.BaseResponse;
-import nex.vts.backend.Model.Response.LoginResponse;
+import nex.vts.backend.Model.Response.*;
 import nex.vts.backend.Model.User;
-import nex.vts.backend.Model.Response.DriverData;
-import nex.vts.backend.Model.Response.DriverDetails;
-import nex.vts.backend.Model.Response.VehicleList;
-import nex.vts.backend.Model.Response.VehiclelistItem;
 import nex.vts.backend.Repository.UserRepo;
 import nex.vts.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,10 +115,10 @@ public class UserLoginController {
         DriverData driverData = new DriverData();
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatus(true);
-      //  System.out.println("Encoded Data :" + obfuscatePartnerId(user_id));
+        //  System.out.println("Encoded Data :" + obfuscatePartnerId(user_id));
         System.out.println("decoded Data :" + deObfuscatePartnerId(Long.parseLong(user_id)));
 
-        DriverDetails driverDetails = new DriverDetails( 1235L,"Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
+        DriverDetails driverDetails = new DriverDetails(1234L, "Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
 
         driverData.setDriverList(driverDetails);
         baseResponse.setData(driverData);

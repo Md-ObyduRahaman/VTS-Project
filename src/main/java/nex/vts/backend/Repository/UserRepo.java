@@ -10,7 +10,7 @@ public interface UserRepo {
 
     Optional<User> findByUserName(String userName);
 
-    Optional<User> findById(Integer userID);
+    boolean findById(Integer userID);
 
     int save(User user);
 }

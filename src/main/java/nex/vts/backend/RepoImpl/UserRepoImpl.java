@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,8 +99,20 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public Optional<User> findById(Integer userID) {
-        return Optional.empty();
+    public boolean findById(Integer userID) {
+        boolean hasRecord =
+                jdbcTemplete
+                        .query("select * from driverdetails WHERE driverid=?",
+                                new Object[] { userID },
+                                (ResultSet rs) -> {
+                                    if (rs.next()) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                        );
+        return hasRecord;
+
     }
 
     @Override
