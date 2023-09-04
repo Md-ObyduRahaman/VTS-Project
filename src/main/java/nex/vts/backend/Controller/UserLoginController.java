@@ -90,7 +90,8 @@ public class UserLoginController {
         if (RefreshAuthentication.isAuthenticated()) {
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.setStatus(true);
-            LoginResponse loginResponse = new LoginResponse();
+            RefreshLogin loginResponse = new RefreshLogin();
+            loginResponse.setRefreshSuccess(true);
             loginResponse.setServerDateTime(getCurrentDateTime());
             loginResponse.setToken(jwtService.generateToken(authRequest.getUsername()));
             baseResponse.setData(loginResponse);
@@ -149,8 +150,8 @@ public class UserLoginController {
         System.out.println("decoded Data :" + deObfuscatePartnerId(Long.parseLong(user_id)));
 
         //DriverDetails driverDetails = new DriverDetails(1234L, "Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
-        Optional<DriverDetails> driverDetails =driverRepo.findById(1235L);
-                driverData.setDriverList(driverDetails.get());
+        Optional<DriverDetails> driverDetails = driverRepo.findById(1235L);
+        driverData.setDriverList(driverDetails.get());
         baseResponse.setData(driverData);
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
