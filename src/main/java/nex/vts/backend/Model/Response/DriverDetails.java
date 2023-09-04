@@ -1,48 +1,40 @@
 package nex.vts.backend.Model.Response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+
+
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Table(name = "DRIVERDETAILS")
 public class DriverDetails {
 
+	@Id
 	@JsonProperty("driverId")
-	private Long driverId;
+	private Long DRIVERID;
 
 	@JsonProperty("Father Name")
-	private String fatherName;
+	private String FATHERNAME;
 
 	@JsonProperty("Mobile Number")
-	private String mobileNumber;
+	private String MOBILENUMBER;
 
 	@JsonProperty("License Number")
-	private String licenseNumber;
+	@Column(name = "LICENSENUMBER")
+	private String LICENSENUMBER;
 
 	@JsonProperty("Address")
-	private String address;
+	private String ADDRESS;
 
 	@JsonProperty("Name")
-	private String name;
+	private String NAME;
 
-	public void setFatherName(String fatherName){
-		this.fatherName = fatherName;
-	}
-
-	public void setMobileNumber(String mobileNumber){
-		this.mobileNumber = mobileNumber;
-	}
-
-	public void setLicenseNumber(String licenseNumber){
-		this.licenseNumber = licenseNumber;
-	}
-
-	public void setAddress(String address){
-		this.address = address;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
 }

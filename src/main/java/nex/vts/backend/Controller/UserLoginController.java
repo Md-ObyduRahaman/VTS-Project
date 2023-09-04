@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.Model.AuthRequest;
 import nex.vts.backend.Model.Response.*;
 import nex.vts.backend.Model.User;
+import nex.vts.backend.Repository.DriverRepo;
 import nex.vts.backend.Repository.UserRepo;
 import nex.vts.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class UserLoginController {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    DriverRepo driverRepo;
 
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('User')")
@@ -136,16 +140,19 @@ public class UserLoginController {
     @PreAuthorize("hasAuthority('User')")
     public ResponseEntity<String> getDriverList(@PathVariable("user_id") String user_id, @PathVariable("vehicle_id") String vehicle_id) throws JsonProcessingException {
 
+
         DriverData driverData = new DriverData();
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatus(true);
+
         //  System.out.println("Encoded Data :" + obfuscatePartnerId(user_id));
         System.out.println("decoded Data :" + deObfuscatePartnerId(Long.parseLong(user_id)));
 
-        DriverDetails driverDetails = new DriverDetails(1234L, "Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
-
-        driverData.setDriverList(driverDetails);
+        //DriverDetails driverDetails = new DriverDetails(1234L, "Saruf", "01783726998", "452466", "kolaBagan,Dhaka", "Maruf");
+        Optional<DriverDetails> driverDetails =driverRepo.findById(1235L);
+                driverData.setDriverList(driverDetails.get());
         baseResponse.setData(driverData);
+
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
