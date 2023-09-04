@@ -38,6 +38,7 @@ public class JwtService {
             return claimsResolver.apply(claims);
         }catch (Exception e){
             System.err.println("Error: "+ e.getMessage());
+            //TODO
             return null;
         }
     }
