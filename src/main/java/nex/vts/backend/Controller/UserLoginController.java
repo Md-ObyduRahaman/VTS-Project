@@ -11,12 +11,17 @@ import nex.vts.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.ConnectException;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +47,8 @@ public class UserLoginController {
     @Autowired
     DriverRepo driverRepo;
 
+    Integer count = 0;
+
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('User')")
     public List<User> getAllUsers() {
@@ -55,7 +62,9 @@ public class UserLoginController {
     }
 
     @PostMapping("/new")
+    @Retryable(retryFor = {SQLException.class, IOException.class, ConnectException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000, multiplier = 2))
     public Integer addNewUser(@RequestBody User userInfo) {
+        System.out.println("retry: "+ count++);
         return userRepo.save(userInfo);
     }
 
