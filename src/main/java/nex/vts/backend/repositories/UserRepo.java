@@ -1,6 +1,6 @@
-package nex.vts.backend.Repository;
+package nex.vts.backend.repositories;
 
-import nex.vts.backend.Model.User;
+import nex.vts.backend.models.User;
 
 import java.util.List;
 import java.util.Optional;

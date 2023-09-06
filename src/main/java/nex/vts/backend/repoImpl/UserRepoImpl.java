@@ -1,7 +1,7 @@
-package nex.vts.backend.RepoImpl;
+package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.Model.User;
-import nex.vts.backend.Repository.UserRepo;
+import nex.vts.backend.models.User;
+import nex.vts.backend.repositories.UserRepo;
 import oracle.jdbc.OracleTypes;
 import org.json.JSONArray;
 import org.json.JSONException;

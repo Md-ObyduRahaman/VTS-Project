@@ -1,4 +1,4 @@
-package nex.vts.backend.Model;
+package nex.vts.backend.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

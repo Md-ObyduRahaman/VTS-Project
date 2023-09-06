@@ -1,4 +1,4 @@
-package nex.vts.backend.Model.Response;
+package nex.vts.backend.models.responses;
 
 import java.util.List;
 

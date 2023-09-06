@@ -1,29 +1,27 @@
-package nex.vts.backend.config;
+package nex.vts.backend.configs;
 
-
-import nex.vts.backend.Model.User;
+import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserInfoUserDetails implements UserDetails {
 
-
-    private String name;
+    private String username;
     private String password;
+
+    private boolean isAccountActive;
     private List<GrantedAuthority> authorities;
 
-    public UserInfoUserDetails(User userInfo) {
-        name=userInfo.getUSERNAME();
+    public UserInfoUserDetails(VTS_LOGIN_USER userInfo) {
+        username =userInfo.getUSERNAME();
         password=userInfo.getPASSWORD();
-        authorities= Arrays.stream(userInfo.getROLES().split(","))
+        isAccountActive = userInfo.getIS_ACCOUNT_ACTIVE() == 1;
+        /*authorities= Arrays.stream(userInfo.getROLES().split(","))
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     @Override
@@ -38,7 +36,7 @@ public class UserInfoUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return username;
     }
 
     @Override
@@ -58,6 +56,6 @@ public class UserInfoUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isAccountActive;
     }
 }

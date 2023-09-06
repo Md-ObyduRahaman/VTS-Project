@@ -1,13 +1,13 @@
-package nex.vts.backend.Controller;
+package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.Model.AuthRequest;
-import nex.vts.backend.Model.Response.*;
-import nex.vts.backend.Model.User;
-import nex.vts.backend.Repository.DriverRepo;
-import nex.vts.backend.Repository.UserRepo;
-import nex.vts.backend.service.JwtService;
+import nex.vts.backend.models.AuthRequest;
+import nex.vts.backend.models.responses.*;
+import nex.vts.backend.models.User;
+import nex.vts.backend.repositories.DriverRepo;
+import nex.vts.backend.repositories.UserRepo;
+import nex.vts.backend.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -119,8 +121,14 @@ public class UserLoginController {
     }
 
     @GetMapping(value = "/vehicle-list", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('User')")
+    //@PreAuthorize("hasAuthority('User')")
     public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        System.out.println("username: " + username);
+        System.out.println("password: " + userDetails.getPassword());
+
         VehicleList vehicleObject = new VehicleList();
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatus(true);
