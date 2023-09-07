@@ -42,7 +42,6 @@ public class JwtService {
             return null;
         }
     }
-
     private Claims extractAllClaims(String token)   {
             return Jwts
                     .parserBuilder()
