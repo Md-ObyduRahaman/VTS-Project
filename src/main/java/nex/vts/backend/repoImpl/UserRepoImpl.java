@@ -11,9 +11,8 @@ import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlOutParameter;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -25,12 +24,11 @@ import java.util.Optional;
 @Repository
 public class UserRepoImpl implements UserRepo {
 
+    SimpleJdbcCall getAllStatesJdbcCall;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private JdbcTemplate jdbcTemplete;
-    SimpleJdbcCall getAllStatesJdbcCall;
 
 
     public UserRepoImpl(DataSource dataSource) {
@@ -103,12 +101,9 @@ public class UserRepoImpl implements UserRepo {
         boolean hasRecord =
                 jdbcTemplete
                         .query("select * from driverdetails WHERE driverid=?",
-                                new Object[] { userID },
+                                new Object[]{userID},
                                 (ResultSet rs) -> {
-                                    if (rs.next()) {
-                                        return true;
-                                    }
-                                    return false;
+                                    return rs.next();
                                 }
                         );
         return hasRecord;

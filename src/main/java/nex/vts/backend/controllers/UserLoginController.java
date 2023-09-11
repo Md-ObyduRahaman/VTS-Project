@@ -2,9 +2,10 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.models.AuthRequest;
-import nex.vts.backend.models.responses.*;
 import nex.vts.backend.models.User;
+import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.responses.VehicleList;
+import nex.vts.backend.models.responses.VehiclelistItem;
 import nex.vts.backend.repositories.DriverRepo;
 import nex.vts.backend.repositories.UserRepo;
 import nex.vts.backend.services.JwtService;
@@ -15,8 +16,6 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -36,48 +35,33 @@ import java.util.Optional;
 public class UserLoginController {
 
     @Autowired
+    ObjectMapper objectMapper;
+    @Autowired
+    DriverRepo driverRepo;
+    Integer count = 0;
+    @Autowired
     private JwtService jwtService;
-
     @Autowired
     private UserRepo userRepo;
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
-    DriverRepo driverRepo;
-
-    Integer count = 0;
-
-    @GetMapping("/users")
-    @PreAuthorize("hasAuthority('User')")
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
+    public static String getCurrentDateTime() {
+        ZoneId dhaka = ZoneId.of("Asia/Dhaka");
+        ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dhakaTime.format(formatter);
     }
 
-    @GetMapping("/users/{userName}")
-    @PreAuthorize("hasAuthority('Admin')")
-    public Optional<User> getUsersById(@PathVariable String userName) {
-        return userRepo.findByUserName(userName);
-    }
 
-    @PostMapping("/new")
-    @Retryable(retryFor = {SQLException.class, IOException.class, ConnectException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000, multiplier = 2))
-    public Integer addNewUser(@RequestBody User userInfo) {
-        System.out.println("retry: "+ count++);
-        return userRepo.save(userInfo);
-    }
-
-    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) throws JsonProcessingException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.setStatus(true);
             LoginResponse loginResponse = new LoginResponse();
-            loginResponse.setLoginSuccess(true);
+            loginResponse.loginSuccess = true;
             loginResponse.setServerDateTime(getCurrentDateTime());
             loginResponse.setToken(jwtService.generateToken(authRequest.getUsername()));
             baseResponse.setData(loginResponse);
@@ -93,9 +77,9 @@ public class UserLoginController {
         }
 
 
-    }
+    }*/
 
-    @PostMapping(value = "/RefreshToken", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@PostMapping(value = "/RefreshToken", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> RefreshAuthAndGetToken(@RequestBody AuthRequest authRequest) throws JsonProcessingException {
         Authentication RefreshAuthentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (RefreshAuthentication.isAuthenticated()) {
@@ -118,43 +102,21 @@ public class UserLoginController {
         }
 
 
+    }*/
+
+    @GetMapping("/users")
+    @PreAuthorize("hasAuthority('User')")
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
     }
 
-    @GetMapping(value = "/vehicle-list", produces = MediaType.APPLICATION_JSON_VALUE)
-    //@PreAuthorize("hasAuthority('User')")
-    public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
-        System.out.println("username: " + username);
-        System.out.println("password: " + userDetails.getPassword());
-
-        VehicleList vehicleObject = new VehicleList();
-        BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setStatus(true);
-
-        ArrayList<VehiclelistItem> vehiclelistItems = new ArrayList<>();
-        VehiclelistItem vehiclelistItems1 = new VehiclelistItem("Toyota", "Blue", "16479", "Active", "Z605");
-        VehiclelistItem vehiclelistItems2 = new VehiclelistItem("BMW", "Black", "452466", "In-Active", "L457");
-
-        vehiclelistItems.add(vehiclelistItems1);
-        vehiclelistItems.add(vehiclelistItems2);
-
-        vehicleObject.setVehiclelist(vehiclelistItems);
-
-        baseResponse.setData(vehicleObject);
-        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-
+    @GetMapping("/users/{userName}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public Optional<User> getUsersById(@PathVariable String userName) {
+        return userRepo.findByUserName(userName);
     }
 
-    public static String getCurrentDateTime() {
-        ZoneId dhaka = ZoneId.of("Asia/Dhaka");
-        ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return dhakaTime.format(formatter);
-    }
-
-    @GetMapping(value = "users/{user_id}/vehicle/{vehicle_id}/driver_info", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@GetMapping(value = "users/{user_id}/vehicle/{vehicle_id}/driver_info", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('User')")
     public ResponseEntity<String> getDriverList(@PathVariable("user_id") String user_id, @PathVariable("vehicle_id") String vehicle_id) throws JsonProcessingException {
 
@@ -173,37 +135,39 @@ public class UserLoginController {
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
+    }*/
+
+    @PostMapping("/new")
+    @Retryable(retryFor = {SQLException.class, IOException.class, ConnectException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000, multiplier = 2))
+    public Integer addNewUser(@RequestBody User userInfo) {
+        System.out.println("retry: " + count++);
+        return userRepo.save(userInfo);
     }
 
-    public static Long obfuscatePartnerId(String strUserId) {
+    @GetMapping(value = "/vehicle-list", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@PreAuthorize("hasAuthority('User')")
+    public ResponseEntity<String> getVehicleList() throws JsonProcessingException {
 
-        try {
-            Long User_id = Long.parseLong(strUserId);
-            System.out.println("Converted Long value: " + User_id);
-            Long firstId = User_id * 2 * 3 * 7;
-            System.out.println("firstId Value: " + firstId);
-            Long secondId = 7L * 8L * 9L;
-            System.out.println("secondId Value: " + secondId);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        System.out.println("username: " + username);
+        System.out.println("password: " + userDetails.getPassword());
 
-            Long finalId = firstId + secondId;
-            System.out.println("finalId Value: " + finalId);
-            return finalId;
+        VehicleList vehicleObject = new VehicleList();
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.status = true;
 
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Couldn't convert to Long.");
-            return null;
-        }
+        ArrayList<VehiclelistItem> vehiclelistItems = new ArrayList<>();
+        VehiclelistItem vehiclelistItems1 = new VehiclelistItem("Toyota", "Blue", "16479", "Active", "Z605");
+        VehiclelistItem vehiclelistItems2 = new VehiclelistItem("BMW", "Black", "452466", "In-Active", "L457");
 
-    }
+        vehiclelistItems.add(vehiclelistItems1);
+        vehiclelistItems.add(vehiclelistItems2);
 
-    public static Long deObfuscatePartnerId(Long finalId) {
-        Long secondId = 7L * 8L * 9L;
-        Long newlId = finalId - secondId;
-        System.out.println("finalId Value: " + newlId);
+        vehicleObject.setVehiclelist(vehiclelistItems);
 
-        Long result = newlId / (3 * 2 * 7);
-        System.out.println("result Value: " + result);
-        return result;
+        baseResponse.data = vehicleObject;
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
 

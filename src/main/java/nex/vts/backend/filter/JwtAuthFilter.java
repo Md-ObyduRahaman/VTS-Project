@@ -52,4 +52,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     }
 
+    //Almost useless have to remove later
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        return "/api/public/v1/1/login".equals(path);
+    }
 }

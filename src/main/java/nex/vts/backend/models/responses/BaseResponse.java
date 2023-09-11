@@ -3,34 +3,19 @@ package nex.vts.backend.models.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"status","data","errorCode","errorMsg"})
-public class BaseResponse{
+@JsonPropertyOrder({"status", "data", "errorCode", "errorMsg"})
+public class BaseResponse {
 
-	@JsonProperty("data")
-	private Object data;
+    @JsonProperty("data")
+    public Object data;
 
-	@JsonProperty("errorCode")
-	private int errorCode;
+    @JsonProperty("errorCode")
+    public int errorCode;
 
-	@JsonProperty("status")
-	private boolean status;
+    @JsonProperty("status")
+    public boolean status;
 
-	@JsonProperty("errorMsg")
-	private String errorMsg="";
+    @JsonProperty("errorMsg")
+    public String errorMsg = "";
 
-	public void setData(Object data){
-		this.data = data;
-	}
-
-	public void setErrorCode(int errorCode){
-		this.errorCode = errorCode;
-	}
-
-	public void setStatus(boolean status){
-		this.status = status;
-	}
-
-	public void setErrorMsg(String errorMsg){
-		this.errorMsg = errorMsg;
-	}
 }

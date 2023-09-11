@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -15,7 +15,8 @@
     <description>Back-End project for vts_backend</description>
     <properties>
         <java.version>17</java.version>
-        <jakarta-servlet.version>5.0.0</jakarta-servlet.version> <!-- Jetty does not yet support Servlet 6.0. To use Jetty with Spring Boot 3.0, so we had to downgrade the Servlet API to 5.0. -->
+        <jakarta-servlet.version>5.0.0
+        </jakarta-servlet.version> <!-- Jetty does not yet support Servlet 6.0. To use Jetty with Spring Boot 3.0, so we had to downgrade the Servlet API to 5.0. -->
     </properties>
     <dependencies>
 
