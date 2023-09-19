@@ -2,9 +2,10 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.models.responses.BaseResponse;
-import nex.vts.backend.models.responses.VehicleList;
-import nex.vts.backend.models.responses.VehiclelistItem;
+import jakarta.servlet.http.HttpSession;
+import nex.vts.backend.models.responses.*;
+import nex.vts.backend.repositories.FavouriteVehiclelRepo;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+
+
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 
 @RestController
 @RequestMapping("/api/private")
@@ -27,8 +28,11 @@ public class CtrlVehicleList {
 
     private final Logger logger = LoggerFactory.getLogger(CtrlVehicleList.class);
 
+
+
     @Autowired
     ObjectMapper objectMapper;
+
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@PathVariable("deviceType") Integer deviceType, @PathVariable("userId") long userId) throws JsonProcessingException {

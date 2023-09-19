@@ -2,6 +2,7 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
 import nex.vts.backend.dbentities.NEX_VEHICLE_DEPT;
 import nex.vts.backend.dbentities.VTS_EXTENDED_USER_PROFILE;
@@ -47,13 +48,14 @@ public class CtrlLogin {
     private LoginReq reqBody = null;
 
     @PostMapping(value = "/v1/{deviceType}/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> login(@PathVariable("deviceType") Integer deviceType, @RequestParam Map<String, String> requestBody) throws JsonProcessingException {
+    public ResponseEntity<String> login( @PathVariable("deviceType") Integer deviceType, @RequestParam Map<String, String> requestBody) throws JsonProcessingException {
 
         // Input Validation
         if (isNullOrEmpty(requestBody.get("data"))) {
             throw new AppCommonException(400 + "##BAD REQUEST 2");
         }
         reqBody = objectMapper.readValue(requestBody.get("data"), LoginReq.class);
+
         //TODO: Request Field Validation
 
         VTS_LOGIN_USER vtsLoginUser = new VTS_LOGIN_USER();
@@ -147,6 +149,7 @@ public class CtrlLogin {
 
 
         baseResponse.data = loginResponse;
+
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
         //Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(reqBody.username, reqBody.password));
         //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
