@@ -22,14 +22,14 @@ public class SecurityExceptionHandler extends ResponseEntityExceptionHandler {
 
     //https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/core/AuthenticationException.html
     //TODO: try to send actual message based on sub exceptions
-    @ExceptionHandler({ AuthenticationException.class })
+    @ExceptionHandler({AuthenticationException.class})
     @ResponseBody
     public ResponseEntity<String> handleAuthenticationException(Exception ex) throws JsonProcessingException {
 
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setStatus(false);
-        baseResponse.setErrorCode(401);
-        baseResponse.setErrorMsg("You are unauthorized to access this resource. If you are valid user then request for token again.");
+        baseResponse.status = false;
+        baseResponse.errorCode = 401;
+        baseResponse.errorMsg = "You are unauthorized to access this resource. If you are valid user then request for token again.";
         String clientResponse = objectMapper.writeValueAsString(baseResponse);
 
         System.out.println("Exception name " + ex.getClass());

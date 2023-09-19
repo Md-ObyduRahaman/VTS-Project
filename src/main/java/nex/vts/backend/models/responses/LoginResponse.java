@@ -1,27 +1,29 @@
 package nex.vts.backend.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-public class LoginResponse{
+@Data
+public class LoginResponse {
 
-	@JsonProperty("loginSuccess")
-	private boolean loginSuccess;
+    @JsonProperty("loginSuccess")
+    public boolean loginSuccess;
 
-	@JsonProperty("serverDateTime")
-	private String serverDateTime;
+    @JsonProperty("serverDateTime")
+    public String serverDateTime;
 
-	@JsonProperty("token")
-	private String token;
+    @JsonProperty("token")
+    public String token;
 
-	public void setLoginSuccess(boolean loginSuccess){
-		this.loginSuccess = loginSuccess;
-	}
+    public int profileType;
 
-	public void setServerDateTime(String serverDateTime){
-		this.serverDateTime = serverDateTime;
-	}
+    public int profileId;
 
-	public void setToken(String token){
-		this.token = token;
-	}
+    public int mainAccountId;
+
+    public int parentId;
+
+    public String userName;
+
+
 }

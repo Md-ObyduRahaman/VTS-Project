@@ -9,15 +9,15 @@ import java.util.List;
 
 public class UserInfoUserDetails implements UserDetails {
 
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
-    private boolean isAccountActive;
+    private final boolean isAccountActive;
     private List<GrantedAuthority> authorities;
 
     public UserInfoUserDetails(VTS_LOGIN_USER userInfo) {
-        username =userInfo.getUSERNAME();
-        password=userInfo.getPASSWORD();
+        username = userInfo.getUSERNAME();
+        password = userInfo.getPASSWORD();
         isAccountActive = userInfo.getIS_ACCOUNT_ACTIVE() == 1;
         /*authorities= Arrays.stream(userInfo.getROLES().split(","))
                 .map(SimpleGrantedAuthority::new)

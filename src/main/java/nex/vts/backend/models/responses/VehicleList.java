@@ -1,11 +1,10 @@
 package nex.vts.backend.models.responses;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VehicleList  {
+import java.util.List;
 
+public class VehicleList {
 
 
     @JsonProperty("vehiclelistItem")

@@ -10,13 +10,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
-public class Http401Handler {
+@RestControllerAdvice
+public class AppCommonExceptionHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(Http401Handler.class);
+    private final Logger logger = LoggerFactory.getLogger(AppCommonExceptionHandler.class);
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -26,8 +26,8 @@ public class Http401Handler {
     {api_version}##{api_name}##{error_code}##{error_message}
     */
 
-    @ExceptionHandler(value = {HttpException401.class})
-    public ResponseEntity<String> transparentApiErrorException(HttpException401 ex) {
+    @ExceptionHandler(value = {AppCommonException.class})
+    public ResponseEntity<String> transparentApiErrorException(AppCommonException ex) {
 
         System.out.println("Controller advice " + ex.getMessage());
         String[] errorMessages = ex.getMessage().split("##");
@@ -35,10 +35,9 @@ public class Http401Handler {
         String errorMsg = errorMessages[1] != null ? errorMessages[1] : "";
 
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setStatus(false);
-        baseResponse.setData(null);
-        baseResponse.setErrorCode(errorCode);
-        baseResponse.setErrorMsg(errorMsg);
+        baseResponse.status = false;
+        baseResponse.errorCode = errorCode;
+        baseResponse.errorMsg = errorMsg;
 
         String clientResponse = null;
 

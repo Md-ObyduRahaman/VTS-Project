@@ -1,8 +1,8 @@
 package nex.vts.backend.configs;
 
 
-import nex.vts.backend.repositories.VtsLoginUserRepo;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
+import nex.vts.backend.repositories.RepoVtsLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,21 +16,13 @@ import java.util.Optional;
 public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private VtsLoginUserRepo vtsLoginUserRepo;
-
-    @Autowired
     PasswordEncoder passwordEncoder;
-    /*@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userInfo = repository.findByUserName(username);
-        return userInfo.map(UserInfoUserDetails::new)
-                .orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
-
-    }*/
+    @Autowired
+    private RepoVtsLoginUser repoVtsLoginUser;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<VTS_LOGIN_USER> userInfo = vtsLoginUserRepo.findByUserName(username);
+        Optional<VTS_LOGIN_USER> userInfo = repoVtsLoginUser.findByUserName(username);
         return userInfo.map(UserInfoUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
 

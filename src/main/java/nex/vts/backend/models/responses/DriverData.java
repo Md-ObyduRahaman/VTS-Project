@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DriverData {
 
-	@JsonProperty("driverDetails")
-	private DriverDetails driverDetails;
+    @JsonProperty("driverDetails")
+    private DriverDetails driverDetails;
 
-	public void setDriverList(DriverDetails driverDetails){
-		this.driverDetails = driverDetails;
-	}
+    public void setDriverList(DriverDetails driverDetails) {
+        this.driverDetails = driverDetails;
+    }
 }
