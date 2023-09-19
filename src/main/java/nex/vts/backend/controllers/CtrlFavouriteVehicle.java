@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CtrlFavouriteVehicle {
 
 
-    private final Logger logger = LoggerFactory.getLogger(CtrlVehicleList.class);
+    private final Logger logger = LoggerFactory.getLogger(CtrlFavouriteVehicle.class);
 
     @Autowired
     FavouriteVehiclelRepo favouriteVehiclelRepo;
