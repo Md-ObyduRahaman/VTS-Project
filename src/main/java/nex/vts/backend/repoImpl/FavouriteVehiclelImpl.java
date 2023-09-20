@@ -177,6 +177,12 @@ public class FavouriteVehiclelImpl implements FavouriteVehiclelRepo {
         }
 
 
-        return favouriteVehiclelList;
+        if (favouriteVehiclelList.get().isEmpty())
+        {
+            return Optional.empty();
+        }
+        else {
+            return favouriteVehiclelList;
+        }
     }
 }
