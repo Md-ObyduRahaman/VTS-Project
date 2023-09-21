@@ -1,6 +1,5 @@
 package nex.vts.backend.models.vehicle;
 
-import nex.vts.backend.models.vehicle.vehicleList;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

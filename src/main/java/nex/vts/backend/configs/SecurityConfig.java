@@ -31,7 +31,9 @@ public class SecurityConfig {
             "/api/private/v1/3/login",
             "/api/private/v1/1/refresh-token",
             "/api/private/v1/2/refresh-token",
-            "/api/private/v1/3/refresh-token"
+            "/api/private/v1/3/refresh-token",
+        /*  "/api/private/v1/vehicle/details"*/ /*todo-> testing purpose*/
+           /* "/api/private/v1/vehicle/list"*/ /*todo-> testing purpose*/
     };
     @Autowired
     @Qualifier("delegatedAuthenticationEntryPoint")
