@@ -1,18 +1,18 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Permission_RowMapper;
 import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Details_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Permission_RowMapper;
 import nex.vts.backend.repositories.Vehicle_Details_Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 
-@Component
+@Repository
 @SuppressWarnings("all")
 public class Vehicle_Details_Permission_Repo_Imp implements Vehicle_Details_Repo {
     private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_Details_Permission_Repo_Imp.class);
@@ -36,7 +36,7 @@ public class Vehicle_Details_Permission_Repo_Imp implements Vehicle_Details_Repo
             return jdbcTemplate.query(getQuery, new Vehicle_Permission_RowMapper(), userType, profileId, parentId, userType2, profileId2, parentId2, userType3, profileId3, parentId3, vehicleId);
         } catch (BadSqlGrammarException e) {
             return "Uncatogorized Exception, Provide proper parameter ";
-        }catch (DataAccessException accessException){
+        } catch (DataAccessException accessException) {
             return accessException.getMessage();
         }
     }

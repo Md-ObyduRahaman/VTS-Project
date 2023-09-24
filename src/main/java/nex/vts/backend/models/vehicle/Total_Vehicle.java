@@ -8,5 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Total_Vehicle {
-    private Object numberOfVehicles;
+    private Integer numberOfVehicles;
 }

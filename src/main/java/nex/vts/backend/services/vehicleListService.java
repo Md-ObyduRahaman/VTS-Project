@@ -3,8 +3,7 @@ package nex.vts.backend.services;
 import nex.vts.backend.repoImpl.vehicleListRepoImplementation;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 @Component
 public class vehicleListService {
@@ -14,20 +13,20 @@ public class vehicleListService {
 
     private final vehicleListRepoImplementation vehicleListRepositoryImplementation;
 
-    public List<Object> getVehicleList(Integer groupId, Integer operationId, String limit, Integer offset, Integer userType, Integer parentId) {
-        return Collections.singletonList(vehicleListRepositoryImplementation.getVehicleList(groupId, operationId, limit, offset, userType, parentId));
+    public Optional getVehicleList(Integer groupId, Integer operatorId, String limit, Integer offset, Integer userType, Integer parentId) {
+        return Optional.<Object>of(vehicleListRepositoryImplementation.getVehicleList(groupId, operatorId, limit, offset, userType, parentId).stream().findFirst());
     }
 
-    public Object get_total_vehicle(Integer groupId, Integer parentId, Integer userType) {
-        Object total_vehicle;
+    public Optional get_total_vehicle(Integer groupId, Integer parentId, Integer userType) {
+        Optional total_vehicle;
         if (userType.equals(1))
-            total_vehicle = vehicleListRepositoryImplementation.total_vehicle_for_user_type_1(groupId);
+            total_vehicle = Optional.of(vehicleListRepositoryImplementation.total_vehicle_for_user_type_1(groupId));
         else if (userType.equals(2))
-            total_vehicle = vehicleListRepositoryImplementation.total_vehicle_for_user_type_2(groupId, parentId);
+            total_vehicle = Optional.of(vehicleListRepositoryImplementation.total_vehicle_for_user_type_2(groupId, parentId));
         else if (userType.equals(3))
-            total_vehicle = vehicleListRepositoryImplementation.total_vehicle_for_user_type_3(groupId);
+            total_vehicle = Optional.of(vehicleListRepositoryImplementation.total_vehicle_for_user_type_3(groupId));
         else
-            total_vehicle = vehicleListRepositoryImplementation.total_vehicle_for_user_type_default(groupId, parentId, userType);
+            total_vehicle = Optional.of(vehicleListRepositoryImplementation.total_vehicle_for_user_type_default(groupId, parentId, userType));
         return total_vehicle;
     }
 }

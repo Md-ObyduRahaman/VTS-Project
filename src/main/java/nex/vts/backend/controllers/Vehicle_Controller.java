@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/private/v1")
@@ -44,7 +45,7 @@ public class Vehicle_Controller {
         offset = Integer.parseInt(jsonFormat.get("offset").toString());
         userType = Integer.parseInt(jsonFormat.get("userType").toString());
         parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
-        Object vehicleList = vehicleListService.getVehicleList(groupId, operationId, limit, offset, userType, parentId);
+        Optional vehicleList = vehicleListService.getVehicleList(groupId, operationId, limit, offset, userType, parentId);
         if (userType.equals(1)) {
             respnse.put("total-vehicle",vehicleListService.get_total_vehicle(groupId, parentId, userType));
             respnse.put("vehicle-list", vehicleList);
