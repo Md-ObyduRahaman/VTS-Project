@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,13 +19,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/private/v1")
 @SuppressWarnings("all")
-public class vehicleListController {
+public class Vehicle_Controller {
     private final vehicleListService vehicleListService;
     private final Vehicle_Details_Service detailsService;
     Map<String, Object> respnse = new LinkedHashMap<>(), vehicle = new LinkedHashMap<>();
     BaseResponse baseResponse = new BaseResponse();
 
-    public vehicleListController(vehicleListService vehicleListService, Vehicle_Details_Service detailsService) {
+    public Vehicle_Controller(vehicleListService vehicleListService, Vehicle_Details_Service detailsService) {
         this.vehicleListService = vehicleListService;
         this.detailsService = detailsService;
     }
@@ -63,7 +64,7 @@ public class vehicleListController {
     } /*    @GetMapping("/vehicle/list") public ResponseEntity<?> getVehicleList(@RequestParam("groupId") Integer groupId, @RequestParam("operationId") Integer operationId, @RequestParam("limit") String limit, @RequestParam(value = "offset",required = false)Integer offset, @RequestParam(value = "userType")Integer userType, @RequestParam(value = "parentId") Integer parentId ){ return ResponseEntity.ok(vehicleListService.getVehicleList(groupId, operationId,limit,offset,userType,parentId)); }*/
 
     @GetMapping(value = "/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data) {
+    public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data) throws SQLException {
         Integer userType, profileId, vehicleId,parentId;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);

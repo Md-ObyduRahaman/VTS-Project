@@ -1,11 +1,12 @@
-package nex.vts.backend.models.vehicle;
+package nex.vts.backend.models.vehicle.rowMapper;
 
+import nex.vts.backend.models.vehicle.Vehicle_Permission;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Vehicle_PermissionRowMapper implements RowMapper<Vehicle_Permission> {
+public class Vehicle_Permission_RowMapper implements RowMapper<Vehicle_Permission> {
     @Override
     public Vehicle_Permission mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Vehicle_Permission(

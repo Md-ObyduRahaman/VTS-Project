@@ -1,6 +1,6 @@
 package nex.vts.backend.services;
 
-import nex.vts.backend.repoImpl.vehicleListRepositoryImplementation;
+import nex.vts.backend.repoImpl.vehicleListRepoImplementation;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -8,11 +8,11 @@ import java.util.List;
 
 @Component
 public class vehicleListService {
-    public vehicleListService(vehicleListRepositoryImplementation vehicleListRepositoryImplementation) {
+    public vehicleListService(vehicleListRepoImplementation vehicleListRepositoryImplementation) {
         this.vehicleListRepositoryImplementation = vehicleListRepositoryImplementation;
     }
 
-    private final vehicleListRepositoryImplementation vehicleListRepositoryImplementation;
+    private final vehicleListRepoImplementation vehicleListRepositoryImplementation;
 
     public List<Object> getVehicleList(Integer groupId, Integer operationId, String limit, Integer offset, Integer userType, Integer parentId) {
         return Collections.singletonList(vehicleListRepositoryImplementation.getVehicleList(groupId, operationId, limit, offset, userType, parentId));

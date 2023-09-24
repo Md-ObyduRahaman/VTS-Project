@@ -7,6 +7,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class totalVehicle {
+public class Total_Vehicle {
     private Object numberOfVehicles;
 }
