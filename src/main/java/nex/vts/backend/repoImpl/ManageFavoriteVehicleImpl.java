@@ -42,7 +42,7 @@ public class ManageFavoriteVehicleImpl implements SetManageFavoriteVehicleRepo {
         try {
             Map<String, Object> result = getAllStatesJdbcCall.withProcedureName("MANAGE_FAVORITE_VEHICLE")
                     .declareParameters(new SqlOutParameter("p_response", OracleTypes.CURSOR))
-                    .execute("SetFavorite",45,54,45,0,0);
+                    .execute("SetFavorite",45,54,45,0,0,"l");
             JSONObject json = new JSONObject(result);
              out = json.get("p_response").toString();
         }
