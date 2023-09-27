@@ -1,0 +1,94 @@
+package nex.vts.backend.repoImpl;
+
+import nex.vts.backend.models.vehicle.Vehicle_District;
+import nex.vts.backend.models.vehicle.Vehicle_Location;
+import nex.vts.backend.models.vehicle.Vehicle_Thana;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
+import nex.vts.backend.repositories.Vehicle_Location_Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+@SuppressWarnings("all")
+public class Vehicle_Location_Implementation implements Vehicle_Location_Repository {
+    private final JdbcTemplate jdbcTemplate;
+
+    public Vehicle_Location_Implementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Optional getVehicleLocation(Integer vehicleId) {
+        String getQuery = "select a.vehicle_id                                                                         vehicle_id,\n       a.userid                                                                             vehicle_name,\n       a.lat                                                                                latitude,\n       a.lon                                                                                longitude,\n       to_char(to_date(a.vdate, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24, 'YYYY-MM-DD HH24:MI:SS') vehicle_time,\n       a.engin                                                                              engine,\n       a.speed                                                                              speed\nFROM GPSNEXGP.NEX_INDIVIDUAL_TEMP a,\n     GPSNEXGP.NEX_INDIVIDUAL_CLIENT b\nwhere a.vehicle_id = b.id\n  AND a.vehicle_id = ?";
+        List<Vehicle_Location> getVehicleLocation = jdbcTemplate.query(getQuery, new Vehicle_Location_RowMapper(), vehicleId);
+        return Optional.of(getVehicleLocation);
+    }/*todo ------ get vehicle location ------------*/
+
+    @Override
+    public Optional getReverseGeocoder(/*Integer xLatitude, Integer xLongitude*/) {
+        double xLatitude = 23.04435701063096;  /*Todo : testing purpose*/
+        double xLongitude = 23.1036257274697;   /*Todo : testing purpose*/
+        String districtName;
+        String[] listOfPolyX, listOfPolyY;
+        Integer numberOfPolyX, districtId;
+        List<Vehicle_District> listOfDistrict = new ArrayList<>();
+        String getDistrict = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B FROM GPSNEXGP.DISTRICT";
+        listOfDistrict = jdbcTemplate.query(getDistrict, new Vehicle_District_RowMapper());
+        if (!listOfDistrict.isEmpty())
+            for (int eachDistrict = 0; eachDistrict < listOfDistrict.size(); eachDistrict++) {
+                String discription = listOfDistrict.get(eachDistrict).getDescription();
+                listOfPolyX = getCSVValues(listOfDistrict.get(eachDistrict).getPolyX());
+                listOfPolyY = getCSVValues(listOfDistrict.get(eachDistrict).getPolyY());
+                numberOfPolyX = listOfPolyX.length;
+                if (pointInPolygon(xLatitude, xLongitude, listOfPolyX.length, listOfPolyX, listOfPolyY) == false) {
+                    districtName = discription;
+                    districtId = listOfDistrict.get(eachDistrict).getDistrictId();
+                    break;
+                }
+            }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional getVehicleDistrict() {
+        String getQuery = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
+                "FROM GPSNEXGP.DISTRICT";
+        List<Vehicle_District> vehicleDistricts = jdbcTemplate.query(getQuery,new Vehicle_District_RowMapper());
+        return Optional.of(vehicleDistricts);
+    }
+
+    @Override
+    public Optional getVehicleThana(Integer thanaId) {
+        if (thanaId.equals(true)){
+            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
+                    "FROM GPSNEXGP.thana".concat("where DIST_ID = ?");
+            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(),thanaId);
+            return Optional.of(vehicleThanas);
+        }else {
+            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
+                    "FROM GPSNEXGP.thana";
+            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
+            return Optional.of(vehicleThanas);
+        }
+    }
+
+    @Override
+    public Optional getVehicleRoad(Integer districtId) {
+        return Optional.empty();
+    }
+
+    private boolean pointInPolygon(double xLatitude, double xLongitude, int length, String[] listOfPolyX, String[] listOfPolyY) {
+        return false;
+    }
+
+    private String[] getCSVValues(String poly) { /*Todo : in here php code  separeted double quoted vlaue if exists*/
+        String[] listOfPolyX = poly.split(",");
+        return listOfPolyX;
+    }
+}
