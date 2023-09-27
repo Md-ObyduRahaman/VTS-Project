@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,12 @@ import java.util.Map;
 @Service
 public class VehicleSettingImpl implements VehicleSettingRepo {
 
-    SimpleJdbcCall getAllStatesJdbcCall;
-
     @Autowired
     private JdbcTemplate jdbcTemplete;
+    SimpleJdbcCall getAllStatesJdbcCall;
 
     public VehicleSettingImpl(DataSource dataSource) {
-
+        this.jdbcTemplete = new JdbcTemplate(dataSource);
         this.getAllStatesJdbcCall = new SimpleJdbcCall(dataSource);
     }
 
@@ -52,15 +52,26 @@ public class VehicleSettingImpl implements VehicleSettingRepo {
 
         String out = null;
 
+        SimpleJdbcCall jdbcCall = getAllStatesJdbcCall.withProcedureName("modify_vehicle_profile");
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("p_type", p_type);
+        params.addValue("p_profile_type", p_profile_type);
+        params.addValue("p_profile_id", p_profile_id);
+        params.addValue("p_parent_profile_id", p_parent_profile_id);
+        params.addValue("p_login_status", p_login_status);
+        params.addValue("p_vehicle_id", p_vehicle_id);
+        params.addValue("p_pass", p_pass);
+        params.addValue("p_max_speed", p_max_speed);
+        params.addValue("p_sms", p_sms);
+        params.addValue("p_email", p_email);
+        params.addValue("p_multiple_alert", p_multiple_alert);
+        params.addValue("p_safe_mode", p_safe_mode);
 
         try {
-            Map<String, Object> result = getAllStatesJdbcCall.withProcedureName("modify_vehicle_profile")
-                    .declareParameters(new SqlOutParameter("p_response", OracleTypes.CURSOR))
-                    .execute(p_type, p_profile_type, p_profile_id, p_parent_profile_id, p_vehicle_id,
-                            p_login_status, p_pass, p_max_speed, p_sms, p_email, p_multiple_alert, p_safe_mode,":p_response");
-
-            JSONObject json = new JSONObject(result);
-            out = json.get("p_response").toString();
+            Map<String, Object> output = jdbcCall.execute(params);
+            JSONObject json = new JSONObject(output);
+             out = json.get("P_RESPONSE").toString();
 
         } catch (NumberFormatException e) {
             System.err.println("You are trying to pass wrong type of arguments ,please check arguments index position with procedure arguments index position, and try to pass write f DataType. Please check Error massage.\nError massage: " + e.getMessage());
