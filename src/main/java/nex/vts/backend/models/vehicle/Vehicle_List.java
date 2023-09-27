@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class vehicleList {
+public class Vehicle_List {
 
     private String vehicleId;
     private String vehicleName;
