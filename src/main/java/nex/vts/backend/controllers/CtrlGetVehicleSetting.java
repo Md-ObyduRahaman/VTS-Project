@@ -2,11 +2,8 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.models.responses.AccountSummary;
-import nex.vts.backend.models.responses.AccountSummaryObj;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.VehicleOthersInfoModel;
-import nex.vts.backend.repositories.AccountSummaryRepo;
 import nex.vts.backend.repositories.VehicleOthersInfoRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/private")
-public class CtrlVehicleOthersInfo {
+public class CtrlGetVehicleSetting {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -32,10 +28,10 @@ public class CtrlVehicleOthersInfo {
     @Autowired
     VehicleOthersInfoRepo vehicleOthersInfoRepo;
 
-    private final Logger logger = LoggerFactory.getLogger(CtrlVehicleOthersInfo.class);
+    private final Logger logger = LoggerFactory.getLogger(CtrlGetVehicleSetting.class);
 
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/vehicleOthersInfo/{rowID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/getVehicleSetting/{rowID}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehicleOthersInfo(@PathVariable("deviceType") Integer deviceType,
                                                      @PathVariable("userId") Integer userId,
                                                         @PathVariable("rowID") Integer rowID) throws JsonProcessingException {
