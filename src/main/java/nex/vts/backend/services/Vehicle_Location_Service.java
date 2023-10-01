@@ -16,12 +16,12 @@ public class Vehicle_Location_Service {
         this.locationImplementation = locationImplementation;
     }
 
-    public Optional getVehicleLatitudeLongitude() {
+/*    public Optional getVehicleLatitudeLongitude() {
         return locationImplementation.getReverseGeocoder();
     }
 
     public Optional getVehicleLocationDetails(Integer vehicleId){
         return locationImplementation.getVehicleLocation(vehicleId);
-    }
+    }*/
 }
 

@@ -1,11 +1,8 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.models.vehicle.Vehicle_District;
 import nex.vts.backend.models.vehicle.Vehicle_Location;
-import nex.vts.backend.models.vehicle.Vehicle_Thana;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
+
 import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
 import nex.vts.backend.repositories.Vehicle_Location_Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,24 +13,26 @@ import java.util.Optional;
 
 @Repository
 @SuppressWarnings("all")
-public class Vehicle_Location_Implementation implements Vehicle_Location_Repository {
+public class Vehicle_Location_Implementation
+        //implements Vehicle_Location_Repository {
+{
     private final JdbcTemplate jdbcTemplate;
 
     public Vehicle_Location_Implementation(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
+  /*  @Override
     public Optional getVehicleLocation(Integer vehicleId) {
         String getQuery = "select a.vehicle_id                                                                         vehicle_id,\n       a.userid                                                                             vehicle_name,\n       a.lat                                                                                latitude,\n       a.lon                                                                                longitude,\n       to_char(to_date(a.vdate, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24, 'YYYY-MM-DD HH24:MI:SS') vehicle_time,\n       a.engin                                                                              engine,\n       a.speed                                                                              speed\nFROM GPSNEXGP.NEX_INDIVIDUAL_TEMP a,\n     GPSNEXGP.NEX_INDIVIDUAL_CLIENT b\nwhere a.vehicle_id = b.id\n  AND a.vehicle_id = ?";
         List<Vehicle_Location> getVehicleLocation = jdbcTemplate.query(getQuery, new Vehicle_Location_RowMapper(), vehicleId);
         return Optional.of(getVehicleLocation);
-    }/*todo ------ get vehicle location ------------*/
+    }*//*todo ------ get vehicle location ------------*/
 
-    @Override
-    public Optional getReverseGeocoder(/*Integer xLatitude, Integer xLongitude*/) {
-        double xLatitude = 23.04435701063096;  /*Todo : testing purpose*/
-        double xLongitude = 23.1036257274697;   /*Todo : testing purpose*/
+    /*@Override
+    public Optional getReverseGeocoder(*//*Integer xLatitude, Integer xLongitude*//*) {
+        double xLatitude = 23.04435701063096;  *//*Todo : testing purpose*//*
+        double xLongitude = 23.1036257274697;   *//*Todo : testing purpose*//*
         String districtName;
         String[] listOfPolyX, listOfPolyY;
         Integer numberOfPolyX, districtId;
@@ -76,12 +75,12 @@ public class Vehicle_Location_Implementation implements Vehicle_Location_Reposit
             List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
             return Optional.of(vehicleThanas);
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Optional getVehicleRoad(Integer districtId) {
         return Optional.empty();
-    }
+    }*/
 
     private boolean pointInPolygon(double xLatitude, double xLongitude, int length, String[] listOfPolyX, String[] listOfPolyY) {
         return false;
