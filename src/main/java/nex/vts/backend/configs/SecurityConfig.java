@@ -40,8 +40,6 @@ public class SecurityConfig {
 
     };
 
-
-    
     @Autowired
     @Qualifier("delegatedAuthenticationEntryPoint")
     AuthenticationEntryPoint authEntryPoint;
