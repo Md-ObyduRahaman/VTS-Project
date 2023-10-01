@@ -1,31 +1,18 @@
 package nex.vts.backend.models.vehicle;
 
-public class Vehicle_Road {
-
-
-    private Integer roadId, districtId, thanaId;
+public class Vehicle_District {
+    private Integer districtId;
     private String description, polyX, polyY, banglaDescription;
 
-
-    public Vehicle_Road(Integer roadId, Integer districtId, Integer thanaId, String description, String polyX, String polyY, String banglaDescription) {
-        this.roadId = roadId;
+    public Vehicle_District(Integer districtId, String description, String polyX, String polyY, String banglaDescription) {
         this.districtId = districtId;
-        this.thanaId = thanaId;
         this.description = description;
         this.polyX = polyX;
         this.polyY = polyY;
         this.banglaDescription = banglaDescription;
     }
 
-    public Vehicle_Road() {
-    }
-
-    public Integer getRoadId() {
-        return roadId;
-    }
-
-    public void setRoadId(Integer roadId) {
-        this.roadId = roadId;
+    public Vehicle_District() {
     }
 
     public Integer getDistrictId() {
@@ -34,14 +21,6 @@ public class Vehicle_Road {
 
     public void setDistrictId(Integer districtId) {
         this.districtId = districtId;
-    }
-
-    public Integer getThanaId() {
-        return thanaId;
-    }
-
-    public void setThanaId(Integer thanaId) {
-        this.thanaId = thanaId;
     }
 
     public String getDescription() {

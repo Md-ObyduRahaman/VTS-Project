@@ -3,7 +3,7 @@ package nex.vts.backend.repositories;
 
 import java.util.Optional;
 
-public interface Vehicle_Location_Repository {
+public interface Vehicle_Location_Repo {
 
     Optional getVehicleLocation(Integer vehicleId);
 

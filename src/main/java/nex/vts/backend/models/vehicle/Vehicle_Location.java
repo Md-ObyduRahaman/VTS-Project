@@ -1,14 +1,5 @@
 package nex.vts.backend.models.vehicle;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Data
-@Getter
-@Setter
-@ToString
 public class Vehicle_Location {
     private String vehicleId, vehicleName;
     private Float latitude, longitude;
@@ -27,4 +18,75 @@ public class Vehicle_Location {
 
     public Vehicle_Location() {
     }
+
+
+    @Override
+    public String toString() {
+        return "Vehicle_Location{" +
+                "vehicleId='" + vehicleId + '\'' +
+                ", vehicleName='" + vehicleName + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", vehicleTime='" + vehicleTime + '\'' +
+                ", engine='" + engine + '\'' +
+                ", speed=" + speed +
+                '}';
+    }
+
+    public String getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getVehicleTime() {
+        return vehicleTime;
+    }
+
+    public void setVehicleTime(String vehicleTime) {
+        this.vehicleTime = vehicleTime;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public Float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Float speed) {
+        this.speed = speed;
+    }
+
 }

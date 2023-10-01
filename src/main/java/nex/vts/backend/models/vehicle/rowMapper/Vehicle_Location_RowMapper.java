@@ -1,4 +1,4 @@
-package nex.vts.backend.models.vehicle.rowMapper;
+package nex.vts.backend.models.vehicle.RowMapper;
 
 import nex.vts.backend.models.vehicle.Vehicle_Location;
 import org.springframework.jdbc.core.RowMapper;

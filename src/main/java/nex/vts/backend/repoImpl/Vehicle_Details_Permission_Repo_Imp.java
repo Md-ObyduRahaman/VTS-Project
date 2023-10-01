@@ -1,7 +1,7 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Details_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Permission_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_List_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.*;
 import nex.vts.backend.repositories.Vehicle_Details_Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

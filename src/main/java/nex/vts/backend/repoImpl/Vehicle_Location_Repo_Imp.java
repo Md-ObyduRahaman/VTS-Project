@@ -1,12 +1,14 @@
 package nex.vts.backend.repoImpl;
 
+import nex.vts.backend.models.vehicle.RowMapper.Vehicle_District_RowMapper;
+import nex.vts.backend.models.vehicle.RowMapper.Vehicle_Location_RowMapper;
+import nex.vts.backend.models.vehicle.RowMapper.Vehicle_Road_RowMapper;
+import nex.vts.backend.models.vehicle.RowMapper.Vehicle_Thana_RowMapper;
 import nex.vts.backend.models.vehicle.Vehicle_District;
 import nex.vts.backend.models.vehicle.Vehicle_Location;
+import nex.vts.backend.models.vehicle.Vehicle_Road;
 import nex.vts.backend.models.vehicle.Vehicle_Thana;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
-import nex.vts.backend.repositories.Vehicle_Location_Repository;
+import nex.vts.backend.repositories.Vehicle_Location_Repo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +18,10 @@ import java.util.Optional;
 
 @Repository
 @SuppressWarnings("all")
-public class Vehicle_Location_Implementation implements Vehicle_Location_Repository {
+public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     private final JdbcTemplate jdbcTemplate;
 
-    public Vehicle_Location_Implementation(JdbcTemplate jdbcTemplate) {
+    public Vehicle_Location_Repo_Imp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -57,22 +59,19 @@ public class Vehicle_Location_Implementation implements Vehicle_Location_Reposit
 
     @Override
     public Optional getVehicleDistrict() {
-        String getQuery = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
-                "FROM GPSNEXGP.DISTRICT";
-        List<Vehicle_District> vehicleDistricts = jdbcTemplate.query(getQuery,new Vehicle_District_RowMapper());
+        String getQuery = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.DISTRICT";
+        List<Vehicle_District> vehicleDistricts = jdbcTemplate.query(getQuery, new Vehicle_District_RowMapper());
         return Optional.of(vehicleDistricts);
     }
 
     @Override
     public Optional getVehicleThana(Integer thanaId) {
-        if (thanaId.equals(true)){
-            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
-                    "FROM GPSNEXGP.thana".concat("where DIST_ID = ?");
-            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(),thanaId);
+        if (thanaId.equals(true)) {
+            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana".concat("where DIST_ID = ?");
+            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
             return Optional.of(vehicleThanas);
-        }else {
-            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" +
-                    "FROM GPSNEXGP.thana";
+        } else {
+            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana";
             List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
             return Optional.of(vehicleThanas);
         }
@@ -80,7 +79,15 @@ public class Vehicle_Location_Implementation implements Vehicle_Location_Reposit
 
     @Override
     public Optional getVehicleRoad(Integer districtId) {
-        return Optional.empty();
+        if (districtId.equals(true)) {
+            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\nFROM GPSNEXGP.road";
+            List<Vehicle_Road> vehicleRoads = jdbcTemplate.query(getQuery, new Vehicle_Road_RowMapper());
+            return Optional.of(vehicleRoads);
+        } else {
+            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.road".concat("where DIST_ID = ?");
+            List<Vehicle_Road> vehicleRoads = jdbcTemplate.query(getQuery, new Vehicle_Road_RowMapper(), districtId);
+            return Optional.of(vehicleRoads);
+        }
     }
 
     private boolean pointInPolygon(double xLatitude, double xLongitude, int length, String[] listOfPolyX, String[] listOfPolyY) {
