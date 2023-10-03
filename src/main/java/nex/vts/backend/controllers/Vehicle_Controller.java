@@ -36,19 +36,19 @@ public class Vehicle_Controller {
 
     @GetMapping(value = "/vehicle/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleList(@RequestHeader(value = "data") String data) {
-        Integer groupId, operationId;
+        Integer groupId, operatorId;
         String limit;
         Integer offset, userType, parentId;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);
         JSONObject jsonFormat = new JSONObject(string_decode_data);
         groupId = Integer.parseInt(jsonFormat.get("groupId").toString());
-        operationId = Integer.parseInt(jsonFormat.get("operationId").toString());
+        operatorId = Integer.parseInt(jsonFormat.get("operationId").toString());
         limit = jsonFormat.get("limit").toString();
         offset = Integer.parseInt(jsonFormat.get("offset").toString());
         userType = Integer.parseInt(jsonFormat.get("userType").toString());
         parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
-        Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, operationId, limit, offset, userType, parentId);
+        Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, operatorId, limit, offset, userType, parentId);
         if (userType.equals(1)) {
             respnse.put("total-vehicle", Vehicle_List_Service.get_total_vehicle(groupId, parentId, userType));
             respnse.put("vehicle-list", vehicleList);
