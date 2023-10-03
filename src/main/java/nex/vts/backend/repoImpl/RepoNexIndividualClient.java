@@ -1,4 +1,4 @@
-package nex.vts.backend.repositories;
+package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
 import org.slf4j.Logger;

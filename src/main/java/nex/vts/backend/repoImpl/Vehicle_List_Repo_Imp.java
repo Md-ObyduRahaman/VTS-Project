@@ -10,11 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@SuppressWarnings("all")
-public class vehicleListRepoImplementation implements Vehicle_List_Repo {
+public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
     private static JdbcTemplate jdbcTemplate;
 
-    public vehicleListRepoImplementation(JdbcTemplate jdbcTemplate) {
+    public Vehicle_List_Repo_Imp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

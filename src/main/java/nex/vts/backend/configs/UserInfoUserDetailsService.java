@@ -2,7 +2,7 @@ package nex.vts.backend.configs;
 
 
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
-import nex.vts.backend.repositories.RepoVtsLoginUser;
+import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

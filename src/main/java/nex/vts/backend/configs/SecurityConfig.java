@@ -27,13 +27,19 @@ public class SecurityConfig {
 
     private final String[] allowedRoutes = {
             "/api/private/v1/1/login",
-            "/api/private/v1/2/login",
-            "/api/private/v1/3/login",
             "/api/private/v1/1/refresh-token",
+            "/api/private/v1/2/login",
             "/api/private/v1/2/refresh-token",
+            "/api/private/v1/3/login",
             "/api/private/v1/3/refresh-token",
             "/api/private/v1/vehicle/details", /*todo-> testing purpose*/
-            "/api/private/v1/vehicle/list" /*todo-> testing purpose*/};
+            "/api/private/v1/vehicle/district",/*todo-> testing purpose*/
+            "/api/private/v1/vehicle/list", /*todo-> testing purpose*/
+            "/api/private/v1/vehicle/road",/*todo-> testing purpose*/
+            "/api/private/v1/vehicle/thana"/*todo-> testing purpose*/
+
+    };
+
     @Autowired
     @Qualifier("delegatedAuthenticationEntryPoint")
     AuthenticationEntryPoint authEntryPoint;

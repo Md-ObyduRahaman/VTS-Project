@@ -41,7 +41,7 @@ public class CtrlTravelDistanceData {
         }
 
            reqBody = objectMapper.readValue(requestBody.get("data"), TravelDistanceDataModel.class);
-        travelDistanceDataRepo.getTravelDistanceData(reqBody);
+           travelDistanceDataRepo.getTravelDistanceData(reqBody);
 
 
         return null;

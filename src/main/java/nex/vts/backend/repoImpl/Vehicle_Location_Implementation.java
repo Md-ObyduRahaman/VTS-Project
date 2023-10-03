@@ -3,7 +3,7 @@ package nex.vts.backend.repoImpl;
 import nex.vts.backend.models.vehicle.Vehicle_Location;
 
 import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
-import nex.vts.backend.repositories.Vehicle_Location_Repository;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
