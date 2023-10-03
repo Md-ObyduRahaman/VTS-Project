@@ -2,11 +2,13 @@ package nex.vts.backend.controllers;
 
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.services.Vehicle_Details_Service;
-import nex.vts.backend.services.Vehicle_Location_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
+import nex.vts.backend.services.Vehicle_Location_Service;
 import org.json.JSONObject;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,7 +85,7 @@ public class Vehicle_Controller {
     }
 
     @GetMapping(value = "/vehicle/district", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleDistrict() {
+    public ResponseEntity<?> getVehicleDistrict()throws SQLException, BadSqlGrammarException, DataAccessException {
         respnse.put("Vehicle-District", locationService.getVehicleDistrict());
         baseResponse.status = true;
         baseResponse.data = respnse;
@@ -91,7 +93,7 @@ public class Vehicle_Controller {
     }
 
     @GetMapping(value = "/vehicle/thana", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleThana(@RequestHeader(value = "data") String data) {
+    public ResponseEntity<?> getVehicleThana(@RequestHeader(value = "data") String data)throws SQLException, BadSqlGrammarException, DataAccessException {
         Integer thanaId;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);
@@ -104,7 +106,7 @@ public class Vehicle_Controller {
     }
 
     @GetMapping(value = "/vehicle/road", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleRoad(@RequestHeader(value = "data") String data) {
+    public ResponseEntity<?> getVehicleRoad(@RequestHeader(value = "data") String data)throws SQLException, BadSqlGrammarException, DataAccessException {
         Integer districtId;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);

@@ -1,7 +1,7 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_List_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.*;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Details_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Permission_RowMapper;
 import nex.vts.backend.repositories.Vehicle_Details_Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.SQLException;
 
 @Repository
-@SuppressWarnings("all")
 public class Vehicle_Details_Permission_Repo_Imp implements Vehicle_Details_Repo {
     private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_Details_Permission_Repo_Imp.class);
     private final JdbcTemplate jdbcTemplate;
