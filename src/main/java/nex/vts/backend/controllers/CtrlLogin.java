@@ -2,7 +2,6 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpSession;
 import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
 import nex.vts.backend.dbentities.NEX_VEHICLE_DEPT;
 import nex.vts.backend.dbentities.VTS_EXTENDED_USER_PROFILE;
@@ -11,7 +10,7 @@ import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.requests.LoginReq;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.LoginResponse;
-import nex.vts.backend.repositories.*;
+import nex.vts.backend.repoImpl.*;
 import nex.vts.backend.services.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package nex.vts.backend.repositories;
+package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.dbentities.VTS_EXTENDED_USER_PROFILE;
 import org.slf4j.Logger;
