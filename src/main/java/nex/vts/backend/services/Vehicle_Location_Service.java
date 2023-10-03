@@ -16,18 +16,13 @@ public class Vehicle_Location_Service {
         this.locationImplementation = locationImplementation;
     }
 
-/*    public Optional getVehicleLatitudeLongitude() {
+    public Optional getVehicleLatitudeLongitude() {
         return locationImplementation.getReverseGeocoder();
     }
 
     public Optional getVehicleLocationDetails(Integer vehicleId)throws SQLException, BadSqlGrammarException, DataAccessException {
         return locationImplementation.getVehicleLocation(vehicleId);
-<<<<<<< HEAD
-    }*/
-}
-=======
     }
->>>>>>> 027c213da4cf5eb5f5dae2b03b04a9bb84c766f9
 
     public Optional getVehicleDistrict()throws SQLException, BadSqlGrammarException, DataAccessException{
         Optional vehicleDistrict = locationImplementation.getVehicleDistrict();
