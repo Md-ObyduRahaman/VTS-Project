@@ -65,8 +65,7 @@ public class Vehicle_Controller {
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
-    } /*    @GetMapping("/vehicle/list") public ResponseEntity<?> getVehicleList(@RequestParam("groupId") Integer groupId, @RequestParam("operationId") Integer operationId, @RequestParam("limit") String limit, @RequestParam(value = "offset",required = false)Integer offset, @RequestParam(value = "userType")Integer userType, @RequestParam(value = "parentId") Integer parentId ){ return ResponseEntity.ok(vehicleListService.getVehicleList(groupId, operationId,limit,offset,userType,parentId)); }*/
-
+    }
     @GetMapping(value = "/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data) throws SQLException {
         Integer userType, profileId, vehicleId, parentId;
