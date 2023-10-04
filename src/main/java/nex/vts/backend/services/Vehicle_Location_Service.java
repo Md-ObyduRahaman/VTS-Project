@@ -16,8 +16,8 @@ public class Vehicle_Location_Service {
         this.locationImplementation = locationImplementation;
     }
 
-    public Optional getVehicleLatitudeLongitude() {
-        return locationImplementation.getReverseGeocoder();
+    public Optional getVehicleLatitudeLongitude(Double xLatitude, Double xLongitude) {
+        return locationImplementation.getReverseGeocoder(xLatitude,xLongitude);
     }
 
     public Optional getVehicleLocationDetails(Integer vehicleId)throws SQLException, BadSqlGrammarException, DataAccessException {

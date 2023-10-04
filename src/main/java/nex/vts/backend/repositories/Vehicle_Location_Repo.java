@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface Vehicle_Location_Repo {
     Optional getVehicleLocation(Integer vehicleId)throws SQLException, BadSqlGrammarException, DataAccessException;
-    Optional getReverseGeocoder(/*Integer xLatitude,Integer xLongitude*/);
+    Optional getReverseGeocoder(Double xLatitude,Double xLongitude);
     Optional getVehicleDistrict() throws SQLException, BadSqlGrammarException, DataAccessException;
     Object getVehicleThana(Integer thanaId) throws SQLException, BadSqlGrammarException, DataAccessException;
     Optional getVehicleRoad(Integer districtId)throws SQLException, BadSqlGrammarException, DataAccessException;
