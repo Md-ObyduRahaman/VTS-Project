@@ -7,7 +7,7 @@ import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.requests.LoginReq;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.ResRefreshToken;
-import nex.vts.backend.repositories.RepoVtsLoginUser;
+import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
