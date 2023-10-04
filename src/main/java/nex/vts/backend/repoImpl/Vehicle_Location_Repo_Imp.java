@@ -1,25 +1,26 @@
+
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.models.vehicle.Vehicle_District;
-import nex.vts.backend.models.vehicle.Vehicle_Location;
-import nex.vts.backend.models.vehicle.Vehicle_Road;
-import nex.vts.backend.models.vehicle.Vehicle_Thana;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Road_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
-import nex.vts.backend.repositories.Vehicle_Location_Repo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+        import nex.vts.backend.models.vehicle.Vehicle_District;
+        import nex.vts.backend.models.vehicle.Vehicle_Location;
+        import nex.vts.backend.models.vehicle.Vehicle_Road;
+        import nex.vts.backend.models.vehicle.Vehicle_Thana;
+        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
+        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
+        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Road_RowMapper;
+        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
+        import nex.vts.backend.repositories.Vehicle_Location_Repo;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
+        import org.springframework.dao.DataAccessException;
+        import org.springframework.jdbc.BadSqlGrammarException;
+        import org.springframework.jdbc.core.JdbcTemplate;
+        import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+        import java.sql.SQLException;
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.Optional;
 
 @Repository
 public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
