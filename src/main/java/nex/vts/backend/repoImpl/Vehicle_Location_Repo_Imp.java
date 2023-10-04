@@ -39,9 +39,7 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     }/*todo ------ get vehicle location ------------*/
 
     @Override
-    public Optional getReverseGeocoder(/*Integer xLatitude, Integer xLongitude*/) {
-        double xLatitude = 23.04435701063096;  /*Todo : testing purpose*/
-        double xLongitude = 23.1036257274697;   /*Todo : testing purpose*/
+    public Optional getReverseGeocoder(Double xLatitude, Double xLongitude) {
         String districtName;
         String[] listOfPolyX, listOfPolyY;
         Integer numberOfPolyX, districtId;
@@ -54,13 +52,23 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
                 listOfPolyX = getCSVValues(listOfDistrict.get(eachDistrict).getPolyX());
                 listOfPolyY = getCSVValues(listOfDistrict.get(eachDistrict).getPolyY());
                 numberOfPolyX = listOfPolyX.length;
-                if (pointInPolygon(xLatitude, xLongitude, listOfPolyX.length, listOfPolyX, listOfPolyY) == false) {
-                    districtName = discription;
-                    districtId = listOfDistrict.get(eachDistrict).getDistrictId();
-                    break;
+                if(pointInPolygon(xLatitude,xLongitude,numberOfPolyX,listOfPolyX,listOfPolyY) == false){
+
                 }
+
             }
         return Optional.empty();
+    }
+
+    private boolean pointInPolygon(Double xLatitude, Double xLongitude, Integer numberOfPolyX, String[] listOfPolyX, String[] listOfPolyY) {
+        int j = numberOfPolyX - 1;
+        boolean oddNodes = false;
+        for (int i = 0; i < numberOfPolyX; i++) {
+            if ((Double.parseDouble(listOfPolyY[i]) < xLongitude && Double.parseDouble(listOfPolyY[j]) >= xLongitude || Double.parseDouble(listOfPolyY[j]) < xLongitude && Double.parseDouble(listOfPolyY[i]) >= xLongitude) && Double.parseDouble(listOfPolyX[i]) + (xLongitude - Double.parseDouble(listOfPolyY[i])) / (Double.parseDouble(listOfPolyY[j]) - Double.parseDouble(listOfPolyY[i])) * (Double.parseDouble(listOfPolyY[j]) - Double.parseDouble(listOfPolyX[i])) < xLatitude)
+                oddNodes = !oddNodes;
+            j = i;
+        }
+        return oddNodes;
     }
 
     @Override
@@ -102,9 +110,7 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
         }
     }
 
-    private boolean pointInPolygon(double xLatitude, double xLongitude, int length, String[] listOfPolyX, String[] listOfPolyY) {
-        return false;
-    }
+
 
     private String[] getCSVValues(String poly) { /*Todo : in here php code  separeted double quoted vlaue if exists*/
         String[] listOfPolyX = poly.split(",");
