@@ -1,31 +1,29 @@
-
 package nex.vts.backend.repoImpl;
 
-        import nex.vts.backend.models.vehicle.Vehicle_District;
-        import nex.vts.backend.models.vehicle.Vehicle_Location;
-        import nex.vts.backend.models.vehicle.Vehicle_Road;
-        import nex.vts.backend.models.vehicle.Vehicle_Thana;
-        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
-        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
-        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Road_RowMapper;
-        import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
-        import nex.vts.backend.repositories.Vehicle_Location_Repo;
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
-        import org.springframework.dao.DataAccessException;
-        import org.springframework.jdbc.BadSqlGrammarException;
-        import org.springframework.jdbc.core.JdbcTemplate;
-        import org.springframework.stereotype.Repository;
+import nex.vts.backend.models.vehicle.Vehicle_District;
+import nex.vts.backend.models.vehicle.Vehicle_Location;
+import nex.vts.backend.models.vehicle.Vehicle_Road;
+import nex.vts.backend.models.vehicle.Vehicle_Thana;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Location_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Road_RowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.Vehicle_Thana_RowMapper;
+import nex.vts.backend.repositories.Vehicle_Location_Repo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-        import java.sql.SQLException;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Optional;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     private final JdbcTemplate jdbcTemplate;
-
     private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_Location_Repo_Imp.class);
 
     public Vehicle_Location_Repo_Imp(JdbcTemplate jdbcTemplate) {
@@ -53,10 +51,9 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
                 listOfPolyX = getCSVValues(listOfDistrict.get(eachDistrict).getPolyX());
                 listOfPolyY = getCSVValues(listOfDistrict.get(eachDistrict).getPolyY());
                 numberOfPolyX = listOfPolyX.length;
-                if(pointInPolygon(xLatitude,xLongitude,numberOfPolyX,listOfPolyX,listOfPolyY) == false){
-
+                if (pointInPolygon(xLatitude, xLongitude, numberOfPolyX, listOfPolyX, listOfPolyY) == false) {
+                    /*Todo---- implement reversegeocoder*/
                 }
-
             }
         return Optional.empty();
     }
@@ -81,17 +78,14 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
 
     @Override
     public Object getVehicleThana(Integer thanaId) throws SQLException, BadSqlGrammarException, DataAccessException {
-        if (!thanaId.equals(null)) {
-            try {
-                String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana\n".concat("where DIST_ID = ?");
-                List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
-                return Optional.of(vehicleThanas);
-            } catch (Exception exception) {
-
-                return LOGGER.getName();
-            }
-
-        } else {
+        if (!thanaId.equals(null)) try {
+            String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana\n".concat("where DIST_ID = ?");
+            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
+            return Optional.of(vehicleThanas);
+        } catch (Exception exception) {
+            return LOGGER.getName();
+        }
+        else {
             String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana";
             List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
             return Optional.of(vehicleThanas);
@@ -110,8 +104,6 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
             return Optional.of(vehicleRoads);
         }
     }
-
-
 
     private String[] getCSVValues(String poly) { /*Todo : in here php code  separeted double quoted vlaue if exists*/
         String[] listOfPolyX = poly.split(",");
