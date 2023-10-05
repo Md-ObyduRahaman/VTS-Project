@@ -34,7 +34,7 @@ public class SecurityConfig {
             "/api/private/v1/3/refresh-token",
             "/api/private/v1/vehicle/details", /*todo-> testing purpose*/
             "/api/private/v1/vehicle/district",/*todo-> testing purpose*/
-            "/api/private/v1/vehicle/list", /*todo-> testing purpose*/
+            "/api/private/v1/users/{userId}/vehicles", /*todo-> testing purpose*/
             "/api/private/v1/vehicle/road",/*todo-> testing purpose*/
             "/api/private/v1/vehicle/thana"/*todo-> testing purpose*/
 
