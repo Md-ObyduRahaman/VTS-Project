@@ -24,7 +24,6 @@ import java.util.Optional;
 @Repository
 public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     private final JdbcTemplate jdbcTemplate;
-
     private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_Location_Repo_Imp.class);
 
     public Vehicle_Location_Repo_Imp(JdbcTemplate jdbcTemplate) {
@@ -39,9 +38,7 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     }/*todo ------ get vehicle location ------------*/
 
     @Override
-    public Optional getReverseGeocoder(/*Integer xLatitude, Integer xLongitude*/) {
-        double xLatitude = 23.04435701063096;  /*Todo : testing purpose*/
-        double xLongitude = 23.1036257274697;   /*Todo : testing purpose*/
+    public Optional getReverseGeocoder(Double xLatitude, Double xLongitude) {
         String districtName;
         String[] listOfPolyX, listOfPolyY;
         Integer numberOfPolyX, districtId;
@@ -54,13 +51,22 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
                 listOfPolyX = getCSVValues(listOfDistrict.get(eachDistrict).getPolyX());
                 listOfPolyY = getCSVValues(listOfDistrict.get(eachDistrict).getPolyY());
                 numberOfPolyX = listOfPolyX.length;
-                if (pointInPolygon(xLatitude, xLongitude, listOfPolyX.length, listOfPolyX, listOfPolyY) == false) {
-                    districtName = discription;
-                    districtId = listOfDistrict.get(eachDistrict).getDistrictId();
-                    break;
+                if (pointInPolygon(xLatitude, xLongitude, numberOfPolyX, listOfPolyX, listOfPolyY) == false) {
+                    /*Todo---- implement reversegeocoder*/
                 }
             }
         return Optional.empty();
+    }
+
+    private boolean pointInPolygon(Double xLatitude, Double xLongitude, Integer numberOfPolyX, String[] listOfPolyX, String[] listOfPolyY) {
+        int j = numberOfPolyX - 1;
+        boolean oddNodes = false;
+        for (int i = 0; i < numberOfPolyX; i++) {
+            if ((Double.parseDouble(listOfPolyY[i]) < xLongitude && Double.parseDouble(listOfPolyY[j]) >= xLongitude || Double.parseDouble(listOfPolyY[j]) < xLongitude && Double.parseDouble(listOfPolyY[i]) >= xLongitude) && Double.parseDouble(listOfPolyX[i]) + (xLongitude - Double.parseDouble(listOfPolyY[i])) / (Double.parseDouble(listOfPolyY[j]) - Double.parseDouble(listOfPolyY[i])) * (Double.parseDouble(listOfPolyY[j]) - Double.parseDouble(listOfPolyX[i])) < xLatitude)
+                oddNodes = !oddNodes;
+            j = i;
+        }
+        return oddNodes;
     }
 
     @Override
@@ -72,17 +78,14 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
 
     @Override
     public Object getVehicleThana(Integer thanaId) throws SQLException, BadSqlGrammarException, DataAccessException {
-        if (!thanaId.equals(null)) {
-            try {
-                String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana\n".concat("where DIST_ID = ?");
-                List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
-                return Optional.of(vehicleThanas);
-            } catch (Exception exception) {
-
-                return LOGGER.getName();
-            }
-
-        } else {
+        if (!thanaId.equals(null)) try {
+            String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana\n".concat("where DIST_ID = ?");
+            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
+            return Optional.of(vehicleThanas);
+        } catch (Exception exception) {
+            return LOGGER.getName();
+        }
+        else {
             String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana";
             List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
             return Optional.of(vehicleThanas);
@@ -100,10 +103,6 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
             List<Vehicle_Road> vehicleRoads = jdbcTemplate.query(getQuery, new Vehicle_Road_RowMapper(), districtId);
             return Optional.of(vehicleRoads);
         }
-    }
-
-    private boolean pointInPolygon(double xLatitude, double xLongitude, int length, String[] listOfPolyX, String[] listOfPolyY) {
-        return false;
     }
 
     private String[] getCSVValues(String poly) { /*Todo : in here php code  separeted double quoted vlaue if exists*/
