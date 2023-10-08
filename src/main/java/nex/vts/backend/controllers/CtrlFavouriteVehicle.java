@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CtrlFavouriteVehicle {
 
 
-    private final Logger logger = LoggerFactory.getLogger(CtrlVehicleList.class);
+    private final Logger logger = LoggerFactory.getLogger(CtrlFavouriteVehicle.class);
 
     @Autowired
     FavouriteVehiclelRepo favouriteVehiclelRepo;
@@ -36,7 +36,6 @@ public class CtrlFavouriteVehicle {
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/favourit-vehicles",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@RequestHeader("APP_DATA") String appData, @PathVariable("deviceType") Integer deviceType,
                                               @PathVariable("userId") Integer userId) throws JsonProcessingException {
-        System.out.println("............................"+appData);
 
         Integer limit;
         Integer offset,userType,PARENT_PROFILE_ID;
@@ -67,7 +66,7 @@ public class CtrlFavouriteVehicle {
         BaseResponse baseResponse = new BaseResponse();
 
 
-        if (!favouriteVehiclelList.isPresent()){
+        if (favouriteVehiclelList.isEmpty()){
             baseResponse.status = false;
             baseResponse.errorMsg="Data  not found";
             baseResponse.errorCode=4041;

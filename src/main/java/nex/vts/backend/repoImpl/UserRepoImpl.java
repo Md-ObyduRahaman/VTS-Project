@@ -74,7 +74,6 @@ public class UserRepoImpl implements UserRepo {
             System.err.println("Please check your number of parameter that you are trying to pass as arguments, pass right number of parameter.  Please check Error massage.\nError massage: " + e.getMessage());
         } catch (Exception e) {
             System.err.println("Exception Occurred: " + e.getMessage());
-
         }
 
         return userArrayList;
