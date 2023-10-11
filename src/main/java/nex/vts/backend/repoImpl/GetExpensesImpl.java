@@ -41,7 +41,7 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
                 "         GPSNEXGP.get_vehicle_name (0, USER_ID)     VEHICLE_NAME,\n" +
                 "         description                       expense_notes\n" +
                 "    FROM GPSNEXGP.NEX_ALL_EXPENDITURE\n" +
-                "   WHERE USER_ID = "+vehicleId+" AND DATE_TIME BETWEEN "+date_from+" AND "+date_to +" ORDER BY DATE_TIME ASC";
+                "   WHERE USER_ID = "+vehicleId+" AND DATE_TIME BETWEEN ' "+date_from+" ' AND '"+date_to +"' ORDER BY DATE_TIME ASC";
 
         Optional<ArrayList<GetExpansesModel>> getExpenseList=Optional.empty();
 
