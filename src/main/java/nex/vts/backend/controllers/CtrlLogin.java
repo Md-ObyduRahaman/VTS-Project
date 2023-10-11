@@ -70,7 +70,7 @@ public class CtrlLogin {
                 isCredentialMatched = true;
                 baseResponse.status = true;
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
-                throw new AppCommonException(4004 + "##Your account is blocked. Please contact with call center");
+                throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center");
             } else {
                 throw new AppCommonException(4005 + "##User credential not matched");
             }
