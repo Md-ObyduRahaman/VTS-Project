@@ -9,6 +9,4 @@ public interface GetExpenseRepo {
 
     List<GetExpense> findAllExpenses(String vehicle_id, String date_from, String Date_to);
 
-
-
 }

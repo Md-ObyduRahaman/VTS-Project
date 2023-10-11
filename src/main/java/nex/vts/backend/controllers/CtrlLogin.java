@@ -70,12 +70,12 @@ public class CtrlLogin {
                 isCredentialMatched = true;
                 baseResponse.status = true;
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
-                throw new AppCommonException(400 + "##Your account is blocked. Please contact with call center");
+                throw new AppCommonException(4004 + "##Your account is blocked. Please contact with call center");
             } else {
-                throw new AppCommonException(400 + "##User credential not matched");
+                throw new AppCommonException(4005 + "##User credential not matched");
             }
         } else {
-            throw new AppCommonException(400 + "##User not found");
+            throw new AppCommonException(4006 + "##User not found");
         }
 
         if (isCredentialMatched) {
@@ -99,14 +99,14 @@ public class CtrlLogin {
                     try {
                         nexDeptClientProfileOpt = repoNexVehicleDept.getParentProfileIdOfDepartmentClient(vtsLoginUser.getPROFILE_ID());
                     } catch (Exception e) {
-                        throw new AppCommonException(400 + "##Could not fetch profile information");
+                        throw new AppCommonException(4007 + "##Could not fetch profile information");
                     }
 
                     if (nexDeptClientProfileOpt.isPresent()) {
                         NEX_VEHICLE_DEPT nexIndividualClientProfile = nexDeptClientProfileOpt.get();
                         loginResponse.parentId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                     } else {
-                        throw new AppCommonException(400 + "##Sorry we could not found your profile information");
+                        throw new AppCommonException(4008 + "##Sorry we could not found your profile information");
                     }
                     break;
                 case 3:
@@ -114,14 +114,14 @@ public class CtrlLogin {
                     try {
                         nexIndividualClientProfileOpt = repoNexIndividualClient.getParentProfileIdOfIndividualClient(vtsLoginUser.getPROFILE_ID());
                     } catch (Exception e) {
-                        throw new AppCommonException(400 + "##Could not fetch profile information");
+                        throw new AppCommonException(4013 + "##Could not fetch profile information");
                     }
 
                     if (nexIndividualClientProfileOpt.isPresent()) {
                         NEX_INDIVIDUAL_CLIENT nexIndividualClientProfile = nexIndividualClientProfileOpt.get();
                         loginResponse.parentId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                     } else {
-                        throw new AppCommonException(400 + "##Individual client profile not found");
+                        throw new AppCommonException(4014 + "##Individual client profile not found");
                     }
                     break;
                 case 4:
@@ -129,18 +129,18 @@ public class CtrlLogin {
                     try {
                         nexExtendedClientProfileOpt = repoVtsExtendedUserProfile.getParentProfileIdOfExtendedClient(vtsLoginUser.getPROFILE_ID());
                     } catch (Exception e) {
-                        throw new AppCommonException(400 + "##Could not fetch profile information");
+                        throw new AppCommonException(4012 + "##Could not fetch profile information");
                     }
 
                     if (nexExtendedClientProfileOpt.isPresent()) {
                         VTS_EXTENDED_USER_PROFILE nexExtendedClientProfile = nexExtendedClientProfileOpt.get();
                         loginResponse.parentId = nexExtendedClientProfile.getPARENT_PROFILE_ID();
                     } else {
-                        throw new AppCommonException(400 + "##Individual client profile not found");
+                        throw new AppCommonException(4010 + "##Individual client profile not found");
                     }
                     break;
                 default:
-                    throw new AppCommonException(400 + "##Invalid profile type");
+                    throw new AppCommonException(4011 + "##Invalid profile type");
             }
 
 

@@ -59,12 +59,12 @@ public class CtrlRefreshToken {
                 isCredentialMatched = true;
                 baseResponse.status = true;
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
-                throw new AppCommonException(400 + "##Your account is blocked. Please contact with call center");
+                throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center");
             } else {
-                throw new AppCommonException(400 + "##User credential not matched");
+                throw new AppCommonException(4016 + "##User credential not matched");
             }
         } else {
-            throw new AppCommonException(400 + "##User not found");
+            throw new AppCommonException(4006 + "##User not found");
         }
 
         if (isCredentialMatched) {
