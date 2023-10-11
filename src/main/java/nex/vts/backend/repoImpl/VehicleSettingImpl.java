@@ -74,6 +74,7 @@ public class VehicleSettingImpl implements VehicleSettingRepo {
              out = json.get("P_RESPONSE").toString();
 
         } catch (NumberFormatException e) {
+
             System.err.println("You are trying to pass wrong type of arguments ,please check arguments index position with procedure arguments index position, and try to pass write f DataType. Please check Error massage.\nError massage: " + e.getMessage());
 
         } catch (BadSqlGrammarException e) {

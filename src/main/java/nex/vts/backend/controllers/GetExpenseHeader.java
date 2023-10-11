@@ -56,7 +56,6 @@ public class GetExpenseHeader {
             baseResponse.data = getExpansesListObj;
         }
 
-
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
