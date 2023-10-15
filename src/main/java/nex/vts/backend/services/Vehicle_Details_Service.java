@@ -1,15 +1,15 @@
 package nex.vts.backend.services;
 
-import nex.vts.backend.repoImpl.Vehicle_Details_Permission_Repo_Imp;
+import nex.vts.backend.repoImpl.Vehicle_DetailsPermission_Repo_Imp;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 
 @Component
 public class Vehicle_Details_Service {
-    private final Vehicle_Details_Permission_Repo_Imp permissionRepoImp;
+    private final Vehicle_DetailsPermission_Repo_Imp permissionRepoImp;
 
-    public Vehicle_Details_Service(Vehicle_Details_Permission_Repo_Imp permissionRepoImp) {
+    public Vehicle_Details_Service(Vehicle_DetailsPermission_Repo_Imp permissionRepoImp) {
         this.permissionRepoImp = permissionRepoImp;
     }
 
