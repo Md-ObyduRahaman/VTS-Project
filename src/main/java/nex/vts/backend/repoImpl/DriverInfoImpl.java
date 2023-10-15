@@ -18,7 +18,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Optional<DriverInfoModel> getCorporateClientProfile(int USERID) {
+    public DriverInfoModel getCorporateClientProfile(int USERID) {
         logger.debug("Executing query to get client profile by client profile id: {}", USERID);
         return jdbcTemplate.queryForObject("SELECT ID,USERID,D_NAME,D_FNAME,D_LICENSE,D_ADDRESS,D_CELL,\n" +
                 "TO_CHAR(TO_DATE(D_DOB, 'YYYYMMDD'), 'MM/DD/YYYY') D_DOB, LENGTH(DRIVER_PHOTO) DRIVER_HAS_PHOTO\n" +

@@ -98,7 +98,8 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean findById(Integer userID) {
+    public boolean
+    findById(Integer userID) {
         boolean hasRecord =
                 jdbcTemplete
                         .query("select * from driverdetails WHERE driverid=?",

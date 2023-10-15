@@ -41,7 +41,7 @@ public class DriverInfoController {
         } else {
             GetDriverInfoObj getDriverInfoObj = new GetDriverInfoObj();
             baseResponse.status = true;
-            GetDriverInfoObj.GetDriverModels(getDriverInfoObj);
+            getDriverInfoObj.setDriverInfoModels(GetDriverInfo);
             baseResponse.data =  GetDriverInfoObj;
         }
 
