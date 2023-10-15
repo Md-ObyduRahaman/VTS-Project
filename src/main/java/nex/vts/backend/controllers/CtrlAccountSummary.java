@@ -43,11 +43,15 @@ public class CtrlAccountSummary {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
+            baseResponse.version="V.0.0.1";
+            baseResponse.apiName="getAccountSummary";
         } else {
             AccountSummaryObj accountSummaryObj = new AccountSummaryObj();
             baseResponse.status = true;
             accountSummaryObj.setAccountSummaries(accountSummaries);
             baseResponse.data = accountSummaryObj;
+            baseResponse.version="V.0.0.1";
+            baseResponse.apiName="getAccountSummary";
         }
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));

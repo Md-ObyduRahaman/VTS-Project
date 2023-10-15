@@ -13,11 +13,11 @@ import org.springframework.stereotype.Repository;
 import java.sql.SQLException;
 
 @Repository
-public class Vehicle_Details_Permission_Repo_Imp implements Vehicle_Details_Repo {
-    private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_Details_Permission_Repo_Imp.class);
+public class Vehicle_DetailsPermission_Repo_Imp implements Vehicle_Details_Repo {
+    private final static Logger LOGGER = LoggerFactory.getLogger(Vehicle_DetailsPermission_Repo_Imp.class);
     private final JdbcTemplate jdbcTemplate;
 
-    public Vehicle_Details_Permission_Repo_Imp(JdbcTemplate jdbcTemplate) {
+    public Vehicle_DetailsPermission_Repo_Imp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

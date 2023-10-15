@@ -41,8 +41,8 @@ public class VehicleOthersInfoImpl implements VehicleOthersInfoRepo {
                     new VehicleOthersInfoModel(rs.getString("IND_PASS"),
                             rs.getString("CELL_PHONE"),
                             rs.getString("EMAIL"),
-                            rs.getInt("IS_FAVORITE"), rs.getInt("VEHICLE_STATUS"),
-                            rs.getInt("IS_MULTIPLE_NOTIFICATION_ALLOW"),
+                            rs.getBoolean("IS_FAVORITE"), rs.getInt("VEHICLE_STATUS"),
+                            rs.getBoolean("IS_MULTIPLE_NOTIFICATION_ALLOW"),
                             rs.getInt("IS_SAFE_MODE_ACTIVE"), rs.getInt("MAX_CAR_SPEED")
                     )
             ).stream().findFirst();

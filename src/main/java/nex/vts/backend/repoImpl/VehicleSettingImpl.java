@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -24,11 +25,14 @@ public class VehicleSettingImpl implements VehicleSettingRepo {
 
     @Autowired
     private JdbcTemplate jdbcTemplete;
+
+    private final DataSource dataSource;
     SimpleJdbcCall getAllStatesJdbcCall;
 
+
+    @Autowired
     public VehicleSettingImpl(DataSource dataSource) {
-        this.jdbcTemplete = new JdbcTemplate(dataSource);
-        this.getAllStatesJdbcCall = new SimpleJdbcCall(dataSource);
+        this.dataSource = dataSource;
     }
 
 
@@ -46,50 +50,117 @@ public class VehicleSettingImpl implements VehicleSettingRepo {
         return Integer.valueOf(result);
     }
 
-    @Override
-    public String getModifyVicleProfileResponse(String p_type, Integer p_profile_type, Integer p_profile_id, Integer p_parent_profile_id, Integer p_vehicle_id, Integer p_login_status, String p_pass, String p_max_speed, String p_sms, String p_email, Integer p_multiple_alert, Integer p_safe_mode) {
 
+
+    @Override
+    public String modify_vehicle_profile(String p_type, Integer p_profile_type, Integer p_profile_id, Integer p_parent_profile_id,
+                                         Integer p_vehicle_id, Integer p_login_status, String p_pass, Integer p_max_speed,
+                                         String p_sms, String p_email, boolean p_multiple_alert, Integer p_safe_mode) throws SQLException {
 
         String out = null;
+        Connection connection = dataSource.getConnection();
+        CallableStatement callableStatement = connection.prepareCall("{call modify_vehicle_profile (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)}");
 
-        SimpleJdbcCall jdbcCall = getAllStatesJdbcCall.withProcedureName("modify_vehicle_profile");
+        // Set the parameters
+        callableStatement.setString(1, p_type);
+        callableStatement.setInt(2, p_profile_type);
+        callableStatement.setInt(3, p_profile_id);
+        callableStatement.setInt(4, p_parent_profile_id);
+        callableStatement.setInt(5, p_vehicle_id);
+        callableStatement.setInt(6, p_login_status);
+        callableStatement.setString(7, p_pass);
+        callableStatement.setInt(8, p_max_speed);
+        callableStatement.setString(9, p_sms);
+        callableStatement.setString(10, p_email);
+        callableStatement.setBoolean(11, p_multiple_alert);
+        callableStatement.setInt(12, p_safe_mode);
+        // Register the OUT parameter
+        callableStatement.registerOutParameter(13, Types.VARCHAR);
 
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("p_type", p_type);
-        params.addValue("p_profile_type", p_profile_type);
-        params.addValue("p_profile_id", p_profile_id);
-        params.addValue("p_parent_profile_id", p_parent_profile_id);
-        params.addValue("p_login_status", p_login_status);
-        params.addValue("p_vehicle_id", p_vehicle_id);
-        params.addValue("p_pass", p_pass);
-        params.addValue("p_max_speed", p_max_speed);
-        params.addValue("p_sms", p_sms);
-        params.addValue("p_email", p_email);
-        params.addValue("p_multiple_alert", p_multiple_alert);
-        params.addValue("p_safe_mode", p_safe_mode);
 
         try {
-            Map<String, Object> output = jdbcCall.execute(params);
-            JSONObject json = new JSONObject(output);
-             out = json.get("P_RESPONSE").toString();
+            // Execute the stored procedure
+            boolean result = callableStatement.execute();
 
-        } catch (NumberFormatException e) {
-
-            System.err.println("You are trying to pass wrong type of arguments ,please check arguments index position with procedure arguments index position, and try to pass write f DataType. Please check Error massage.\nError massage: " + e.getMessage());
-
-        } catch (BadSqlGrammarException e) {
+            // Check if the result is a ResultSet (if applicable)
+            if (result) {
+                ResultSet resultSet = callableStatement.getResultSet();
+                // Process the result set here
+            } else {
+                // Handle the case where the result is an update count or there's no result
+                int updateCount = callableStatement.getUpdateCount();
+                if (updateCount != -1) {
+                    // This is an update count (e.g., number of rows affected)
+                    // Handle it accordingly
+                } else {
+                    // There is no result or an unknown result
+                    System.out.println("There is no result or an unknown result");
+                    // Handle it as needed
+                }
+                // Retrieve the value of the 7th OUT parameter
+                 out = callableStatement.getString(13);
+                System.out.println("Value of out: " + out);
+            }
+        } catch (SQLException e) {
+            // Handle any exceptions that might occur during the execution
             e.printStackTrace();
-            System.err.println("Please check your procedure Name and number of arguments. Please check Error massage.\nError massage: " + e.getMessage());
+        } finally {
+            // Don't forget to close the callableStatement and the connection
+            callableStatement.close();
+            connection.close();
+        }
+        return out;
+    }
 
-        } catch (JSONException e) {
-            System.err.println("Please check your output cursor name, must be similar with oracle procedure out cursor. Please check Error massage.\nError massage: " + e.getMessage());
+    @Override
+    public String manage_favorite_vehicle(String p_type, Integer p_profile_type, Integer p_profile_id, Integer p_parent_profile_id,
+                                          Integer p_vehicle_id, Integer p_favorite_value) throws SQLException {
 
-        } catch (NullPointerException e) {
-            System.err.println(" Please check your SimpleJdbcCall object, might be dataSource is not assigned.  Please check Error massage.\nError massage: " + e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Please check your number of parameter that you are trying to pass as arguments, pass right number of parameter.  Please check Error massage.\nError massage: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Exception Occurred: " + e.getMessage());
+        String out = null;
+        Connection connection = dataSource.getConnection();
+        CallableStatement callableStatement = connection.prepareCall("{call manage_favorite_vehicle (?, ?, ?, ?, ?, ?,?)}");
+
+        // Set the parameters
+        callableStatement.setString(1, p_type);
+        callableStatement.setInt(2, p_profile_type);
+        callableStatement.setInt(3, p_profile_id);
+        callableStatement.setInt(4, p_parent_profile_id);
+        callableStatement.setInt(5, p_vehicle_id);
+        callableStatement.setInt(6, p_favorite_value);
+        // Register the OUT parameter
+        callableStatement.registerOutParameter(7, Types.VARCHAR);
+
+
+        try {
+            // Execute the stored procedure
+            boolean result = callableStatement.execute();
+
+            // Check if the result is a ResultSet (if applicable)
+            if (result) {
+                ResultSet resultSet = callableStatement.getResultSet();
+                // Process the result set here
+            } else {
+                // Handle the case where the result is an update count or there's no result
+                int updateCount = callableStatement.getUpdateCount();
+                if (updateCount != -1) {
+                    // This is an update count (e.g., number of rows affected)
+                    // Handle it accordingly
+                } else {
+                    // There is no result or an unknown result
+                    System.out.println("There is no result or an unknown result");
+                    // Handle it as needed
+                }
+                // Retrieve the value of the 7th OUT parameter
+                out = callableStatement.getString(7);
+                System.out.println("Value of out: " + out);
+            }
+        } catch (SQLException e) {
+            // Handle any exceptions that might occur during the execution
+            e.printStackTrace();
+        } finally {
+            // Don't forget to close the callableStatement and the connection
+            callableStatement.close();
+            connection.close();
         }
         return out;
     }
