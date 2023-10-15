@@ -1,9 +1,7 @@
 package nex.vts.backend.models.responses;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -11,10 +9,25 @@ import lombok.ToString;
 @ToString
 public class VehicleOthersInfoModel {
 
-    private String  IND_PASS,
-             CELL_PHONE, EMAIL;
-    private Integer IS_FAVORITE, VEHICLE_STATUS,
-            IS_MULTIPLE_NOTIFICATION_ALLOW,
-            IS_SAFE_MODE_ACTIVE, MAX_CAR_SPEED;
+    private String  IND_PASS;
+    @JsonProperty("cellPhone")
+    private String CELL_PHONE;
+    @JsonProperty("emailId")
+    private String       EMAIL;
+    @JsonProperty("isFavorite")
+    private Boolean IS_FAVORITE;
+    @JsonProperty("vehicleStatus")
+    private Integer VEHICLE_STATUS;
+    @JsonProperty("multipleNotification")
+    private boolean IS_MULTIPLE_NOTIFICATION_ALLOW;
+    @JsonProperty("safeMode")
+    private Integer IS_SAFE_MODE_ACTIVE;
+    @JsonProperty("maxSpeedValue")
+    private Integer MAX_CAR_SPEED;
+
+    public Boolean getIS_MULTIPLE_NOTIFICATION_ALLOW()
+    {
+        return this.IS_MULTIPLE_NOTIFICATION_ALLOW;
+    }
 
 }

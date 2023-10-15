@@ -82,11 +82,15 @@ public class CtrlSpeedData {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found within this time limit";
             baseResponse.errorCode = 4041;
+            baseResponse.version="V.0.0.1";
+            baseResponse.apiName="getSpeedData";
         } else {
             speedDataResponsesObj speedDataResponsesObj = new speedDataResponsesObj();
             baseResponse.status = true;
             speedDataResponsesObj.setSpeedDataResponses(speedDataResponses);
             baseResponse.data = speedDataResponsesObj;
+            baseResponse.version="V.0.0.1";
+            baseResponse.apiName="getSpeedData";
         }
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));

@@ -58,6 +58,8 @@ public class CtrlRefreshToken {
             if (reqBody.username.equals(vtsLoginUser.getUSERNAME()) && reqBody.password.equals(vtsLoginUser.getPASSWORD()) && vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
                 isCredentialMatched = true;
                 baseResponse.status = true;
+                baseResponse.apiName=reqBody.apiName;
+                baseResponse.version="V.0.0.1";
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
                 throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center");
             } else {
