@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface DriverInfoRepo
 {
-    public Optional<ArrayList<GetExpansesModel>> findDriverInfo(String id);
+    public int findDriverInfo(Integer id);
 }
