@@ -2,6 +2,7 @@ package nex.vts.backend.controllers;
 
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.services.Vehicle_Details_Service;
+import nex.vts.backend.services.Vehicle_History_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
 import nex.vts.backend.services.Vehicle_Location_Service;
 import org.json.JSONObject;
@@ -29,13 +30,15 @@ public class Vehicle_Controller {
     private final Vehicle_List_Service Vehicle_List_Service;
     private final Vehicle_Details_Service detailsService;
     private final Vehicle_Location_Service locationService;
+    private final Vehicle_History_Service historyService;
     Map<String, Object> respnse = new LinkedHashMap<>(), vehicle = new LinkedHashMap<>();
     BaseResponse baseResponse = new BaseResponse();
 
-    public Vehicle_Controller(Vehicle_List_Service Vehicle_List_Service, Vehicle_Details_Service detailsService, Vehicle_Location_Service locationService) {
+    public Vehicle_Controller(Vehicle_List_Service Vehicle_List_Service, Vehicle_Details_Service detailsService, Vehicle_Location_Service locationService, Vehicle_History_Service historyService) {
         this.Vehicle_List_Service = Vehicle_List_Service;
         this.detailsService = detailsService;
         this.locationService = locationService;
+        this.historyService = historyService;
     }
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
@@ -128,5 +131,22 @@ public class Vehicle_Controller {
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
+    }
+
+
+    /*todo --- Vehicle history Api*/
+
+    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
+    @GetMapping(value = "/vehicle-history",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getVehicleHistory(@RequestHeader(value = "data")String data){
+        Integer vehicleId;
+        String fromDate,toDate;
+        byte[] decode_data = Base64.getDecoder().decode(data);
+        String string_decode_data = new String(decode_data);
+        JSONObject jsonFormat = new JSONObject(string_decode_data);
+        vehicleId = Integer.parseInt(jsonFormat.get("vehicleId").toString());
+        fromDate = jsonFormat.get("fromDate").toString();
+        toDate = jsonFormat.get("toDate").toString();
+        return ResponseEntity.ok(historyService.getVehicleHistory(vehicleId,fromDate,toDate));
     }
 }

@@ -19,29 +19,30 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
 
     public Object total_vehicle_for_user_type_1(Integer groupId) {
         String total = "select count(a.ID) total\n" + "from nex_individual_temp a,\n" + "     nex_individual_client b\n" + "where a.VEHICLE_ID = b.ID\n" + "  and a.group_id = ?\n" + "  AND a.OPERATORID = 1\n" + "  AND b.ACTIVATION = 1";
-        Integer numberOfVehicles = jdbcTemplate.queryForObject(total,new Object[]{groupId},new Total_Vehicle_RowMapper()).getNumberOfVehicles();
+        Integer numberOfVehicles = jdbcTemplate.queryForObject(total, new Object[]{groupId}, new Total_Vehicle_RowMapper()).getNumberOfVehicles();
         return numberOfVehicles;
     }
 
     public Object total_vehicle_for_user_type_2(Integer groupId, Integer parentId) {
         String total = "select count(a.ID) total\n" + "from nex_individual_temp a,\n" + "     nex_individual_client b\n" + "where a.VEHICLE_ID = b.id\n" + "  and a.VEHICLE_ID in\n" + "      (select to_char(VEHICLE_ID)\n" + "       from GPSNEXGP.NEX_EXTENDED_USER_VS_VEHICLE\n" + "       WHERE PROFILE_ID = ?\n" + "         AND PROFILE_TYPE = 2\n" + "         AND PARENT_PROFILE_ID = ?)\n" + "  AND b.OPERATORID = 1\n" + "  AND b.ACTIVATION = 1";
-        Integer numberOfVehicles = jdbcTemplate.queryForObject(total,new Object[]{groupId,parentId},new Total_Vehicle_RowMapper()).getNumberOfVehicles();
+        Integer numberOfVehicles = jdbcTemplate.queryForObject(total, new Object[]{groupId, parentId}, new Total_Vehicle_RowMapper()).getNumberOfVehicles();
         return numberOfVehicles;
     }
 
     public Integer total_vehicle_for_user_type_3(Integer groupId) {
         String total = "select count(a.ID) total\n" + "from nex_individual_temp a,\n" + "     nex_individual_client b\n" + "where a.vehicle_id = b.id\n" + "  and a.VEHICLE_ID = ?\n" + "  AND a.OPERATORID = 1\n" + "  AND b.ACTIVATION = 1";
-        Integer numberOfVehicles = jdbcTemplate.queryForObject(total,new Object[]{groupId},new Total_Vehicle_RowMapper()).getNumberOfVehicles();
+        Integer numberOfVehicles = jdbcTemplate.queryForObject(total, new Object[]{groupId}, new Total_Vehicle_RowMapper()).getNumberOfVehicles();
         return numberOfVehicles;
     }
 
     public Object total_vehicle_for_user_type_default(Integer groupId, Integer userType, Integer parentId) {
         String total = "select count(a.ID) total\n" + "from nex_individual_temp a,\n" + "     nex_individual_client b\n" + "where a.VEHICLE_ID = b.id\n" + "  and a.VEHICLE_ID in\n" + "      (select to_char(VEHICLE_ID)\n" + "       from GPSNEXGP.NEX_EXTENDED_USER_VS_VEHICLE\n" + "       WHERE PROFILE_ID = ?\n" + "         AND PROFILE_TYPE = ?\n" + "         AND PARENT_PROFILE_ID = ?)\n" + "  AND b.OPERATORID = 1\n" + "  AND b.ACTIVATION = 1";
-        Integer numberOfVehicles = jdbcTemplate.queryForObject(total,new Object[]{groupId,userType,parentId},new Total_Vehicle_RowMapper()).getNumberOfVehicles();
+        Integer numberOfVehicles = jdbcTemplate.queryForObject(total, new Object[]{groupId, userType, parentId}, new Total_Vehicle_RowMapper()).getNumberOfVehicles();
         return numberOfVehicles;
     }
 
-    @Override /*todo -- groupId is equivalent to vehicleId,profileId as per php code & documentation*/
+    /*todo -- groupId is equivalent to vehicleId,profileId as per php code & documentation*/
+    @Override
     public List<Vehicle_List> getVehicleList(Integer groupId, Integer operatorId, String limit, Integer offset, Integer userType, Integer parentId) {
         if (limit.equals("ALL")) {
             if (userType.equals(1)) {
