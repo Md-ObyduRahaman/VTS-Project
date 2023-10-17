@@ -1,85 +1,110 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.SpeedDataResponse;
+import nex.vts.backend.models.responses.MonthTravleDistance;
+import nex.vts.backend.models.responses.MonthTravleDistanceForAll;
 import nex.vts.backend.models.responses.TravelDistanceDataModel;
-import nex.vts.backend.repositories.SpeedDataRepo;
 import nex.vts.backend.repositories.TravelDistanceDataRepo;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.TransientDataAccessException;
-import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
     private final Logger logger = LoggerFactory.getLogger(TravelDistanceDataImpl.class);
 
+
     @Autowired
-    private JdbcTemplate jdbcTemplete;
+    private JdbcTemplate jdbcTemplate;
+
+    private final DataSource dataSource;
     SimpleJdbcCall getAllStatesJdbcCall;
 
+
+    @Autowired
     public TravelDistanceDataImpl(DataSource dataSource) {
-        this.jdbcTemplete = new JdbcTemplate(dataSource);
-        this.getAllStatesJdbcCall = new SimpleJdbcCall(dataSource);
+        this.dataSource = dataSource;
     }
+
 
     @Override
-    public Optional<ArrayList<TravelDistanceDataModel>> getTravelDistanceData(TravelDistanceDataModel t) {
+    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t) throws SQLException {
 
 
-        String out = null;
+        String sql="SELECT\n" +
+                "   ROW_NUMBER() OVER (ORDER BY DATETIME) AS key,\n" +
+                "    GROUPID AS profile_id,\n" +
+                "    VEHICLEID AS VEHICLE_ID,\n" +
+                "    DATETIME AS DATE_TIME,\n" +
+                "    NUM_OF_DAYS,\n" +
+                "    ROUND(DISTANCE,2) as DISTANCE,\n" +
+                "    MOTHER_ACCOUNT_NAME AS main_account_id,\n" +
+                "    ROUND(AVG(DISTANCE) OVER (), 2) AS average_distance,\n" +
+                "    ROUND(SUM(DISTANCE) OVER (), 2)  AS total_distance,\n" +
+                "    ROUND(MAX(DISTANCE) OVER (), 2) AS MAX_DISTANCE,\n" +
+                "    ROUND(MIN(DISTANCE) OVER (), 2) AS MIN_DISTANCE,\n" +
+                "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount\n" +
+                "FROM GPSNEXGP.NEX_DISTANCE_REPOT_DATA";
 
-        SimpleJdbcCall jdbcCall = getAllStatesJdbcCall.withProcedureName("generate_distance_report_data");
+        // Step 1: Call the stored procedure with parameters
+        String callProcedureSql = "CALL GPSNEXGP.GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
+        jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
+        // Step 2: Run a SELECT query to fetch the results
+        List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
 
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("p_alert_type", t.getP_alert_type());
-        params.addValue("p_report_type", t.getP_report_type());
-        params.addValue("p_profile_type", t.getProfileType());
-        params.addValue("p_profile_id", t.getProfileId());
-        params.addValue("p_profile_p_id", t.getParentId());
-        params.addValue("p_all_vehicle_flag", t.getP_all_vehicle_flag());
-        params.addValue("p_vehicle_id", t.getVehicleId());
-        params.addValue("p_date_from", t.getP_date_from());
-        params.addValue("p_date_to", t.getP_date_to());
 
-        try {
-            Map<String, Object> output = jdbcCall.execute(params);
-            JSONObject json = new JSONObject(output);
-         //   out = json.get("P_RESPONSE").toString();
+        //Map Data
+        ArrayList<MonthTravleDistance> monthTravleDistanceList=new ArrayList<>();
+        MonthTravleDistanceForAll monthTravleDistanceForAllin=new MonthTravleDistanceForAll();
+        Boolean flag=true;
 
-        } catch (NumberFormatException e) {
-            System.err.println("You are trying to pass wrong type of arguments ,please check arguments index position with procedure arguments index position, and try to pass write f DataType. Please check Error massage.\nError massage: " + e.getMessage());
+        for (Map<String, Object> map : results) {
 
-        } catch (BadSqlGrammarException e) {
-            e.printStackTrace();
-            System.err.println("Please check your procedure Name and number of arguments. Please check Error massage.\nError massage: " + e.getMessage());
+            MonthTravleDistance monthTravleDistance=new MonthTravleDistance();
+            if(flag) {
+                BigDecimal AVERAGE_DISTANCE = (BigDecimal) map.get("AVERAGE_DISTANCE");
+                monthTravleDistanceForAllin.setAverage(AVERAGE_DISTANCE.doubleValue());
+                BigDecimal TOTAL_DISTANCE = (BigDecimal) map.get("TOTAL_DISTANCE");
+                monthTravleDistanceForAllin.setTotal(TOTAL_DISTANCE.doubleValue());
+                BigDecimal MAX_DISTANCE = (BigDecimal) map.get("MAX_DISTANCE");
+                monthTravleDistanceForAllin.setMax(MAX_DISTANCE.doubleValue());
+                BigDecimal MIN_DISTANCE = (BigDecimal) map.get("MIN_DISTANCE");
+                monthTravleDistanceForAllin.setMin(MIN_DISTANCE.doubleValue());
+                BigDecimal TOTALROWCOUNT = (BigDecimal) map.get("TOTALROWCOUNT");
+                monthTravleDistanceForAllin.setTotalCount(TOTALROWCOUNT.intValue());
+                flag=false;
 
-        } catch (JSONException e) {
-            System.err.println("Please check your output cursor name, must be similar with oracle procedure out cursor. Please check Error massage.\nError massage: " + e.getMessage());
+}
+            String PROFILE_ID = (String) map.get("PROFILE_ID");
+            String VEHICLE_ID = (String) map.get("VEHICLE_ID");
+            String DATE_TIME = (String) map.get("DATE_TIME");
+            BigDecimal NUM_OF_DAYS = (BigDecimal) map.get("NUM_OF_DAYS");
+            BigDecimal DISTANCE = (BigDecimal) map.get("DISTANCE");
+            String MAIN_ACCOUNT_ID = (String) map.get("MAIN_ACCOUNT_ID");
+            BigDecimal KEY = (BigDecimal) map.get("KEY");
 
-        } catch (NullPointerException e) {
-            System.err.println(" Please check your SimpleJdbcCall object, might be dataSource is not assigned.  Please check Error massage.\nError massage: " + e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Please check your number of parameter that you are trying to pass as arguments, pass right number of parameter.  Please check Error massage.\nError massage: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Exception Occurred: " + e.getMessage());
+            monthTravleDistanceList.add(new MonthTravleDistance(PROFILE_ID, VEHICLE_ID,
+                    DATE_TIME, NUM_OF_DAYS.toString(),
+                    DISTANCE.toString(), MAIN_ACCOUNT_ID, KEY.intValue()));
         }
-        return null;
+        monthTravleDistanceForAllin.setMonthTravleDistancesList(monthTravleDistanceList);
+
+
+
+        return monthTravleDistanceForAllin;
+
     }
-    }
+
+
+}
 
