@@ -1,16 +1,16 @@
 package nex.vts.backend.models.vehicle;
 
-public class Vehicle_History {
+public class Vehicle_History_UserInput {
     private Integer vehicleId;
     private String fromDate, toDate;
 
-    public Vehicle_History(Integer vehicleId, String fromDate, String toDate) {
+    public Vehicle_History_UserInput(Integer vehicleId, String fromDate, String toDate) {
         this.vehicleId = vehicleId;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
 
-    public Vehicle_History() {
+    public Vehicle_History_UserInput() {
     }
 
     public Integer getVehicleId() {
