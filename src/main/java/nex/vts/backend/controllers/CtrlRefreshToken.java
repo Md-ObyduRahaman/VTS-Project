@@ -9,6 +9,7 @@ import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.ResRefreshToken;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.JwtService;
+import nex.vts.backend.utilities.PasswordHashUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class CtrlRefreshToken {
             throw new AppCommonException(400 + "##BAD REQUEST 2");
         }
         reqBody = objectMapper.readValue(requestBody.get("data"), LoginReq.class);
+        reqBody.password= PasswordHashUtility.generateSHA256Hash(reqBody.password);
+
         //TODO: Request Field Validation
 
         VTS_LOGIN_USER vtsLoginUser = new VTS_LOGIN_USER();

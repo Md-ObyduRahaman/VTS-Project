@@ -1,6 +1,12 @@
 package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.nio.charset.StandardCharsets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
 import nex.vts.backend.dbentities.NEX_VEHICLE_DEPT;
@@ -12,13 +18,19 @@ import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.LoginResponse;
 import nex.vts.backend.repoImpl.*;
 import nex.vts.backend.services.JwtService;
+import nex.vts.backend.utilities.PasswordHashUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
 
@@ -46,6 +58,8 @@ public class CtrlLogin {
     private RepoVtsExtendedUserProfile repoVtsExtendedUserProfile;
     private LoginReq reqBody = null;
 
+
+
     @PostMapping(value = "/v1/{deviceType}/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login( @PathVariable("deviceType") Integer deviceType, @RequestParam Map<String, String> requestBody) throws JsonProcessingException {
 
@@ -55,12 +69,16 @@ public class CtrlLogin {
         }
         reqBody = objectMapper.readValue(requestBody.get("data"), LoginReq.class);
 
+        reqBody.password=PasswordHashUtility.generateSHA256Hash(reqBody.password);
+
+
         //TODO: Request Field Validation
 
         VTS_LOGIN_USER vtsLoginUser = new VTS_LOGIN_USER();
         BaseResponse baseResponse = new BaseResponse();
         LoginResponse loginResponse = new LoginResponse();
         boolean isCredentialMatched = false;
+
 
         //Authenticating user
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username);
@@ -156,5 +174,7 @@ public class CtrlLogin {
         //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     }
+
+
 
 }
