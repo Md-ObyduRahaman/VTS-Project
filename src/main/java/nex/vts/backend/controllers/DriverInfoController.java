@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
+/*
 @RestController
 @ResponseBody
 @RequestMapping("/api/private")
@@ -53,4 +53,6 @@ public class DriverInfoController {
     }
 
 }
+
+ */
 

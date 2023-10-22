@@ -1,36 +1,14 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.controllers.DriverInfoController;
-import nex.vts.backend.dbentities.NEX_CORPORATE_CLIENT;
-import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
-import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.AccountSummary;
-import nex.vts.backend.models.responses.DriverInfoModel;
-import nex.vts.backend.models.responses.GetExpansesModel;
-import nex.vts.backend.repositories.DriverInfoRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.TransientDataAccessException;
-import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
-
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Optional;
-
-@Service
-public class DriverInfoImpl implements DriverInfoRepo {
+//@Service
+/*public class DriverInfoImpl implements DriverInfoRepo {
     private final Logger logger = LoggerFactory.getLogger(RepoNexCorporateClient.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
     String sql = null;
 
-    public Optional<DriverInfoModel> findDriverInfo(Integer userID) {
+   public Optional<DriverInfoModel> findDriverInfo(Integer userID) {
         String sql = "select * from NEX_DRIVERINFO WHERE USERID=?";
         Optional<DriverInfoModel> driverInfoOptional = Optional.empty();
 
@@ -39,18 +17,17 @@ public class DriverInfoImpl implements DriverInfoRepo {
                     sql,
                     new Object[]{userID},
                     (ResultSet rs, int rowNum) -> {
-                        DriverInfoModel model = new DriverInfoModel();
-                        // Populate model with data from ResultSet
-                        return model;
-                    }
+               //         DriverInfoModel model = new DriverInfoModel();
+                  //      return model;
+                   // }
             );
 
-            Optional<DriverInfoModel> driverInfoOptional = Optional.empty();
+            //Optional<DriverInfoModel> driverInfoOptional = Optional.empty();
 
             try {
 
-                driverInfoOptional = Optional.of(DriverInfoModel) jdbcTemplate.query(sql,
-                        BeanPropertyRowMapper.newInstance(DriverInfoModel.class));
+            //    driverInfoOptional = Optional.of(DriverInfoModel) jdbcTemplate.query(sql,
+                       // BeanPropertyRowMapper.newInstance(DriverInfoModel.class));
             } catch (BadSqlGrammarException e) {
                 logger.trace("No Data found with profileId is {}  Sql Grammar Exception", userID);
                 throw new AppCommonException(4001 + "##Sql Grammar Exception");
@@ -72,4 +49,4 @@ public class DriverInfoImpl implements DriverInfoRepo {
         }
 
     }
-}
+}*/
