@@ -45,7 +45,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
                     }
             );
 
-            driverInfoOptional = Optional.ofNullable(driverInfo);
+            Optional<DriverInfoModel> driverInfoOptional = Optional.empty();
 
             try {
 
@@ -62,10 +62,10 @@ public class DriverInfoImpl implements DriverInfoRepo {
                 throw new AppCommonException(4003 + "##A database connection could not be obtained");
             }
 
-            if (driverInfoOptional.get().isEmpty()) {
+            if (!driverInfoOptional.isPresent()) {
                 return Optional.empty();
             } else {
-                return DriverInfo;
+                return driverInfoOptional;
             }
 
 
