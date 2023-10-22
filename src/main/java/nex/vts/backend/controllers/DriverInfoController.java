@@ -11,6 +11,7 @@ import nex.vts.backend.repositories.DriverInfoRepo;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RestController
 @ResponseBody
 @RequestMapping("/api/private")
+@Service
 public class DriverInfoController {
 
     @Autowired
@@ -30,7 +32,7 @@ public class DriverInfoController {
     public ResponseEntity<String> GetDriverInfo(@PathVariable("id") Integer id) throws JsonProcessingException {
 
 
-        Optional<ArrayList<DriverInfoModel>> GetDriverInfo = repo.findDriverInfo(id);
+        Optional<DriverInfoModel> GetDriverInfo = repo.findDriverInfo(id);
         BaseResponse baseResponse = new BaseResponse();
 
 
