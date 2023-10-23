@@ -85,16 +85,11 @@ public class Vehicle_Controller {
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data) throws SQLException {
-        Integer userType, profileId, vehicleId, parentId;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);
         JSONObject jsonFormat = new JSONObject(string_decode_data);
-        userType = Integer.parseInt(jsonFormat.get("userType").toString());
-        profileId = Integer.parseInt(jsonFormat.get("profileId").toString());
-        vehicleId = Integer.parseInt(jsonFormat.get("vehicleId").toString());
-        parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
-        respnse.put("vehicle-Permission", detailsService.getVehiclePermission(userType, profileId, parentId, vehicleId));
-        respnse.put("vehicle-details", detailsService.getVehicleDetails(userType, profileId, vehicleId));
+        respnse.put("vehicle-Permission", detailsService.getVehiclePermission(Integer.parseInt(jsonFormat.get("userType").toString()), Integer.parseInt(jsonFormat.get("profileId").toString()), Integer.parseInt(jsonFormat.get("parentId").toString()), Integer.parseInt(jsonFormat.get("vehicleId").toString())));
+        respnse.put("vehicle-details", detailsService.getVehicleDetails(Integer.parseInt(jsonFormat.get("userType").toString()), Integer.parseInt(jsonFormat.get("profileId").toString()), Integer.parseInt(jsonFormat.get("vehicleId").toString())));
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);

@@ -59,13 +59,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 String getVehicleListQuery = "select a.VEHICLE_ID                     id,       a.USERID                         vehicle_name,       a.ENGIN                          engine_status,      a.SPEED                          speed,      b.FAVORITE                       is_favorite,       b.ICON_TYPE                      vehicle_icon_type,      b.CUSTOM_USERID                  user_defined_vehicle_name,       b.ICON_TYPE_ON_MAP               ICON_TYPE_ON_MAP,      b.ICON_TYPE_RUNNING              ICON_TYPE_RUNNING,      b.ICON_TYPE_STOPPED              ICON_TYPE_STOPPED,      b.ICON_TYPE_STATIONARY           ICON_TYPE_STATIONARY,      GPSNEXGP.GET_MAX_CAR_SPEED(b.ID) max_speed from nex_individual_temp a,   nex_individual_client b where a.VEHICLE_ID = b.id and a.VEHICLE_ID in      (select to_char(VEHICLE_ID)       from GPSNEXGP.NEX_EXTENDED_USER_VS_VEHICLE       WHERE PROFILE_ID = ?        AND PROFILE_TYPE = 6        AND PARENT_PROFILE_ID = ?)  AND b.OPERATORID = ?  AND b.ACTIVATION = 1";
                 return Collections.singletonList(jdbcTemplate.query(getVehicleListQuery, new Vehicle_List_RowMapper(), groupId, parentId, operatorId));
             }
-<<<<<<< HEAD
-        }
-        else {
-            Integer limits = Integer.parseInt(limit);
-=======
         } else {
->>>>>>> master_clone
             if (userType.equals(1)) {
                     String getVehicleListQuery = "select a.VEHICLE_ID                     id,      a.USERID                         vehicle_name,     a.ENGIN                          engine_status,       a.SPEED                          speed,       b.FAVORITE                       is_favorite,       b.ICON_TYPE                      vehicle_icon_type,      b.CUSTOM_USERID                  user_defined_vehicle_name,      b.ICON_TYPE_ON_MAP              ICON_TYPE_ON_MAP,       b.ICON_TYPE_RUNNING             ICON_TYPE_RUNNING,      b.ICON_TYPE_STOPPED              ICON_TYPE_STOPPED,       b.ICON_TYPE_STATIONARY           ICON_TYPE_STATIONARY,       GPSNEXGP.GET_MAX_CAR_SPEED(b.ID) max_speed from nex_individual_temp a,     nex_individual_client b where a.VEHICLE_ID = b.ID  and a.group_id = ? AND a.OPERATORID = ?  AND b.ACTIVATION = 1".concat("order by a.ORDER_INDEX, b.ID asc OFFSET ? ROWS FETCH FIRST ? ROWS ONLY");
                     return Collections.singletonList(jdbcTemplate.query(getVehicleListQuery, new Vehicle_List_RowMapper(), groupId, operatorId, offset, Integer.parseInt(limit)));
