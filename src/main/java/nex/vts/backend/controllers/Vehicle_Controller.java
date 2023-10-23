@@ -1,6 +1,7 @@
 package nex.vts.backend.controllers;
 
 import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.vehicle.Vehicle_History_Get;
 import nex.vts.backend.services.Vehicle_Details_Service;
 import nex.vts.backend.services.Vehicle_History_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
 import java.sql.SQLException;
-import java.util.Base64;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/private/v1")
@@ -139,6 +138,7 @@ public class Vehicle_Controller {
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle-history",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleHistory(@RequestHeader(value = "data")String data){
+        Map<String,Object> totalCount = new HashMap<>();
         Integer vehicleId;
         String fromDate,toDate;
         byte[] decode_data = Base64.getDecoder().decode(data);
