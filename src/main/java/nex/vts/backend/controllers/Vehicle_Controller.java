@@ -1,7 +1,6 @@
 package nex.vts.backend.controllers;
 
 import nex.vts.backend.models.responses.BaseResponse;
-import nex.vts.backend.models.vehicle.Vehicle_History_Get;
 import nex.vts.backend.services.Vehicle_Details_Service;
 import nex.vts.backend.services.Vehicle_History_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
@@ -20,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/private/v1")
@@ -97,6 +99,7 @@ public class Vehicle_Controller {
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
     }
+
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/district", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleDistrict() throws SQLException, BadSqlGrammarException, DataAccessException {
@@ -105,6 +108,7 @@ public class Vehicle_Controller {
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
     }
+
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/thana", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleThana(@RequestHeader(value = "data") String data) throws SQLException, BadSqlGrammarException, DataAccessException {
@@ -118,6 +122,7 @@ public class Vehicle_Controller {
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
     }
+
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/road", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleRoad(@RequestHeader(value = "data") String data) throws SQLException, BadSqlGrammarException, DataAccessException {
@@ -130,23 +135,22 @@ public class Vehicle_Controller {
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
-    }
-
-
-    /*todo --- Vehicle history Api*/
+    } /*todo --- Vehicle history Api*/
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
-    @GetMapping(value = "/vehicle-history",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleHistory(@RequestHeader(value = "data")String data){
-        Map<String,Object> totalCount = new HashMap<>();
+    @GetMapping(value = "/vehicle-history", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getVehicleHistory(@RequestHeader(value = "data") String data) {
+        Map<String, Object> totalCount = new HashMap<>();
         Integer vehicleId;
-        String fromDate,toDate;
+        String fromDate, toDate;
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);
         JSONObject jsonFormat = new JSONObject(string_decode_data);
         vehicleId = Integer.parseInt(jsonFormat.get("vehicleId").toString());
         fromDate = jsonFormat.get("fromDate").toString();
         toDate = jsonFormat.get("toDate").toString();
-        return ResponseEntity.ok(historyService.getVehicleHistory(vehicleId,fromDate,toDate));
+        baseResponse.data = historyService.getVehicleHistory(vehicleId, fromDate, toDate);
+        baseResponse.status = true;
+        return ResponseEntity.ok(baseResponse);
     }
 }
