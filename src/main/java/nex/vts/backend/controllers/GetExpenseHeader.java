@@ -47,11 +47,15 @@ public class GetExpenseHeader {
 
         if (GetExpansesList.isEmpty()) {
             baseResponse.status = false;
+            baseResponse.version="v.0.0.01";
+            baseResponse.apiName="GET_Expense_details";
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         } else {
             GetExpansesListObj getExpansesListObj = new GetExpansesListObj();
             baseResponse.status = true;
+            baseResponse.version="v.0.0.01";
+            baseResponse.apiName="GET_Expense_details";
             getExpansesListObj.setGetExpansesModels(GetExpansesList);
             baseResponse.data = getExpansesListObj;
         }
