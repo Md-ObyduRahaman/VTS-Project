@@ -1,10 +1,9 @@
 package nex.vts.backend.services;
 
 import nex.vts.backend.repoImpl.Vehicle_List_Repo_Imp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class Vehicle_List_Service {
@@ -12,10 +11,15 @@ public class Vehicle_List_Service {
         this.Vehicle_List_Repo_Imp = Vehicle_List_Repo_Imp;
     }
 
+    private final Logger logger = LoggerFactory.getLogger(Vehicle_List_Service.class);
     private final Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp;
 
-    public List<Object> getVehicleList(Integer groupId, Integer operationId, String limit, Integer offset, Integer userType, Integer parentId) {
-        return Collections.singletonList(Vehicle_List_Repo_Imp.getVehicleList(groupId, operationId, limit, offset, userType, parentId));
+    public Object getVehicleList(Integer groupId, String limit, Integer offset, Integer userType, Integer parentId) {
+        try {
+            return Vehicle_List_Repo_Imp.getVehicleList(groupId, limit, offset, userType, parentId);
+        } catch (Exception e) {
+            return logger;
+        }
     }
 
     public Object get_total_vehicle(Integer groupId, Integer parentId, Integer userType) {

@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class Vehicle_Controller {
     private final Vehicle_Details_Service detailsService;
     private final Vehicle_Location_Service locationService;
     private final Vehicle_History_Service historyService;
-    Map<String, Object> respnse = new LinkedHashMap<>(), vehicle = new LinkedHashMap<>();
+    Map<String, Object> respnse = new LinkedHashMap<>();
     BaseResponse baseResponse = new BaseResponse();
 
     public Vehicle_Controller(Vehicle_List_Service Vehicle_List_Service, Vehicle_Details_Service detailsService, Vehicle_Location_Service locationService, Vehicle_History_Service historyService) {
@@ -59,7 +58,7 @@ public class Vehicle_Controller {
                 offset = Integer.parseInt(jsonFormat.get("offset").toString());
                 userType = Integer.parseInt(jsonFormat.get("userType").toString());
                 parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
-                Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, operatorId, limit, offset, userType, parentId);
+                Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, limit, offset, userType, parentId);
                 if (userType.equals(1)) {
                     respnse.put("total-vehicle", Vehicle_List_Service.get_total_vehicle(groupId, parentId, userType));
                     respnse.put("vehicle-list", vehicleList);
@@ -77,8 +76,18 @@ public class Vehicle_Controller {
         } catch (Exception e) {
             logger.warn("can not provide appropriate parameter in json", e.getMessage());
         }
-        baseResponse.status = true;
-        baseResponse.data = respnse;
+        if (respnse.isEmpty()) {
+            baseResponse.data = null;
+            baseResponse.status = false;
+            baseResponse.apiName = "get Vehicle List";
+            baseResponse.errorMsg = "kindly provide proper parameter";
+        } else {
+            baseResponse.status = true;
+            baseResponse.data = respnse;
+            baseResponse.apiName = "get Vehicle List";
+            baseResponse.version = "V.0.0.1";
+        }
+
         return ResponseEntity.ok(baseResponse);
     }
 

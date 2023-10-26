@@ -13,7 +13,7 @@ public class Vehicle_History_Service {
         history_repo = historyRepo;
     }
 
-    public List<Object> getVehicleHistory(Integer vehicleId, String fromDate, String toDate) {
+    public Object getVehicleHistory(Integer vehicleId, String fromDate, String toDate) {
         return history_repo.getVehicleHistory(vehicleId, fromDate, toDate);
     }
 }
