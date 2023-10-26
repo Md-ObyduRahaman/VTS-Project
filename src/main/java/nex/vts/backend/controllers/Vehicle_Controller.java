@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
 import java.sql.SQLException;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/private/v1")
@@ -99,6 +96,8 @@ public class Vehicle_Controller {
         JSONObject jsonFormat = new JSONObject(string_decode_data);
         respnse.put("vehicle-Permission", detailsService.getVehiclePermission(Integer.parseInt(jsonFormat.get("userType").toString()), Integer.parseInt(jsonFormat.get("profileId").toString()), Integer.parseInt(jsonFormat.get("parentId").toString()), Integer.parseInt(jsonFormat.get("vehicleId").toString())));
         respnse.put("vehicle-details", detailsService.getVehicleDetails(Integer.parseInt(jsonFormat.get("userType").toString()), Integer.parseInt(jsonFormat.get("profileId").toString()), Integer.parseInt(jsonFormat.get("vehicleId").toString())));
+        baseResponse.apiName = "vehicle-Detail";
+        baseResponse.version = "V.0.0.1";
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
@@ -153,7 +152,10 @@ public class Vehicle_Controller {
         vehicleId = Integer.parseInt(jsonFormat.get("vehicleId").toString());
         fromDate = jsonFormat.get("fromDate").toString();
         toDate = jsonFormat.get("toDate").toString();
-        baseResponse.data = historyService.getVehicleHistory(vehicleId, fromDate, toDate);
+        respnse.put("Vehicle-Hisotry",historyService.getVehicleHistory(vehicleId, fromDate, toDate));
+        baseResponse.data = respnse;
+        baseResponse.apiName = "vehicle-history";
+        baseResponse.version = "V.0.0.1";
         baseResponse.status = true;
         return ResponseEntity.ok(baseResponse);
     }
