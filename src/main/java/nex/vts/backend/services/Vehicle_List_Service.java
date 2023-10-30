@@ -5,14 +5,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Component
 public class Vehicle_List_Service {
-    public Vehicle_List_Service(Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp) {
-        this.Vehicle_List_Repo_Imp = Vehicle_List_Repo_Imp;
-    }
 
     private final Logger logger = LoggerFactory.getLogger(Vehicle_List_Service.class);
     private final Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp;
+    Map<String, Object> respnse = new LinkedHashMap<>();
+
+    public Vehicle_List_Service(Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp) {
+        this.Vehicle_List_Repo_Imp = Vehicle_List_Repo_Imp;
+    }
 
     public Object getVehicleList(Integer groupId, String limit, Integer offset, Integer userType, Integer parentId) {
         try {
@@ -34,4 +39,12 @@ public class Vehicle_List_Service {
             total_vehicle = Vehicle_List_Repo_Imp.total_vehicle_for_user_type_default(groupId, parentId, userType);
         return total_vehicle;
     }
+
+    public Object getVehicles(Integer groupId, String limit, Integer offset, Integer userType, Integer parentId) {
+        respnse.put("Vehicle-list", getVehicleList(groupId, limit, offset, userType, parentId));
+        respnse.put("Total-Vehicle", get_total_vehicle(groupId, parentId, userType));
+        return respnse;
+    }
+
+
 }
