@@ -5,6 +5,7 @@ import nex.vts.backend.services.Vehicle_Details_Service;
 import nex.vts.backend.services.Vehicle_History_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
 import nex.vts.backend.services.Vehicle_Location_Service;
+import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,16 +48,15 @@ public class Vehicle_Controller {
         byte[] decode_data = Base64.getDecoder().decode(data);
         String string_decode_data = new String(decode_data);
         JSONObject jsonFormat = new JSONObject(string_decode_data);
-        try {
-            if (!(jsonFormat.get("groupId").toString().isEmpty() && jsonFormat.get("operationId").toString().isEmpty() && jsonFormat.get("limit").toString().isEmpty() && jsonFormat.get("offset").toString().isEmpty() && jsonFormat.get("userType").toString().isEmpty() && jsonFormat.get("parentId").toString().isEmpty())) {
-                groupId = Integer.parseInt(jsonFormat.get("groupId").toString());
-                operatorId = Integer.parseInt(jsonFormat.get("operationId").toString());
-                limit = jsonFormat.get("limit").toString();
-                offset = Integer.parseInt(jsonFormat.get("offset").toString());
-                userType = Integer.parseInt(jsonFormat.get("userType").toString());
-                parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
-                Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, limit, offset, userType, parentId);
-                if (userType.equals(1)) {
+            groupId = Integer.parseInt(jsonFormat.get("groupId").toString());
+            limit = jsonFormat.get("limit").toString();
+            offset = Integer.parseInt(jsonFormat.get("offset").toString());
+            userType = Integer.parseInt(jsonFormat.get("userType").toString());
+            parentId = Integer.parseInt(jsonFormat.get("parentId").toString());
+//            Object vehicleList = Vehicle_List_Service.getVehicleList(groupId, limit, offset, userType, parentId);
+         Object  getVehicleInfo =  Vehicle_List_Service.getVehicles(groupId,limit,offset,userType,parentId);
+
+/*                if (userType.equals(1)) {
                     respnse.put("total-vehicle", Vehicle_List_Service.get_total_vehicle(groupId, parentId, userType));
                     respnse.put("vehicle-list", vehicleList);
                 } else if (userType.equals(2)) {
@@ -68,23 +68,31 @@ public class Vehicle_Controller {
                 } else {
                     respnse.put("total-vehicle", Vehicle_List_Service.get_total_vehicle(groupId, parentId, userType));
                     respnse.put("vehicle-list", vehicleList);
-                }
-            }
-        } catch (Exception e) {
-            logger.warn("can not provide appropriate parameter in json", e.getMessage());
-        }
-        if (respnse.isEmpty()) {
+                }*/
+/*        if (respnse.isEmpty()) {
             baseResponse.data = null;
             baseResponse.status = false;
             baseResponse.apiName = "get Vehicle List";
             baseResponse.errorMsg = "kindly provide proper parameter";
         } else {
             baseResponse.status = true;
-            baseResponse.data = respnse;
+            baseResponse.data = getVehicleInfo;
             baseResponse.apiName = "get Vehicle List";
             baseResponse.version = "V.0.0.1";
-        }
+        }*/
 
+        if (!getVehicleInfo.equals(null)) {
+            baseResponse.data = getVehicleInfo;
+            baseResponse.status = true;
+            baseResponse.version = "V.0.0.1";
+            baseResponse.apiName = "Vehicle-List";
+        } else {
+            baseResponse.data = null;
+            baseResponse.status = false;
+            baseResponse.version = "V.0.0.1";
+            baseResponse.apiName = "Vehicle-List";
+            baseResponse.errorMsg = String.valueOf(HttpStatus.SC_NOT_FOUND);
+        }
         return ResponseEntity.ok(baseResponse);
     }
 

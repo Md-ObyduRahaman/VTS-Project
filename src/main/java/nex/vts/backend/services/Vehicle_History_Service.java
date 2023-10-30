@@ -14,6 +14,11 @@ public class Vehicle_History_Service {
     }
 
     public Object getVehicleHistory(Integer vehicleId, String fromDate, String toDate) {
-        return history_repo.getVehicleHistory(vehicleId, fromDate, toDate);
+        try {
+            return history_repo.getVehicleHistory(vehicleId, fromDate, toDate);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
     }
 }

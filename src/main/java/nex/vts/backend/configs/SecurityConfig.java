@@ -40,7 +40,7 @@ public class SecurityConfig {
      //       "/api/private/v1/vehicle/thana",/*todo-> testing purpose*/
 //            "/api/private/v1/vehicle-history"/*todo-> testing purpose*/
     };
-
+clear
     @Autowired
     @Qualifier("delegatedAuthenticationEntryPoint")
     AuthenticationEntryPoint authEntryPoint;

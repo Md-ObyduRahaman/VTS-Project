@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
@@ -35,7 +36,7 @@ public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
     }
 
     @Override
-    public Object getVehicleHistory(Integer vehicleId, String from_Date_Time, String to_Date_Time) {
+    public Optional<Object> getVehicleHistory(Integer vehicleId, String from_Date_Time, String to_Date_Time) {
         LocalDate localDate_new_fromDate = LocalDate.parse(from_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd")), localDate_new_toDate = LocalDate.parse(to_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd"));
         LocalTime localTime_new_fromTime = LocalTime.parse(from_Date_Time.substring(8), DateTimeFormatter.ofPattern("HHmmss")).plusHours(2), localTime_new_toTime = LocalTime.parse(to_Date_Time.substring(8), DateTimeFormatter.ofPattern("HHmmss")).plusHours(2);
         String fromTime, toTime, fromDateTime, toDateTime, from_Date, to_Date;
@@ -55,7 +56,7 @@ public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
         return getVehicleHistoryResponse(trackList);
     }
 
-    public Object getVehicleHistoryResponse(List<Vehicle_History_Get> trackList) {
+    public Optional<Object> getVehicleHistoryResponse(List<Vehicle_History_Get> trackList) {
         List<Vehicle_History_Get> historyGetList = new ArrayList<>();
         List<Vehicle_History_Get> historyGets = new ArrayList<>();
         boolean duplicateVehicle = false;
@@ -88,9 +89,8 @@ public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
                     historyGets.add(historyGetList.get(each));
                 }
             }
-
         }
-        return historyGets;
+        return Optional.of(historyGets);
     }
 
     private Long getVehicleDateTime(Long dateTime) {
