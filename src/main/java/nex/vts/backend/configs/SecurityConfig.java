@@ -3,8 +3,10 @@ package nex.vts.backend.configs;
 import nex.vts.backend.filter.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -47,16 +49,15 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthFilter authFilter;
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     //authentication
     public UserDetailsService userDetailsService() {
         return new UserInfoUserDetailsService();
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -80,15 +81,18 @@ public class SecurityConfig {
     }
 
 
-   @Bean
+    @Bean
     public PasswordEncoder passwordEncoder() {
-        return new MessageDigestPasswordEncoder("SHA-256");
+
+        String appActiveProfile = environment.getProperty("spring.profiles.active");
+
+        if(appActiveProfile == null || appActiveProfile.equals("gp") || appActiveProfile.equals("gpdev")){
+            return new MessageDigestPasswordEncoder("SHA-256");
+        }else {
+            return NoOpPasswordEncoder.getInstance();
+        }
     }
 
-  /*  @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }*/
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
