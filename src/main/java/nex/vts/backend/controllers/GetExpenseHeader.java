@@ -19,6 +19,7 @@ import java.util.Optional;
 public class GetExpenseHeader {
     //,produces = MediaType.APPLICATION_JSON_VALUE
 
+    private final short API_VERSION = 1;
 
    @Autowired
     GetExpenseHeaderRepo repo;
@@ -41,7 +42,7 @@ public class GetExpenseHeader {
 
 
 
-        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId);
+        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

@@ -23,6 +23,9 @@ import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 @RequestMapping("/api/private")
 public class CtrlSpeedData {
 
+    private final short API_VERSION = 1;
+
+
     private final Logger logger = LoggerFactory.getLogger(CtrlSpeedData.class);
 
     private SpeedDataModel reqBody = null;
@@ -33,10 +36,10 @@ public class CtrlSpeedData {
     @Autowired
     SpeedDataRepo speedDataRepo;
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/speedData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getSpeedData(@RequestParam Map<String, String> requestBody) throws JsonProcessingException {
+    public ResponseEntity<String> getSpeedData(@RequestParam Map<String, String> requestBody,@PathVariable("deviceType") Integer deviceType) throws JsonProcessingException {
         // Input Validation
         if (isNullOrEmpty(requestBody.get("data"))) {
-            throw new AppCommonException(400 + "##BAD REQUEST 2");
+            throw new AppCommonException(400 + "##BAD REQUEST 2##"+deviceType+"##"+API_VERSION);
         }
         reqBody = objectMapper.readValue(requestBody.get("data"), SpeedDataModel.class);
 
@@ -51,7 +54,7 @@ public class CtrlSpeedData {
             String finalFromTime = fromTime.concat("000000");
             String finalToTime = fromTime.concat("235959");
 
-           speedDataResponses=speedDataRepo.getSpeedDataForhr(finalToTime,finalFromTime, reqBody.getVehicleId());
+           speedDataResponses=speedDataRepo.getSpeedDataForhr(finalToTime,finalFromTime, reqBody.getVehicleId(),deviceType);
 
 
         }
@@ -69,7 +72,7 @@ public class CtrlSpeedData {
                 toTime = fromTime.concat( timeSlot  + "5959");
             }
 
-            speedDataResponses=speedDataRepo.getSpeedDataForhr(toTime,finalFromTime, reqBody.getVehicleId());
+            speedDataResponses=speedDataRepo.getSpeedDataForhr(toTime,finalFromTime, reqBody.getVehicleId(),deviceType);
 
             System.out.println();
 

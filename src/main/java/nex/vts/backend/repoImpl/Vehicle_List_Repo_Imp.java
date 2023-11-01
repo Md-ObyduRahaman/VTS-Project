@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
     private static JdbcTemplate jdbcTemplate;
+    private final short API_VERSION = 1;
     private Logger logger = LoggerFactory.getLogger(Vehicle_List_Repo_Imp.class);
 
     public Vehicle_List_Repo_Imp(JdbcTemplate jdbcTemplate) {

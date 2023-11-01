@@ -34,11 +34,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
 
-import static nex.vts.backend.controllers.UserLoginController.getCurrentDateTime;
 import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 
 @RestController
@@ -180,9 +182,16 @@ public class CtrlLogin {
 
 
         baseResponse.data = loginResponse;
+        System.out.println(loginResponse.token);
 
         return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
+    }
+    public static String getCurrentDateTime() {
+        ZoneId dhaka = ZoneId.of("Asia/Dhaka");
+        ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dhakaTime.format(formatter);
     }
 
 

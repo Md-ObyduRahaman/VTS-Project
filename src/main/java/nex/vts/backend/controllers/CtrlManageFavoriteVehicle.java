@@ -9,10 +9,7 @@ import nex.vts.backend.repositories.SetManageFavoriteVehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,17 +24,18 @@ public class CtrlManageFavoriteVehicle {
 
     @Autowired
     private SetManageFavoriteVehicleRepo setManageFavoriteVehicleRepo;
+    private final short API_VERSION = 1;
     private ManageFavoriteVehicle reqBody = null;
 
     @PostMapping(value = "/v1/{deviceType}/users/{userId}/manageFavoriteVehicle", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String setManageFavoriteVehicle(@RequestParam Map<String, String> requestBody) throws JsonProcessingException {
+    public String setManageFavoriteVehicle(@RequestParam Map<String, String> requestBody,@PathVariable("deviceType") Integer deviceType) throws JsonProcessingException {
 
         // Input Validation
         if (isNullOrEmpty(requestBody.get("data"))) {
-            throw new AppCommonException(400 + "##BAD REQUEST 2");
+            throw new AppCommonException(400 + "##BAD REQUEST 2##"+deviceType+"##"+API_VERSION);
         }
         reqBody = objectMapper.readValue(requestBody.get("data"), ManageFavoriteVehicle.class);
-        return setManageFavoriteVehicleRepo.setManageFavoriteVehicle(reqBody);
+        return setManageFavoriteVehicleRepo.setManageFavoriteVehicle(reqBody, deviceType);
     }
 
 

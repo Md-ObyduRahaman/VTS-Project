@@ -21,12 +21,12 @@ import java.util.Optional;
 public class SpeedDataImpl implements SpeedDataRepo {
 
     private final Logger logger = LoggerFactory.getLogger(SpeedDataImpl.class);
-
+    private final short API_VERSION = 1;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
-    public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForhr(String finalToTime, String finalFromTime, Integer vehicleId) {
+    public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForhr(String finalToTime, String finalFromTime, Integer vehicleId,Integer deviceType) {
 
         String sql="SELECT ID,\n" +
                 "         TIME_IN_NUMBER              date_time,\n" +
@@ -52,13 +52,13 @@ public class SpeedDataImpl implements SpeedDataRepo {
                     BeanPropertyRowMapper.newInstance(SpeedDataResponse.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", vehicleId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception");
-        } catch (TransientDataAccessException f) {
-            logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", vehicleId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable");
-        } catch (CannotGetJdbcConnectionException g) {
-            logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", vehicleId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained");
+            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+        }catch (TransientDataAccessException f){
+            logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", vehicleId);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+        }catch (CannotGetJdbcConnectionException g){
+            logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", vehicleId);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
         }
 
         if (speedDataResponses.get().isEmpty())

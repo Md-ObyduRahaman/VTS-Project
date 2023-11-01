@@ -30,6 +30,8 @@ public class CtrlTravelDistanceData {
     @Autowired
     ObjectMapper objectMapper;
 
+    private final short API_VERSION = 1;
+
     @Autowired
     TravelDistanceDataRepo travelDistanceDataRepo;
 
@@ -37,10 +39,10 @@ public class CtrlTravelDistanceData {
 
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/getTravelDistanceData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getTravelDistanceData(@RequestParam Map<String, String> requestBody, @PathVariable("userId") Integer userId) throws JsonProcessingException, SQLException {
+    public ResponseEntity<String> getTravelDistanceData(@RequestParam Map<String, String> requestBody, @PathVariable("userId") Integer userId,@PathVariable("deviceType") Integer deviceType) throws JsonProcessingException, SQLException {
         // Input Validation
         if (isNullOrEmpty(requestBody.get("data"))) {
-            throw new AppCommonException(400 + "##BAD REQUEST 2");
+            throw new AppCommonException(400 + "##BAD REQUEST 2##"+deviceType+"##"+API_VERSION);
         }
 
            reqBody = objectMapper.readValue(requestBody.get("data"), TravelDistanceDataModel.class);
@@ -65,7 +67,7 @@ public class CtrlTravelDistanceData {
         String  to_date= String.valueOf(lastDate).replace("-", "");
         reqBody.setP_date_to(Integer.valueOf(to_date));
 
-        MonthTravleDistanceForAll monthTravleDistanceForAll= travelDistanceDataRepo.getTravelDistanceData(reqBody);
+        MonthTravleDistanceForAll monthTravleDistanceForAll= travelDistanceDataRepo.getTravelDistanceData(reqBody,deviceType);
 
         BaseResponse baseResponse = new BaseResponse();
 

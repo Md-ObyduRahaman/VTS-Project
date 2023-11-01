@@ -36,7 +36,7 @@ public class CtrlGetVehicleSetting {
                                                      @PathVariable("userId") Integer userId,
                                                         @PathVariable("rowID") Integer rowID) throws JsonProcessingException {
 
-        Optional<VehicleOthersInfoModel> vehicleOthersInfo= vehicleOthersInfoRepo.getVehicleOthersInfo(rowID);
+        Optional<VehicleOthersInfoModel> vehicleOthersInfo= vehicleOthersInfoRepo.getVehicleOthersInfo(rowID,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

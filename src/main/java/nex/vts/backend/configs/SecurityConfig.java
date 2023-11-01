@@ -27,7 +27,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
     private final String[] allowedRoutes = {
             "/api/private/v1/1/login",
             "/api/private/v1/1/refresh-token",

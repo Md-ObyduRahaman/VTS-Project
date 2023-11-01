@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface VehicleOthersInfoRepo {
 
 
-    public Optional<VehicleOthersInfoModel> getVehicleOthersInfo(Integer rowID);
+    public Optional<VehicleOthersInfoModel> getVehicleOthersInfo(Integer rowID,Integer deviceType);
 }

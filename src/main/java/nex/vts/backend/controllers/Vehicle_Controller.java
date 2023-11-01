@@ -5,7 +5,7 @@ import nex.vts.backend.services.Vehicle_Details_Service;
 import nex.vts.backend.services.Vehicle_History_Service;
 import nex.vts.backend.services.Vehicle_List_Service;
 import nex.vts.backend.services.Vehicle_Location_Service;
-import org.apache.http.HttpStatus;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +67,7 @@ public class Vehicle_Controller {
             baseResponse.status = false;
             baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "Vehicle-List";
-            baseResponse.errorMsg = String.valueOf(HttpStatus.SC_NOT_FOUND);
+            baseResponse.errorMsg = "The resource or endpoint was not found";
         }
         return ResponseEntity.ok(baseResponse);
     }

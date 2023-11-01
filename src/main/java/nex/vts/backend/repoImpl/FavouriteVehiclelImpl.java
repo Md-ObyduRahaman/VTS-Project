@@ -4,7 +4,6 @@ package nex.vts.backend.repoImpl;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.FavouriteVehiclelModel;
 import nex.vts.backend.repositories.FavouriteVehiclelRepo;
-import oracle.jdbc.xa.OracleXAException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import java.util.Optional;
 public class FavouriteVehiclelImpl implements FavouriteVehiclelRepo {
 
     private final Logger logger = LoggerFactory.getLogger(FavouriteVehiclelImpl.class);
-
+    private final short API_VERSION = 1;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -35,8 +34,9 @@ public class FavouriteVehiclelImpl implements FavouriteVehiclelRepo {
 
 
     @Override
-    public Optional<ArrayList<FavouriteVehiclelModel>> findNeededData(String limit, Integer offset, Integer GROUP_ID, Integer OPERATORID, Integer userType, Integer PARENT_PROFILE_ID)  {
+    public Optional<ArrayList<FavouriteVehiclelModel>> findNeededData(String limit, Integer offset, Integer GROUP_ID, Integer OPERATORID, Integer userType, Integer PARENT_PROFILE_ID,Integer deviceType)  {
        String ConcateSql ="";
+
         if (limit!="ALL"){
              ConcateSql = " OFFSET "+offset+
                     "ROWS FETCH FIRST "+limit+ " ROWS ONLY";
@@ -167,13 +167,13 @@ public class FavouriteVehiclelImpl implements FavouriteVehiclelRepo {
         }
         catch (BadSqlGrammarException e) {
             logger.trace("No Data found with userType is {}  Sql Grammar Exception", userType);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception");
+            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
         }catch (TransientDataAccessException f){
             logger.trace("No Data found with userType is {} network or driver issue or db is temporarily unavailable  ", userType);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable");
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
         }catch (CannotGetJdbcConnectionException g){
             logger.trace("No Data found with userType is {} could not acquire a jdbc connection  ", userType);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained");
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
         }
 
 

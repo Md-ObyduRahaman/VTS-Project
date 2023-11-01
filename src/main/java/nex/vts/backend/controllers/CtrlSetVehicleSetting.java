@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.*;
 
+import nex.vts.backend.repositories.VehicleOthersInfoRepo;
 import nex.vts.backend.repositories.VehicleSettingRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,18 +13,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 
@@ -38,22 +34,26 @@ public class CtrlSetVehicleSetting {
     @Autowired
     ObjectMapper objectMapper;
 
+    private final short API_VERSION = 1;
+
     @Autowired
     VehicleSettingRepo vehicleSettingRepo;
+
+    @Autowired
+    VehicleOthersInfoRepo vehicleOthersInfoRepo;
 
     private  static  VehicleOthersInfoModel permisionData_old;
 
 
-    @PostMapping(value = "/v1/settings/vehicle-settings/change-status", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> setVehicleSettings(@RequestHeader("Authorization") String jwtToken, @RequestParam Map<String, String> requestBody) throws IOException, SQLException {
+    @PostMapping(value = "/v1/{deviceType}/settings/vehicle-settings/change-status", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> setVehicleSettings(@RequestHeader("Authorization") String jwtToken, @RequestParam Map<String, String> requestBody,@PathVariable("deviceType") Integer deviceType) throws IOException, SQLException {
 
         Boolean checkBool = true;
         Integer changeVehicleStatus,changeMaxSpeed,changeEmail,changeSMS;
 
         // Input Validation
         if (isNullOrEmpty(requestBody.get("data"))) {
-            throw new AppCommonException(400 + "##BAD REQUEST 2");
-        }
+            throw new AppCommonException(400 + "##BAD REQUEST 2##"+deviceType+"##"+API_VERSION);        }
         reqBody = objectMapper.readValue(requestBody.get("data"), SetVehicleSettingInfo.class);
 
 
@@ -62,8 +62,16 @@ public class CtrlSetVehicleSetting {
 
         VehicleOthersInfoModel permisionData_new= reqBody.getVehicleOthersInfoModel();
 
+        Optional<VehicleOthersInfoModel> vehicleOthersInfo= vehicleOthersInfoRepo.getVehicleOthersInfo(reqBody.getVehicleId(),deviceType);
+        if (vehicleOthersInfo.isPresent()) {
+            permisionData_old = vehicleOthersInfo.get();
+        }
+        else {
+            System.out.println("list is empty");
+            throw new AppCommonException(4009 + "##VEHICLEOTHERSINFO LIST IS EMPTY##"+deviceType+"##"+API_VERSION);
 
-
+        }
+ /*
         // Starting fetch data
         HttpClient httpClient = HttpClients.createDefault();
         String apiUrl = "http://localhost:8009/api/private/v1/1/users/252/getVehicleSetting/"+reqBody.getVehicleId();
@@ -87,6 +95,7 @@ public class CtrlSetVehicleSetting {
                 Integer.parseInt(permissionData.get("safeMode").toString()),
                 Integer.parseInt(permissionData.get("maxSpeedValue").toString()));
 
+*/
 
         String p_permissionType = "ChangeAll";
         changeVehicleStatus=vehicleSettingRepo.getDiffSettingInfo("ChangeVehicleStatus",reqBody.getProfileType(),reqBody.getProfileId(),reqBody.getParentId(),reqBody.getVehicleId());

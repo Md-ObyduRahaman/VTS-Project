@@ -12,6 +12,6 @@ import java.util.Optional;
 
 public interface TravelDistanceDataRepo {
 
-    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel travelDistanceDataModel) throws SQLException;
+    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel travelDistanceDataModel,Integer deviceType) throws SQLException;
 
 }
