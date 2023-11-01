@@ -23,20 +23,20 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/private/v1")
-public class Vehicle_Controller {
-    private final Logger logger = LoggerFactory.getLogger(Vehicle_Controller.class.getName());
+public class VehicleList_Controller {
+    private final Logger logger = LoggerFactory.getLogger(VehicleList_Controller.class.getName());
     private final Vehicle_List_Service Vehicle_List_Service;
-    private final Vehicle_Details_Service detailsService;
+    /*private final Vehicle_Details_Service detailsService;*/
     private final Vehicle_Location_Service locationService;
-    private final Vehicle_History_Service historyService;
+    /*private final Vehicle_History_Service historyService;*/
     Map<String, Object> respnse = new LinkedHashMap<>();
     BaseResponse baseResponse = new BaseResponse();
 
-    public Vehicle_Controller(Vehicle_List_Service Vehicle_List_Service, Vehicle_Details_Service detailsService, Vehicle_Location_Service locationService, Vehicle_History_Service historyService) {
+    public VehicleList_Controller(Vehicle_List_Service Vehicle_List_Service, /*Vehicle_Details_Service detailsService,*/ Vehicle_Location_Service locationService/*, Vehicle_History_Service historyService*/) {
         this.Vehicle_List_Service = Vehicle_List_Service;
-        this.detailsService = detailsService;
+        /*this.detailsService = detailsService;*/
         this.locationService = locationService;
-        this.historyService = historyService;
+        /*this.historyService = historyService;*/
     }
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
@@ -96,7 +96,7 @@ public class Vehicle_Controller {
         return ResponseEntity.ok(baseResponse);
     }
 
-    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
+/*    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data) throws SQLException {
         byte[] decode_data = Base64.getDecoder().decode(data);
@@ -109,7 +109,7 @@ public class Vehicle_Controller {
         baseResponse.status = true;
         baseResponse.data = respnse;
         return ResponseEntity.ok(baseResponse);
-    }
+    }*/
 
 /*    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle/district", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -148,7 +148,7 @@ public class Vehicle_Controller {
         return ResponseEntity.ok(baseResponse);
     }*/ /*todo --- Vehicle history Api*/
 
-    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
+/*    @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/vehicle-history", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleHistory(@RequestHeader(value = "data") String data) {
         Map<String, Object> totalCount = new HashMap<>();
@@ -166,5 +166,5 @@ public class Vehicle_Controller {
         baseResponse.version = "V.0.0.1";
         baseResponse.status = true;
         return ResponseEntity.ok(baseResponse);
-    }
+    }*/
 }
