@@ -11,4 +11,7 @@ public class GetDriverInfoObj {
 
     @JsonProperty("DriverInfoData")
     private Optional<DriverInfoModel> driverInfoModels;
+
+    public static void setGetDriverModels(Optional<DriverInfoModel> getDriverInfo) {
+    }
 }
