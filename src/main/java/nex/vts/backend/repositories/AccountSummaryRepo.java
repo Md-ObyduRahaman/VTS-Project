@@ -11,5 +11,5 @@ import java.util.Optional;
 
 public interface AccountSummaryRepo {
 
-    public Optional<ArrayList<AccountSummary>> getAccountSummary(Integer profileId,Integer userType);
+    public Optional<ArrayList<AccountSummary>> getAccountSummary(Integer profileId,Integer userType,Integer deviceType);
 }

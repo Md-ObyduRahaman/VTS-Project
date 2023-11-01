@@ -4,5 +4,5 @@ import nex.vts.backend.models.responses.ManageFavoriteVehicle;
 
 public interface SetManageFavoriteVehicleRepo {
 
-    public String setManageFavoriteVehicle(ManageFavoriteVehicle manageFavoriteVehicle);
+    public String setManageFavoriteVehicle(ManageFavoriteVehicle manageFavoriteVehicle,Integer deviceType);
 }

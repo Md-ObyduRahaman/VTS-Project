@@ -3,8 +3,10 @@ package nex.vts.backend.configs;
 import nex.vts.backend.filter.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -24,7 +27,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
     private final String[] allowedRoutes = {
             "/api/private/v1/1/login",
             "/api/private/v1/1/refresh-token",
@@ -32,12 +34,9 @@ public class SecurityConfig {
             "/api/private/v1/2/refresh-token",
             "/api/private/v1/3/login",
             "/api/private/v1/3/refresh-token",
-            "/api/private/v1/vehicle/details", /*todo-> testing purpose*/
-            "/api/private/v1/vehicle/district",/*todo-> testing purpose*/
-            "/api/private/v1/users/{userId}/vehicles", /*todo-> testing purpose*/
-            "/api/private/v1/vehicle/road",/*todo-> testing purpose*/
-            "/api/private/v1/vehicle/thana",/*todo-> testing purpose*/
-            "/api/private/v1/vehicle-history"/*todo-> testing purpose*/
+/*            "/api/private/v1/users/{userId}/vehicles", *//*todo-> testing purpose*//*
+            "/api/private/v1/vehicle-history", *//*todo-> testing purpose*//*
+            "/api/private/v1/vehicle/details" *//*todo-> testing purpose*/
     };
 
     @Autowired
@@ -46,16 +45,15 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthFilter authFilter;
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     //authentication
     public UserDetailsService userDetailsService() {
         return new UserInfoUserDetailsService();
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -78,15 +76,19 @@ public class SecurityConfig {
                 .build();
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new MessageDigestPasswordEncoder("SHA-256");
-    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+
+        String appActiveProfile = environment.getProperty("spring.profiles.active");
+
+        if(appActiveProfile == null || appActiveProfile.equals("gp") || appActiveProfile.equals("gpdev")){
+            return new MessageDigestPasswordEncoder("SHA-256");
+        }else {
+            return NoOpPasswordEncoder.getInstance();
+        }
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
