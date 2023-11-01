@@ -7,6 +7,7 @@ import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.DriverInfoModel;
 import nex.vts.backend.models.responses.GetExpansesListObj;
 import nex.vts.backend.models.responses.GetExpansesModel;
+import nex.vts.backend.repositories.DriverInfoRepo;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,28 +22,29 @@ import java.util.Optional;
 public class DriverInfoController {
 
     @Autowired
-    GetExpenseHeaderRepo repo;
+    DriverInfoRepo repo;
 
     @Autowired
     ObjectMapper objectMapper;
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/")
-    public ResponseEntity<String> vehicleList(@PathVariable("id") Integer id) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/usrID")
+    public ResponseEntity<String> vehicleList(@PathVariable("usrID") Integer id) throws JsonProcessingException {
 
 
-       // Optional<ArrayList<DriverInfoModel>> GetDriverInfo = repo.findAllExpenses(id);
+        Optional<DriverInfoModel> GetDriverInfo = repo.findDriverInfo(id);
+
         BaseResponse baseResponse = new BaseResponse();
 
-/*
+
         if (GetDriverInfo.isEmpty()) {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         } else {
-            GetDriverInfoObj getExpansesListObj = new GetDriverInfoObj();
+            GetDriverInfoObj getDriverInfoObj = new GetDriverInfoObj();
             baseResponse.status = true;
             GetDriverInfoObj.setGetDriverModels(GetDriverInfo);
-            baseResponse.data =  GetDriverInfoObj;
-        }*/
+            baseResponse.data =  getDriverInfoObj;
+        }
 
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
