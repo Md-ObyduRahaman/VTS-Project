@@ -2,6 +2,7 @@ package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.dbentities.NEX_CORPORATE_CLIENT;
 import nex.vts.backend.exceptions.AppCommonException;
+import nex.vts.backend.models.responses.AccountSummary;
 import nex.vts.backend.models.responses.DriverInfoModel;
 import nex.vts.backend.models.responses.GetExpansesModel;
 import nex.vts.backend.repositories.DriverInfoRepo;
@@ -35,9 +36,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
     public Optional<DriverInfoModel> findDriverInfo(Integer USERID) {
         logger.debug("Executing query to get client profile by client user id: {}", USERID);
 
-        return jdbcTemplate.queryForObject("SELECT ID,USERID,D_NAME,D_FNAME,D_LICENSE,D_ADDRESS,D_CELL,\n" +
-                "TO_CHAR(TO_DATE(D_DOB, 'YYYYMMDD'), 'MM/DD/YYYY') D_DOB, LENGTH(DRIVER_PHOTO) DRIVER_HAS_PHOTO\n" +
-                "FROM NEX_DRIVERINFO WHERE USERID=?", new Object[]{USERID}, (rs, rowNum) ->
+        return jdbcTemplate.queryForObject("SELECT USERID FROM NEX_DRIVERINFO WHERE USERID=?", new Object[]{USERID}, (rs, rowNum) ->
                 Optional.of(new DriverInfoModel(
                         rs.getString("ID"),
                         rs.getString("USERID"),
@@ -52,31 +51,29 @@ public class DriverInfoImpl implements DriverInfoRepo {
         );
     }
 }
-/*
-    try
 
-    {
+        /*
 
-        Optional<DriverInfoModel> getAllDriverInfo = Optional.of((DriverInfoModel) jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(DriverInfoModel.class)));
-    }
-        catch(BadSqlGrammarException e)
+        Optional<DriverInfoModel> getAllDriverInfo = Optional.empty();
 
-    {
-        logger.trace("No Data found with userId is {}  Sql Grammar Exception", USERID);
-        throw new AppCommonException(4001 + "##Sql Grammar Exception");
-    }catch(TransientDataAccessException f)
 
-    {
-        logger.trace("No Data found with userId is {} network or driver issue or db is temporarily unavailable  ", USERID);
-        throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable");
-    }catch(CannotGetJdbcConnectionException g)
+        try {
 
-    {
-        logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", USERID);
-        throw new AppCommonException(4003 + "##A database connection could not be obtained");
+             getAllDriverInfo = Optional.of((DriverInfoModel) jdbcTemplate.query(sql,
+                    BeanPropertyRowMapper.newInstance(DriverInfoModel.class)));
+        } catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with userId is {}  Sql Grammar Exception", USERID);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception");
+        } catch (TransientDataAccessException f) {
+            logger.trace("No Data found with userId is {} network or driver issue or db is temporarily unavailable  ", USERID);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable");
+        } catch (CannotGetJdbcConnectionException g) {
+            logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", USERID);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained");
+        }
     }
 }
+*/
 
-    }
-    */
+
+
