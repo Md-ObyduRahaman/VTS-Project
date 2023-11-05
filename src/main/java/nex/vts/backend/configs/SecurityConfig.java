@@ -34,9 +34,10 @@ public class SecurityConfig {
             "/api/private/v1/2/refresh-token",
             "/api/private/v1/3/login",
             "/api/private/v1/3/refresh-token",
-/*            "/api/private/v1/users/{userId}/vehicles", *//*todo-> testing purpose*//*
-            "/api/private/v1/vehicle-history", *//*todo-> testing purpose*//*
-            "/api/private/v1/vehicle/details" *//*todo-> testing purpose*/
+            "/api/private/v1/{deviceType}/expense/list", /*todo-->testing purpose*/
+            "/api/private/v1/{deviceType}/vehicles", /*todo-->testing purpose*/
+            "/api/private/v1/{deviceType}/vehicle/details", /*todo-->testing purpose*/
+            "/api/private/v1/{deviceType}/vehicle-history" /*todo-->testing purpose*/
     };
 
     @Autowired
