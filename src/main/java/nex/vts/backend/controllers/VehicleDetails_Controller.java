@@ -40,7 +40,7 @@ public class VehicleDetails_Controller {
     }
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
-    @GetMapping(value = "{deviceType}/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{userId}/{deviceType}/vehicle/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleDetails(@RequestHeader(value = "data") String data,@PathVariable("deviceType") Integer deviceType,@PathVariable(value = "userId")Long userId) throws SQLException, JsonProcessingException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption decryptedValue= new AESEncryptionDecryption(activeProfile,deviceType,API_VERSION);

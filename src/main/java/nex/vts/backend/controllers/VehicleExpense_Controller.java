@@ -29,8 +29,8 @@ public class VehicleExpense_Controller {
 
     @GetMapping("{userId}/{deviceType}/expense/list")
     public ResponseEntity<?> getExpenseList(@PathVariable("deviceType") Integer deviceType,@PathVariable(value = "userId")Long userId){
-        String activeProfile = environment.getProperty("spring.profiles.active");
-        AESEncryptionDecryption decryptedValue= new AESEncryptionDecryption(activeProfile,deviceType,API_VERSION);
+//        String activeProfile = environment.getProperty("spring.profiles.active");
+//        AESEncryptionDecryption decryptedValue= new AESEncryptionDecryption(activeProfile,deviceType,API_VERSION);
         Long getUserId = deObfuscateId(userId);
         listResponse.expenseList = expenseList.getExpenseList();
         response.apiName = "expense list";
