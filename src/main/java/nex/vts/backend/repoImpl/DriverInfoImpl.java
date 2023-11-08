@@ -39,22 +39,6 @@ public class DriverInfoImpl implements DriverInfoRepo {
 
         String sql = "SELECT USERID, ID, D_NAME, D_FNAME, D_LICENSE, D_ADDRESS, D_CELL, D_DOB, DRIVER_PHOTO FROM NEX_DRIVERINFO WHERE USERID="+USERID;
 
-        /* jdbcTemplate.queryForObject("SELECT ID,USERID,D_NAME,D_FNAME,D_LICENSE,D_ADDRESS,D_CELL,\n" +
-                "TO_CHAR(TO_DATE(D_DOB, 'YYYYMMDD'), 'MM/DD/YYYY') D_DOB, LENGTH(DRIVER_PHOTO) DRIVER_HAS_PHOTO\n" +
-                "FROM NEX_DRIVERINFO WHERE USERID=?", new Object[]{USERID}, (rs, rowNum) ->
-                Optional.of(new DriverInfoModel(
-                        rs.getString("ID"),
-                        rs.getString("USERID"),
-                        rs.getString("D_NAME"),
-                        rs.getString("D_FNAME"),
-                        rs.getString("D_LICENSE"),
-                        rs.getString("D_ADDRESS"),
-                        rs.getString("D_CELL"),
-                        rs.getString("D_DOB"),
-                        rs.getBoolean("DRIVER_HAS_PHOTO")
-                ))
-        );*/
-
 
         try
         {
@@ -63,7 +47,6 @@ public class DriverInfoImpl implements DriverInfoRepo {
                     BeanPropertyRowMapper.newInstance(DriverInfoModel.class)));
         }
         catch (BadSqlGrammarException e) {
-            e.printStackTrace();
             logger.trace("No Data found with userId is {}  Sql Grammar Exception", USERID);
             throw new AppCommonException(4001 + "##Sql Grammar Exception#1#1");
         }

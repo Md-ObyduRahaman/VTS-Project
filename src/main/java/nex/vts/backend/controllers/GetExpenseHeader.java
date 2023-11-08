@@ -39,10 +39,6 @@ public class GetExpenseHeader {
 
 
 
-
-
-
-
         Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 

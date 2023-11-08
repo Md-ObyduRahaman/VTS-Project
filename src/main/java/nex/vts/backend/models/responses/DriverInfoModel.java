@@ -26,9 +26,6 @@ public class DriverInfoModel {
     private String D_CELL;
     @JsonProperty("dob")
     private String D_DOB;
-
-
-
     @JsonProperty("driver_photo")
-            private Blob DRIVER_PHOTO;
+    private Blob DRIVER_PHOTO;
 }
