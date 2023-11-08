@@ -17,42 +17,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 @RestController
 @RequestMapping("/api/private")
 public class CtrlGetVehicleSetting {
-
     @Autowired
     ObjectMapper objectMapper;
-
-
     @Autowired
     VehicleOthersInfoRepo vehicleOthersInfoRepo;
-
     private final Logger logger = LoggerFactory.getLogger(CtrlGetVehicleSetting.class);
 
-
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/getVehicleSetting/{rowID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> getVehicleOthersInfo(@PathVariable("deviceType") Integer deviceType,
-                                                     @PathVariable("userId") Integer userId,
-                                                        @PathVariable("rowID") Integer rowID) throws JsonProcessingException {
-
-        Optional<VehicleOthersInfoModel> vehicleOthersInfo= vehicleOthersInfoRepo.getVehicleOthersInfo(rowID,deviceType);
+    private ResponseEntity<String> getVehicleOthersInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("userId") Integer userId, @PathVariable("rowID") Integer rowID) throws JsonProcessingException {
+        Long getUserId = deObfuscateId(Long.valueOf(userId));
+        Optional<VehicleOthersInfoModel> vehicleOthersInfo = vehicleOthersInfoRepo.getVehicleOthersInfo(rowID, deviceType);
         BaseResponse baseResponse = new BaseResponse();
-
-
         if (vehicleOthersInfo.isEmpty()) {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
-            baseResponse.version="V.0.0.1";
-            baseResponse.apiName="getVehicleSetting";
+            baseResponse.version = "V.0.0.1";
+            baseResponse.apiName = "getVehicleSetting";
         } else {
             baseResponse.status = true;
             baseResponse.data = vehicleOthersInfo;
-            baseResponse.version="V.0.0.1";
-            baseResponse.apiName="getVehicleSetting";
+            baseResponse.version = "V.0.0.1";
+            baseResponse.apiName = "getVehicleSetting";
         }
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-
     }
 }

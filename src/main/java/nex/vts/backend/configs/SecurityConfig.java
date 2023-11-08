@@ -37,7 +37,12 @@ public class SecurityConfig {
             "/api/private/v1/{userId}/{deviceType}/expense/list", /*todo-->testing purpose*/
             "/api/private/v1/{userId}/{deviceType}/vehicles", /*todo-->testing purpose*/
             "/api/private/v1/{userId}/{deviceType}/vehicle/details", /*todo-->testing purpose*/
-            "/api/private/v1/{userId}/{deviceType}/vehicle-history" /*todo-->testing purpose*/
+            "/api/private/v1/{userId}/{deviceType}/vehicle-history", /*todo-->testing purpose*/
+            "/api/private/v1/vehicle/location",/*todo--> testing purpose*/
+//            "/api/private/v1/{deviceType}/users/{userId}/speedData", /*todo [sojib] todo-->testing purpose*/
+//            "/api/private/v1/{userId}/{deviceType}/settings/vehicle-settings/change-status", /*todo [sojib] todo-->testing purpose*/
+//            "/api/private/v1/{deviceType}/users/{userId}/getTravelDistanceData", /*todo [sojib] todo-->testing purpose*/
+//            "/api/private/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}" /*todo [sojib] todo-->testing purpose*/
     };
 
     @Autowired
