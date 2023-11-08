@@ -19,15 +19,15 @@ import java.util.Optional;
 public class DriverInfoController {
 
     @Autowired
-    DriverInfoRepo repo;
+    DriverInfoRepo DriveRepo;
 
     @Autowired
     ObjectMapper objectMapper;
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/usrID")
-    public ResponseEntity<String> vehicleList(@PathVariable("usrID") Integer id) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/ID")
+    public ResponseEntity<String> DriverList(@PathVariable("ID") Integer id) throws JsonProcessingException {
 
 
-        Optional<DriverInfoModel> GetDriverInfo = repo.findDriverInfo(id);
+        Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(id);
 
         BaseResponse baseResponse = new BaseResponse();
 
@@ -39,6 +39,8 @@ public class DriverInfoController {
         } else {
             GetDriverInfoObj getDriverInfoObj = new GetDriverInfoObj();
             baseResponse.status = true;
+            baseResponse.apiName= "Get Expense Header";
+            baseResponse.version= "v.0.0.1";
             GetDriverInfoObj.setGetDriverModels(GetDriverInfo);
             baseResponse.data =  getDriverInfoObj;
         }
