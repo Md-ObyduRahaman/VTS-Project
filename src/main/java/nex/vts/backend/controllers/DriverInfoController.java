@@ -36,6 +36,8 @@ public class DriverInfoController {
 
         if (GetDriverInfo.isEmpty()) {
             baseResponse.status = false;
+            baseResponse.apiName= "Get Driver Info";
+            baseResponse.version= "v.0.0.1";
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         }
