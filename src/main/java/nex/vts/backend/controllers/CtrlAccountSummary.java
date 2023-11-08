@@ -33,9 +33,10 @@ public class CtrlAccountSummary {
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{prfileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getAccountSummary(@PathVariable("userType") Integer userType,
+                                                     @PathVariable("deviceType") Integer deviceType,
                                                      @PathVariable("prfileId") Integer prfileId) throws JsonProcessingException {
 
-        Optional<ArrayList<AccountSummary>> accountSummaries = accountSummaryRepo.getAccountSummary(prfileId, userType);
+        Optional<ArrayList<AccountSummary>> accountSummaries = accountSummaryRepo.getAccountSummary(prfileId, userType,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

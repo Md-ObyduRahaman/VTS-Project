@@ -1,6 +1,8 @@
 package nex.vts.backend.repoImpl;
 
 
+import nex.vts.backend.exceptions.AppCommonException;
+import nex.vts.backend.models.responses.FavouriteVehiclelModel;
 import nex.vts.backend.models.responses.VehicleOthersInfoModel;
 
 import nex.vts.backend.repositories.VehicleOthersInfoRepo;
@@ -8,13 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.TransientDataAccessException;
+import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class VehicleOthersInfoImpl implements VehicleOthersInfoRepo {
+    private final short API_VERSION = 1;
 
     private final Logger logger = LoggerFactory.getLogger(VehicleOthersInfoImpl.class);
 
@@ -22,7 +30,7 @@ public class VehicleOthersInfoImpl implements VehicleOthersInfoRepo {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Optional<VehicleOthersInfoModel> getVehicleOthersInfo(Integer rowID) {
+    public Optional<VehicleOthersInfoModel> getVehicleOthersInfo(Integer rowID,Integer deviceType) {
         logger.trace("Executing query to find rowID by rowID: {}", rowID);
         Optional<VehicleOthersInfoModel> userObj = Optional.empty();
         String query = "SELECT FAVORITE                is_favorite,\n" +
@@ -46,11 +54,16 @@ public class VehicleOthersInfoImpl implements VehicleOthersInfoRepo {
                             rs.getInt("IS_SAFE_MODE_ACTIVE"), rs.getInt("MAX_CAR_SPEED")
                     )
             ).stream().findFirst();
-        } catch (Exception e) {
-            if (e instanceof EmptyResultDataAccessException) {
-                logger.trace("No user found with rowID {} on VTS_LOGIN_USER tbl", rowID);
-                return userObj;
-            }
+        }
+        catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with rowID is {}  Sql Grammar Exception", rowID);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+        }catch (TransientDataAccessException f){
+            logger.trace("No Data found with rowID is {} network or driver issue or db is temporarily unavailable  ", rowID);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+        }catch (CannotGetJdbcConnectionException g){
+            logger.trace("No Data found with rowID is {} could not acquire a jdbc connection  ", rowID);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
         }
 
         return userObj;

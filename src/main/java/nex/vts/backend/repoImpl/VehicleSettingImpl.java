@@ -2,7 +2,7 @@ package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.models.User;
 import nex.vts.backend.repositories.VehicleSettingRepo;
-import oracle.jdbc.OracleTypes;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

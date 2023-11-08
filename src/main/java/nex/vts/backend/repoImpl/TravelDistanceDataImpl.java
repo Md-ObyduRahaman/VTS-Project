@@ -1,5 +1,6 @@
 package nex.vts.backend.repoImpl;
 
+import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.MonthTravleDistance;
 import nex.vts.backend.models.responses.MonthTravleDistanceForAll;
 import nex.vts.backend.models.responses.TravelDistanceDataModel;
@@ -7,6 +8,9 @@ import nex.vts.backend.repositories.TravelDistanceDataRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.TransientDataAccessException;
+import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
@@ -23,12 +27,15 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
     private final Logger logger = LoggerFactory.getLogger(TravelDistanceDataImpl.class);
 
+    private final short API_VERSION = 1;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private final DataSource dataSource;
     SimpleJdbcCall getAllStatesJdbcCall;
+
+    List<Map<String, Object>> results;
 
 
     @Autowired
@@ -38,7 +45,7 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
 
     @Override
-    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t) throws SQLException {
+    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t,Integer deviceType) throws SQLException {
 
 
         String sql="SELECT\n" +
@@ -58,9 +65,23 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
         // Step 1: Call the stored procedure with parameters
         String callProcedureSql = "CALL GPSNEXGP.GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
-        jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
-        // Step 2: Run a SELECT query to fetch the results
-        List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
+
+      try {
+          jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
+          // Step 2: Run a SELECT query to fetch the results
+          results = jdbcTemplate.queryForList(sql);
+      }
+      catch (BadSqlGrammarException e) {
+          logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", t.getVehicleId());
+          throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+      }catch (TransientDataAccessException f){
+          logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", t.getVehicleId());
+          throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+      }catch (CannotGetJdbcConnectionException g){
+          logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", t.getVehicleId());
+          throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+      }
+
 
 
         //Map Data

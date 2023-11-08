@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class GetExpenseHeader {
     //,produces = MediaType.APPLICATION_JSON_VALUE
 
+    private final short API_VERSION = 1;
 
    @Autowired
     GetExpenseHeaderRepo repo;
@@ -26,7 +28,7 @@ public class GetExpenseHeader {
    @Autowired
     ObjectMapper objectMapper;
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}")
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@PathVariable("deviceType") Integer deviceType,
                                               @PathVariable("userId") Integer userId,
                                               @PathVariable("userType") Integer userType,
@@ -41,7 +43,7 @@ public class GetExpenseHeader {
 
 
 
-        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId);
+        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

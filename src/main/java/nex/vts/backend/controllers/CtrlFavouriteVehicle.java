@@ -62,7 +62,7 @@ public class CtrlFavouriteVehicle {
             limit=20;
         }
 
-        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehiclelList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset,userId,1,userType,PARENT_PROFILE_ID);
+        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehiclelList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset,userId,1,userType,PARENT_PROFILE_ID,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

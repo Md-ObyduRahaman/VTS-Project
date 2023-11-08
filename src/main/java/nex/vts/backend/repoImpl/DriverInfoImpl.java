@@ -37,7 +37,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
 
         Optional<DriverInfoModel> getDriverInfo;
 
-        String sql = "SELECT USERID, ID, D_NAME, D_FNAME, D_LICENSE, D_ADDRESS, D_CELL, D_DOB, DRIVER_PHOTO FROM NEX_DRIVERINFO WHERE USERID=?";
+        String sql = "SELECT USERID, ID, D_NAME, D_FNAME, D_LICENSE, D_ADDRESS, D_CELL, D_DOB, DRIVER_PHOTO FROM NEX_DRIVERINFO WHERE USERID="+USERID;
 
         /* jdbcTemplate.queryForObject("SELECT ID,USERID,D_NAME,D_FNAME,D_LICENSE,D_ADDRESS,D_CELL,\n" +
                 "TO_CHAR(TO_DATE(D_DOB, 'YYYYMMDD'), 'MM/DD/YYYY') D_DOB, LENGTH(DRIVER_PHOTO) DRIVER_HAS_PHOTO\n" +

@@ -13,7 +13,12 @@ public class Vehicle_History_Service {
         history_repo = historyRepo;
     }
 
-    public List<Object> getVehicleHistory(Integer vehicleId, String fromDate, String toDate) {
-        return history_repo.getVehicleHistory(vehicleId, fromDate, toDate);
+    public Object getVehicleHistory(Integer vehicleId, String fromDate, String toDate) {
+        try {
+            return history_repo.getVehicleHistory(vehicleId, fromDate, toDate);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
     }
 }
