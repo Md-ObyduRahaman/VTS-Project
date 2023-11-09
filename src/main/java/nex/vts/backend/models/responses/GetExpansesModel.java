@@ -22,5 +22,4 @@ public class GetExpansesModel
     @JsonProperty("expense_unit_price")
     private Integer EXPENSE_UNIT_PRICE;
 
-
 }
