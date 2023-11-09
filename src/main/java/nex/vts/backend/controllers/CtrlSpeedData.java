@@ -29,7 +29,7 @@ import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 public class CtrlSpeedData {
     private final short API_VERSION = 1;
     private final Logger logger = LoggerFactory.getLogger(CtrlSpeedData.class);
-    private SpeedDataModel reqBody = null;
+
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
@@ -37,16 +37,16 @@ public class CtrlSpeedData {
     @Autowired
     SpeedDataRepo speedDataRepo;
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/speedData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getSpeedData(@RequestParam Map<String, String> requestBody, @PathVariable("deviceType") Integer deviceType, @PathVariable(value = "userId") Long userId) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/speedData/{fromDate}/{timeSlot}/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getSpeedData(@PathVariable("deviceType") Integer deviceType,
+                                               @PathVariable("vehicleId") Integer vehicleId,
+                                               @PathVariable("timeSlot") Integer timeslot,
+                                               @PathVariable("fromDate") String fromDate,
+                                               @PathVariable(value = "userId") Long userId) throws JsonProcessingException {
         String activeProfile = environment.getProperty("spring.profiles.active");
-        AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
+        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
         Long getUserId = deObfuscateId(userId);        /* Input Validation */
-        if (isNullOrEmpty(requestBody.get("data"))) {
-            throw new AppCommonException(400 + "##BAD REQUEST 2##" + deviceType + "##" + API_VERSION);
-        }
-        String decode_data = decryptedValue.aesDecrypt(requestBody.get("data"), API_VERSION);
-        reqBody = objectMapper.readValue(decode_data, SpeedDataModel.class);
+        SpeedDataModel reqBody=new SpeedDataModel(fromDate,timeslot,vehicleId);
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses;
         if (reqBody.getTimeSlot() == 24) {
             String fromTime, toTime;
@@ -82,6 +82,9 @@ public class CtrlSpeedData {
             baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "getSpeedData";
         }
-        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
+        //  return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+
     }
 }

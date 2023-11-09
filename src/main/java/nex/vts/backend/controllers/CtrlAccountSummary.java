@@ -6,6 +6,7 @@ import nex.vts.backend.models.responses.AccountSummary;
 import nex.vts.backend.models.responses.AccountSummaryObj;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.repositories.AccountSummaryRepo;
+import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class CtrlAccountSummary {
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getAccountSummary(@PathVariable("userType") Integer userType, @PathVariable("deviceType") Integer deviceType, @PathVariable("profileId") Integer profileId, @PathVariable("userId") Long userId) throws JsonProcessingException {
         Long getUserId = deObfuscateId(userId);
+        String activeProfile = environment.getProperty("spring.profiles.active");
+        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
+
         Optional<ArrayList<AccountSummary>> accountSummaries = accountSummaryRepo.getAccountSummary(profileId, userType, deviceType);
         BaseResponse baseResponse = new BaseResponse();
         if (accountSummaries.isEmpty()) {
@@ -51,6 +55,9 @@ public class CtrlAccountSummary {
         }
         baseResponse.version = "V.0.0.1";
         baseResponse.apiName = "getAccountSummary";
-        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+       // return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
+        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+
     }
 }
