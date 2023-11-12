@@ -1,7 +1,6 @@
 package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
@@ -22,15 +21,16 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
-import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
-
 
 @RestController
 @RequestMapping("/api/private/v1")
@@ -40,7 +40,6 @@ public class VehicleList_Controller {
     private final Vehicle_Location_Service locationService;
     BaseResponse baseResponse = new BaseResponse();
     ObjectMapper objectMapper = new ObjectMapper();
-
     @Autowired
     RepoVtsLoginUser repoVtsLoginUser;
     Environment environment;
@@ -53,48 +52,29 @@ public class VehicleList_Controller {
     }
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
-    @GetMapping(value = "{userId}/{deviceType}/vehicles/{limit}/{offset}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleList(@RequestHeader(value = "data") String data, @PathVariable(value = "deviceType") Integer deviceType, @PathVariable(required = false, value = "offset") Integer offset, @PathVariable(required = false, value = "limit") Integer limit, @PathVariable(value = "userId") Long userId) throws JsonProcessingException {
+    @GetMapping(value = "/{deviceType}/vehicles/{limit}/{offset}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getVehicleList(/*@RequestHeader(value = "data") String data,*/ @PathVariable(value = "deviceType") Integer deviceType, @PathVariable(required = false, value = "offset") Integer offset, @PathVariable(required = false, value = "limit") String limit/*, @PathVariable(value = "userId") Long userId*/) throws JsonProcessingException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-        Long getUserId = deObfuscateId(userId);
-        /*byte[] decode_data = Base64.getDecoder().decode(data);*/
-        /*        String string_decode_data = new String(decode_data);*/
-        String string_decode_data = decryptedValue.aesDecrypt(data, API_VERSION);
+//        Long getUserId = deObfuscateId(userId); /*byte[] decode_data = Base64.getDecoder().decode(data);*//*        String string_decode_data = new String(decode_data);*//*        String string_decode_data = decryptedValue.aesDecrypt(data, API_VERSION);*/
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
-        System.out.println("username: " + username);
+//       System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username);
-        if (vtsLoginUserOpt.isPresent()) {
-            loginUser = vtsLoginUserOpt.get();
-
-            //System.out.println("password: " + userDetails.getPassword());
+        if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
+        else throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
+        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), String.valueOf(limit), offset, loginUser.getUSER_TYPE(), loginUser.getPROFILE_ID());
+        if (!getVehicleInfo.equals(null)) {
+            baseResponse.data = getVehicleInfo;
+            baseResponse.status = true;
+            baseResponse.apiName = "Vehicle-List";
         } else {
-            throw new AppCommonException(400 + "##login cred not found##" + userId + "##" + API_VERSION);
-        }
-        /*        System.out.println(string_decode_data);*/
-        if (!isNullOrEmpty(string_decode_data)) {
-            JsonNode jsonNode = objectMapper.readTree(string_decode_data);
-        /*    Object getVehicleInfo =
-                    Vehicle_List_Service.getVehicles(
-                              Integer.parseInt(jsonNode.get("groupId").toString())
-                            , jsonNode.get("limit").toString()
-                            , Integer.parseInt(jsonNode.get("offset").toString())
-                            , Integer.parseInt(jsonNode.get("userType").toString())
-                            , Integer.parseInt(jsonNode.get("parentId").toString()));*/
-            VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), String.valueOf(limit), offset, loginUser.getUSER_TYPE(), loginUser.getPROFILE_ID());
-            if (!getVehicleInfo.equals(null)) {
-                baseResponse.data = getVehicleInfo;
-                baseResponse.status = true;
-                baseResponse.apiName = "Vehicle-List";
-            } else {
-                baseResponse.data = null;
-                baseResponse.status = false;
-                baseResponse.apiName = "Vehicle-List";
-                baseResponse.errorMsg = "The resource or endpoint was not found";
-            }
-        } else throw new AppCommonException(400 + "##BAD REQUEST 2##" + userId + "##" + API_VERSION);
+            baseResponse.data = null;
+            baseResponse.status = false;
+            baseResponse.apiName = "Vehicle-List";
+            baseResponse.errorMsg = "The resource or endpoint was not found";
+        } /*        } else throw new AppCommonException(400 + "##BAD REQUEST 2##" + userId + "##" + API_VERSION); return ResponseEntity.ok(baseResponse);*/
         return ResponseEntity.ok(baseResponse);
     }
 }

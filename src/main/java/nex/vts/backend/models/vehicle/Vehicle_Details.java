@@ -1,3 +1,4 @@
+/*
 package nex.vts.backend.models.vehicle;
 
 import lombok.Data;
@@ -11,7 +12,9 @@ import lombok.ToString;
 @ToString
 public class Vehicle_Details {
     private Integer iconType, iconTypeOnMap, iconTypeRunning, iconTypeStopped, iconTypeStationary;
-    private String vehicleName; /*TODO : in database column name is USERID*/
+    private String vehicleName; */
+/*TODO : in database column name is USERID*//*
+
     private String carRegistrationNo;
     private Float speed;
     private String engine;
@@ -49,3 +52,4 @@ public class Vehicle_Details {
     public Vehicle_Details() {
     }
 }
+*/

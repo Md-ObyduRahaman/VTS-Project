@@ -1,3 +1,4 @@
+/*
 package nex.vts.backend.models.vehicle;
 
 import lombok.*;
@@ -23,3 +24,4 @@ public class Vehicle_List {
     private Integer maxSpeed;
 
 }
+*/
