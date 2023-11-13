@@ -1,8 +1,7 @@
 package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.AccountSummary;
-import nex.vts.backend.models.responses.FavouriteVehiclelModel;
+import nex.vts.backend.models.responses.UserFullName;
 import nex.vts.backend.repositories.AccountSummaryRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,13 +26,18 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
     private final Logger logger = LoggerFactory.getLogger(AccountSummaryImpl.class);
 
+    private final DataSource dataSource;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private final short API_VERSION = 1;
 
+    public AccountSummaryImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
-    public Optional<ArrayList<AccountSummary>> getAccountSummary(Integer profileId,Integer userType,Integer deviceType) {
+    public Optional<ArrayList<UserFullName>> getUserFullName(Integer profileId, Integer userType, Integer deviceType) {
 
 
 
@@ -68,12 +77,12 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
         }
 
 
-        Optional<ArrayList<AccountSummary>> accountSummaries = Optional.empty();
+        Optional<ArrayList<UserFullName>> accountSummaries = Optional.empty();
 
         try {
 
-            accountSummaries = Optional.of((ArrayList<AccountSummary>) jdbcTemplate.query(sql,
-                    BeanPropertyRowMapper.newInstance(AccountSummary.class)));
+            accountSummaries = Optional.of((ArrayList<UserFullName>) jdbcTemplate.query(sql,
+                    BeanPropertyRowMapper.newInstance(UserFullName.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
             throw new AppCommonException(4001 + "##Sql Grammar Exception"+deviceType+"##"+API_VERSION);
@@ -93,10 +102,51 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
             return accountSummaries;
         }
 
-
-
-
     }
+
+    @Override
+    public double getVehicleData(String p_info_type,String columnName,Integer profileType,Integer profileId,Integer parentId,String dateFrom,String dateTo,Integer deviceType,String packageName) {
+         Integer result= 0;
+        String sql=null;
+
+        try {
+            if(p_info_type.equals("todayDistance")){
+                 sql = "SELECT GPSNEXGP."+packageName+"( ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
+            }else {
+                p_info_type = "'" + p_info_type + "'";
+                 sql = "SELECT GPSNEXGP."+packageName+"("+p_info_type+", ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
+            }
+            System.out.println(sql);
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, profileType);
+            statement.setInt(2, profileId);
+            statement.setInt(3, parentId);
+            statement.setString(4, dateFrom);
+            statement.setString(5, dateTo);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                result= Integer.valueOf(rs.getString(columnName));
+            }
+
+        } catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception"+deviceType+"##"+API_VERSION);
+        } catch (TransientDataAccessException f) {
+            logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable"+deviceType+"##"+API_VERSION);
+        } catch (CannotGetJdbcConnectionException g) {
+            logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained"+deviceType+"##"+API_VERSION);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
 
 
 }

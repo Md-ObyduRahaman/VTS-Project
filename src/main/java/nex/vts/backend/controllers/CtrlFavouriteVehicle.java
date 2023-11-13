@@ -33,7 +33,6 @@ public class CtrlFavouriteVehicle {
     private final  Integer LIMIT_MAX_THRESHOLD=20;
 
     /* /v1/{deviceType}/users/{userId}/favourit-vehicles */
-
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/favourit-vehicles",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@RequestHeader("APP_DATA") String appData, @PathVariable("deviceType") Integer deviceType,
                                               @PathVariable("userId") Integer userId) throws JsonProcessingException {

@@ -45,11 +45,11 @@ public class CtrlSetVehicleSetting {
     @PostMapping(value = "/v1/{userId}/{deviceType}/settings/vehicle-settings/change-status", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> setVehicleSettings(@RequestHeader("Authorization") String jwtToken, @RequestParam Map<String, String> requestBody, @PathVariable("deviceType") Integer deviceType, @PathVariable(value = "userId") Long userId) throws IOException, SQLException {
         String activeProfile = environment.getProperty("spring.profiles.active");
-        AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
+        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
         Long getUserId = deObfuscateId(userId);
         boolean checkBool = true;
         Integer changeVehicleStatus, changeMaxSpeed, changeEmail, changeSMS;
-        String decode_data = decryptedValue.aesDecrypt(requestBody.get("data"), API_VERSION);        /* Input Validation */
+        String decode_data = aesCrypto.aesDecrypt(requestBody.get("data"), API_VERSION);        /* Input Validation */
         if (isNullOrEmpty(requestBody.get("data"))) {
             throw new AppCommonException(400 + "##BAD REQUEST 2##" + deviceType + "##" + API_VERSION);
         }
@@ -95,7 +95,9 @@ public class CtrlSetVehicleSetting {
             baseResponse.version = "V.0.0.1";
             baseResponse.data = vehicleSettingResponse;
         }
-        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
+      //  return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
     }
 
     public String updateVehicleSettingInfo(SetVehicleSettingInfo request, String p_permissionType, String p_password) {

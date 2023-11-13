@@ -22,12 +22,12 @@ public class GetExpenseHeader {
 
     private final short API_VERSION = 1;
 
-   @Autowired
+    @Autowired
     GetExpenseHeaderRepo repo;
 
-   @Autowired
+    @Autowired
     ObjectMapper objectMapper;
-   //http://localhost:8009/api/private/v1/1/users/1/1/GetExpenseHeader/860/20120505/20120506
+    //http://localhost:8009/api/private/v1/1/users/1/1/GetExpenseHeader/860/20120505/20120506
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@PathVariable("deviceType") Integer deviceType,
@@ -37,29 +37,33 @@ public class GetExpenseHeader {
                                               @PathVariable("date_from") String date_from,
                                               @PathVariable("date_to") String date_to) throws JsonProcessingException {
 
+
+
+
         Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 
         if (GetExpansesList.isEmpty()) {
             baseResponse.status = false;
-            baseResponse.version="v.0.0.01";
-            baseResponse.apiName="GET_Expense_details";
+            baseResponse.apiName= "Get Expense Header";
+            baseResponse.version= "v.0.0.1";
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         } else {
             GetExpansesListObj getExpansesListObj = new GetExpansesListObj();
             baseResponse.status = true;
-            baseResponse.version="v.0.0.01";
-            baseResponse.apiName="GET_Expense_details";
-
+            baseResponse.apiName= "Get Expense Header";
+            baseResponse.version= "v.0.0.1";
+            getExpansesListObj.setGetExpansesModels(GetExpansesList);
+            baseResponse.data = getExpansesListObj;
         }
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
 
-    }
+}
 
 
 
