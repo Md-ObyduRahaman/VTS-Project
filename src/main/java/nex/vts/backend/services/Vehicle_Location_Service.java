@@ -1,5 +1,6 @@
 package nex.vts.backend.services;
 
+import nex.vts.backend.models.responses.VehicleLocationResponse;
 import nex.vts.backend.repoImpl.Vehicle_Location_Repo_Imp;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -12,6 +13,8 @@ import java.util.Optional;
 public class Vehicle_Location_Service {
     private Vehicle_Location_Repo_Imp locationImplementation;
 
+    VehicleLocationResponse locationResponse=new VehicleLocationResponse();
+
     public Vehicle_Location_Service(Vehicle_Location_Repo_Imp locationImplementation) {
         this.locationImplementation = locationImplementation;
     }
@@ -20,8 +23,9 @@ public class Vehicle_Location_Service {
         return locationImplementation.getReverseGeocoder(xLatitude,xLongitude);
     }
 
-    public Optional getVehicleLocationDetails(Integer vehicleId)throws SQLException, BadSqlGrammarException, DataAccessException {
-        return locationImplementation.getVehicleLocation(vehicleId);
+    public VehicleLocationResponse getVehicleLocationDetails(Integer vehicleId)throws SQLException, BadSqlGrammarException, DataAccessException {
+        locationResponse.vehicleLocation =  locationImplementation.getVehicleLocation(vehicleId);
+        return locationResponse;
     }
 
     public Optional getVehicleDistrict()throws SQLException, BadSqlGrammarException, DataAccessException{

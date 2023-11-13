@@ -1,7 +1,7 @@
 package nex.vts.backend.repoImpl;
 
+import nex.vts.backend.models.responses.VehicleLocation;
 import nex.vts.backend.models.vehicle.Vehicle_District;
-import nex.vts.backend.models.vehicle.Vehicle_Location;
 import nex.vts.backend.models.vehicle.Vehicle_Road;
 import nex.vts.backend.models.vehicle.Vehicle_Thana;
 import nex.vts.backend.models.vehicle.rowMapper.Vehicle_District_RowMapper;
@@ -31,10 +31,10 @@ public class Vehicle_Location_Repo_Imp implements Vehicle_Location_Repo {
     }
 
     @Override
-    public Optional getVehicleLocation(Integer vehicleId) throws SQLException, BadSqlGrammarException, DataAccessException {
+    public VehicleLocation getVehicleLocation(Integer vehicleId) throws SQLException, BadSqlGrammarException, DataAccessException {
         String getQuery = "select a.vehicle_id    vehicle_id,\n       a.userid             vehicle_name,\n       a.lat                                                                                latitude,\n       a.lon                                                                                longitude,\n       to_char(to_date(a.vdate, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24, 'YYYY-MM-DD HH24:MI:SS') vehicle_time,\n       a.engin                                                                              engine,\n       a.speed                                                                              speed\nFROM GPSNEXGP.NEX_INDIVIDUAL_TEMP a,\n     GPSNEXGP.NEX_INDIVIDUAL_CLIENT b\nwhere a.vehicle_id = b.id\n  AND a.vehicle_id = ?";
-        Object getVehicleLocation = jdbcTemplate.query(getQuery, new Vehicle_Location_RowMapper(), vehicleId);
-        return Optional.of(getVehicleLocation);
+        return  jdbcTemplate.queryForObject(getQuery, new Vehicle_Location_RowMapper(),new Object[]{vehicleId});
+//        return Optional.of(getVehicleLocation);
     }/*todo ------ get vehicle location ------------*/
 
     @Override
