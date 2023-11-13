@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repositories.DriverInfoRepo;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
+import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +25,18 @@ public class DriverInfoController {
 
     @Autowired
     ObjectMapper objectMapper;
+    @Autowired
+    Environment environment;
+    private final short API_VERSION = 1;
+    //JSONObject jsonObject = new JSONObject();
     //http://localhost:8009/api/private/v1/1/users/1/1/DriverInfo/215
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{ID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> DriverList(@PathVariable("ID") Integer id) throws JsonProcessingException {
+    public ResponseEntity<String> DriverList(@PathVariable("deviceType") Integer deviceType,
+                                             @PathVariable("ID") Integer id) throws JsonProcessingException {
 
-       // System.out.println("Mahzabin");
+
+        String appActiveProfile = environment.getProperty("spring.profiles.active");
+        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(appActiveProfile,deviceType,API_VERSION);
 
         Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(id);
 
@@ -51,8 +60,10 @@ public class DriverInfoController {
             baseResponse.data =  getDriverInfoObj;
         }
 
+        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
 
-        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+
+        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
     }
 
