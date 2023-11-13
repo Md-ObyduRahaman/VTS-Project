@@ -63,18 +63,18 @@ public class CtrlFavouriteVehicle {
             limit=20;
         }
 
-        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehiclelList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset,userId,1,userType,PARENT_PROFILE_ID,deviceType);
+        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehicleList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset,userId,1,userType,PARENT_PROFILE_ID,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 
-        if (favouriteVehiclelList.isEmpty()){
+        if (favouriteVehicleList.isEmpty()){
             baseResponse.status = false;
             baseResponse.errorMsg="Data  not found";
             baseResponse.errorCode=4041;
         }else {
             FavouritVehicleObj favouritVehicleObj=new FavouritVehicleObj();
             baseResponse.status = true;
-            favouritVehicleObj.setFavouriteVehiclelModels(favouriteVehiclelList);
+            favouritVehicleObj.setFavouriteVehiclelModels(favouriteVehicleList);
             baseResponse.data = favouritVehicleObj;
         }
 

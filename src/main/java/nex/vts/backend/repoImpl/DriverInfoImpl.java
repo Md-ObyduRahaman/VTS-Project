@@ -21,6 +21,7 @@ import java.util.Optional;
 @Service
 @Repository
 public class DriverInfoImpl implements DriverInfoRepo {
+
     private final Logger logger = LoggerFactory.getLogger(DriverInfoImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
@@ -75,6 +76,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
 
     }
 }
+
 
 
 

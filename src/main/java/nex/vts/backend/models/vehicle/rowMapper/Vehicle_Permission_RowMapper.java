@@ -1,3 +1,4 @@
+/*
 package nex.vts.backend.models.vehicle.rowMapper;
 
 import nex.vts.backend.models.vehicle.Vehicle_Permission;
@@ -24,3 +25,4 @@ public class Vehicle_Permission_RowMapper implements RowMapper<Vehicle_Permissio
         );
     }
 }
+*/

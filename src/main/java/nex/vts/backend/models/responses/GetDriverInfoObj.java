@@ -1,18 +1,14 @@
 package nex.vts.backend.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
+@Data
 public class GetDriverInfoObj {
 
-    @JsonProperty("GetDriverInfo")
-    private Optional<GetDriverInfoObj> getDriverModels;
+    @JsonProperty("driverInfoData")
+    private Optional<DriverInfoModel> driverInfoModels;
 
-    public void setGetDriverModels(Optional<DriverInfoModel> getDriverInfo) {
-    }
-
-    // public static void setGetDriverModels(Optional<DriverInfoModel> getDriverInfo) {
-   // }
 }

@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface DriverInfoRepo
 {
     Optional<DriverInfoModel> findDriverInfo(Integer id);
-    //public Optional<DriverInfoModel> findAllDriverinfo(Integer Id);
+//    public Optional<DriverInfoModel> findAllDriverinfo(Integer Id);
+
 }

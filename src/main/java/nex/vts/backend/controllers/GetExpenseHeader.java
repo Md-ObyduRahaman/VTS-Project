@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,16 +27,15 @@ public class GetExpenseHeader {
 
    @Autowired
     ObjectMapper objectMapper;
+   //http://localhost:8009/api/private/v1/1/users/1/1/GetExpenseHeader/860/20120505/20120506
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}")
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@PathVariable("deviceType") Integer deviceType,
                                               @PathVariable("userId") Integer userId,
                                               @PathVariable("userType") Integer userType,
                                               @PathVariable("vehicleId") Integer vehicleId,
                                               @PathVariable("date_from") String date_from,
                                               @PathVariable("date_to") String date_to) throws JsonProcessingException {
-
-
 
         Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
         BaseResponse baseResponse = new BaseResponse();
@@ -52,8 +52,7 @@ public class GetExpenseHeader {
             baseResponse.status = true;
             baseResponse.version="v.0.0.01";
             baseResponse.apiName="GET_Expense_details";
-            getExpansesListObj.setGetExpansesModels(GetExpansesList);
-            baseResponse.data = getExpansesListObj;
+
         }
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));

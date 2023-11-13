@@ -10,7 +10,7 @@ import java.util.Optional;
 public class GetExpansesListObj
 {
 
-    @JsonProperty("GetExpansesData")
+    @JsonProperty("getExpansesData")
     private Optional<ArrayList<GetExpansesModel>> getExpansesModels;
 
 
