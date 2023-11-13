@@ -16,9 +16,8 @@ public class VehicleLocation_Controller {
         this.locationService = locationService;
     }
 
-
     @GetMapping("/v1/vehicle/location")
-    public ResponseEntity<?> getVehicleLocation(@RequestHeader(value = "data") Integer vehicleId/*, @RequestParam("userId") Long userId,@RequestParam("deviceType")Integer deviceType*/) throws SQLException {
+    public ResponseEntity<?> getVehicleLocation(@RequestHeader(value = "data") Integer vehicleId) throws SQLException {
         return ResponseEntity.ok(locationService.getVehicleLocationDetails(vehicleId));
     }
 

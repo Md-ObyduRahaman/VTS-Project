@@ -2,9 +2,12 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.models.responses.AccountSummary;
+import nex.vts.backend.dbentities.VTS_LOGIN_USER;
+import nex.vts.backend.models.responses.AccountSummaryInfo;
 import nex.vts.backend.models.responses.AccountSummaryObj;
 import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.responses.UserFullName;
+import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.repositories.AccountSummaryRepo;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
@@ -13,11 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -32,6 +42,9 @@ public class CtrlAccountSummary {
     AccountSummaryRepo accountSummaryRepo;
     @Autowired
     Environment environment;
+
+    @Autowired
+    RepoVtsLoginUser repoVtsLoginUser;
     private final short API_VERSION = 1;
     private final Logger logger = LoggerFactory.getLogger(CtrlAccountSummary.class);
 
@@ -41,23 +54,83 @@ public class CtrlAccountSummary {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-        Optional<ArrayList<AccountSummary>> accountSummaries = accountSummaryRepo.getAccountSummary(profileId, userType, deviceType);
+       UserFullName fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
+
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        System.out.println("username: " + username);
+        VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
+        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username);
+        AccountSummaryInfo summary= getAccountSummary( userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(),deviceType,fullName.getFULL_NAME());
+
         BaseResponse baseResponse = new BaseResponse();
-        if (accountSummaries.isEmpty()) {
+
+
+        if (summary.getFull_NAME().isEmpty()) {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         } else {
             AccountSummaryObj accountSummaryObj = new AccountSummaryObj();
             baseResponse.status = true;
-            accountSummaryObj.setAccountSummaries(accountSummaries);
+            accountSummaryObj.setAccountSummaries(summary);
             baseResponse.data = accountSummaryObj;
         }
         baseResponse.version = "V.0.0.1";
         baseResponse.apiName = "getAccountSummary";
-       // return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
-        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        //System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
+        //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+
+    }
+
+    private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME)
+    {
+
+
+        Integer runningVehicle= (int) accountSummaryRepo.getVehicleData("RV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
+        Integer stoppedVehicle= (int) accountSummaryRepo.getVehicleData("SV","stopped_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
+        Integer todaySpeedAlert= (int) accountSummaryRepo.getVehicleData("SPEED","speed_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss"), getEndOfDay("yyyyMMddHHmmss"),deviceType,"get_alert_summary");
+        Integer todayGEOAlert= (int) accountSummaryRepo.getVehicleData("GEO","geo_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss"), getEndOfDay("yyyyMMddHHmmss"),deviceType,"get_alert_summary");
+        Integer todayOthersAlert= (int) accountSummaryRepo.getVehicleData("OTHERS","geo_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss").substring(0, 8), getEndOfDay("yyyyMMddHHmmss").substring(0, 8),deviceType,"get_alert_summary");
+        double todayDistance=accountSummaryRepo.getVehicleData("todayDistance","distance",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_distance_summary");
+        Integer availableSMS= (int) accountSummaryRepo.getVehicleData("AS","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
+        Integer todayRunningVehicle= (int) accountSummaryRepo.getVehicleData("TRV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
+
+
+        AccountSummaryInfo accountSummaryInfo=new AccountSummaryInfo();
+        accountSummaryInfo.setTotalVehicle(runningVehicle+stoppedVehicle);
+        accountSummaryInfo.setTodayAlert(todaySpeedAlert+todayGEOAlert+todayOthersAlert);
+        accountSummaryInfo.setTodayDistance(todayDistance);
+        accountSummaryInfo.setAvailableSMS(availableSMS);
+        accountSummaryInfo.setRunningVehicle(runningVehicle);
+        accountSummaryInfo.setStoppedVehicle(stoppedVehicle);
+        accountSummaryInfo.setRunningVehicle(todayRunningVehicle);
+        accountSummaryInfo.setFull_NAME(full_NAME);
+
+        return accountSummaryInfo;
+    }
+
+
+    public static String getStartOfDay(String format) {
+
+
+        // Current date with time set to 00:00:00
+        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
+        String formattedStartOfDay = startOfDay.format(DateTimeFormatter.ofPattern(format));
+        System.out.println("Start of the day: " + formattedStartOfDay);
+        return formattedStartOfDay;
+
+    }
+    public static String getEndOfDay(String format) {
+
+
+        // Current date with time set to 23:59:59
+        LocalDateTime endOfDay = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
+        String formattedEndOfDay = endOfDay.format(DateTimeFormatter.ofPattern(format));
+        System.out.println("End of the day: " + formattedEndOfDay);
+        return formattedEndOfDay;
 
     }
 }
