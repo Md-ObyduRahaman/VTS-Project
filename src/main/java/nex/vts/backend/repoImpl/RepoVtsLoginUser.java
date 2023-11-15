@@ -40,7 +40,10 @@ public class RepoVtsLoginUser {
                             rs.getInt("IS_ACCOUNT_ACTIVE"),
                             rs.getInt("IS_REMOTE_ACCESS_ENABLED"),
                             rs.getString("USERNAME"),
-                            rs.getString("PASSWORD")
+                            rs.getString("PASSWORD"),
+                            rs.getString("PARENT_PROFILE_ID"),
+                            rs.getString("CONTACT_EMAIL"),
+                            rs.getString("OPERATORID")
                     )
             ).stream().findFirst();
         } catch (Exception e) {

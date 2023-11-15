@@ -25,5 +25,7 @@ public class LoginResponse {
 
     public String userName;
 
+    //IND_LOGIN,ICON_TYPE,COMPANY_ID
+
 
 }

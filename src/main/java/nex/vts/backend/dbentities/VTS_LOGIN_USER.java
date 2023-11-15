@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class VTS_LOGIN_USER {
     private int ID, PROFILE_ID, MAIN_ACCOUNT_ID;
     private int USER_TYPE, ROLE_ID, IS_ACCOUNT_ACTIVE, IS_REMOTE_ACCESS_ENABLED;
-    private String USERNAME, PASSWORD;
+    private String USERNAME, PASSWORD,PARENT_PROFILE_ID,CONTACT_EMAIL,OPERATORID;
 }
