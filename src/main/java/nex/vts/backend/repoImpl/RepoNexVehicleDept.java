@@ -30,4 +30,10 @@ public class RepoNexVehicleDept {
                 ))
         );
     }
+
+    public Integer getC2(Integer operatorid ) {
+
+        Integer result = jdbcTemplate.queryForObject("SELECT get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
+return  result;
+    }
 }

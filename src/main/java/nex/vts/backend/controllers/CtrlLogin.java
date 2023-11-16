@@ -147,16 +147,25 @@ public class CtrlLogin {
                     Optional<NEX_VEHICLE_DEPT> nexDeptClientProfileOpt = Optional.empty();
                     try {
                         nexDeptClientProfileOpt = repoNexVehicleDept.getParentProfileIdOfDepartmentClient(vtsLoginUser.getUSERNAME(),reqBody.password,operatorid,shcemaName);
+
                     } catch (Exception e) {
                         throw new AppCommonException(4007 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
                     }
 
                     if (nexDeptClientProfileOpt.isPresent()) {
                         NEX_VEHICLE_DEPT nexIndividualClientProfile = nexDeptClientProfileOpt.get();
-                        loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
+                        Integer c2Value=repoNexVehicleDept.getC2(nexIndividualClientProfile.getPARENT_PROFILE_ID());
+                        if (c2Value==1){
+                            loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
+                        }
+                        else {
+                            break;
+                        }
+
                     } else {
                         throw new AppCommonException(4008 + "##Sorry we could not found your profile information" + deviceType + "##" + API_VERSION);
                     }
+                    System.out.println("here");
                     break;
                 case 3: //[ Individual-Acc-User ]  [ User-Type = 3 ]
                     Optional<NEX_INDIVIDUAL_CLIENT> nexIndividualClientProfileOpt = Optional.empty();
