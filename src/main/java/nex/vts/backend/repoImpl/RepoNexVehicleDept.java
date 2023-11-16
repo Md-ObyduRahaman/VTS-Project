@@ -22,9 +22,9 @@ public class RepoNexVehicleDept {
                   and OPERATORID = 3";
     * */
 
-    public Optional<NEX_VEHICLE_DEPT> getParentProfileIdOfDepartmentClient(String userName, String password,Integer operatorid ) {
+    public Optional<NEX_VEHICLE_DEPT> getParentProfileIdOfDepartmentClient(String userName, String password,Integer operatorid,String schemaName ) {
         logger.debug("Executing query to get parent userName  of department type client {}", userName);
-        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM GPSNEXGP.NEX_VEHICLE_DEPT  where USERID = ? and GRP_PASS = ? and ACTIVATION = 1 and OPERATORID = ?", new Object[]{userName,password,operatorid}, (rs, rowNum) ->
+        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM "+schemaName+"NEX_VEHICLE_DEPT  where USERID = ? and GRP_PASS = ? and ACTIVATION = 1 and OPERATORID = ?", new Object[]{userName,password,operatorid}, (rs, rowNum) ->
                 Optional.of(new NEX_VEHICLE_DEPT(
                         rs.getInt("PARENT_PROFILE_ID")
                 ))

@@ -41,7 +41,7 @@ public class VehicleLocation_Controller {
         AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(userDetails.getUsername());
+        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(userDetails.getUsername(),environment.getProperty("application.profiles.shcemaName"));
         if (vtsLoginUser.isPresent()) loginUser = vtsLoginUser.get();
         else throw new AppCommonException(400 + "##login cred not found##" + "##" + API_VERSION);
         baseResponse.data = locationService.getVehicleLocationDetails(loginUser.getPROFILE_ID());

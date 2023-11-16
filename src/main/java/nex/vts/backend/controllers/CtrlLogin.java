@@ -65,6 +65,7 @@ public class CtrlLogin {
 
         String appActiveProfile = environment.getProperty("spring.profiles.active");
         Integer operatorid = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(appActiveProfile, deviceType, API_VERSION);
 
@@ -74,7 +75,7 @@ public class CtrlLogin {
         }
         reqBody = objectMapper.readValue(aesCrypto.aesDecrypt(requestBody.get("data"), API_VERSION), LoginReq.class);
 
-        reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
+       // reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
 
         //System.out.println("password: " + userDetails.getPassword());
 
@@ -88,7 +89,7 @@ public class CtrlLogin {
 
 
         //Authenticating user
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username);
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username,shcemaName);
         if (vtsLoginUserOpt.isPresent()) {
             vtsLoginUser = vtsLoginUserOpt.get();
             if (reqBody.username.equals(vtsLoginUser.getUSERNAME()) && reqBody.password.equals(vtsLoginUser.getPASSWORD()) && vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
@@ -119,21 +120,25 @@ public class CtrlLogin {
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
 //            loginResponse.parentId =  vtsLoginUser.getPROFILE_ID();
 
+            String dynamicColumnName;
+            if(operatorid==1 || operatorid==8){
+                dynamicColumnName="CORP_PASS";
+            }
+            else if(operatorid==2 || operatorid==3 || operatorid==7  ){//GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7
+                dynamicColumnName="PASSWORD";
+            }
+
+            else {
+                dynamicColumnName=null;
+            }
             switch (vtsLoginUser.getUSER_TYPE()) {
                 case 1: {  //[ Mother-Acc-User ] [ User-Type = 1 ]
-                    String dynamicColumnName;
-                    if(operatorid==1 || operatorid==8){
-                        dynamicColumnName="CORP_PASS";
-                    }
-                    else {
-                        dynamicColumnName="PASSWORD";
-
-                    }
 
                     if (vtsLoginUser.getPARENT_PROFILE_ID().equals("0")) {
                         //validation check from corporate table...?
-                        Optional<Case1UserInfo> userInfo=  loginUserInformation.caseOneAccountInfo(vtsLoginUser.getPROFILE_ID(),vtsLoginUser.getUSERNAME(),reqBody.password,dynamicColumnName);
+                        Optional<Case1UserInfo> userInfo=  loginUserInformation.caseOneAccountInfo(vtsLoginUser.getPROFILE_ID(),vtsLoginUser.getUSERNAME(),reqBody.password,dynamicColumnName,operatorid);
                         loginResponse.profileId = Integer.parseInt(userInfo.get().getID());
+                        loginResponse.mainAccountId= Integer.parseInt(userInfo.get().getID());
                     }
                     // Nothing to do
                     break;
@@ -141,7 +146,7 @@ public class CtrlLogin {
                 case 2: //[ Child-Acc-User ]  [ User-Type = 2 ]
                     Optional<NEX_VEHICLE_DEPT> nexDeptClientProfileOpt = Optional.empty();
                     try {
-                        nexDeptClientProfileOpt = repoNexVehicleDept.getParentProfileIdOfDepartmentClient(vtsLoginUser.getUSERNAME(),reqBody.password,operatorid);
+                        nexDeptClientProfileOpt = repoNexVehicleDept.getParentProfileIdOfDepartmentClient(vtsLoginUser.getUSERNAME(),reqBody.password,operatorid,shcemaName);
                     } catch (Exception e) {
                         throw new AppCommonException(4007 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
                     }
@@ -156,10 +161,12 @@ public class CtrlLogin {
                 case 3: //[ Individual-Acc-User ]  [ User-Type = 3 ]
                     Optional<NEX_INDIVIDUAL_CLIENT> nexIndividualClientProfileOpt = Optional.empty();
 
+
+
                     if (Integer.parseInt(vtsLoginUser.getPARENT_PROFILE_ID()) > 0) {
 
                         try {
-                            nexIndividualClientProfileOpt = repoNexIndividualClient.getParentProfileIdOfIndividualClient(vtsLoginUser.getPROFILE_ID(),vtsLoginUser.getUSERNAME(),reqBody.password,operatorid);
+                            nexIndividualClientProfileOpt = repoNexIndividualClient.getParentProfileIdOfIndividualClient(vtsLoginUser.getPROFILE_ID(),vtsLoginUser.getUSERNAME(),reqBody.password,operatorid,shcemaName,dynamicColumnName);
                         } catch (Exception e) {
                             throw new AppCommonException(4013 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
                         }
@@ -193,7 +200,6 @@ public class CtrlLogin {
 
 
         }
-
 
         baseResponse.data = loginResponse;
         System.out.println(loginResponse.token);

@@ -18,13 +18,13 @@ public class RepoVtsLoginUser {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Optional<VTS_LOGIN_USER> findByUserName(String userName) {
+    public Optional<VTS_LOGIN_USER> findByUserName(String userName,String shcemaName) {
 
         logger.trace("Executing query to find user by username: {}", userName);
         Optional<VTS_LOGIN_USER> userObj = Optional.empty();
         String query = "SELECT *\n" +
                 "FROM (SELECT *\n" +
-                "      FROM GPSNEXGP.VTS_LOGIN_USER\n" +
+                "      FROM "+shcemaName+"VTS_LOGIN_USER\n" +
                 "      WHERE USERNAME = ?\n" +
                 "      ORDER BY ID ASC)\n" +
                 "WHERE ROWNUM <= 1";
@@ -42,11 +42,15 @@ public class RepoVtsLoginUser {
                             rs.getString("USERNAME"),
                             rs.getString("PASSWORD"),
                             rs.getString("PARENT_PROFILE_ID"),
-                            rs.getString("CONTACT_EMAIL"),
+                           // rs.getString("CONTACT_EMAIL"),
                             rs.getString("OPERATORID")
+                            //ID, PROFILE_ID, USERNAME, PASSWORD, USER_TYPE, ROLE_ID, IS_ACCOUNT_ACTIVE,
+                            // IS_REMOTE_ACCESS_ENABLED, OPERATORID, TOKEN, TOKEN_EXPIRE, CREATED_AT, CREATED_BY,
+                            // UPDATED_AT, UPDATED_BY, PARENT_PROFILE_ID, MAIN_ACCOUNT_ID
                     )
             ).stream().findFirst();
         } catch (Exception e) {
+            e.printStackTrace();
             if (e instanceof EmptyResultDataAccessException) {
                 logger.trace("No user found with username {} on VTS_LOGIN_USER tbl", userName);
                 return userObj;

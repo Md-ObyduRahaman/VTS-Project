@@ -16,9 +16,9 @@ public class RepoNexIndividualClient {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Optional<NEX_INDIVIDUAL_CLIENT> getParentProfileIdOfIndividualClient(int profileId,String userName, String password,Integer operatorid) {
+    public Optional<NEX_INDIVIDUAL_CLIENT> getParentProfileIdOfIndividualClient(int profileId,String userName, String password,Integer operatorid,String shcemaName,String dynamicColumnName) {
         logger.debug("Executing query to get parent profile id of individual client {}", profileId);
-        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM GPSNEXGP.NEX_INDIVIDUAL_CLIENT WHERE ID = ? AND USERID = ? AND IND_PASS = ? AND ACTIVATION = 1 AND IND_LOGIN = 1 AND OPERATORID = ?", new Object[]{profileId,userName,password,operatorid}, (rs, rowNum) ->
+        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM "+shcemaName+"NEX_INDIVIDUAL_CLIENT WHERE ID = ? AND USERID = ? AND "+dynamicColumnName+" = ? AND ACTIVATION = 1 AND IND_LOGIN = 1 AND OPERATORID = ?", new Object[]{profileId,userName,password,operatorid}, (rs, rowNum) ->
                 Optional.of(new NEX_INDIVIDUAL_CLIENT(
                         rs.getInt("PARENT_PROFILE_ID")
                 ))
