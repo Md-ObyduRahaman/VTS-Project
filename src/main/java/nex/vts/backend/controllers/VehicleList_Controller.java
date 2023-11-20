@@ -61,7 +61,7 @@ public class VehicleList_Controller {
         String username = userDetails.getUsername();
 //       System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username);
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
         if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
         else throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
         VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), String.valueOf(limit), offset, loginUser.getUSER_TYPE(), loginUser.getPROFILE_ID());

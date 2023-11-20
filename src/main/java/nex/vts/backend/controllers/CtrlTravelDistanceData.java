@@ -62,7 +62,7 @@ public class CtrlTravelDistanceData {
         String username = userDetails.getUsername();
         System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username);
+        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
 
 
 

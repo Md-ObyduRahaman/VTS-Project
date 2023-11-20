@@ -54,7 +54,7 @@ public class VehicleDetails_Controller {
         AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(userDetails.getUsername());
+        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(userDetails.getUsername(),environment.getProperty("application.profiles.shcemaName"));
 //        Long getUserId = deObfuscateId(userId);
 //        byte[] decode_data = Base64.getDecoder().decode(data);
 //        String string_decode_data = new String(decode_data);

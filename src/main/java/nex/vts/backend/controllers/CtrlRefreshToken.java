@@ -66,7 +66,7 @@ public class CtrlRefreshToken {
         boolean isCredentialMatched = false;
 
         //Authenticating user
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username);
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username,environment.getProperty("application.profiles.shcemaName"));
         if (vtsLoginUserOpt.isPresent()) {
             vtsLoginUser = vtsLoginUserOpt.get();
             if (reqBody.username.equals(vtsLoginUser.getUSERNAME()) && reqBody.password.equals(vtsLoginUser.getPASSWORD()) && vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
