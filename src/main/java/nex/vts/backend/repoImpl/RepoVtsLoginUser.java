@@ -53,6 +53,7 @@ public class RepoVtsLoginUser {
             e.printStackTrace();
             if (e instanceof EmptyResultDataAccessException) {
                 logger.trace("No user found with username {} on VTS_LOGIN_USER tbl", userName);
+
                 return userObj;
             }
         }

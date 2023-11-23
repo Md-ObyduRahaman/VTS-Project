@@ -59,7 +59,8 @@ public class AppCommonExceptionHandler {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(aesCrypto.aesEncrypt(clientResponse,apiVersion));
+       // return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(aesCrypto.aesEncrypt(clientResponse,apiVersion));
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(clientResponse);
     }
 
 }

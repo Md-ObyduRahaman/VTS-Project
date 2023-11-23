@@ -88,7 +88,6 @@ public class CtrlAccountSummary {
     private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME)
     {
 
-
         Integer runningVehicle= (int) accountSummaryRepo.getVehicleData("RV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
         Integer stoppedVehicle= (int) accountSummaryRepo.getVehicleData("SV","stopped_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
         Integer todaySpeedAlert= (int) accountSummaryRepo.getVehicleData("SPEED","speed_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss"), getEndOfDay("yyyyMMddHHmmss"),deviceType,"get_alert_summary");

@@ -75,10 +75,15 @@ public class CtrlLogin {
         }
         reqBody = objectMapper.readValue(aesCrypto.aesDecrypt(requestBody.get("data"), API_VERSION), LoginReq.class);
 
-       // reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
+        if (operatorid==1||operatorid==3){
+
+        }
+        else {
+            reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
+        }
+
 
         //System.out.println("password: " + userDetails.getPassword());
-
 
         //TODO: Request Field Validation
 
@@ -97,16 +102,19 @@ public class CtrlLogin {
                 baseResponse.status = true;
                 baseResponse.version = "V.0.0.1";
                 baseResponse.apiName = reqBody.apiName;
+            } else if (!reqBody.password.equals(vtsLoginUser.getPASSWORD())) {
+                throw new AppCommonException(4016 + "##Your password is wrong. Please contact with call center##" + deviceType + "##" + API_VERSION);
+
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 0) {
-                throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center");
+                throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center##"+ deviceType + "##" + API_VERSION);
 
             } else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
                 throw new AppCommonException(4015 + "##Your account is blocked. Please contact with call center##" + deviceType + "##" + API_VERSION);
             } else {
-                throw new AppCommonException(4005 + "##User credential not matched" + deviceType + "##" + API_VERSION);
+                throw new AppCommonException(4005 + "##User credential not matched##" + deviceType + "##" + API_VERSION);
             }
         } else {
-            throw new AppCommonException(4006 + "##User not found" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4006 + "##User not found##" + deviceType + "##" + API_VERSION);
         }
 
         if (isCredentialMatched) {
@@ -127,7 +135,6 @@ public class CtrlLogin {
             else if(operatorid==2 || operatorid==3 || operatorid==7  ){//GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7
                 dynamicColumnName="PASSWORD";
             }
-
             else {
                 dynamicColumnName=null;
             }
@@ -215,6 +222,7 @@ public class CtrlLogin {
 
         // return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        //account block problem
 
     }
 
