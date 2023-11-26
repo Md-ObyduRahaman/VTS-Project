@@ -1,7 +1,5 @@
 package nex.vts.backend.repositories;
 
-import java.util.List;
-
 public interface Vehicle_List_Repo {
-    Object getVehicleList(Integer groupId, String limit, Integer offset, Integer userType, Integer parentId);
+    Object getVehicleList(Integer id, Integer userType, Integer operatorId, String vehicleID_MotherAccId);
 }
