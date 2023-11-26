@@ -96,7 +96,8 @@ public class CtrlLogin {
             loginResponse.profileId = vtsLoginUser.getPROFILE_ID();
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID(); /*            loginResponse.parentId =  vtsLoginUser.getPROFILE_ID(); */
             String dynamicColumnName;
-            if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";
+            if (operatorid == 1 || operatorid == 8)
+                dynamicColumnName = "IND_PASS";
             else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/*GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
                 dynamicColumnName = "PASSWORD";
             } else dynamicColumnName = null;

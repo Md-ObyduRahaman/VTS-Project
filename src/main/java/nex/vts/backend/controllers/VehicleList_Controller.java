@@ -48,24 +48,22 @@ public class VehicleList_Controller {
         this.locationService = locationService;
         this.environment = environment;
     }
-    /*"/{deviceType}/vehicles/{limit}/{offset}"*/
+
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/{deviceType}/vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleList(/*@RequestHeader(value = "data") String data,*/ @PathVariable(value = "deviceType") Integer deviceType/*, @PathVariable(required = false, value = "offset") Integer offset, @PathVariable(required = false, value = "limit") String limit*//*, @PathVariable(value = "userId") Long userId*/) throws JsonProcessingException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
+        String schemaName = environment.getProperty("application.profiles.shcemaName");
         AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-//        Long getUserId = deObfuscateId(userId); /*byte[] decode_data = Base64.getDecoder().decode(data);*//*        String string_decode_data = new String(decode_data);*//*        String string_decode_data = decryptedValue.aesDecrypt(data, API_VERSION);*/
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
-//       System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
         if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
-        else throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
-        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID()
-                 /*                , String.valueOf(limit) , offset*/
-                , loginUser.getUSER_TYPE(),operatorId,"3333"/*,loginUser.getID()*/ /*, loginUser.getPROFILE_ID()*/);
+        else
+            throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
+        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), loginUser.getUSER_TYPE(), operatorId, schemaName);
         if (!getVehicleInfo.equals(null)) {
             baseResponse.data = getVehicleInfo;
             baseResponse.status = true;

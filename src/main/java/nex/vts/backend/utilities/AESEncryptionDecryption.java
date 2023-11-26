@@ -19,7 +19,7 @@ public class AESEncryptionDecryption {
 
 
         private String API_V1_DEVICE_1_SECRET_KEY = "Nx123OTT0908J129";
-        private String API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J129";
+        private String API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J130";
         private String API_V1_DEVICE_3_SECRET_KEY = "Nx123OTT0876J129";
         private String API_V2_DEVICE_1_SECRET_KEY = "Nx123OTT0456J129";
         private String API_V2_DEVICE_2_SECRET_KEY = "Nx123OTT0123J129";
