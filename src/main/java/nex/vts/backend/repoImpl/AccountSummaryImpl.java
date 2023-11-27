@@ -6,6 +6,7 @@ import nex.vts.backend.repositories.AccountSummaryRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.TransientDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -30,6 +31,8 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    Environment environment;
     private final short API_VERSION = 1;
 
     public AccountSummaryImpl(DataSource dataSource) {
@@ -108,13 +111,14 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
     public double getVehicleData(String p_info_type,String columnName,Integer profileType,Integer profileId,Integer parentId,String dateFrom,String dateTo,Integer deviceType,String packageName) {
          Integer result= 0;
         String sql=null;
+        String schemaName=environment.getProperty("application.profiles.shcemaName");
 
         try {
             if(p_info_type.equals("todayDistance")){
-                 sql = "SELECT GPSNEXGP."+packageName+"( ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
+                 sql = "SELECT "+schemaName+packageName+"( ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
             }else {
                 p_info_type = "'" + p_info_type + "'";
-                 sql = "SELECT GPSNEXGP."+packageName+"("+p_info_type+", ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
+                 sql = "SELECT "+schemaName+packageName+"("+p_info_type+", ?, ?, ?, ?, ?) AS "+columnName+" FROM DUAL";
             }
             System.out.println(sql);
             Connection connection = dataSource.getConnection();

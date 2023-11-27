@@ -11,4 +11,5 @@ public class AccountSummaryInfo {
   private Integer todayRunningVehicle,StoppedVehicle,RunningVehicle,availableSMS,todayAlert,totalVehicle;
   private double todayDistance;
   private String full_NAME;
+  private DetailsOfClientDue detailsOfClientDue;
 }
