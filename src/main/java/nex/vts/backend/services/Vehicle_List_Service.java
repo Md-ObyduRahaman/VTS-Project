@@ -1,6 +1,7 @@
 package nex.vts.backend.services;
 
 import nex.vts.backend.exceptions.AppCommonException;
+import nex.vts.backend.models.responses.DeptOfVehicleListItem;
 import nex.vts.backend.models.responses.DetailsOfVehicleItem;
 import nex.vts.backend.models.responses.VehicleListResponse;
 import nex.vts.backend.repoImpl.Vehicle_List_Repo_Imp;
@@ -20,17 +21,20 @@ public class Vehicle_List_Service {
         this.Vehicle_List_Repo_Imp = Vehicle_List_Repo_Imp;
     }
 
-    public Object getVehicleList(Integer id/*, String limit, Integer offset*/, Integer userType, Integer oparatorId,String shcemaName) {
+    public Object getVehicleList(Integer id/*, String limit, Integer offset*/, Integer userType, Integer oparatorId,String shcemaName,Integer deptId) {
         try {
-            return Vehicle_List_Repo_Imp.getVehicleList(id/*, limit, offset*/, userType,oparatorId, shcemaName);
+            return Vehicle_List_Repo_Imp.getVehicleList(id/*, limit, offset*/, userType,oparatorId, shcemaName,deptId);
         } catch (Exception e) {
             throw new AppCommonException(e.getMessage());
         }
     }
 
-    public VehicleListResponse getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName) {
+    public VehicleListResponse getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName,Integer deptId) {
         VehicleListResponse vehicleListResponse = new VehicleListResponse();
-        vehicleListResponse.setDetailsOfVehicle((List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName));
+        if(!userType.equals(2)){
+            vehicleListResponse.setDetailsOfVehicle((List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
+        }else
+            vehicleListResponse.setDeptOfVehicleList((List<DeptOfVehicleListItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
         return vehicleListResponse;
     }
 
