@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
@@ -31,7 +32,8 @@ public class AppCommonExceptionHandler {
     */
 
     @ExceptionHandler(value = {AppCommonException.class})
-    public ResponseEntity<String> transparentApiErrorException(AppCommonException ex) {
+    @ResponseBody
+    public ResponseEntity<String> transparentApiErrorException(AppCommonException ex) throws JsonProcessingException{
 
         System.out.println("Controller advice " + ex.getMessage());
         String[] errorMessages = ex.getMessage().split("##");
@@ -44,6 +46,25 @@ public class AppCommonExceptionHandler {
         baseResponse.status = false;
         baseResponse.errorCode = errorCode;
         baseResponse.errorMsg = errorMsg;
+
+        // Determine the HttpStatus dynamically based on the errorCode or any other criteria
+        HttpStatus httpStatus;
+
+        switch (errorCode) {
+            case 200:
+                httpStatus = HttpStatus.OK;
+                break;
+            case 400:
+                httpStatus = HttpStatus.BAD_REQUEST;
+                break;
+            case 404:
+                httpStatus = HttpStatus.NOT_FOUND;
+                break;
+            // Add more cases as needed based on your error codes
+            default:
+                httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+                break;
+        }
 
         String clientResponse = null;
 
@@ -60,7 +81,7 @@ public class AppCommonExceptionHandler {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
        // return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(aesCrypto.aesEncrypt(clientResponse,apiVersion));
-        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(clientResponse);
+        return ResponseEntity.status(httpStatus).headers(httpHeaders).body(clientResponse);
     }
 
 }

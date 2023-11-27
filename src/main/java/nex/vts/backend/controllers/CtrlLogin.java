@@ -114,7 +114,7 @@ public class CtrlLogin {
                 throw new AppCommonException(4005 + "##User credential not matched##" + deviceType + "##" + API_VERSION);
             }
         } else {
-            throw new AppCommonException(4006 + "##User not found##" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(404 + "##User not found##" + deviceType + "##" + API_VERSION);
         }
 
         if (isCredentialMatched) {
