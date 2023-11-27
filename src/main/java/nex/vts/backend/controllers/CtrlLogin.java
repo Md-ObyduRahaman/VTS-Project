@@ -100,7 +100,7 @@ public class CtrlLogin {
             if (reqBody.username.equals(vtsLoginUser.getUSERNAME()) && reqBody.password.equals(vtsLoginUser.getPASSWORD()) && vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
                 isCredentialMatched = true;
                 baseResponse.status = true;
-                baseResponse.version = "V.0.0.1";
+
                 baseResponse.apiName = reqBody.apiName;
             } else if (!reqBody.password.equals(vtsLoginUser.getPASSWORD())) {
                 throw new AppCommonException(4016 + "##Your password is wrong. Please contact with call center##" + deviceType + "##" + API_VERSION);
@@ -184,13 +184,13 @@ public class CtrlLogin {
                         try {
                             nexIndividualClientProfileOpt = repoNexIndividualClient.getParentProfileIdOfIndividualClient(vtsLoginUser.getPROFILE_ID(),vtsLoginUser.getUSERNAME(),reqBody.password,operatorid,shcemaName,dynamicColumnName);
                         } catch (Exception e) {
-                            throw new AppCommonException(4013 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
+                            throw new AppCommonException(4013 + "##Could not fetch profile information##" + deviceType + "##" + API_VERSION);
                         }
                         if (nexIndividualClientProfileOpt.isPresent()) {
                             NEX_INDIVIDUAL_CLIENT nexIndividualClientProfile = nexIndividualClientProfileOpt.get();
                             loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                         } else {
-                            throw new AppCommonException(4014 + "##Individual client profile not found" + deviceType + "##" + API_VERSION);
+                            throw new AppCommonException(4014 + "##Individual client profile not found##" + deviceType + "##" + API_VERSION);
                         }
                     }
 
@@ -200,18 +200,18 @@ public class CtrlLogin {
                     try {
                         nexExtendedClientProfileOpt = repoVtsExtendedUserProfile.getParentProfileIdOfExtendedClient(vtsLoginUser.getPROFILE_ID());
                     } catch (Exception e) {
-                        throw new AppCommonException(4012 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
+                        throw new AppCommonException(4012 + "##Could not fetch profile information##" + deviceType + "##" + API_VERSION);
                     }
 
                     if (nexExtendedClientProfileOpt.isPresent()) {
                         VTS_EXTENDED_USER_PROFILE nexExtendedClientProfile = nexExtendedClientProfileOpt.get();
                         loginResponse.profileId = nexExtendedClientProfile.getPARENT_PROFILE_ID();
                     } else {
-                        throw new AppCommonException(4010 + "##Individual client profile not found" + deviceType + "##" + API_VERSION);
+                        throw new AppCommonException(4010 + "##Individual client profile not found##" + deviceType + "##" + API_VERSION);
                     }
                     break;
                 default:
-                    throw new AppCommonException(4011 + "##Invalid profile type" + deviceType + "##" + API_VERSION);
+                    throw new AppCommonException(4011 + "##Invalid profile type##" + deviceType + "##" + API_VERSION);
             }
 
 

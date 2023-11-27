@@ -92,7 +92,7 @@ public class CtrlAccountSummary {
             accountSummaryObj.setAccountSummaries(summary);
             baseResponse.data = accountSummaryObj;
         }
-        baseResponse.version = "V.0.0.1";
+
         baseResponse.apiName = "getAccountSummary";
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 

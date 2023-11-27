@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
-@JsonPropertyOrder({"status","version","apiName","data", "errorCode", "errorMsg"})
+@JsonPropertyOrder({"status","apiName","data", "errorCode", "errorMsg"})
 public class BaseResponse {
 
-   @JsonProperty("version")
-    public  String version;
+
 
    @JsonProperty("apiName")
     public String apiName;

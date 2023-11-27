@@ -52,12 +52,10 @@ public class CtrlForgotPassWord {
             baseResponse.status = false;
             baseResponse.errorMsg = forgotPassWordResponseData.getMessage();
             baseResponse.errorCode = 4042;
-            baseResponse.version="V.0.0.1";
             baseResponse.apiName="forgotPassword";
         } else {
             baseResponse.status = true;
             baseResponse.data = forgotPassWordResponseData;
-            baseResponse.version="V.0.0.1";
             baseResponse.apiName="forgotPassword";
         }
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));

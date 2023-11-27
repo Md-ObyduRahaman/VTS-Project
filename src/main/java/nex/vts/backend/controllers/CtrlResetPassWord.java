@@ -66,14 +66,12 @@ public class CtrlResetPassWord {
         if (forgotPassWordResponseData.getP_operation_stat()==1) {
             baseResponse.status = true;
             baseResponse.data = resetData(reqBody);
-            baseResponse.version="V.0.0.1";
             baseResponse.apiName="resetPassword";
 
         } else {
             baseResponse.status = false;
             baseResponse.errorMsg = resetData(reqBody).getMessage();
             baseResponse.errorCode = 4042;
-            baseResponse.version="V.0.0.1";
             baseResponse.apiName="resetPassword";
 
         }
