@@ -75,11 +75,11 @@ public class CtrlLogin {
         }
         reqBody = objectMapper.readValue(aesCrypto.aesDecrypt(requestBody.get("data"), API_VERSION), LoginReq.class);
 
-        if (operatorid==1||operatorid==3){
+        if (operatorid==1||operatorid==8){
+            reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
 
         }
         else {
-            reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
         }
 
 
@@ -100,7 +100,6 @@ public class CtrlLogin {
             if (reqBody.username.equals(vtsLoginUser.getUSERNAME()) && reqBody.password.equals(vtsLoginUser.getPASSWORD()) && vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 1) {
                 isCredentialMatched = true;
                 baseResponse.status = true;
-
                 baseResponse.apiName = reqBody.apiName;
             } else if (!reqBody.password.equals(vtsLoginUser.getPASSWORD())) {
                 throw new AppCommonException(4016 + "##Your password is wrong. Please contact with call center##" + deviceType + "##" + API_VERSION);
@@ -130,7 +129,7 @@ public class CtrlLogin {
 
             String dynamicColumnName;
             if(operatorid==1 || operatorid==8){
-                dynamicColumnName="CORP_PASS";
+                dynamicColumnName="IND_PASS";
             }
             else if(operatorid==2 || operatorid==3 || operatorid==7  ){//GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7
                 dynamicColumnName="PASSWORD";
