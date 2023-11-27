@@ -63,7 +63,7 @@ public class VehicleList_Controller {
         if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
-        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), loginUser.getUSER_TYPE(), operatorId, schemaName);
+        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), loginUser.getUSER_TYPE(), operatorId, schemaName, Integer.valueOf(loginUser.getPARENT_PROFILE_ID()));
         if (!getVehicleInfo.equals(null)) {
             baseResponse.data = getVehicleInfo;
             baseResponse.status = true;

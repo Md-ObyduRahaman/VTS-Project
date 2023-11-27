@@ -13,4 +13,6 @@ public class VehicleListResponse {
     private int totalVehicle;
     @JsonProperty("details of Vehicle")
     private List<DetailsOfVehicleItem> detailsOfVehicle;
+    @JsonProperty("Dept Of Vehicle List")
+    private List<DeptOfVehicleListItem> deptOfVehicleList;
 }
