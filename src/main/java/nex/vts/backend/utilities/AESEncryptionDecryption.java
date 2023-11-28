@@ -17,6 +17,8 @@ import java.util.Base64;
 
 public class AESEncryptionDecryption {
 
+    private Integer deviceType;
+
 
         private String API_V1_DEVICE_1_SECRET_KEY = "Nx123OTT0908J129";
         private String API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J130";
@@ -30,6 +32,7 @@ public class AESEncryptionDecryption {
     private SecretKeySpec keySpecV2;
 
     public AESEncryptionDecryption(String applicationDomain, int deviceType, int apiVersion) {
+        this.deviceType=deviceType;
         if(applicationDomain.equalsIgnoreCase("GP")){
             API_V1_DEVICE_1_SECRET_KEY = "Nx123OTT0908J129";
             API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J129";
@@ -100,7 +103,8 @@ public class AESEncryptionDecryption {
                 return responseString;
             } catch (Exception f) {
                 logger.error("Could not decrypt", f);
-                throw new AppCommonException(400 + "##Malformed request. Decryption issue occurred.");
+                throw new AppCommonException(400 + "##Malformed request. Decryption issue occurred##" + deviceType + "##" + apiVersion);
+
             }
         }
     }

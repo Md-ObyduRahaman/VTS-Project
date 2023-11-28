@@ -84,7 +84,6 @@ public class CtrlSetVehicleSetting {
         if (!checkBool) {
             baseResponse.status = false;
             baseResponse.apiName = "changeVehicleStatus";
-            baseResponse.version = "V.0.0.1";
             baseResponse.errorMsg = "Operation Failed. You are not permitted to update vehicle settings";
             baseResponse.errorCode = 4005;
         } else {
@@ -92,7 +91,6 @@ public class CtrlSetVehicleSetting {
             VehicleSettingResponse vehicleSettingResponse = new VehicleSettingResponse(msg);
             baseResponse.status = true;
             baseResponse.apiName = "changeVehicleStatus";
-            baseResponse.version = "V.0.0.1";
             baseResponse.data = vehicleSettingResponse;
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));

@@ -84,12 +84,10 @@ public class CtrlTravelDistanceData {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found within this time limit";
             baseResponse.errorCode = 4041;
-            baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "getTravelDistanceData";
         } else {
             baseResponse.status = true;
             baseResponse.data = monthTravleDistanceForAll;
-            baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "getTravelDistanceData";
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));

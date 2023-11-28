@@ -46,12 +46,10 @@ public class CtrlGetVehicleSetting {
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
-            baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "getVehicleSetting";
         } else {
             baseResponse.status = true;
             baseResponse.data = vehicleOthersInfo;
-            baseResponse.version = "V.0.0.1";
             baseResponse.apiName = "getVehicleSetting";
         }
         // return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
