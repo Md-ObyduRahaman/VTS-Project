@@ -31,9 +31,9 @@ public class RepoNexVehicleDept {
         );
     }
 
-    public Integer getC2(Integer operatorid ) {
+    public Integer getC2(Integer operatorid ,String shcemaName) {
 
-        Integer result = jdbcTemplate.queryForObject("SELECT get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
+        Integer result = jdbcTemplate.queryForObject("SELECT "+shcemaName+"get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
 return  result;
     }
 }
