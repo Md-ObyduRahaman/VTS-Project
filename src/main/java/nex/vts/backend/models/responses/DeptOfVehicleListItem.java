@@ -41,8 +41,11 @@ public class DeptOfVehicleListItem {
     private int isFavourite;
     @JsonProperty("iconTypeRunning")
     private int iconTypeRunning;
+    @JsonProperty("iscolor")
+    private int iscolor;
 
-    public DeptOfVehicleListItem(int iconTypeStationary, int iconTypeOnMap, String vehicleName, int iconTypeStopped, String color, String userDefinedVehicleName, int maxSpeed, float speed, String engineStatus, String registrationNumber, String vendor, int vehicleIconType, String model, String id, int isFavourite, int iconTypeRunnig) {
+    public DeptOfVehicleListItem(int iconTypeStationary, int iconTypeOnMap, String vehicleName, int iconTypeStopped, String color, String userDefinedVehicleName, int maxSpeed, float speed, String engineStatus, String registrationNumber, String vendor, int vehicleIconType, String model, String id, int isFavourite, int iconTypeRunnig,int iscolor) {
+
         this.iconTypeStationary = iconTypeStationary;
         this.iconTypeOnMap = iconTypeOnMap;
         this.vehicleName = vehicleName;
@@ -59,5 +62,7 @@ public class DeptOfVehicleListItem {
         this.id = id;
         this.isFavourite = isFavourite;
         this.iconTypeRunning = iconTypeRunnig;
+        this.iscolor = iscolor;
+
     }
 }

@@ -41,8 +41,10 @@ public class DetailsOfVehicleItem {
     private String vDate;
     @JsonProperty("lat")
     private float lat;
+    @JsonProperty("iscolor")
+    private int iscolor;
 
-    public DetailsOfVehicleItem(int rowNo, int id, String vehicleId, String userId, String groupId, String engine, int speed, float lat, float lon, String vDate, int favourite, int iconType, int orderIndex, String distance, String positionHis) {
+    public DetailsOfVehicleItem(int rowNo, int id, String vehicleId, String userId, String groupId, String engine, int speed, float lat, float lon, String vDate, int favourite, int iconType, int orderIndex, String distance, String positionHis,int iscolor) {
         this.rowNo = rowNo;
         this.id = id;
         this.vehicleId = vehicleId;
@@ -58,5 +60,6 @@ public class DetailsOfVehicleItem {
         this.orderIndex = orderIndex;
         this.distance = distance;
         this.positionHis = positionHis;
+        this.iscolor = iscolor;
     }
 }
