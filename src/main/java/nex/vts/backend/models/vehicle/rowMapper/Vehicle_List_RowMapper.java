@@ -24,7 +24,8 @@ public class Vehicle_List_RowMapper implements RowMapper<DetailsOfVehicleItem> {
                 rs.getInt("ICON_TYPE"),
                 rs.getInt("ORDER_INDEX"),
                 rs.getString("DISTANCE"),
-                rs.getString("POSITION_HIS")
+                rs.getString("POSITION_HIS"),
+                rs.getInt("iscolor")
         );
     }
 }

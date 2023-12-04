@@ -42,7 +42,11 @@ public class DetailsOfVehicle {
     @JsonProperty("iconTypeRunnig")
     private int iconTypeRunnig;
 
-    public DetailsOfVehicle(String id, String vehicleName, String engineStatus, float speed, int isFavourite, int vehicleIconType, String userDefinedVehicleName, int iconTypeOnMap, int iconTypeRunnig, int iconTypeStopped, int iconTypeStationary, String registrationNumber, String color, String vendor, String model, String maxSpeed) {
+    @JsonProperty("iscolor")
+    private int iscolor;
+
+    public DetailsOfVehicle(String id, String vehicleName, String engineStatus, float speed, int isFavourite, int vehicleIconType, String userDefinedVehicleName, int iconTypeOnMap, int iconTypeRunnig, int iconTypeStopped, int iconTypeStationary, String registrationNumber, String color, String vendor, String model, String maxSpeed,int iscolor) {
+
         this.iconTypeStationary = iconTypeStationary;
         this.iconTypeOnMap = iconTypeOnMap;
         this.vehicleName = vehicleName;
@@ -59,5 +63,6 @@ public class DetailsOfVehicle {
         this.id = id;
         this.isFavourite = isFavourite;
         this.iconTypeRunnig = iconTypeRunnig;
+        this.iscolor = iscolor;
     }
 }

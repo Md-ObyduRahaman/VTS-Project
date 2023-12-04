@@ -32,9 +32,13 @@ public class Vehicle_List_Service {
     public VehicleListResponse getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName,Integer deptId) {
         VehicleListResponse vehicleListResponse = new VehicleListResponse();
         if(!userType.equals(2)){
+            List<DetailsOfVehicleItem> totalVehicleList = (List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId);
             vehicleListResponse.setDetailsOfVehicle((List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
+            vehicleListResponse.setTotalVehicle(totalVehicleList.size());
         }else
             vehicleListResponse.setDeptOfVehicleList((List<DeptOfVehicleListItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
+            List<DeptOfVehicleListItem> totalDeptOfVehicleListItem = (List<DeptOfVehicleListItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId);
+            vehicleListResponse.setTotalVehicle(totalDeptOfVehicleListItem.size());
         return vehicleListResponse;
     }
 

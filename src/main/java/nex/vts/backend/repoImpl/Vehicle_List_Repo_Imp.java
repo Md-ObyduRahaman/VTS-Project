@@ -30,15 +30,24 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
             case 1:
                 try {
                     String query = "select ROWNUM ROWNO,ID,VEHICLE_ID,USERID,GROUP_ID,ENGIN,SPEED,LAT,LON,VDATE,FAVORITE,ICON_TYPE,ORDER_INDEX,DISTANCE,"
-                            .concat(shcemaName).concat("get_vehicle_stat_his(VEHICLE_ID) as POSITION_HIS\n" +
-                                    "                            FROM (select t.ID,t.VEHICLE_ID,t.USERID,t.GROUP_ID,t.ENGIN,t.SPEED,t.LAT,t.LON,t.VDATE,t.FAVORITE,t.ICON_TYPE,t.ORDER_INDEX,'0' as DISTANCE\n" +
+                            .concat(shcemaName).concat("get_vehicle_stat_his(VEHICLE_ID) as POSITION_HIS,\n" +
+                                    "                                case\n" +
+                                    "                                    when ENGIN = 'ON' AND SPEED > 0\n" +
+                                    "                                    THEN 1\n" +
+                                    "                                    WHEN ENGIN = 'ON' AND SPEED <= 0\n" +
+                                    "                                    THEN 2\n" +
+                                    "                                    WHEN ENGIN = 'OFF'\n" +
+                                    "                                    THEN 3\n" +
+                                    "                                    END iscolor")
+                            .concat("                            FROM (select t.ID,t.VEHICLE_ID,t.USERID,t.GROUP_ID,t.ENGIN,t.SPEED,t.LAT,t.LON,t.VDATE,t.FAVORITE,t.ICON_TYPE,t.ORDER_INDEX,'0' as DISTANCE\n" +
                                     "                                  FROM nex_individual_temp t\n" +
                                     "                                  where t.VEHICLE_ID IN (select ID\n" +
                                     "                                                         from NEX_INDIVIDUAL_CLIENT\n" +
                                     "                                                         where COMPANY_ID = ?\n" +
                                     "                                                           and ACTIVATION = 1\n" +
                                     "                                                           and OPERATORID =?)\n" +
-                                    "                                  order by t.USERID asc, t.ORDER_INDEX asc)").concat("order by ROWNO asc offset 0 rows fetch first 30 rows only");
+                                    "                                  order by t.USERID asc, t.ORDER_INDEX asc)\n" +
+                                    "--                               order by ROWNO asc offset ? rows fetch first ? rows only");
                     return jdbcTemplate.query(query, new Vehicle_List_RowMapper(), id, operatorId);
                 } catch (Exception e) {
                     throw new AppCommonException(e.toString());/*when fail to execute query what will happen*/
@@ -60,17 +69,25 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                             "       b.CAR_REG_NO            registration_number,\n" +
                             "       b.CAR_COLOUR            color,\n" +
                             "       b.CAR_VENDOR            vendor,\n" +
-                            "       b.CAR_MODEL             model,".concat(shcemaName)
-                                    .concat("GET_MAX_CAR_SPEED(b.ID) max_speed\n" +
-                                            "from ").concat(shcemaName).concat("nex_individual_temp a,")
-                                    .concat(shcemaName).concat("nex_individual_client b\n" +
+                            "       b.CAR_MODEL             model,"
+                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed,\n" +
+                                            "                                       case\n" +
+                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0\n" +
+                                            "                                    THEN 1\n" +
+                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0\n" +
+                                            "                                    THEN 2\n" +
+                                            "                                    WHEN a.ENGIN = 'OFF'\n" +
+                                            "                                    THEN 3\n" +
+                                            "                                    END iscolor\n" +
+                                            "from ").concat(shcemaName).concat("nex_individual_temp a,").concat(shcemaName).concat("nex_individual_client b\n" +
                                             "where a.VEHICLE_ID = b.id\n" +
-                                            "  and a.VEHICLE_ID in").concat("(select to_char(VEHICLE_ID)\n" +
+                                            "  and a.VEHICLE_ID in\n" +
+                                            "      (select to_char(VEHICLE_ID)\n" +
                                             "       from ").concat(shcemaName).concat("NEX_EXTENDED_USER_VS_VEHICLE\n" +
                                             "       WHERE PROFILE_ID = ?\n" +
                                             "         AND PROFILE_TYPE = 2\n" +
-                                            "         AND PARENT_PROFILE_ID =? ) \n" +
-                                            "  AND b.OPERATORID = ?\n" +
+                                            "         AND PARENT_PROFILE_ID =?)\n" +
+                                            "  AND b.OPERATORID = ?/*1*/\n" +
                                             "  AND b.ACTIVATION = 1"); /*todo somotimes need to off activation for checking data*/
                     return jdbcTemplate.query(query, new RowMapper<DeptOfVehicleListItem>() {
                         @Override
@@ -91,7 +108,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                     rs.getString("model"),
                                     rs.getString("id"),
                                     rs.getInt("is_favorite"),
-                                    rs.getInt("ICON_TYPE_RUNNING")
+                                    rs.getInt("ICON_TYPE_RUNNING"),
+                                    rs.getInt("iscolor")
                             );
                         }
                     }, id, deptId, operatorId);
@@ -102,7 +120,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 /*break;*/
             case 3:
                 try {
-                    String query = "select a.VEHICLE_ID            id,\n" +
+                    String query ="select a.VEHICLE_ID            id,\n" +
                             "       a.USERID                vehicle_name,\n" +
                             "       a.ENGIN                 engine_status,\n" +
                             "       a.SPEED                 speed,\n" +
@@ -116,12 +134,22 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                             "       b.CAR_REG_NO            registration_number,\n" +
                             "       b.CAR_COLOUR            color,\n" +
                             "       b.CAR_VENDOR            vendor,\n" +
-                            "       b.CAR_MODEL             model,".concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed\n" +
-                                    "from ").concat(shcemaName).concat(" nex_individual_temp a,").concat(shcemaName).concat("nex_individual_client b\n" +
-                                    "where a.vehicle_id = b.id\n" +
-                                    "  and a.VEHICLE_ID = ?\n" +
-                                    "  AND b.OPERATORID = ?\n" +
-                                    "  AND b.ACTIVATION = 1");
+                            "       b.CAR_MODEL             model,"
+                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed,\n" +
+                                            "                                    case\n" +
+                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0\n" +
+                                            "                                    THEN 1\n" +
+                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0\n" +
+                                            "                                    THEN 2\n" +
+                                            "                                    WHEN a.ENGIN = 'OFF'\n" +
+                                            "                                    THEN 3\n" +
+                                            "                                    END iscolor\n" +
+                                            "from nex_individual_temp a,\n" +
+                                            "     nex_individual_client b\n" +
+                                            "where a.vehicle_id = b.id\n" +
+                                            "  and a.VEHICLE_ID = ?\n" +
+                                            "  AND b.OPERATORID = ?\n" +
+                                            "  AND b.ACTIVATION = 1");
                     return jdbcTemplate.query(query, new DetailsOfVehicle_RowMapper(), id, operatorId);
                 } catch (Exception e) {
                     throw new AppCommonException(e.getMessage());

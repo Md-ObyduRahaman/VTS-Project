@@ -25,7 +25,8 @@ public class DetailsOfVehicle_RowMapper implements RowMapper<DetailsOfVehicle> {
                 rs.getString("color"),
                 rs.getString("vendor"),
                 rs.getString("model"),
-                rs.getString("max_speed")
+                rs.getString("max_speed"),
+                rs.getInt("iscolor")
         );
     }
 }

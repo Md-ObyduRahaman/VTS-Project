@@ -23,7 +23,7 @@ public class Vehicle_Get_Expense_List_Repo_Imp implements Vehicle_Expense_List_R
     public Optional<Object> getExpenseList() {
         String query = "select ID, EXP_NAME FROM GPSNEXGP.nex_expense_name a where a.READ_ONLY = 1 order by EXP_NAME asc";
         Object expenseList = jdbcTemplate.query(query, new RowMapper<Get_Expense_List>() {
-            @Override
+            @Override/*todo not needed*/
             public Get_Expense_List mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Get_Expense_List(
                         rs.getInt("ID"),
