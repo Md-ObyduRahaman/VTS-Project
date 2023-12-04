@@ -60,6 +60,30 @@ public class GetExpenseHeader {
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/getExpenseList", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> expenseList(@PathVariable("deviceType") Integer deviceType,
+                                              @PathVariable("userId") Integer userId,
+                                              @PathVariable("userType") Integer userType
+                                             ) throws JsonProcessingException {
+
+        Optional<ArrayList<ExpenseNameList>> GetExpansesNameList = repo.findAllExpensesName(deviceType,userId,userType);
+        BaseResponse baseResponse = new BaseResponse();
+
+
+        if (GetExpansesNameList.isEmpty()) {
+            baseResponse.status = false;
+            baseResponse.apiName= "Get Expense Header";
+            baseResponse.errorMsg = "Data  not found";
+            baseResponse.errorCode = 4041;
+        } else {
+            baseResponse.status = true;
+            baseResponse.apiName= "Get Expense Header";
+            baseResponse.data = GetExpansesNameList;
+        }
+
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+
+    }
 
 }
 

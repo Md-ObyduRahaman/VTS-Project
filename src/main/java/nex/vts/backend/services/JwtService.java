@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import nex.vts.backend.exceptions.AppCommonException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,8 @@ public class JwtService {
                 System.out.println("Signature is being tempered");
             } else if (e instanceof ExpiredJwtException) { // io.jsonwebtoken.ExpiredJwtException
                 System.out.println("Token Expired");
+                throw new AppCommonException(4051 + "##Token is Expired##" + 1 + "##" + 1);
+
             }
             return null;
         }

@@ -56,16 +56,19 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                 break;
             case 2:
                 //profileId=29
-                sql = "SELECT NVD.DEPT_NAME FULL_NAME, NVD.CONTACT_NAME\n" +
-                        "  FROM GPSNEXGP.NEX_VEHICLE_DEPT NVD\n" +
-                        " WHERE NVD.ID = "+profileId;
+                sql = "SELECT\n" +
+                        "    NVD.DEPT_NAME as FULL_NAME, NVD.CONTACT_NAME, NVD.CONTACT_EMAIL,\n" +
+                        "    NVD.COMPANY_ID, get_client_name(NVD.COMPANY_ID) as MOTHER_ACC_NAME     \n" +
+                        "FROM NEX_VEHICLE_DEPT NVD\n" +
+                        "WHERE NVD.ID ="+profileId;
                 break;
             case 3:
                 //profileId=127
-                sql = "SELECT NIC.FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM NEX_INDIVIDUAL_CLIENT  NIC\n" +
-                        "       JOIN NEX_CORPORATE_CLIENT NCC ON NCC.ID = NIC.COMPANY_ID\n" +
-                        " WHERE NIC.ID = "+profileId;
+                sql = "SELECT \n" +
+                        "    NIC.USERID  as FULL_NAME,\n" +
+                        "    NIC.COMPANY_ID, get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
+                        "FROM NEX_INDIVIDUAL_CLIENT NIC   \n" +
+                        "WHERE NIC.ID ="+profileId;
                 break;
 
             case 4:
