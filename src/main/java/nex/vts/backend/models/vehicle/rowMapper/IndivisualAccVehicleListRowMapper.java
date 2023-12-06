@@ -1,15 +1,15 @@
 package nex.vts.backend.models.vehicle.rowMapper;
 
-import nex.vts.backend.models.responses.DetailsOfVehicle;
+import nex.vts.backend.models.responses.IndividualAccVehicleList;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DetailsOfVehicle_RowMapper implements RowMapper<DetailsOfVehicle> {
+public class IndivisualAccVehicleListRowMapper implements RowMapper<IndividualAccVehicleList> {
     @Override
-    public DetailsOfVehicle mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new DetailsOfVehicle(
+    public IndividualAccVehicleList mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return new IndividualAccVehicleList(
                 rs.getString("id"),
                 rs.getString("vehicle_name"),
                 rs.getString("engine_status"),

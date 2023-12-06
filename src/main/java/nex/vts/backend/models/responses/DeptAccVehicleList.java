@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
-public class DetailsOfVehicle {
+public class DeptAccVehicleList {
     @JsonProperty("iconTypeStationary")
     private int iconTypeStationary;
     @JsonProperty("iconTypeOnMap")
@@ -22,7 +22,7 @@ public class DetailsOfVehicle {
     @JsonProperty("userDefinedVehicleName")
     private String userDefinedVehicleName;
     @JsonProperty("maxSpeed")
-    private String maxSpeed;
+    private int maxSpeed;
     @JsonProperty("speed")
     private float speed;
     @JsonProperty("engineStatus")
@@ -39,13 +39,12 @@ public class DetailsOfVehicle {
     private String id;
     @JsonProperty("isFavourite")
     private int isFavourite;
-    @JsonProperty("iconTypeRunnig")
-    private int iconTypeRunnig;
-
+    @JsonProperty("iconTypeRunning")
+    private int iconTypeRunning;
     @JsonProperty("iscolor")
     private int iscolor;
 
-    public DetailsOfVehicle(String id, String vehicleName, String engineStatus, float speed, int isFavourite, int vehicleIconType, String userDefinedVehicleName, int iconTypeOnMap, int iconTypeRunnig, int iconTypeStopped, int iconTypeStationary, String registrationNumber, String color, String vendor, String model, String maxSpeed,int iscolor) {
+    public DeptAccVehicleList(int iconTypeStationary, int iconTypeOnMap, String vehicleName, int iconTypeStopped, String color, String userDefinedVehicleName, int maxSpeed, float speed, String engineStatus, String registrationNumber, String vendor, int vehicleIconType, String model, String id, int isFavourite, int iconTypeRunnig, int iscolor) {
 
         this.iconTypeStationary = iconTypeStationary;
         this.iconTypeOnMap = iconTypeOnMap;
@@ -62,7 +61,8 @@ public class DetailsOfVehicle {
         this.model = model;
         this.id = id;
         this.isFavourite = isFavourite;
-        this.iconTypeRunnig = iconTypeRunnig;
+        this.iconTypeRunning = iconTypeRunnig;
         this.iscolor = iscolor;
+
     }
 }
