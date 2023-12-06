@@ -77,7 +77,7 @@ public class CtrlAccountSummary {
         System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
-        AccountSummaryInfo summary= getAccountSummary( userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(),deviceType,fullName.getFULL_NAME());
+        AccountSummaryInfo summary= getAccountSummary( userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(),deviceType,fullName.getFULL_NAME(),fullName.getMOTHER_ACC_NAME());
 
         BaseResponse baseResponse = new BaseResponse();
 
@@ -98,7 +98,7 @@ public class CtrlAccountSummary {
 
     }
 
-    private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME) throws IOException {
+    private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME,String motherAccountName) throws IOException {
 
         Integer runningVehicle= (int) accountSummaryRepo.getVehicleData("RV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
         Integer stoppedVehicle= (int) accountSummaryRepo.getVehicleData("SV","stopped_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
@@ -119,6 +119,10 @@ public class CtrlAccountSummary {
         accountSummaryInfo.setStoppedVehicle(stoppedVehicle);
         accountSummaryInfo.setRunningVehicle(todayRunningVehicle);
         accountSummaryInfo.setFull_NAME(full_NAME);
+        accountSummaryInfo.setMotherAccountName(motherAccountName);
+
+
+        //currentDue will Double
 
 
         // Starting fetch data
