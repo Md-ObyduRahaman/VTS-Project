@@ -4,22 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExpenseResponse {
 
-    @JsonProperty("code")
-    private int code;
-
     @JsonProperty("expenseSubmitted")
     private boolean expenseSubmitted;
 
     @JsonProperty("message")
     private String message;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public boolean isExpenseSubmitted() {
         return expenseSubmitted;
@@ -39,6 +28,9 @@ public class ExpenseResponse {
 
     @Override
     public String toString() {
-        return "Response{" + "code = '" + code + '\'' + ",expenseSubmitted = '" + expenseSubmitted + '\'' + ",message = '" + message + '\'' + "}";
+        return "ExpenseResponse{" +
+                "expenseSubmitted=" + expenseSubmitted +
+                ", message='" + message + '\'' +
+                '}';
     }
 }
