@@ -50,10 +50,10 @@ public class AddExpense_Imp implements AddExpense_Repo {
         try {
 
 
-            String query = "INSERT INTO nex_all_expenditure (USER_ID, GROUPID,\n" +
+            String query = "INSERT INTO".concat(schemaName).concat(" nex_all_expenditure (USER_ID, GROUPID,\n" +
                     "                                 EXPENSE_ID, DATE_TIME, AMOUNT, DESCRIPTION, EXPENSE_ID_N,\n" +
                     "                                 DEPT_ID)\n" +
-                    "VALUES (?,?,?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?,?,?,?)");
             Object[] param = new Object[]{userId, groupId, expenseId, dateTime, amount, description, expenseId2, deptId};
             int[] types = new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
             int flag = jdbcTemplate.update(query, param, types);

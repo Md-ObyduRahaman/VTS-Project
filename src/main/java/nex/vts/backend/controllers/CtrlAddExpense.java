@@ -24,20 +24,17 @@ import java.util.Optional;
 @RequestMapping("/api/private/v1")
 public class CtrlAddExpense {
 
-    @Autowired
-    private Environment environment;
-
+    private final short API_VERSION = 1;
     @Autowired
     RepoVtsLoginUser repoVtsLoginUser;
-    private final short API_VERSION = 1;
-
     BaseResponse response = new BaseResponse();
-
+    @Autowired
+    private Environment environment;
     @Autowired
     private AddExpense_Service addExpenseService;
 
     @PostMapping(value = "/{deviceType}/add/expense", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addExpense(@PathVariable(value = "deviceType") Integer deviceType, @RequestParam(value = "data")String reqBody) throws JsonProcessingException {
+    public ResponseEntity<?> addExpense(@PathVariable(value = "deviceType") Integer deviceType, @RequestParam(value = "data") String reqBody) throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
         String activeProfile = environment.getProperty("spring.profiles.active");
@@ -49,8 +46,7 @@ public class CtrlAddExpense {
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
 
-        if (vtsLoginUserOpt.isPresent())
-            loginUser = vtsLoginUserOpt.get();
+        if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
@@ -69,12 +65,11 @@ public class CtrlAddExpense {
             response.data = addExpenseService.addExpenseService(userId, groupId, expenseId, date, amount, schemaName, description, expenseId2, deptId);
             response.status = true;
             response.apiName = "Add Expense";
-        }
-        else {
+        } else {
             response.data = null;
             response.status = false;
             response.apiName = "add Expense";
-            response.errorMsg = "Operation did not Succesful";
+            response.errorMsg = "Operation did not Successful";
             response.errorCode = 000;
         }
         return ResponseEntity.ok(response);
