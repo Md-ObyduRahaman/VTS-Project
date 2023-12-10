@@ -25,19 +25,19 @@ public class DeptAccVehicleList {
     private int maxSpeed;
     @JsonProperty("speed")
     private float speed;
-    @JsonProperty("engineStatus")
+    @JsonProperty("engine")
     private String engineStatus;
     @JsonProperty("registrationNumber")
     private String registrationNumber;
     @JsonProperty("vendor")
     private String vendor;
-    @JsonProperty("vehicleIconType")
+    @JsonProperty("iconType")
     private int vehicleIconType;
     @JsonProperty("model")
     private String model;
     @JsonProperty("id")
     private String id;
-    @JsonProperty("isFavourite")
+    @JsonProperty("favourite")
     private int isFavourite;
     @JsonProperty("iconTypeRunning")
     private int iconTypeRunning;
