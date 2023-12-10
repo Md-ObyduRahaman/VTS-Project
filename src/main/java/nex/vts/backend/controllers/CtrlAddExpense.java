@@ -7,7 +7,6 @@ import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.ExpenseModel;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
-import nex.vts.backend.repositories.AddExpense_Repo;
 import nex.vts.backend.services.AddExpense_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +22,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/private/v1")
 public class CtrlAddExpense {
-
     private final short API_VERSION = 1;
+
     @Autowired
     RepoVtsLoginUser repoVtsLoginUser;
     BaseResponse response = new BaseResponse();
+
     @Autowired
     private Environment environment;
+
     @Autowired
     private AddExpense_Service addExpenseService;
 
@@ -46,20 +47,22 @@ public class CtrlAddExpense {
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
 
-        if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
+        if (vtsLoginUserOpt.isPresent())
+            loginUser = vtsLoginUserOpt.get();
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
         ExpenseModel expenseModel = mapper.readValue(reqBody, ExpenseModel.class);
 
-        String groupId = String.valueOf(loginUser.getPROFILE_ID());
-        String userId = expenseModel.userId;
-        String expenseId = expenseModel.expenseId;
-        String date = expenseModel.dateTime;
-        String amount = expenseModel.amount;
-        String description = expenseModel.description;
-        Integer expenseId2 = expenseModel.expenseId2;
-        Integer deptId = expenseModel.deptId;
+        String groupId = String.valueOf(loginUser.getPROFILE_ID()),
+                userId = expenseModel.userId,
+                expenseId = expenseModel.expenseId,
+                date = expenseModel.dateTime,
+                amount = expenseModel.amount,
+                description = expenseModel.description;
+
+        Integer expenseId2 = expenseModel.expenseId2,
+                deptId = expenseModel.deptId;
 
         if (!(groupId.isEmpty() & userId.isEmpty() & expenseId.isEmpty() & date.isEmpty() & amount.isEmpty() & expenseId2.equals(null) & deptId.equals(null))) {
             response.data = addExpenseService.addExpenseService(userId, groupId, expenseId, date, amount, schemaName, description, expenseId2, deptId);
