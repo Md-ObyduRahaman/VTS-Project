@@ -1,9 +1,7 @@
 package nex.vts.backend.services;
 
 import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.DeptOfVehicleListItem;
-import nex.vts.backend.models.responses.DetailsOfVehicleItem;
-import nex.vts.backend.models.responses.VehicleListResponse;
+import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repoImpl.Vehicle_List_Repo_Imp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +15,10 @@ public class Vehicle_List_Service {
     private final Logger logger = LoggerFactory.getLogger(Vehicle_List_Service.class);
     private final Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp;
 
+    MotherVehicleListResponse motherVehicleListResponse = new MotherVehicleListResponse();
+    DepartmentVehicleListResponse departmentVehicleListResponse = new DepartmentVehicleListResponse();
+    IndividualVehicleListResponse individualVehicleListResponse = new IndividualVehicleListResponse();
+
     public Vehicle_List_Service(Vehicle_List_Repo_Imp Vehicle_List_Repo_Imp) {
         this.Vehicle_List_Repo_Imp = Vehicle_List_Repo_Imp;
     }
@@ -25,21 +27,40 @@ public class Vehicle_List_Service {
         try {
             return Vehicle_List_Repo_Imp.getVehicleList(id/*, limit, offset*/, userType,oparatorId, shcemaName,deptId);
         } catch (Exception e) {
-            throw new AppCommonException(e.getMessage());
+            throw new AppCommonException(300 + "Vehicles are not registered yet of this acccount "+id+ " "+deptId);
         }
     }
 
-    public VehicleListResponse getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName,Integer deptId) {
-        VehicleListResponse vehicleListResponse = new VehicleListResponse();
-        if(!userType.equals(2)){
-            List<DetailsOfVehicleItem> totalVehicleList = (List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId);
-            vehicleListResponse.setDetailsOfVehicle((List<DetailsOfVehicleItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
-            vehicleListResponse.setTotalVehicle(totalVehicleList.size());
-        }else
-            vehicleListResponse.setDeptOfVehicleList((List<DeptOfVehicleListItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId));
-            List<DeptOfVehicleListItem> totalDeptOfVehicleListItem = (List<DeptOfVehicleListItem>) getVehicleList(id/*, limit, offset*/, userType,operatorId,shcemaName,deptId);
-            vehicleListResponse.setTotalVehicle(totalDeptOfVehicleListItem.size());
-        return vehicleListResponse;
+    public Object getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName,Integer deptId) {
+//        VehicleListResponse vehicleListResponse = new VehicleListResponse();
+/*        if (userType.equals(1)) {
+            List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId);
+            motherVehicleListResponse.setMotherAccVehicleLists((List<MotherAccVehicleList>) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId));
+            motherVehicleListResponse.setTotalVehicle(totalVehicleList.size());
+        } else if (userType.equals(2)) {
+            departmentVehicleListResponse.setDeptAccVehicleLists((List<DeptAccVehicleList>) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId));
+            List<DeptAccVehicleList> totalDeptAccVehicleList = (List<DeptAccVehicleList>) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId);
+            departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
+        } else
+             individualVehicleListResponse.setIndividualAccVehicleListList((IndividualAccVehicleList) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId));*/
+        switch (userType) {
+            case 1:
+                List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
+                motherVehicleListResponse.setMotherAccVehicleLists((List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                motherVehicleListResponse.setTotalVehicle(totalVehicleList.size());
+                return motherVehicleListResponse;
+            case 2:
+                departmentVehicleListResponse.setDeptAccVehicleLists((List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                List<DeptAccVehicleList> totalDeptAccVehicleList = (List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
+                departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
+                return departmentVehicleListResponse;
+            case 3:
+                individualVehicleListResponse.setIndividualAccVehicleListList((IndividualAccVehicleList) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                return individualVehicleListResponse;
+            default:
+                return "this" + userType + " is not registered";
+        }
+//        return null;
     }
 
 

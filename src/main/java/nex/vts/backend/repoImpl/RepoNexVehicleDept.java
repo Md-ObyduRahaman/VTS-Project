@@ -22,18 +22,14 @@ public class RepoNexVehicleDept {
                   and OPERATORID = 3";
     * */
 
-    public Optional<NEX_VEHICLE_DEPT> getParentProfileIdOfDepartmentClient(String userName, String password,Integer operatorid,String schemaName ) {
+    public Optional<NEX_VEHICLE_DEPT> getParentProfileIdOfDepartmentClient(String userName, String password, Integer operatorid, String schemaName) {
         logger.debug("Executing query to get parent userName  of department type client {}", userName);
-        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM "+schemaName+"NEX_VEHICLE_DEPT  where USERID = ? and GRP_PASS = ? and ACTIVATION = 1 and OPERATORID = ?", new Object[]{userName,password,operatorid}, (rs, rowNum) ->
-                Optional.of(new NEX_VEHICLE_DEPT(
-                        rs.getInt("PARENT_PROFILE_ID")
-                ))
-        );
+        return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM " + schemaName + "NEX_VEHICLE_DEPT  where USERID = ? and GRP_PASS = ? and ACTIVATION = 1 and OPERATORID = ?", new Object[]{userName, password, operatorid}, (rs, rowNum) -> Optional.of(new NEX_VEHICLE_DEPT(rs.getInt("PARENT_PROFILE_ID"))));
     }
 
-    public Integer getC2(Integer operatorid ,String shcemaName) {
+    public Integer getC2(Integer operatorid, String shcemaName) {
 
-        Integer result = jdbcTemplate.queryForObject("SELECT "+shcemaName+"get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
-return  result;
+        Integer result = jdbcTemplate.queryForObject("SELECT " + shcemaName + "get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
+        return result;
     }
 }

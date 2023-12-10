@@ -1,9 +1,8 @@
 package nex.vts.backend.repoImpl;
 
-import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.DeptOfVehicleListItem;
-import nex.vts.backend.models.vehicle.rowMapper.DetailsOfVehicle_RowMapper;
-import nex.vts.backend.models.vehicle.rowMapper.Vehicle_List_RowMapper;
+import nex.vts.backend.models.responses.DeptAccVehicleList;
+import nex.vts.backend.models.vehicle.rowMapper.IndivisualAccVehicleListRowMapper;
+import nex.vts.backend.models.vehicle.rowMapper.MotherAccVehicleListRowMapper;
 import nex.vts.backend.repositories.Vehicle_List_Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,11 +47,10 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                     "                                                           and OPERATORID =?)\n" +
                                     "                                  order by t.USERID asc, t.ORDER_INDEX asc)\n" +
                                     "--                               order by ROWNO asc offset ? rows fetch first ? rows only");
-                    return jdbcTemplate.query(query, new Vehicle_List_RowMapper(), id, operatorId);
+                    return jdbcTemplate.query(query, new MotherAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
-                    throw new AppCommonException(e.toString());/*when fail to execute query what will happen*/
+                    return e.getMessage();/*when fail to execute query what will happen*/
                 }
-                /*break;*/
             case 2:
                 try {
                     String query = "select a.VEHICLE_ID            id,\n" +
@@ -89,10 +87,10 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             "         AND PARENT_PROFILE_ID =?)\n" +
                                             "  AND b.OPERATORID = ?/*1*/\n" +
                                             "  AND b.ACTIVATION = 1"); /*todo somotimes need to off activation for checking data*/
-                    return jdbcTemplate.query(query, new RowMapper<DeptOfVehicleListItem>() {
+                    return jdbcTemplate.query(query, new RowMapper<DeptAccVehicleList>() {
                         @Override
-                        public DeptOfVehicleListItem mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            return new DeptOfVehicleListItem(
+                        public DeptAccVehicleList mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            return new DeptAccVehicleList(
                                     rs.getInt("ICON_TYPE_STATIONARY"),
                                     rs.getInt("ICON_TYPE_ON_MAP"),
                                     rs.getString("vehicle_name"),
@@ -115,12 +113,12 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                     }, id, deptId, operatorId);
 
                 } catch (Exception e) {
-                    throw new AppCommonException(e.getMessage());
+                    return e.getMessage();
                 }
-                /*break;*/
+
             case 3:
                 try {
-                    String query ="select a.VEHICLE_ID            id,\n" +
+                    String query = "select a.VEHICLE_ID            id,\n" +
                             "       a.USERID                vehicle_name,\n" +
                             "       a.ENGIN                 engine_status,\n" +
                             "       a.SPEED                 speed,\n" +
@@ -150,11 +148,13 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             "  and a.VEHICLE_ID = ?\n" +
                                             "  AND b.OPERATORID = ?\n" +
                                             "  AND b.ACTIVATION = 1");
-                    return jdbcTemplate.query(query, new DetailsOfVehicle_RowMapper(), id, operatorId);
+                    return jdbcTemplate.queryForObject(query, new IndivisualAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
-                    throw new AppCommonException(e.getMessage());
+                    return e.getMessage();
                 }
+            default:
+                return "vehicle list is empty";
         }
-        return null;
     }
+
 }

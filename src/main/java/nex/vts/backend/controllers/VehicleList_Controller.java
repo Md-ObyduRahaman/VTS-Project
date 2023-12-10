@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
-import nex.vts.backend.models.responses.VehicleListResponse;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.Vehicle_List_Service;
 import nex.vts.backend.services.Vehicle_Location_Service;
@@ -60,10 +59,14 @@ public class VehicleList_Controller {
         String username = userDetails.getUsername();
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
-        if (vtsLoginUserOpt.isPresent()) loginUser = vtsLoginUserOpt.get();
+
+        if (vtsLoginUserOpt.isPresent())
+            loginUser = vtsLoginUserOpt.get();
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
-        VehicleListResponse getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(), loginUser.getUSER_TYPE(), operatorId, schemaName, Integer.valueOf(loginUser.getPARENT_PROFILE_ID()));
+
+        Object getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(),
+                loginUser.getUSER_TYPE(), operatorId, schemaName, Integer.valueOf(loginUser.getPARENT_PROFILE_ID()));
 
         if (!getVehicleInfo.equals(null)) {
             baseResponse.data = getVehicleInfo;
