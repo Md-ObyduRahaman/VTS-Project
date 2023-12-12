@@ -18,8 +18,10 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     private RepoVtsLoginUser repoVtsLoginUser;
+
     @Autowired
     Environment environment;
 

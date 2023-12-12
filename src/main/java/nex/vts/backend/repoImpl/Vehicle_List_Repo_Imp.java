@@ -148,7 +148,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             "  and a.VEHICLE_ID = ?\n" +
                                             "  AND b.OPERATORID = ?\n" +
                                             "  AND b.ACTIVATION = 1");
-                    return jdbcTemplate.queryForObject(query, new IndivisualAccVehicleListRowMapper(), id, operatorId);
+                    return jdbcTemplate.query(query, new IndivisualAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
                     return e.getMessage();
                 }

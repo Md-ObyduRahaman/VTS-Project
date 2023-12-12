@@ -55,7 +55,7 @@ public class Vehicle_List_Service {
                 departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
                 return departmentVehicleListResponse;
             case 3:
-                individualVehicleListResponse.setIndividualAccVehicleListList((IndividualAccVehicleList) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                individualVehicleListResponse.setIndividualAccVehicleListList((List<IndividualAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
                 return individualVehicleListResponse;
             default:
                 return "this" + userType + " is not registered";

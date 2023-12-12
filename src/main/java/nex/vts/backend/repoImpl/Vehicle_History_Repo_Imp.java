@@ -37,9 +37,11 @@ public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
 
     @Override
     public Optional<Object> getVehicleHistory(Integer vehicleId, String from_Date_Time, String to_Date_Time) {
+
         LocalDate localDate_new_fromDate = LocalDate.parse(from_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd")), localDate_new_toDate = LocalDate.parse(to_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd"));
         LocalTime localTime_new_fromTime = LocalTime.parse(from_Date_Time.substring(8), DateTimeFormatter.ofPattern("HHmmss")).plusHours(2), localTime_new_toTime = LocalTime.parse(to_Date_Time.substring(8), DateTimeFormatter.ofPattern("HHmmss")).plusHours(2);
         String fromTime, toTime, fromDateTime, toDateTime, from_Date, to_Date;
+
         if (localTime_new_fromTime.getMinute() == 0)
             fromTime = String.valueOf(localTime_new_fromTime).concat(":").concat("00");
         else fromTime = String.valueOf(localTime_new_fromTime);

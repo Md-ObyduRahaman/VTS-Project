@@ -5,11 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class IndividualVehicleListResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("Vehicle Details")
-    private IndividualAccVehicleList individualAccVehicleListList;
+    private List<IndividualAccVehicleList> individualAccVehicleListList;
 }
