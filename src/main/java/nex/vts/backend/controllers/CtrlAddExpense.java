@@ -41,7 +41,8 @@ public class CtrlAddExpense {
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
         String schemaName = environment.getProperty("application.profiles.shcemaName");
-        AESEncryptionDecryption decryptedValue = new AESEncryptionDecryption(activeProfile, 1, API_VERSION);
+        AESEncryptionDecryption encryptionDecryption = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
+
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
@@ -52,7 +53,7 @@ public class CtrlAddExpense {
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
-        ExpenseModel expenseModel = mapper.readValue(reqBody, ExpenseModel.class);
+        ExpenseModel expenseModel = mapper.readValue(encryptionDecryption.aesDecrypt(reqBody,API_VERSION), ExpenseModel.class);
 
         String groupId = String.valueOf(loginUser.getPROFILE_ID()),
                 userId = expenseModel.userId,
