@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.requests.ExpenseReportReqData;
 import nex.vts.backend.models.requests.LoginReq;
+import nex.vts.backend.models.requests.RptVehPositionReqData;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.ExpenseReportDataList;
 import nex.vts.backend.models.responses.LocationInfo;
@@ -21,8 +21,8 @@ import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 
 @RestController
 @RequestMapping("/api/private")
-public class CtrlExpenseReport {
-    private ExpenseReportReqData reqBody = null;
+public class CtrlReportsVetPosition {
+    private RptVehPositionReqData reqBody = null;
 
     private final short API_VERSION = 1;
     @Autowired
@@ -44,7 +44,7 @@ public class CtrlExpenseReport {
         if (headerValue.isEmpty()) {
             throw new AppCommonException(400 + "##BAD REQUEST 2##" + deviceType + "##" + API_VERSION);
         }
-        reqBody = objectMapper.readValue(aesCrypto.aesDecrypt(headerValue, API_VERSION), ExpenseReportReqData.class);
+        reqBody = objectMapper.readValue(aesCrypto.aesDecrypt(headerValue, API_VERSION), RptVehPositionReqData.class);
 
 
 
