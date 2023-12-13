@@ -6,6 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface Vehicle_Details_Repo {
-    Object getVehicleDetails(Integer userType, Integer profileId) throws SQLException;
+    Object getVehicleDetails(Integer userType, Integer profileId,String schemaName) throws SQLException;
 //    Object getVehiclePermission(Integer userType, Integer profileId, Integer parentId, Integer vehicleId);
 }

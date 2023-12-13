@@ -20,7 +20,7 @@ public class AddExpense_Imp implements AddExpense_Repo {
     public Object addExpense(String userId, String groupId, String expenseId, String dateTime, String amount, String schemaName, String description, Integer expenseId2, Integer deptId) {
 
         try {
-            String query = "INSERT INTO".concat(schemaName).concat(" nex_all_expenditure (USER_ID, GROUPID,\n" +
+            String query = "INSERT INTO ".concat(schemaName).concat("nex_all_expenditure (USER_ID, GROUPID,\n" +
                     "                                 EXPENSE_ID, DATE_TIME, AMOUNT, DESCRIPTION, EXPENSE_ID_N,\n" +
                     "                                 DEPT_ID)\n" +
                     "VALUES (?,?,?,?,?,?,?,?)");

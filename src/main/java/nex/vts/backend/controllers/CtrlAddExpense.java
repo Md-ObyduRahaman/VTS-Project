@@ -27,6 +27,7 @@ public class CtrlAddExpense {
     @Autowired
     RepoVtsLoginUser repoVtsLoginUser;
     BaseResponse response = new BaseResponse();
+    ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     private Environment environment;
@@ -37,7 +38,6 @@ public class CtrlAddExpense {
     @PostMapping(value = "/{deviceType}/add/expense", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addExpense(@PathVariable(value = "deviceType") Integer deviceType, @RequestParam(value = "data") String reqBody) throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
         String schemaName = environment.getProperty("application.profiles.shcemaName");

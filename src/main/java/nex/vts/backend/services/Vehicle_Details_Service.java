@@ -22,9 +22,9 @@ public class Vehicle_Details_Service {
     }*/
 
 
-    public VehicleDetailsResponse getVehicleDetails(Integer userType, Integer profileId) throws SQLException {
+    public VehicleDetailsResponse getVehicleDetails(Integer userType, Integer profileId,String schemaName) throws SQLException {
         VehicleDetailsResponse vehicleDetailsResponse = new VehicleDetailsResponse();
-        vehicleDetailsResponse.vehicleDetails = (VehicleDetails) vehicleDetailsRepo.getVehicleDetails(userType, profileId);
+        vehicleDetailsResponse.vehicleDetails = (VehicleDetails) vehicleDetailsRepo.getVehicleDetails(userType, profileId,schemaName);
         return vehicleDetailsResponse;
     }
 /*    public Object getVehiclePermission(Integer userType, Integer profileId, Integer parentId, Integer vehicleId) {
