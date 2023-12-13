@@ -82,7 +82,7 @@ public class CtrlTravelDistanceData {
         BaseResponse baseResponse = new BaseResponse();
         if (monthTravleDistanceForAll.getMonthTravleDistancesList().isEmpty()) {
             baseResponse.status = false;
-            baseResponse.errorMsg = "Data  not found within this time limit";
+            baseResponse.errorMsg = "Data  not found ";
             baseResponse.errorCode = 4041;
             baseResponse.apiName = "getTravelDistanceData";
         } else {
@@ -92,7 +92,7 @@ public class CtrlTravelDistanceData {
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
 
-        //  return  ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+          return  ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
     }
 }

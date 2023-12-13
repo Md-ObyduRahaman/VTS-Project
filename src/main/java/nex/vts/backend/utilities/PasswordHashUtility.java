@@ -12,6 +12,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 public class PasswordHashUtility {
     public static String generateSHA256Hash(String input) {
+
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = messageDigest.digest(input.getBytes());
