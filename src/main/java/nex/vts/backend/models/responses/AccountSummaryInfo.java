@@ -18,4 +18,6 @@ public class AccountSummaryInfo {
   @Value("${consultationDriver.type:0}")
   private  int consultationDriver;
   private  String motherAccountName;
+  @Value("${overSpeed.type:0}")
+  private  int overSpeed;
 }

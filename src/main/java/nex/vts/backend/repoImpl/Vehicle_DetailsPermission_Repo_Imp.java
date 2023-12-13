@@ -41,7 +41,7 @@ public class Vehicle_DetailsPermission_Repo_Imp implements Vehicle_Details_Repo 
                 "       D.D_NAME                           driver_name,\n" +
                 "       D.D_CELL                           driver_cell,\n" +
                 "       D.MAX_CAR_SPEED                    MAX_CAR_SPEED,\n" +
-                "       LENGTH(D.DRIVER_PHOTO)             DRIVER_PHOTO,\n" +
+                "git        LENGTH(D.DRIVER_PHOTO)             DRIVER_PHOTO,\n" +
                 "       D.CAR_IMAGE                        CAR_IMAGE,".concat(schemaName)
                         .concat("GET_VEHICLE_OPTIONS(?, ?) VEHICLE_OPTIONS\n" +
                                 "FROM ").concat(schemaName).concat("NEX_INDIVIDUAL_CLIENT V\n" +
