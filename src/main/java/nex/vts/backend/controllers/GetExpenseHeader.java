@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 @RestController
 @RequestMapping("/api/private")
 public class GetExpenseHeader {
@@ -31,16 +33,18 @@ public class GetExpenseHeader {
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/GetExpenseHeader/{vehicleId}/{date_from}/{date_to}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@PathVariable("deviceType") Integer deviceType,
-                                              @PathVariable("userId") Integer userId,
+                                              @PathVariable("userId") Long userId,
                                               @PathVariable("userType") Integer userType,
-                                              @PathVariable("vehicleId") Integer vehicleId,
+                                              @PathVariable("vehicleId") Long vehicleId,
                                               @PathVariable("date_from") String date_from,
                                               @PathVariable("date_to") String date_to) throws JsonProcessingException {
 
 
 
+        userId=deObfuscateId(userId);
+        vehicleId=deObfuscateId(vehicleId);
 
-        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to,vehicleId,deviceType);
+        Optional<ArrayList<GetExpansesModel>> GetExpansesList = repo.findAllExpenses(date_from,date_to, Math.toIntExact(vehicleId),deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 
@@ -60,12 +64,14 @@ public class GetExpenseHeader {
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
+    //localhost:8009/api/private//v1/1/users/1006/1/getExpenseList
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/getExpenseList", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> expenseList(@PathVariable("deviceType") Integer deviceType,
                                               @PathVariable("userId") Integer userId,
                                               @PathVariable("userType") Integer userType
                                              ) throws JsonProcessingException {
 
+        userId = Math.toIntExact(deObfuscateId(Long.valueOf(userId)));
         Optional<ArrayList<ExpenseNameList>> GetExpansesNameList = repo.findAllExpensesName(deviceType,userId,userType);
         BaseResponse baseResponse = new BaseResponse();
 
