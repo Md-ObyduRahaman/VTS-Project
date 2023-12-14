@@ -60,6 +60,7 @@ public class CtrlLogin {
     @Autowired
     private RepoVtsExtendedUserProfile repoVtsExtendedUserProfile;
     private LoginReq reqBody = null;
+
     public static String getCurrentDateTime() {
 
         ZoneId dhaka = ZoneId.of("Asia/Dhaka");
@@ -91,8 +92,7 @@ public class CtrlLogin {
                 isCredentialMatched = true;
                 baseResponse.status = true;
                 baseResponse.apiName = reqBody.apiName;
-            }
-            else if (!reqBody.password.equals(vtsLoginUser.getPASSWORD()))
+            } else if (!reqBody.password.equals(vtsLoginUser.getPASSWORD()))
                 throw new AppCommonException(4016 + "##Your password is wrong. Please contact with call center##" + deviceType + "##" + API_VERSION);
 
             else if (vtsLoginUser.getIS_ACCOUNT_ACTIVE() == 0)
@@ -118,12 +118,11 @@ public class CtrlLogin {
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
             String dynamicColumnName;
 
-            if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";
-
-            else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/* TODO GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
+            if (operatorid == 1 || operatorid == 8) {
+                dynamicColumnName = "CORP_PASS";
+            } else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/* TODO GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
                 dynamicColumnName = "PASSWORD";
-            }
-            else dynamicColumnName = null;
+            } else dynamicColumnName = null;
             switch (vtsLoginUser.getUSER_TYPE()) {
 
                 case 1: /*TODO [ Mother-Acc-User ] [ User-Type = 1 ]*/
@@ -141,8 +140,7 @@ public class CtrlLogin {
 
                     try {
                         nexDeptClientProfileOpt = repoNexVehicleDept.getParentProfileIdOfDepartmentClient(vtsLoginUser.getUSERNAME(), reqBody.password, operatorid, shcemaName);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         throw new AppCommonException(4007 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
                     }
 
@@ -150,20 +148,25 @@ public class CtrlLogin {
                         NEX_VEHICLE_DEPT nexIndividualClientProfile = nexDeptClientProfileOpt.get();
                         Integer c2Value = repoNexVehicleDept.getC2(nexIndividualClientProfile.getPARENT_PROFILE_ID(), shcemaName);
                         if (c2Value == 1) loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
-                    }
-                    else
+                    } else
                         throw new AppCommonException(4008 + "##Sorry we could not found your profile information" + deviceType + "##" + API_VERSION);
 
                     break;
 
                 case 3:  /*TODO [ Individual-Acc-User ]  [ User-Type = 3 ]*/
+                    if (operatorid == 1 || operatorid == 8) {
+                        dynamicColumnName = "IND_PASS";
+                    } else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/* TODO GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
+                        dynamicColumnName = "IND_LOGIN";
+                    } else dynamicColumnName = null;
 
                     Optional<NEX_INDIVIDUAL_CLIENT> nexIndividualClientProfileOpt = Optional.empty();
                     if (Integer.parseInt(vtsLoginUser.getPARENT_PROFILE_ID()) > 0) {
                         try {
                             nexIndividualClientProfileOpt = repoNexIndividualClient.getParentProfileIdOfIndividualClient(vtsLoginUser.getPROFILE_ID(), vtsLoginUser.getUSERNAME(), reqBody.password, operatorid, shcemaName, dynamicColumnName);
                         } catch (Exception e) {
-                            throw new AppCommonException(4013 + "##Could not fetch profile information" + deviceType + "##" + API_VERSION);
+                            e.printStackTrace();
+                            throw new AppCommonException(4013 + "##Could not fetch profile information##" + deviceType + "##" + API_VERSION);
                         }
                         if (nexIndividualClientProfileOpt.isPresent()) {
                             NEX_INDIVIDUAL_CLIENT nexIndividualClientProfile = nexIndividualClientProfileOpt.get();

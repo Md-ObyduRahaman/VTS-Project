@@ -41,6 +41,7 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
     @Override
     public Optional<ArrayList<UserFullName>> getUserFullName(Integer profileId, Integer userType, Integer deviceType) {
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
 
 
@@ -50,7 +51,7 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
             case 1:
                 //profileId=1
                 sql = "SELECT NCC.COMPANY_NAME FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM NEX_CORPORATE_CLIENT NCC\n" +
+                        "  FROM "+shcemaName+"NEX_CORPORATE_CLIENT NCC\n" +
                         " WHERE NCC.ID = " + profileId;
 
                 break;
@@ -59,22 +60,22 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                 sql = "SELECT\n" +
                         "    NVD.DEPT_NAME as FULL_NAME, NVD.CONTACT_NAME, NVD.CONTACT_EMAIL,\n" +
                         "    NVD.COMPANY_ID, get_client_name(NVD.COMPANY_ID) as MOTHER_ACC_NAME     \n" +
-                        "FROM NEX_VEHICLE_DEPT NVD\n" +
+                        "FROM "+shcemaName+"NEX_VEHICLE_DEPT NVD\n" +
                         "WHERE NVD.ID ="+profileId;
                 break;
             case 3:
                 //profileId=127
                 sql = "SELECT \n" +
                         "    NIC.USERID  as FULL_NAME,\n" +
-                        "    NIC.COMPANY_ID, get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
-                        "FROM NEX_INDIVIDUAL_CLIENT NIC   \n" +
+                        "    NIC.COMPANY_ID, "+shcemaName+"get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
+                        "FROM "+shcemaName+"NEX_INDIVIDUAL_CLIENT NIC   \n" +
                         "WHERE NIC.ID ="+profileId;
                 break;
 
             case 4:
                 //profileId=127
                 sql = "SELECT NIC.FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM NEX_INDIVIDUAL_CLIENT  NIC\n" +
+                        "  FROM "+shcemaName+"NEX_INDIVIDUAL_CLIENT  NIC\n" +
                         "       JOIN NEX_CORPORATE_CLIENT NCC ON NCC.ID = NIC.COMPANY_ID\n" +
                         " WHERE NIC.ID ="+profileId;
                 break;
@@ -91,7 +92,7 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                     BeanPropertyRowMapper.newInstance(UserFullName.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception"+deviceType+"##"+API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##"+deviceType+"##"+API_VERSION);
         } catch (TransientDataAccessException f) {
             logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
             throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable"+deviceType+"##"+API_VERSION);

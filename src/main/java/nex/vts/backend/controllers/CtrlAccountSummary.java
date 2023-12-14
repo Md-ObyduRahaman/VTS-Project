@@ -40,6 +40,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+import static nex.vts.backend.utilities.UtilityMethods.obfuscateId;
 
 @RestController
 @RequestMapping("/api/private")
@@ -58,7 +59,8 @@ public class CtrlAccountSummary {
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getAccountSummary(@PathVariable("userType") Integer userType, @PathVariable("deviceType") Integer deviceType, @PathVariable("profileId") Integer profileId, @PathVariable("userId") Long userId) throws IOException {
-        Long getUserId = deObfuscateId(userId);
+        Long getUserof = obfuscateId(String.valueOf(userId));
+        Long getUserId = deObfuscateId(getUserof);
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 

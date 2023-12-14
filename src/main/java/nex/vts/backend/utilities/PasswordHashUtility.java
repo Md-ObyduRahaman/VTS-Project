@@ -11,24 +11,28 @@ import java.math.BigInteger;
 @Service
 @NoArgsConstructor
 public class PasswordHashUtility {
-    public static String generateSHA256Hash(String input) {
 
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = messageDigest.digest(input.getBytes());
-            BigInteger bigInt = new BigInteger(1, hashBytes);
-            String hash = bigInt.toString(16);
+        public static String generateSHA256Hash(String input) {
+            try {
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                byte[] hashBytes = messageDigest.digest(input.getBytes());
+                StringBuilder hexString = new StringBuilder();
 
-            // Pad with leading zeros if needed
-            while (hash.length() < 64) {
-                hash = "0" + hash;
+                for (byte hashByte : hashBytes) {
+                    String hex = Integer.toHexString(0xff & hashByte);
+                    if (hex.length() == 1) {
+                        hexString.append('0');
+                    }
+                    hexString.append(hex);
+                }
+
+                return hexString.toString();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                return null;
             }
-
-            return hash;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
         }
     }
-}
+
+
 
