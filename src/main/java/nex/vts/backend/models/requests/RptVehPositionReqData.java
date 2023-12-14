@@ -8,7 +8,8 @@ import nex.vts.backend.models.responses.LocationInfo;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class ExpenseReportReqData {
+public class RptVehPositionReqData {
 
     private  String vehicleName,locationInfo,fromdate, todate;
+    //private  String vehicleName,locationInfo,fromdate, todate,limit(int),offset(int);
 }

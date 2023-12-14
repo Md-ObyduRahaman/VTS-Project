@@ -27,7 +27,6 @@ public class DriverInfoController {
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{ID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> DriverList(@PathVariable("ID") Integer id) throws JsonProcessingException {
 
-        // System.out.println("Mahzabin");
 
         Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(id);
 

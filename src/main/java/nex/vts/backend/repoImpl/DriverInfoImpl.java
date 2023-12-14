@@ -36,7 +36,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
         Optional<DriverInfoModel> getAllDriverInfo=Optional.empty();
 
             String sql = "SELECT USERID, ID, D_NAME, D_FNAME, D_LICENSE, D_ADDRESS, D_CELL, D_DOB, DRIVER_PHOTO " +
-                    "FROM NEX_DRIVERINFO WHERE USERID=?";
+                    "FROM NEX_DRIVERINFO WHERE USERID="+USERID;
 
                    /* jdbcTemplate.queryForObject(sql, new Object[]{USERID}, (rs, rowNum) ->
                             Optional.of(new DriverInfoModel(

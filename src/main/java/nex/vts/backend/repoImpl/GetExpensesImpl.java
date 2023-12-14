@@ -6,6 +6,8 @@ import nex.vts.backend.models.responses.GetExpansesModel;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.TransientDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -25,7 +27,8 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
 
     private final Logger logger = LoggerFactory.getLogger(GetExpensesImpl.class);
 
-
+    @Autowired
+    Environment environment;
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -78,8 +81,10 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
     @Override
     public Optional<ArrayList<ExpenseNameList>> findAllExpensesName(Integer deviceType, Integer userId, Integer userType) {
 
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
+
         String sql="select ID, EXP_NAME\n" +
-                "FROM nex_expense_name\n" +
+                "FROM "+shcemaName+" nex_expense_name\n" +
                 "where READ_ONLY = '1' \n" +
                 "OR (PROFILE_ID = "+userId+" AND profile_type = "+userType+")\n" +
                 "order by EXP_NAME ASC";

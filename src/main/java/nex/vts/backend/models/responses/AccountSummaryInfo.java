@@ -1,5 +1,6 @@
 package nex.vts.backend.models.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,12 @@ public class AccountSummaryInfo {
   private Integer StoppedVehicle,RunningVehicle,availableSMS,todayAlert,totalVehicle;
   private double todayDistance;
   private String full_NAME;
+  @JsonProperty("billingInfo")
   private DetailsOfClientDue detailsOfClientDue;
   @Value("${consultationDriver.type:0}")
   private  int consultationDriver;
   private  String motherAccountName;
   @Value("${overSpeed.type:0}")
   private  int overSpeed;
+ // private  int overSpeed;
 }

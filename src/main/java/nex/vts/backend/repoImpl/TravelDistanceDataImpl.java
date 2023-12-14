@@ -8,6 +8,7 @@ import nex.vts.backend.repositories.TravelDistanceDataRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.TransientDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -34,6 +35,8 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
     private final DataSource dataSource;
     SimpleJdbcCall getAllStatesJdbcCall;
+    @Autowired
+    Environment environment;
 
     List<Map<String, Object>> results;
 
@@ -46,6 +49,8 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
     @Override
     public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t,Integer deviceType) throws SQLException {
+
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
 
         String sql="SELECT\n" +
@@ -61,10 +66,10 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                 "    ROUND(MAX(DISTANCE) OVER (), 2) AS MAX_DISTANCE,\n" +
                 "    ROUND(MIN(DISTANCE) OVER (), 2) AS MIN_DISTANCE,\n" +
                 "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount\n" +
-                "FROM GPSNEXGP.NEX_DISTANCE_REPOT_DATA";
+                "FROM "+shcemaName+"NEX_DISTANCE_REPOT_DATA";
 
         // Step 1: Call the stored procedure with parameters
-        String callProcedureSql = "CALL GPSNEXGP.GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
+        String callProcedureSql = "CALL "+shcemaName+"GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
 
       try {
           jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
