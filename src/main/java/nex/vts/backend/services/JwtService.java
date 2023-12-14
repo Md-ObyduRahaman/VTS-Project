@@ -36,10 +36,10 @@ public class JwtService {
         } catch (Exception e) {
             if (e instanceof SignatureException || e instanceof MalformedJwtException) { // io.jsonwebtoken.security.SignatureException
                 System.out.println("Signature is being tempered");
+                throw new AppCommonException(4051 + "##Signature is being tempered##" + 1 + "##" + 1);
             } else if (e instanceof ExpiredJwtException) { // io.jsonwebtoken.ExpiredJwtException
                 System.out.println("Token Expired");
                 throw new AppCommonException(4051 + "##Token is Expired##" + 1 + "##" + 1);
-
             }
             return null;
         }
