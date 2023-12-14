@@ -118,7 +118,7 @@ public class CtrlLogin {
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
             String dynamicColumnName;
 
-            if (operatorid == 1 || operatorid == 8) dynamicColumnName = "IND_PASS";
+            if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";
 
             else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/* TODO GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
                 dynamicColumnName = "PASSWORD";

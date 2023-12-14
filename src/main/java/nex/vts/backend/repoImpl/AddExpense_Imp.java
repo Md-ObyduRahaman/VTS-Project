@@ -18,7 +18,12 @@ public class AddExpense_Imp implements AddExpense_Repo {
 
     @Override
     public Object addExpense(String userId, String groupId, String expenseId, String dateTime, String amount, String schemaName, String description, Integer expenseId2, Integer deptId) {
-
+        System.out.println(userId);
+        System.out.println(groupId);
+        System.out.println(expenseId);
+        System.out.println(dateTime);
+        System.out.println(amount);
+        System.out.println(deptId);
         try {
             String query = "INSERT INTO ".concat(schemaName).concat("nex_all_expenditure (USER_ID, GROUPID,\n" +
                     "                                 EXPENSE_ID, DATE_TIME, AMOUNT, DESCRIPTION, EXPENSE_ID_N,\n" +
@@ -28,9 +33,7 @@ public class AddExpense_Imp implements AddExpense_Repo {
             int[] types = new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
             int flag = jdbcTemplate.update(query, param, types);
             return flag;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new AppCommonException(e.getMessage());
         }
 
