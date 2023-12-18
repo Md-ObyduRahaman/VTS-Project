@@ -158,7 +158,7 @@ public class CtrlLogin {
                     if (operatorid == 1 || operatorid == 8) {
                         dynamicColumnName = "IND_PASS";
                     } else if (operatorid == 2 || operatorid == 3 || operatorid == 7) {/* TODO GP = 1,NEX = 8 ,M2M = 3 ,ROBI = 7*/
-                        dynamicColumnName = "IND_LOGIN";
+                        dynamicColumnName = "PASSWORD";
                     } else dynamicColumnName = null;
 
                     Optional<NEX_INDIVIDUAL_CLIENT> nexIndividualClientProfileOpt = Optional.empty();

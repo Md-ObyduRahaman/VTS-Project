@@ -55,7 +55,8 @@ public class CtrlTravelDistanceData {
                                                          @PathVariable("deviceType") Integer deviceType) throws JsonProcessingException, SQLException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-        Long getUserId = deObfuscateId(userId);        /* Input Validation */
+        userId = (long) Math.toIntExact(deObfuscateId(userId));
+        vehicleId = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
 
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -69,7 +70,7 @@ public class CtrlTravelDistanceData {
         TravelDistanceDataModel reqBody=new TravelDistanceDataModel(querymonthYear,"","",vehicleId,p_all_vehicle_flag,0,0,vtsLoginUser.get().getPROFILE_ID(),vtsLoginUser.get().getPROFILE_ID(),vtsLoginUser.get().getUSER_TYPE());
 
         String date = reqBody.getQuerymonthYear();        /*06-2019*/
-        String month = date.substring(0, 2), year = date.substring(3, 7);
+        String month = date.substring(0, 2), year = date.substring(2, 6);
         YearMonth yearMonth = YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));        /* Calculate the total number of days in the month */
         int totalDays = yearMonth.lengthOfMonth();        /* Find the first date of the month */
         LocalDate firstDate = yearMonth.atDay(1);

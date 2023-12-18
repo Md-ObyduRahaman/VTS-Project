@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repositories.DriverInfoRepo;
 import nex.vts.backend.repositories.GetExpenseHeaderRepo;
+import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +16,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 @RestController
 @RequestMapping("/api/private")
 public class DriverInfoController {
 
     @Autowired
     DriverInfoRepo DriveRepo;
-
+    @Autowired
+    Environment environment;
+    private final short API_VERSION = 1;
     @Autowired
     ObjectMapper objectMapper;
     //http://localhost:8009/api/private/v1/1/users/1/1/DriverInfo/215
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{ID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> DriverList(@PathVariable("ID") Integer id) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{driverID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> DriverList(@PathVariable("driverID") Long driverID,@PathVariable("userId") Long userId,
+                                             @PathVariable("deviceType") int deviceType) throws JsonProcessingException {
 
+        String activeProfile = environment.getProperty("spring.profiles.active");
+        userId = deObfuscateId(userId);
+        driverID = deObfuscateId(driverID);
+        Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(Math.toIntExact(driverID));
+        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-        Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(id);
 
         BaseResponse baseResponse = new BaseResponse();
 
@@ -50,6 +61,7 @@ public class DriverInfoController {
 
 
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+       // return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
     }
 

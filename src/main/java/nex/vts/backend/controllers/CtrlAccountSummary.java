@@ -59,8 +59,8 @@ public class CtrlAccountSummary {
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getAccountSummary(@PathVariable("userType") Integer userType, @PathVariable("deviceType") Integer deviceType, @PathVariable("profileId") Integer profileId, @PathVariable("userId") Long userId) throws IOException {
-        Long getUserof = obfuscateId(String.valueOf(userId));
-        Long getUserId = deObfuscateId(getUserof);
+        profileId = Math.toIntExact(deObfuscateId(Long.valueOf(profileId)));
+        userId = (long) Math.toIntExact(deObfuscateId(userId));
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 

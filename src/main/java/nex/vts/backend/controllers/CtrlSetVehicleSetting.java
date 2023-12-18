@@ -46,7 +46,7 @@ public class CtrlSetVehicleSetting {
     public ResponseEntity<String> setVehicleSettings(@RequestHeader("Authorization") String jwtToken, @RequestParam Map<String, String> requestBody, @PathVariable("deviceType") Integer deviceType, @PathVariable(value = "userId") Long userId) throws IOException, SQLException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-        Long getUserId = deObfuscateId(userId);
+        userId = (long) Math.toIntExact(deObfuscateId(userId));
         boolean checkBool = true;
         Integer changeVehicleStatus, changeMaxSpeed, changeEmail, changeSMS;
         String decode_data = aesCrypto.aesDecrypt(requestBody.get("data"), API_VERSION);        /* Input Validation */
@@ -94,8 +94,8 @@ public class CtrlSetVehicleSetting {
             baseResponse.data = vehicleSettingResponse;
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
-      //  return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+        return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+       // return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
     }
 
     public String updateVehicleSettingInfo(SetVehicleSettingInfo request, String p_permissionType, String p_password) {

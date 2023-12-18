@@ -45,7 +45,10 @@ public class CtrlSpeedData {
                                                @PathVariable(value = "userId") Long userId) throws JsonProcessingException {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-        Long getUserId = deObfuscateId(userId);        /* Input Validation */
+        userId = (long) Math.toIntExact(deObfuscateId(userId));
+        vehicleId = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
+
+        /* Input Validation */
         SpeedDataModel reqBody=new SpeedDataModel(fromDate,timeslot,vehicleId);
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses;
         if (reqBody.getTimeSlot() == 24) {
@@ -81,8 +84,8 @@ public class CtrlSpeedData {
             baseResponse.apiName = "getSpeedData";
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
-        //  return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-        return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
+          return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+        //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
     }
 }
