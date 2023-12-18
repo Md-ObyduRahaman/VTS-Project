@@ -2,6 +2,7 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j;
 import nex.vts.backend.dbentities.NEX_INDIVIDUAL_CLIENT;
 import nex.vts.backend.dbentities.NEX_VEHICLE_DEPT;
 import nex.vts.backend.dbentities.VTS_EXTENDED_USER_PROFILE;

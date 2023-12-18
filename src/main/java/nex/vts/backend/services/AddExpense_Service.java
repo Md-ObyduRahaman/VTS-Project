@@ -13,22 +13,38 @@ public class AddExpense_Service {
 
     public AddExpense_Service(AddExpense_Imp addExpenseImp) {
         this.addExpenseImp = addExpenseImp;
-    } /*    public Object adExpenseService( String expenseNote, String schemaName, VTS_LOGIN_USER loginUser){ System.out.println(loginUser); return addExpenseImp.addExpense(expenseNote,schemaName,loginUser); }*/
+    }
 
-    public AddExpenseResponse addExpenseService(String userId, String groupId, String expenseId, String dateTime, String amount, String schemaName, String description, Integer expenseId2, Integer deptId) {
+    public AddExpenseResponse addExpenseService(String vehicleId, String profileId, String expenseId, String dateTime, String amount, String description, Integer expenseId2, Integer deptId, Integer operatorId,String schemaName) {
 
         dateTime = dateTime.replace("-", "");
+        int flag = 0;
+        switch (operatorId) {
 
-        try {
-            addExpenseImp.addExpense(userId, groupId, expenseId, dateTime, amount, schemaName, description, expenseId2, deptId);
-            response.setExpenseSubmitted(true);
-            response.setMessage("Operation Success");
-            expenseResponse.setResponse(response);
-        } catch (Exception e) {
-            response.setExpenseSubmitted(false);
-            response.setMessage("Operation Did not Success");
-            expenseResponse.setResponse(response);
+            case 1:/*TODO GP*/
+                flag = addExpenseImp.addExpenseForGp(vehicleId, profileId, expenseId, dateTime, amount, description, expenseId2, deptId,schemaName);
+
+                if (flag == 1) {
+                    response.setExpenseSubmitted(true);
+                    response.setMessage("Operation Success");
+                } else {
+                    response.setExpenseSubmitted(false);
+                    response.setMessage("Operation Did not Success for Gp");
+                }
+            case 3:/*TODO M2M*/
+                flag = addExpenseImp.addExpenseForM2M(vehicleId, profileId, expenseId, dateTime, amount, description, expenseId2, deptId,schemaName);
+
+                if (flag == 1) {
+                    response.setExpenseSubmitted(true);
+                    response.setMessage("Operation Success");
+                    expenseResponse.setResponse(response);
+                } else {
+                    response.setExpenseSubmitted(false);
+                    response.setMessage("Operation Did not Success for M2M");
+                    expenseResponse.setResponse(response);
+                }
         }
         return expenseResponse;
     }
+
 }

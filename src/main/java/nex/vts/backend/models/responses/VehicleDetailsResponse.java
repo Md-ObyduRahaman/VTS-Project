@@ -11,7 +11,7 @@ public class VehicleDetailsResponse {
     public int code;
 
     @JsonProperty("vehicleInfo")
-    public VehicleDetails vehicleDetails;
+    public VehicleDetailInfo vehicleDetailInfo;
 
     public VehicleDetailsResponse getResponse() {
         return vehicleDetailsResponse;
@@ -21,7 +21,7 @@ public class VehicleDetailsResponse {
         return code;
     }
 
-    public VehicleDetails getVehicleInfo() {
-        return vehicleDetails;
+    public VehicleDetailInfo getVehicleInfo() {
+        return vehicleDetailInfo;
     }
 }

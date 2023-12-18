@@ -1,39 +1,126 @@
 package nex.vts.backend.repoImpl;
 
+import nex.vts.backend.exceptions.AppCommonException;
+import nex.vts.backend.models.responses.HistoriesItem;
 import nex.vts.backend.models.vehicle.Vehicle_History_Get;
 import nex.vts.backend.models.vehicle.rowMapper.Vehicle_History_Get_RowMapper;
-import nex.vts.backend.repositories.Vehicle_History_Repo;
+import nex.vts.backend.repositories.VehicleHistoryRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.math.BigInteger;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
-public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
-    private final JdbcTemplate jdbcTemplate;
+public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
+
+    private static Logger logger = LoggerFactory.getLogger(AddExpense_Imp.class);
+    private  JdbcTemplate jdbcTemplate;
     private SimpleJdbcCall jdbcCall;
-    @Autowired
     private DataSource dataSource;
     private SqlParameterSource parameterSource;
 
-    public void setDataSource(DataSource dataSource) {
+    @Autowired
+    public VehicleHistoryRepoImp(JdbcTemplate jdbcTemplate,DataSource dataSource) {
+        this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
     }
 
-    public Vehicle_History_Repo_Imp(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Override
+    public Object getVehicleHistoryForGpAndM2M(String vehicleId, String fromDateTime, String toDateTime,String schemaName) {
+
+     Long   fromDateTimes = Long.parseLong(fromDateTime);
+     Long    toDateTimes = Long.parseLong(toDateTime);
+
+        try {
+
+/*            int outPut;
+            jdbcCall = new SimpleJdbcCall(dataSource).withSchemaName("GPSNEXGP").withProcedureName("PROC_HIS_DATA_TD");
+            parameterSource = new MapSqlParameterSource().addValue("p_vehicleid",Integer.valueOf(vehicleId))
+                    .addValue("p_date_from",fromDateTimes).addValue("p_date_to",toDateTimes)
+                    .addValue("p_interval",0);
+
+             jdbcCall.execute(parameterSource);*/
+
+            execute_StoreProcedure(Integer.valueOf(vehicleId),fromDateTimes,toDateTimes);
+
+             /*String querys = "call GPSNEXGP.PROC_HIS_DATA_TD (6046, 20230702135410, 20230819130854,0)";*/
+
+
+             /*jdbcTemplate.execute(querys);*/
+
+            String query = "select GPSNEXGP.GET_MAX_CAR_SPEED(6046)       tx_maxSpeed,\n" +
+                    "       ROWNUM                                              id_rowNo,\n" +
+                    "       id                                                  ids      ,\n" +
+                    "       VEHICLEID                                           tx_vehicleId,\n" +
+                    "       GROUPID                                             tx_groupId,\n" +
+                    "       DEVICEID                                            tx_deviceId,\n" +
+                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS')              tx_timeStamp,\n" +
+                    "       LAT                                                  float_latitude,\n" +
+                    "       LONGS                                                float_longitude,\n" +
+                    "       TIME_IN_NUMBER                                       id_timeInNumber,\n" +
+                    "       POSITION                                             tx_position,\n" +
+                    "       SPEED                                                tx_speed\n" +
+                    "FROM (select ID,\n" +
+                    "             VEHICLEID,\n" +
+                    "             GROUPID,\n" +
+                    "             DEVICEID,\n" +
+                    "             TIME,\n" +
+                    "             LAT,\n" +
+                    "             LONGS,\n" +
+                    "             TIME_IN_NUMBER,\n" +
+                    "             POSITION,\n" +
+                    "             SPEED\n" +
+                    "      FROM GPSNEXGP.nex_historyrecv_gtt\n" +
+                    "      where VEHICLEID = 6046)\n" +
+                    "where TIME_IN_NUMBER between 20230702135410 and 20230819130854\n" +
+                    "order by time_in_number";
+
+            List<Object> history = Collections.singletonList(jdbcTemplate.queryForList(query, new RowMapper<HistoriesItem>() {
+                @Override
+                public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                    return new HistoriesItem(
+
+                            rs.getString("tx_maxSpeed"),
+                            rs.getInt("id_rowNo"),
+                            rs.getLong("ids"),
+                            rs.getString("tx_vehicleId"),
+                            rs.getString("tx_groupId"),
+                            rs.getString("tx_deviceId"),
+                            rs.getString("tx_timeStamp"),
+                            rs.getDouble("float_latitude"),
+                            rs.getDouble("float_longitude"),
+                            rs.getLong("id_timeInNumber"),
+                            rs.getString("tx_position"),
+                            rs.getString("tx_speed")
+
+                    );
+                }
+
+            }/*, Long.valueOf(vehicleId)*//*,Long.valueOf(vehicleId), fromDateTimes, toDateTimes*/));
+            return history;
+        }catch (Exception e){
+
+            logger.error("Unexpected behaviour with param {}",vehicleId,fromDateTime,toDateTime);
+            throw new AppCommonException(e.getMessage());
+        }
     }
+
 
     @Override
     public Optional<Object> getVehicleHistory(Integer vehicleId, String from_Date_Time, String to_Date_Time) {
@@ -102,11 +189,12 @@ public class Vehicle_History_Repo_Imp implements Vehicle_History_Repo {
         return Long.parseLong(String.valueOf(localDate).replace("-","").concat(String.valueOf(localTime).replace(":","")));
     }
 
-    public int execute_StoreProcedure(Integer vehicleId, Long bigInteger_fromDateTime, Long bigInteger_toDateTime) {
+    public Map<String,Object> execute_StoreProcedure(Integer vehicleId, Long bigInteger_fromDateTime, Long bigInteger_toDateTime) {
+
         jdbcCall = new SimpleJdbcCall(dataSource).withSchemaName("GPSNEXGP").withProcedureName("PROC_HIS_DATA_TD");
-        parameterSource = new MapSqlParameterSource().addValue("p_vehicleid", vehicleId).addValue("p_date_from", bigInteger_fromDateTime).addValue("p_date_to", bigInteger_toDateTime).addValue("p_interval", 0);
-        jdbcCall.execute(parameterSource);
-        return 1;
+        parameterSource = new MapSqlParameterSource().addValue("p_vehicleid", 6046).addValue("p_date_from",20230702135410l).addValue("p_date_to",20230819130854l ).addValue("p_interval", 0);
+       Map<String,Object> out = jdbcCall.execute(parameterSource);
+        return out;
     }
 
 }
