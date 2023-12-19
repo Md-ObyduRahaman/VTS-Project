@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 @RestController
 @RequestMapping("/api/private")
 public class CtrlFavouriteVehicle {
@@ -35,10 +37,12 @@ public class CtrlFavouriteVehicle {
     /* /v1/{deviceType}/users/{userId}/favourit-vehicles */
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/favourit-vehicles",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vehicleList(@RequestHeader("APP_DATA") String appData, @PathVariable("deviceType") Integer deviceType,
-                                              @PathVariable("userId") Integer userId) throws JsonProcessingException {
+                                              @PathVariable("userId") Long userId) throws JsonProcessingException {
 
         Integer limit;
+
         Integer offset,userType,PARENT_PROFILE_ID;
+        userId=deObfuscateId(userId);
 
         // Decode the Base64 string
         byte[] decodedBytes = Base64.getDecoder().decode(appData);
@@ -50,6 +54,7 @@ public class CtrlFavouriteVehicle {
         System.out.println("Decoded String: " + decodedString);
 
         JSONObject jsonObject = new JSONObject(decodedString);
+
         // Print the JSON object
         System.out.println("JSON Object: " + jsonObject);
 
@@ -62,7 +67,7 @@ public class CtrlFavouriteVehicle {
             limit=20;
         }
 
-        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehicleList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset,userId,1,userType,PARENT_PROFILE_ID,deviceType);
+        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehicleList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset, Math.toIntExact(userId),1,userType,PARENT_PROFILE_ID,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

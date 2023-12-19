@@ -87,8 +87,6 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
           throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
       }
 
-
-
         //Map Data
         ArrayList<MonthTravleDistance> monthTravleDistanceList=new ArrayList<>();
         MonthTravleDistanceForAll monthTravleDistanceForAllin=new MonthTravleDistanceForAll();

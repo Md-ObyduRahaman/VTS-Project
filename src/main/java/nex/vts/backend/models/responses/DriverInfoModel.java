@@ -13,6 +13,7 @@ import java.sql.Blob;
 @NoArgsConstructor
 public class DriverInfoModel {
 
+
     private String  USERID;
             private Integer ID;
             @JsonProperty("name")
@@ -29,5 +30,7 @@ public class DriverInfoModel {
     private String D_DOB;
     @JsonProperty("driver_photo")
     private Blob DRIVER_PHOTO;
+    @JsonProperty("vehProfileChangePermision")
+    private VehProfileChangePermision vehProfileChangePermision;
 
 }
