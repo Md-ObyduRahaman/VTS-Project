@@ -26,6 +26,8 @@ import java.net.ConnectException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+
 @RestController
 @RequestMapping("/api/private/v1")
 public class CtrlVehicleDetails {
@@ -62,6 +64,7 @@ public class CtrlVehicleDetails {
             throw new AppCommonException(400 + "##login cred not found##" + "##" + API_VERSION);
 
         Integer profileType = loginUser.getUSER_TYPE();
+        Integer usersIds = Math.toIntExact(deObfuscateId(Long.valueOf(userId)));
 
 /*        VehicleDetailsModel detailsModel = mapper.readValue(encryptionDecryption.aesDecrypt(reqbody,API_VERSION),VehicleDetailsModel.class);
         Integer userType = detailsModel.userType;
@@ -69,9 +72,9 @@ public class CtrlVehicleDetails {
 
 //        VehicleDetailsResponse vehicleDetailsResponse = detailsService.getVehicleDetail(profileType,userId,schemaName,operatorId);
 
-        if (!detailsService.getVehicleDetail(profileType,userId,schemaName,operatorId).equals(null)) {
+        if (!detailsService.getVehicleDetail(profileType,usersIds,schemaName,operatorId).equals(null)) {
 
-            baseResponse.data = detailsService.getVehicleDetail(profileType,userId,schemaName,operatorId);
+            baseResponse.data = detailsService.getVehicleDetail(profileType,usersIds,schemaName,operatorId);
             baseResponse.apiName = "Vehicle-Details";
             baseResponse.status = true;
         }

@@ -60,7 +60,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
 
         }catch (Exception e){
 
-            logger.error(e.getCause().toString());
+            logger.error(e.getMessage());
             throw new AppCommonException(e.getMessage());
         }
 

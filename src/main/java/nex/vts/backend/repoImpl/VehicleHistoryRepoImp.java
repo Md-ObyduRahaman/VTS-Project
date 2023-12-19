@@ -41,10 +41,10 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
     }
 
     @Override
-    public Object getVehicleHistoryForGpAndM2M(String vehicleId, String fromDateTime, String toDateTime,String schemaName) {
+    public Object getVehicleHistoryForGpAndM2M(Integer vehicleId, Long fromDateTime, Long toDateTime,String schemaName) {
 
-     Long   fromDateTimes = Long.parseLong(fromDateTime);
-     Long    toDateTimes = Long.parseLong(toDateTime);
+/*     Long   fromDateTimes = Long.parseLong(fromDateTime);
+     Long    toDateTimes = Long.parseLong(toDateTime);*/
 
         try {
 
@@ -56,25 +56,25 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
              jdbcCall.execute(parameterSource);*/
 
-            execute_StoreProcedure(Integer.valueOf(vehicleId),fromDateTimes,toDateTimes);
+//            execute_StoreProcedure(Integer.valueOf(vehicleId),fromDateTimes,toDateTimes);
 
-             /*String querys = "call GPSNEXGP.PROC_HIS_DATA_TD (6046, 20230702135410, 20230819130854,0)";*/
+/*             String querys = "call GPSNEXGP.PROC_HIS_DATA_TD (6046, 20230702135410, 20230819130854,0)";
+             jdbcTemplate.execute(querys);*/
 
+            jdbcTemplate.update("call GPSNEXGP.PROC_HIS_DATA_TD (?,?, ?,?)",new Object[]{vehicleId,fromDateTime,toDateTime,0});
 
-             /*jdbcTemplate.execute(querys);*/
-
-            String query = "select GPSNEXGP.GET_MAX_CAR_SPEED(6046)       tx_maxSpeed,\n" +
-                    "       ROWNUM                                              id_rowNo,\n" +
-                    "       id                                                  ids      ,\n" +
-                    "       VEHICLEID                                           tx_vehicleId,\n" +
-                    "       GROUPID                                             tx_groupId,\n" +
-                    "       DEVICEID                                            tx_deviceId,\n" +
-                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS')              tx_timeStamp,\n" +
-                    "       LAT                                                  float_latitude,\n" +
-                    "       LONGS                                                float_longitude,\n" +
-                    "       TIME_IN_NUMBER                                       id_timeInNumber,\n" +
-                    "       POSITION                                             tx_position,\n" +
-                    "       SPEED                                                tx_speed\n" +
+            String query = "select GPSNEXGP.GET_MAX_CAR_SPEED(?)       MAX_SPEED,\n" +
+                    "       ROWNUM                                 ROWNO,\n" +
+                    "       ID,\n" +
+                    "       VEHICLEID,\n" +
+                    "       GROUPID,\n" +
+                    "       DEVICEID,\n" +
+                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
+                    "       LAT,\n" +
+                    "       LONGS,\n" +
+                    "       TIME_IN_NUMBER,\n" +
+                    "       POSITION,\n" +
+                    "       SPEED\n" +
                     "FROM (select ID,\n" +
                     "             VEHICLEID,\n" +
                     "             GROUPID,\n" +
@@ -86,34 +86,36 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
                     "             POSITION,\n" +
                     "             SPEED\n" +
                     "      FROM GPSNEXGP.nex_historyrecv_gtt\n" +
-                    "      where VEHICLEID = 6046)\n" +
-                    "where TIME_IN_NUMBER between 20230702135410 and 20230819130854\n" +
+                    "      where VEHICLEID = to_char(?))\n" +
+                    "where TIME_IN_NUMBER between ? and ?\n" +
                     "order by time_in_number";
 
-            List<Object> history = Collections.singletonList(jdbcTemplate.queryForList(query, new RowMapper<HistoriesItem>() {
+            List<Object> history = Collections.singletonList(jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
                 @Override
                 public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 
                     return new HistoriesItem(
 
-                            rs.getString("tx_maxSpeed"),
-                            rs.getInt("id_rowNo"),
-                            rs.getLong("ids"),
-                            rs.getString("tx_vehicleId"),
-                            rs.getString("tx_groupId"),
-                            rs.getString("tx_deviceId"),
-                            rs.getString("tx_timeStamp"),
-                            rs.getDouble("float_latitude"),
-                            rs.getDouble("float_longitude"),
-                            rs.getLong("id_timeInNumber"),
-                            rs.getString("tx_position"),
-                            rs.getString("tx_speed")
+                            rs.getString("MAX_SPEED"),
+                            rs.getInt("ROWNO"),
+                            rs.getLong("ID"),
+                            rs.getString("VEHICLEID"),
+                            rs.getString("GROUPID"),
+                            rs.getString("DEVICEID"),
+                            rs.getString("TIME_STAMP"),
+                            rs.getDouble("LAT"),
+                            rs.getDouble("LONGS"),
+                            rs.getLong("TIME_IN_NUMBER"),
+                            rs.getString("POSITION"),
+                            rs.getString("SPEED")
 
                     );
                 }
 
-            }/*, Long.valueOf(vehicleId)*//*,Long.valueOf(vehicleId), fromDateTimes, toDateTimes*/));
+            }, new Object[]{vehicleId, vehicleId, fromDateTime, toDateTime}));
+
             return history;
+
         }catch (Exception e){
 
             logger.error("Unexpected behaviour with param {}",vehicleId,fromDateTime,toDateTime);
@@ -192,7 +194,7 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
     public Map<String,Object> execute_StoreProcedure(Integer vehicleId, Long bigInteger_fromDateTime, Long bigInteger_toDateTime) {
 
         jdbcCall = new SimpleJdbcCall(dataSource).withSchemaName("GPSNEXGP").withProcedureName("PROC_HIS_DATA_TD");
-        parameterSource = new MapSqlParameterSource().addValue("p_vehicleid", 6046).addValue("p_date_from",20230702135410l).addValue("p_date_to",20230819130854l ).addValue("p_interval", 0);
+        parameterSource = new MapSqlParameterSource().addValue("p_vehicleid", 6046).addValue("p_date_from",bigInteger_fromDateTime).addValue("p_date_to",bigInteger_toDateTime ).addValue("p_interval", 0);
        Map<String,Object> out = jdbcCall.execute(parameterSource);
         return out;
     }

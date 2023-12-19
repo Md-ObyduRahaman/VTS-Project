@@ -17,9 +17,9 @@ public class VehicleDetails_Service {
         this.vehicleDetailsRepo = vehicleDetailsRepo;
     }
 
-    public VehicleInfoResponse getVehicleDetail(Integer userType, Integer profileId, String schemaName,Integer oparatorId) {
+    public VehicleInfoResponse getVehicleDetail(Integer userType, Integer profileId, String schemaName,Integer operatorId) {
 
-        switch (oparatorId){
+        switch (operatorId){
             case 1:/*TODO Gp*/
             case 3:/*TODO M2M*/
                 VehicleDetailInfo detailInfo = (VehicleDetailInfo)vehicleDetailsRepo.getVehicleDetailForGpAndM2M(userType,profileId,schemaName);

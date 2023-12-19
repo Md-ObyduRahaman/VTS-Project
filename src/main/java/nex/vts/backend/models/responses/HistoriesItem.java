@@ -2,76 +2,51 @@ package nex.vts.backend.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @JsonPropertyOrder({"maxSpeed", "rowNo", "ids", "vehicleId", "groupId", "deviceId", "timeStamp", "latitude", "longitude", "timeInNumber", "position", "speed"})
-public class HistoriesItem{
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class HistoriesItem {
 
-	@JsonProperty("rowNo")
-	private int rowNo;
+    @JsonProperty("maxSpeed")
+    private String maxSpeed;
 
-	@JsonProperty("maxSpeed")
-	private String maxSpeed;
+    @JsonProperty("rowNo")
+    private int rowNo;
 
-	@JsonProperty("longitude")
-	private Double longitude;
+    @JsonProperty("id")
+    private Long id;
 
-	@JsonProperty("groupId")
-	private String groupId;
+    @JsonProperty("vehicleId")
+    private String vehicleId;
 
-	@JsonProperty("latitude")
-	private Double latitude;
+    @JsonProperty("groupId")
+    private String groupId;
 
-	@JsonProperty("timeInNumber")
-	private Long timeInNumber;
+    @JsonProperty("deviceId")
+    private String deviceId;
 
-	@JsonProperty("id")
-	private Long id;
+    @JsonProperty("timeStamp")
+    private String time;
 
-	@JsonProperty("vehicleId")
-	private String vehicleId;
+    @JsonProperty("latitude")
+    private Double latitude;
 
-	@JsonProperty("timeStamp")
-	private String time;
+    @JsonProperty("longitude")
+    private Double longitude;
 
-	@JsonProperty("position")
-	private String position;
+    @JsonProperty("timeInNumber")
+    private Long timeInNumber;
 
-	@JsonProperty("speed")
-	private String speed;
+    @JsonProperty("position")
+    private String position;
 
-	@JsonProperty("deviceId")
-	private String deviceId;
+    @JsonProperty("speed")
+    private String speed;
 
-	public HistoriesItem(
-			String maxSpeed,
-			int rowNo,
-			Long id,
-			String vehicleId,
-			String groupId,
-			String deviceId,
-			String time,
-			Double latitude,
-			Double longitude,
-			Long timeInNumber,
-			String position,
-			String speed
-						 ) {
-
-		this.rowNo = rowNo;
-		this.longitude = longitude;
-		this.groupId = groupId;
-		this.latitude = latitude;
-		this.timeInNumber = timeInNumber;
-		this.id = id;
-		this.vehicleId = vehicleId;
-		this.time = time;
-		this.position = position;
-		this.speed = speed;
-		this.deviceId = deviceId;
-		this.maxSpeed = maxSpeed;
-	}
 }

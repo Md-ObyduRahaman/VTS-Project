@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.responses.VehicleHistoryResponse;
 import nex.vts.backend.services.VehicleHistory_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.springframework.core.env.Environment;
@@ -39,25 +40,33 @@ public class CtrlVehicleHistory {
     @GetMapping(value = "/{deviceType}/user/vehicle/{vehicleId}/{fromDateTime}/{toDateTime}/history", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleHistory(@PathVariable("deviceType") Integer deviceType,
                                                @PathVariable("vehicleId")Integer vehicleId,
-                                               @PathVariable("fromDateTime")String fromDateTime,
-                                               @PathVariable("toDateTime")String toDateTime) throws JsonProcessingException {
+                                               @PathVariable("fromDateTime")Long fromDateTime,
+                                               @PathVariable("toDateTime")Long toDateTime) throws JsonProcessingException {
 
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
         String schemaName = environment.getProperty("application.profiles.shcemaName");
         AESEncryptionDecryption encryptionDecryption = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-        historyService.getVehicleHistory(String.valueOf(vehicleId),String.valueOf(fromDateTime),String.valueOf(toDateTime),schemaName,operatorId);
+        Integer vehicleIds = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
+        Long    fromDateTimes = deObfuscateId(fromDateTime);
+        Long    toDateTimes = deObfuscateId(toDateTime);
 
+        VehicleHistoryResponse historyResponse = historyService.getVehicleHistory(vehicleIds,String.valueOf(fromDateTimes),String.valueOf(toDateTimes),schemaName,operatorId);
 
+        if (!historyResponse.getHistory().equals(null)){
 
+            baseResponse.data = historyResponse;
+            baseResponse.apiName = "Vehicle History";
+            baseResponse.status = true;
+        }else {
 
+            baseResponse.apiName = "Vehicle History";
+            baseResponse.status = true;
+            baseResponse.errorCode = 010;
+            baseResponse.errorMsg = "list is empty";
+        }
 
-
-
-
-
-
-        return null;
+        return ResponseEntity.ok(baseResponse);
     }
 }
