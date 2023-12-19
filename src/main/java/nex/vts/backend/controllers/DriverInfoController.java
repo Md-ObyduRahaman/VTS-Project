@@ -30,14 +30,15 @@ public class DriverInfoController {
     @Autowired
     ObjectMapper objectMapper;
     //http://localhost:8009/api/private/v1/1/users/1/1/DriverInfo/215
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{driverID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> DriverList(@PathVariable("driverID") Long driverID,@PathVariable("userId") Long userId,
-                                             @PathVariable("deviceType") int deviceType) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverInfo/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> DriverList(@PathVariable("vehicleId") Long vehicleId,@PathVariable("userId") Long userId,
+                                             @PathVariable("deviceType") int deviceType,@PathVariable("userType") int userType) throws JsonProcessingException {
 
         String activeProfile = environment.getProperty("spring.profiles.active");
         userId = deObfuscateId(userId);
-        driverID = deObfuscateId(driverID);
-        Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(Math.toIntExact(driverID));
+        vehicleId = deObfuscateId(vehicleId);
+        Optional<DriverInfoModel> GetDriverInfo = DriveRepo.findDriverInfo(Math.toIntExact(vehicleId));
+        GetDriverInfo.get().setVehProfileChangePermision(DriveRepo.findVehProfileChangePermision(Math.toIntExact(vehicleId),userType).get());
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
 

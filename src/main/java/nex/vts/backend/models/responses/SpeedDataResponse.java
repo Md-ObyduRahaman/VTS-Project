@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class SpeedDataResponse {
-    private  String ID, DATE_TIME, POSITION, SPEED, VEHICLE_NAME;
+    private  String ID, DATE_TIME, POSITION, SPEED;
 }

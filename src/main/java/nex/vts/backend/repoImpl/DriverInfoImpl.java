@@ -3,10 +3,12 @@ package nex.vts.backend.repoImpl;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.DriverInfoModel;
 import nex.vts.backend.models.responses.GetExpansesModel;
+import nex.vts.backend.models.responses.VehProfileChangePermision;
 import nex.vts.backend.repositories.DriverInfoRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.TransientDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -25,6 +27,8 @@ public class DriverInfoImpl implements DriverInfoRepo {
     private final Logger logger = LoggerFactory.getLogger(DriverInfoImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    Environment environment;
 
     public DriverInfoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -33,10 +37,21 @@ public class DriverInfoImpl implements DriverInfoRepo {
     public Optional<DriverInfoModel> findDriverInfo(Integer USERID) {
         logger.debug("Executing query to get client profile by client user id: {}", USERID);
 
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
+
         Optional<DriverInfoModel> getAllDriverInfo=Optional.empty();
 
-            String sql = "SELECT USERID, ID, D_NAME, D_FNAME, D_LICENSE, D_ADDRESS, D_CELL, D_DOB, DRIVER_PHOTO " +
-                    "FROM NEX_DRIVERINFO WHERE USERID="+USERID;
+            String sql = "SELECT ID,\n" +
+                    "       USERID,\n" +
+                    "       D_NAME,\n" +
+                    "       D_FNAME,\n" +
+                    "       D_LICENSE,\n" +
+                    "       D_ADDRESS,\n" +
+                    "       D_CELL,\n" +
+                    "       "+shcemaName+"date_formate_convert (D_DOB, 'YYYYMMDD', 'DD-Mon-YYYY')    D_DOB,\n" +
+                    "       LENGTH (DRIVER_PHOTO)                                      DRIVER_PHOTO\n" +
+                    "  FROM NEX_DRIVERINFO\n" +
+                    " WHERE USERID ="+USERID;
 
                    /* jdbcTemplate.queryForObject(sql, new Object[]{USERID}, (rs, rowNum) ->
                             Optional.of(new DriverInfoModel(
@@ -72,6 +87,49 @@ public class DriverInfoImpl implements DriverInfoRepo {
             return Optional.empty();
         } else {
             return getAllDriverInfo;
+        }
+
+    }
+    public Optional<VehProfileChangePermision> findVehProfileChangePermision(Integer vehicle_id,Integer profile_type) {
+        logger.debug("Executing query to get client profile by client vehicle_id: {}", vehicle_id);
+
+
+        Optional<VehProfileChangePermision> vehProfileChangePermisionList=Optional.empty();
+
+            String sql = "SELECT ID,\n" +
+                    "       IS_VEH_PASS_CHANGE,\n" +
+                    "       IS_VEH_STAT_CHANGE,\n" +
+                    "       IS_VEH_SPEED_CHANGE,\n" +
+                    "       IS_VEH_ALERT_MAIL_CHANGE,\n" +
+                    "       IS_VEH_ALERT_SMS_CHANGE,\n" +
+                    "       IS_VEH_D_PROFILE_CHANGE\n" +
+                    "  FROM VEH_PROFILE_CHANGE_PERMISION\n" +
+                    " WHERE     VEHICLE_ID = "+vehicle_id+"\n" +
+                    "       AND PROFILE_TYPE = "+profile_type+"\n" +
+                    "       AND PROFILE_ID = "+vehicle_id;
+
+
+
+         //Optional<VehProfileChangePermision> vehProfileChangePermisionList=Optional.empty();
+        try {
+            vehProfileChangePermisionList = Optional.of((VehProfileChangePermision) jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(VehProfileChangePermision.class)));
+        }
+        catch (BadSqlGrammarException e) {
+            e.printStackTrace();
+            logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", vehicle_id);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##1##1");
+        } catch (TransientDataAccessException f) {
+            logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", vehicle_id);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable");
+        } catch (CannotGetJdbcConnectionException g) {
+            logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", vehicle_id);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained");
+        }
+
+        if (vehProfileChangePermisionList.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return vehProfileChangePermisionList;
         }
 
     }
