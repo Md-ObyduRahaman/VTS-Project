@@ -44,17 +44,17 @@ public class Vehicle_List_Service {
         } else
              individualVehicleListResponse.setIndividualAccVehicleListList((IndividualAccVehicleList) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId));*/
         switch (userType) {
-            case 1:
+            case 1:/*TODO parent profile*/
                 List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
                 motherVehicleListResponse.setMotherAccVehicleLists((List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
                 motherVehicleListResponse.setTotalVehicle(totalVehicleList.size());
                 return motherVehicleListResponse;
-            case 2:
+            case 2:/*TODO child/department profile*/
                 departmentVehicleListResponse.setDeptAccVehicleLists((List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
                 List<DeptAccVehicleList> totalDeptAccVehicleList = (List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
                 departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
                 return departmentVehicleListResponse;
-            case 3:
+            case 3:/*TODO indivisual profile*/
                 individualVehicleListResponse.setIndividualAccVehicleListList((List<IndividualAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
                 return individualVehicleListResponse;
             default:
