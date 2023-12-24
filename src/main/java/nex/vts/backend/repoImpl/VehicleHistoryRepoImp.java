@@ -29,19 +29,19 @@ import java.util.*;
 public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
     private static Logger logger = LoggerFactory.getLogger(AddExpense_Imp.class);
-    private  JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     private SimpleJdbcCall jdbcCall;
     private DataSource dataSource;
     private SqlParameterSource parameterSource;
 
     @Autowired
-    public VehicleHistoryRepoImp(JdbcTemplate jdbcTemplate,DataSource dataSource) {
+    public VehicleHistoryRepoImp(JdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
     }
 
     @Override
-    public Object getVehicleHistoryForGpAndM2M(Integer vehicleId, Long fromDateTime, Long toDateTime,String schemaName) {
+    public Object getVehicleHistoryForGpAndM2M(Integer vehicleId, Long fromDateTime, Long toDateTime, String schemaName) {
 
 /*     Long   fromDateTimes = Long.parseLong(fromDateTime);
      Long    toDateTimes = Long.parseLong(toDateTime);*/
@@ -61,36 +61,37 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 /*             String querys = "call GPSNEXGP.PROC_HIS_DATA_TD (6046, 20230702135410, 20230819130854,0)";
              jdbcTemplate.execute(querys);*/
 
-            jdbcTemplate.update("call GPSNEXGP.PROC_HIS_DATA_TD (?,?, ?,?)",new Object[]{vehicleId,fromDateTime,toDateTime,0});
+            jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
 
-            String query = "select GPSNEXGP.GET_MAX_CAR_SPEED(?)       MAX_SPEED,\n" +
-                    "       ROWNUM                                 ROWNO,\n" +
-                    "       ID,\n" +
-                    "       VEHICLEID,\n" +
-                    "       GROUPID,\n" +
-                    "       DEVICEID,\n" +
-                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
-                    "       LAT,\n" +
-                    "       LONGS,\n" +
-                    "       TIME_IN_NUMBER,\n" +
-                    "       POSITION,\n" +
-                    "       SPEED\n" +
-                    "FROM (select ID,\n" +
-                    "             VEHICLEID,\n" +
-                    "             GROUPID,\n" +
-                    "             DEVICEID,\n" +
-                    "             TIME,\n" +
-                    "             LAT,\n" +
-                    "             LONGS,\n" +
-                    "             TIME_IN_NUMBER,\n" +
-                    "             POSITION,\n" +
-                    "             SPEED\n" +
-                    "      FROM GPSNEXGP.nex_historyrecv_gtt\n" +
-                    "      where VEHICLEID = to_char(?))\n" +
-                    "where TIME_IN_NUMBER between ? and ?\n" +
-                    "order by time_in_number";
+            String query = "select ".concat(schemaName)
+                    .concat("GET_MAX_CAR_SPEED(?)       MAX_SPEED,\n" +
+                            "       ROWNUM                                 ROWNO,\n" +
+                            "       ID,\n" +
+                            "       VEHICLEID,\n" +
+                            "       GROUPID,\n" +
+                            "       DEVICEID,\n" +
+                            "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
+                            "       LAT,\n" +
+                            "       LONGS,\n" +
+                            "       TIME_IN_NUMBER,\n" +
+                            "       POSITION,\n" +
+                            "       SPEED\n" +
+                            "FROM (select ID,\n" +
+                            "             VEHICLEID,\n" +
+                            "             GROUPID,\n" +
+                            "             DEVICEID,\n" +
+                            "             TIME,\n" +
+                            "             LAT,\n" +
+                            "             LONGS,\n" +
+                            "             TIME_IN_NUMBER,\n" +
+                            "             POSITION,\n" +
+                            "             SPEED\n" +
+                            "      FROM ").concat(schemaName).concat("nex_historyrecv_gtt\n" +
+                            "      where VEHICLEID = to_char(?))\n" +
+                            "where TIME_IN_NUMBER between ? and ?\n" +
+                            "order by time_in_number");
 
-            List<Object> history = Collections.singletonList(jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
+            return jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
                 @Override
                 public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -112,19 +113,18 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
                     );
                 }
 
-            }, new Object[]{vehicleId, vehicleId, fromDateTime, toDateTime}));
+            }, new Object[]{vehicleId, vehicleId, fromDateTime, toDateTime});
 
-            return history;
+        } catch (Exception e) {
 
-        }catch (Exception e){
-
-            logger.error("Unexpected behaviour with param {}",vehicleId,fromDateTime,toDateTime);
+            logger.error("Unexpected behaviour with param {}", vehicleId, fromDateTime, toDateTime);
             throw new AppCommonException(e.getMessage());
         }
     }
+}
 
 
-    @Override
+/*    @Override
     public Optional<Object> getVehicleHistory(Integer vehicleId, String from_Date_Time, String to_Date_Time) {
 
         LocalDate localDate_new_fromDate = LocalDate.parse(from_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd")), localDate_new_toDate = LocalDate.parse(to_Date_Time.substring(0, 8), DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -199,5 +199,5 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
         return out;
     }
 
-}
+}*/
 /*todo ---------Special condition need to implement*/

@@ -1,5 +1,6 @@
 package nex.vts.backend.repoImpl;
 
+import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.DeptAccVehicleList;
 import nex.vts.backend.models.vehicle.rowMapper.IndivisualAccVehicleListRowMapper;
 import nex.vts.backend.models.vehicle.rowMapper.MotherAccVehicleListRowMapper;
@@ -25,6 +26,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
 
     @Override
     public Object getVehicleList(Integer id, Integer userType, Integer operatorId, String shcemaName, Integer deptId) { /*todo --operatorId is constant and it is 1*/
+
         switch (userType) {
             case 1:
                 try {
@@ -49,7 +51,9 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                     "--                               order by ROWNO asc offset ? rows fetch first ? rows only");
                     return jdbcTemplate.query(query, new MotherAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
-                    return e.getMessage();/*when fail to execute query what will happen*/
+
+                    logger.error(e.getCause().getMessage());
+                    throw new AppCommonException(e.getMessage());
                 }
             case 2:
                 try {
@@ -113,7 +117,9 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                     }, id, deptId, operatorId);
 
                 } catch (Exception e) {
-                    return e.getMessage();
+
+                    logger.error(e.getCause().getMessage());
+                    throw new AppCommonException(e.getMessage());
                 }
 
             case 3:
@@ -150,7 +156,9 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             "  AND b.ACTIVATION = 1");
                     return jdbcTemplate.query(query, new IndivisualAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
-                    return e.getMessage();
+
+                    logger.error(e.getCause().getMessage());
+                    throw new AppCommonException(e.getMessage());
                 }
             default:
                 return "vehicle list is empty";

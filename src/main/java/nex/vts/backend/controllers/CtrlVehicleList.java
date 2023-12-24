@@ -31,8 +31,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/private/v1")
-public class VehicleList_Controller {
-    private final Logger logger = LoggerFactory.getLogger(VehicleList_Controller.class.getName());
+public class CtrlVehicleList {
+    private final Logger logger = LoggerFactory.getLogger(CtrlVehicleList.class.getName());
     private final Vehicle_List_Service Vehicle_List_Service;
     private final Vehicle_Location_Service locationService;
     BaseResponse baseResponse = new BaseResponse();
@@ -42,7 +42,7 @@ public class VehicleList_Controller {
     Environment environment;
     private final short API_VERSION = 1;
 
-    public VehicleList_Controller(Vehicle_List_Service Vehicle_List_Service, Vehicle_Location_Service locationService, Environment environment) {
+    public CtrlVehicleList(Vehicle_List_Service Vehicle_List_Service, Vehicle_Location_Service locationService, Environment environment) {
         this.Vehicle_List_Service = Vehicle_List_Service;
         this.locationService = locationService;
         this.environment = environment;
@@ -50,7 +50,8 @@ public class VehicleList_Controller {
 
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class, ServiceUnavailableException.class}, maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @GetMapping(value = "/{deviceType}/vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getVehicleList(/*@RequestHeader(value = "data") String data,*/ @PathVariable(value = "deviceType") Integer deviceType/*, @PathVariable(required = false, value = "offset") Integer offset, @PathVariable(required = false, value = "limit") String limit*//*, @PathVariable(value = "userId") Long userId*/) throws JsonProcessingException {
+    public ResponseEntity<?> getVehicleList(@PathVariable(value = "deviceType") Integer deviceType/*, @PathVariable(required = false, value = "offset") Integer offset, @PathVariable(required = false, value = "limit") String limit*/) throws JsonProcessingException {
+
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
         String schemaName = environment.getProperty("application.profiles.shcemaName");
@@ -69,10 +70,12 @@ public class VehicleList_Controller {
                 loginUser.getUSER_TYPE(), operatorId, schemaName, Integer.valueOf(loginUser.getPARENT_PROFILE_ID()));
 
         if (!getVehicleInfo.equals(null)) {
+
             baseResponse.data = getVehicleInfo;
             baseResponse.status = true;
             baseResponse.apiName = "Vehicle-List";
         } else {
+
             baseResponse.data = null;
             baseResponse.status = false;
             baseResponse.apiName = "Vehicle-List";
