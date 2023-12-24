@@ -59,19 +59,20 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                 "    VEHICLEID AS VEHICLE_ID,\n" +
                 "    DATETIME AS DATE_TIME,\n" +
                 "    NUM_OF_DAYS,\n" +
-                "    ROUND(DISTANCE,2) as DISTANCE,\n" +
+                "    ROUND(DISTANCE,3) as DISTANCE,\n" +
                 "    MOTHER_ACCOUNT_NAME AS main_account_id,\n" +
-                "    ROUND(AVG(DISTANCE) OVER (), 2) AS average_distance,\n" +
-                "    ROUND(SUM(DISTANCE) OVER (), 2)  AS total_distance,\n" +
-                "    ROUND(MAX(DISTANCE) OVER (), 2) AS MAX_DISTANCE,\n" +
-                "    ROUND(MIN(DISTANCE) OVER (), 2) AS MIN_DISTANCE,\n" +
+                "    ROUND(AVG(DISTANCE) OVER (), 3) AS average_distance,\n" +
+                "    ROUND(SUM(DISTANCE) OVER (), 3)  AS total_distance,\n" +
+                "    ROUND(MAX(DISTANCE) OVER (), 3) AS MAX_DISTANCE,\n" +
+                "    ROUND(MIN(DISTANCE) OVER (), 3) AS MIN_DISTANCE,\n" +
                 "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount\n" +
                 "FROM "+shcemaName+"NEX_DISTANCE_REPOT_DATA";
 
         // Step 1: Call the stored procedure with parameters
         String callProcedureSql = "CALL "+shcemaName+"GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
 
-      try {
+
+        try {
           jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
           // Step 2: Run a SELECT query to fetch the results
           results = jdbcTemplate.queryForList(sql);
