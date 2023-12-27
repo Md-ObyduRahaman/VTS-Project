@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.UtilityMethods.getCurrentDateTime;
 import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
 
 @RestController
@@ -62,13 +63,7 @@ public class CtrlLogin {
     private RepoVtsExtendedUserProfile repoVtsExtendedUserProfile;
     private LoginReq reqBody = null;
 
-    public static String getCurrentDateTime() {
 
-        ZoneId dhaka = ZoneId.of("Asia/Dhaka");
-        ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return dhakaTime.format(formatter);
-    }
 
     @PostMapping(value = "/v1/{deviceType}/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@PathVariable("deviceType") Integer deviceType, @RequestParam Map<String, String> requestBody) throws JsonProcessingException {

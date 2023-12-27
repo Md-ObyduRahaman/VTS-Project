@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface SpeedDataRepo {
 
     public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForhr(String finalToTime, String finalFromTime,Integer vehicleId,Integer deviceType);
+    public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForgr(String finalToTime, String finalFromTime,Integer vehicleId,Integer deviceType);
 
 }

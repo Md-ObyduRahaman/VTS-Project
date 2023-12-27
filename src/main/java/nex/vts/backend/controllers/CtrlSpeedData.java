@@ -56,14 +56,15 @@ public class CtrlSpeedData {
         SpeedDataModel reqBody=new SpeedDataModel(fromDate,timeslot,vehicleId);
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses;
         if (reqBody.getTimeSlot() == 24) {
-            String fromTime, toTime;
+            String fromTime , toTime;
             fromTime = reqBody.getFromDate().substring(0, 8); /*2022/03/14  10:42:40*/
-            String finalFromTime = fromTime.concat("000000"), finalToTime = fromTime.concat("235959");
-            speedDataResponses = speedDataRepo.getSpeedDataForhr(finalToTime, finalFromTime, reqBody.getVehicleId(), deviceType);
+            Integer changeToTime= Integer.valueOf(fromTime)+1;
+            String finalFromTime = fromTime.concat("020000"), finalToTime = String.valueOf(changeToTime).concat("015959");
+            speedDataResponses = speedDataRepo.getSpeedDataForgr(finalToTime, finalFromTime, reqBody.getVehicleId(), deviceType);
         } else {
             String fromTime, toTime, finalFromTime;
             fromTime = reqBody.getFromDate().substring(0, 8);
-            Integer timeSlot = reqBody.getTimeSlot() - 2;
+            Integer timeSlot = reqBody.getTimeSlot() + 2;
             if (Integer.toString(timeSlot).length() == 1) {
                 finalFromTime = fromTime.concat("0" + timeSlot + "0000");
                 toTime = fromTime.concat("0" + timeSlot + "5959");
@@ -71,7 +72,7 @@ public class CtrlSpeedData {
                 finalFromTime = fromTime.concat(timeSlot + "0000");
                 toTime = fromTime.concat(timeSlot + "5959");
             }
-            speedDataResponses = speedDataRepo.getSpeedDataForhr(toTime, finalFromTime, reqBody.getVehicleId(), deviceType);
+            speedDataResponses = speedDataRepo.getSpeedDataForgr(toTime, finalFromTime, reqBody.getVehicleId(), deviceType);
             System.out.println();
         }
         BaseResponse baseResponse = new BaseResponse();
@@ -89,6 +90,7 @@ public class CtrlSpeedData {
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
           return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+          //        return ResponseEntity.status(httpStatus).headers(httpHeaders).body(clientResponse);
         //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
     }

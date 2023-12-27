@@ -72,13 +72,50 @@ public class SpeedDataImpl implements SpeedDataRepo {
 
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", vehicleId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         }catch (TransientDataAccessException f){
             logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", vehicleId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
         }catch (CannotGetJdbcConnectionException g){
             logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", vehicleId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
+        }
+
+        if (speedDataResponses.get().isEmpty())
+        {
+            return Optional.empty();
+        }
+        else {
+            return speedDataResponses;
+        }
+    }
+
+    @Override
+    public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForgr(String finalToTime, String finalFromTime, Integer vehicleId, Integer deviceType) {
+
+        String shcemaName = environment.getProperty("application.profiles.shcemaName");
+
+        String sql="select ID,TIME_IN_NUMBER date_time,POSITION, SPEED FROM "+shcemaName+"nex_historyrecv_gtt where VEHICLEID = to_char("+vehicleId+") and TIME_IN_NUMBER between "+finalFromTime+" and "+finalToTime+" order by id asc";
+        logger.trace(sql);
+        String callProcedureSql = "CALL "+shcemaName+"PROC_HIS_DATA_TD(?, ?,?,?)"; // Replace with your procedure name and parameter placeholders
+
+        Optional<ArrayList<SpeedDataResponse>> speedDataResponses = Optional.empty();
+
+        try {
+            jdbcTemplate.update(callProcedureSql, vehicleId,finalFromTime,finalToTime,0); // Set actual parameter values
+            speedDataResponses = Optional.of((ArrayList<SpeedDataResponse>) jdbcTemplate.query(sql,
+                    BeanPropertyRowMapper.newInstance(SpeedDataResponse.class)));
+           // results = jdbcTemplate.queryForList(sql);
+
+        } catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", vehicleId);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
+        }catch (TransientDataAccessException f){
+            logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", vehicleId);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
+        }catch (CannotGetJdbcConnectionException g){
+            logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", vehicleId);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
 
         if (speedDataResponses.get().isEmpty())
