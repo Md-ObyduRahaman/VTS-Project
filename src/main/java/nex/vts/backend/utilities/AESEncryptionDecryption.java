@@ -21,7 +21,7 @@ public class AESEncryptionDecryption {
 
 
         private String API_V1_DEVICE_1_SECRET_KEY = "Nx123OTT0908J129";
-        private String API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J130";
+        private String API_V1_DEVICE_2_SECRET_KEY = "Nx123OTT0000J129";
         private String API_V1_DEVICE_3_SECRET_KEY = "Nx123OTT0876J129";
         private String API_V2_DEVICE_1_SECRET_KEY = "Nx123OTT0456J129";
         private String API_V2_DEVICE_2_SECRET_KEY = "Nx123OTT0123J129";
@@ -79,7 +79,8 @@ public class AESEncryptionDecryption {
             base64 = new String(Base64.getEncoder().encode(cipher), StandardCharsets.UTF_8);
         } catch (Exception e) {
             logger.error("While encrypting : ", e);
-            throw new AppCommonException(400 + "##Could not prepare API response. Encryption issue occurred.");
+            throw new AppCommonException(400 + "##Could not prepare API response. Encryption issue occurred##" + deviceType + "##" + apiVersion);
+
         }
         return base64;
     }

@@ -56,14 +56,15 @@ public class CtrlSpeedData {
         SpeedDataModel reqBody=new SpeedDataModel(fromDate,timeslot,vehicleId);
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses;
         if (reqBody.getTimeSlot() == 24) {
-            String fromTime, toTime;
+            String fromTime , toTime;
             fromTime = reqBody.getFromDate().substring(0, 8); /*2022/03/14  10:42:40*/
-            String finalFromTime = fromTime.concat("000000"), finalToTime = fromTime.concat("235959");
-            speedDataResponses = speedDataRepo.getSpeedDataForhr(finalToTime, finalFromTime, reqBody.getVehicleId(), deviceType);
+            Integer changeToTime= Integer.valueOf(fromTime)+1;
+            String finalFromTime = fromTime.concat("020000"), finalToTime = String.valueOf(changeToTime).concat("015959");
+            speedDataResponses = speedDataRepo.getSpeedDataForgr(finalToTime, finalFromTime, reqBody.getVehicleId(), deviceType);
         } else {
             String fromTime, toTime, finalFromTime;
             fromTime = reqBody.getFromDate().substring(0, 8);
-            Integer timeSlot = reqBody.getTimeSlot() - 2;
+            Integer timeSlot = reqBody.getTimeSlot() + 2;
             if (Integer.toString(timeSlot).length() == 1) {
                 finalFromTime = fromTime.concat("0" + timeSlot + "0000");
                 toTime = fromTime.concat("0" + timeSlot + "5959");
@@ -71,7 +72,7 @@ public class CtrlSpeedData {
                 finalFromTime = fromTime.concat(timeSlot + "0000");
                 toTime = fromTime.concat(timeSlot + "5959");
             }
-            speedDataResponses = speedDataRepo.getSpeedDataForhr(toTime, finalFromTime, reqBody.getVehicleId(), deviceType);
+            speedDataResponses = speedDataRepo.getSpeedDataForgr(toTime, finalFromTime, reqBody.getVehicleId(), deviceType);
             System.out.println();
         }
         BaseResponse baseResponse = new BaseResponse();
@@ -89,67 +90,9 @@ public class CtrlSpeedData {
         }
         System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
           return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
+          //        return ResponseEntity.status(httpStatus).headers(httpHeaders).body(clientResponse);
         //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
 
     }
-  //localhost:8009/api/private/v1/1/users/12/3/speedData/20220314014500/24/1
-    //@GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/speedData/{fromDate}/{timeSlot}/{vehicleStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getSpeedDataMithuVai(@PathVariable("deviceType") Integer deviceType,
-                                               @PathVariable("vehicleStatus") Integer vehicleId,
-                                               @PathVariable("timeSlot") Integer timeslot,
-                                               @PathVariable("userType") String userType, @PathVariable("fromDate") String fromDate,
-                                               @PathVariable(value = "userId") Long userId) throws JsonProcessingException {
-        String activeProfile = environment.getProperty("spring.profiles.active");
-        AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
-        userId = (long) Math.toIntExact(deObfuscateId(userId));
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
-        System.out.println("username: " + username);
-        VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
 
-
-
-        /* Input Validation */
-        SpeedDataModel reqBody=new SpeedDataModel(fromDate,timeslot,vehicleId);
-        Optional<ArrayList<SpeedDataReport>> speedDataResponses;
-
-
-
-        if (reqBody.getTimeSlot() == 24) {
-            String fromTime, toTime;
-            fromTime = reqBody.getFromDate().substring(0, 8); /*2022/03/14  10:42:40*/
-            String finalFromTime = fromTime.concat("000000"), finalToTime = fromTime.concat("235959");
-            speedDataResponses = speedDataRepo.getSpeedDataForMithuVai(finalToTime, finalFromTime, reqBody.getVehicleId(), deviceType,vtsLoginUser.get());
-        } else {
-            String fromTime, toTime, finalFromTime;
-            fromTime = reqBody.getFromDate().substring(0, 8);
-            Integer timeSlot = reqBody.getTimeSlot() - 2;
-            if (Integer.toString(timeSlot).length() == 1) {
-                finalFromTime = fromTime.concat("0" + timeSlot + "0000");
-                toTime = fromTime.concat("0" + timeSlot + "5959");
-            } else {
-                finalFromTime = fromTime.concat(timeSlot + "0000");
-                toTime = fromTime.concat(timeSlot + "5959");
-            }
-            speedDataResponses = speedDataRepo.getSpeedDataForMithuVai(toTime, finalFromTime, reqBody.getVehicleId(), deviceType,vtsLoginUser.get());
-            System.out.println();
-        }
-        BaseResponse baseResponse = new BaseResponse();
-        if (speedDataResponses.isEmpty()) {
-            baseResponse.status = false;
-            baseResponse.errorMsg = "Data  not found within this time limit";
-            baseResponse.errorCode = 4041;
-            baseResponse.apiName = "getSpeedData";
-        } else {
-            speedDataResponsesObj speedDataResponsesObj = new speedDataResponsesObj();
-            baseResponse.status = true;
-            baseResponse.data = speedDataResponses;
-            baseResponse.apiName = "getSpeedData";
-        }
-        System.out.println(ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse)));
-          return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
-        //return ResponseEntity.ok().body(aesCrypto.aesEncrypt(objectMapper.writeValueAsString(baseResponse),API_VERSION));
-
-    }
 }

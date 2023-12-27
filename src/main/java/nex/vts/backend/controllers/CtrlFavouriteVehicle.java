@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ public class CtrlFavouriteVehicle {
 
     @Autowired
     FavouriteVehiclelRepo favouriteVehiclelRepo;
+
+    @Autowired
+    Environment environment;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -66,8 +70,9 @@ public class CtrlFavouriteVehicle {
         if (LIMIT_MAX_THRESHOLD<=limit){
             limit=20;
         }
+        int operatorId= Integer.parseInt(environment.getProperty("application.profiles.operatorid"));
 
-        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehicleList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset, Math.toIntExact(userId),1,userType,PARENT_PROFILE_ID,deviceType);
+        Optional<ArrayList<FavouriteVehiclelModel>> favouriteVehicleList= favouriteVehiclelRepo.findNeededData(String.valueOf(limit),offset, Math.toIntExact(userId),operatorId,userType,PARENT_PROFILE_ID,deviceType);
         BaseResponse baseResponse = new BaseResponse();
 
 

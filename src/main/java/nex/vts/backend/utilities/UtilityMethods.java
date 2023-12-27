@@ -1,8 +1,19 @@
 package nex.vts.backend.utilities;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class UtilityMethods {
     public static Boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty();
+    }
+    public static String getCurrentDateTime() {
+
+        ZoneId dhaka = ZoneId.of("Asia/Dhaka");
+        ZonedDateTime dhakaTime = ZonedDateTime.now(dhaka);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dhakaTime.format(formatter);
     }
 
     public static Long obfuscateId(String strUserId) {
