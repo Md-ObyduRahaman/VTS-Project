@@ -57,7 +57,20 @@ public class CtrlAddExpense {
 
         ExpenseModel expenseModel = mapper.readValue(encryptionDecryption.aesDecrypt(reqBody,API_VERSION), ExpenseModel.class);
 
-        String groupId = String.valueOf(loginUser.getPROFILE_ID()),
+        String oparationType =expenseModel.oparationType;
+        Integer profileType = expenseModel.profileType;
+        Integer profileId = expenseModel.profileId;
+        Integer parentProfileId = expenseModel.parentProfileId;
+        String  vehicleId = expenseModel.vehicleId;
+        Integer expenseId = expenseModel.expenseId;
+        String dateTime = expenseModel.dateTime;
+        String amount = expenseModel.amount;
+        String expenseDescription = expenseModel.expenseDescription;
+        String expenseRowId = expenseModel.expenseRowId;
+        Integer expenseUnit = expenseModel.expenseUnit;
+        Integer expenseUnitPrice = expenseModel.expenseUnitPrice;
+
+/*        String groupId = String.valueOf(loginUser.getPROFILE_ID()),
                 userId = expenseModel.userId,
                 expenseId = expenseModel.expenseId,
                 date = expenseModel.dateTime,
@@ -65,10 +78,24 @@ public class CtrlAddExpense {
                 description = expenseModel.description;
 
         Integer expenseId2 = expenseModel.expenseId2,
-                deptId = expenseModel.deptId;
+                deptId = expenseModel.deptId;*/
 
-        if (!(groupId.isEmpty() & userId.isEmpty() & expenseId.isEmpty() & date.isEmpty() & amount.isEmpty() & expenseId2.equals(null) & deptId.equals(null))) {
-            response.data = addExpenseService.addExpenseService(userId, groupId, expenseId, date, amount, description, expenseId2, deptId,operatorId,schemaName);
+        if (!(expenseModel.equals(null))) {
+            response.data = addExpenseService.addExpenseService(
+                    oparationType,
+                    profileType,
+                    profileId,
+                    parentProfileId,
+                    vehicleId,
+                    expenseId,
+                    dateTime,
+                    amount,
+                    expenseDescription,
+                    expenseRowId,
+                    expenseUnit,
+                    expenseUnitPrice,
+                    operatorId,
+                    schemaName);
             response.status = true;
             response.apiName = "Add Expense";
         } else {

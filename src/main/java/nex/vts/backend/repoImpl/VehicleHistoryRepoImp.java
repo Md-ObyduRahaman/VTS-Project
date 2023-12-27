@@ -25,6 +25,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static org.apache.logging.log4j.util.ProviderActivator.API_VERSION;
+
 @Repository
 public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
@@ -43,66 +45,47 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
     @Override
     public Object getVehicleHistoryForGpAndM2M(Integer vehicleId, Long fromDateTime, Long toDateTime, String schemaName) {
 
-/*     Long   fromDateTimes = Long.parseLong(fromDateTime);
-     Long    toDateTimes = Long.parseLong(toDateTime);*/
-
         try {
-
-/*            int outPut;
-            jdbcCall = new SimpleJdbcCall(dataSource).withSchemaName("GPSNEXGP").withProcedureName("PROC_HIS_DATA_TD");
-            parameterSource = new MapSqlParameterSource().addValue("p_vehicleid",Integer.valueOf(vehicleId))
-                    .addValue("p_date_from",fromDateTimes).addValue("p_date_to",toDateTimes)
-                    .addValue("p_interval",0);
-
-             jdbcCall.execute(parameterSource);*/
-
-//            execute_StoreProcedure(Integer.valueOf(vehicleId),fromDateTimes,toDateTimes);
-
-/*             String querys = "call GPSNEXGP.PROC_HIS_DATA_TD (6046, 20230702135410, 20230819130854,0)";
-             jdbcTemplate.execute(querys);*/
 
             jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
 
-            String query = "select ".concat(schemaName)
-                    .concat("GET_MAX_CAR_SPEED(?)       MAX_SPEED,\n" +
-                            "       ROWNUM                                 ROWNO,\n" +
-                            "       ID,\n" +
-                            "       VEHICLEID,\n" +
-                            "       GROUPID,\n" +
-                            "       DEVICEID,\n" +
-                            "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
-                            "       LAT,\n" +
-                            "       LONGS,\n" +
-                            "       TIME_IN_NUMBER,\n" +
-                            "       POSITION,\n" +
-                            "       SPEED\n" +
-                            "FROM (select ID,\n" +
-                            "             VEHICLEID,\n" +
-                            "             GROUPID,\n" +
-                            "             DEVICEID,\n" +
-                            "             TIME,\n" +
-                            "             LAT,\n" +
-                            "             LONGS,\n" +
-                            "             TIME_IN_NUMBER,\n" +
-                            "             POSITION,\n" +
-                            "             SPEED\n" +
-                            "      FROM ").concat(schemaName).concat("nex_historyrecv_gtt\n" +
-                            "      where VEHICLEID = to_char(?))\n" +
-                            "where TIME_IN_NUMBER between ? and ?\n" +
-                            "order by time_in_number");
-
+            String query = "select ROWNUM                                 ROWNO,\n" +
+                    "       ID,\n" +
+                    "       VEHICLEID,\n" +
+                    "       GROUPID,\n" +
+                    "       HEAD,\n" +
+                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
+                    "       LAT,\n" +
+                    "       LONGS,\n" +
+                    "       TIME_IN_NUMBER,\n" +
+                    "       POSITION,\n" +
+                    "       SPEED\n" +
+                    "FROM (select ID,\n" +
+                    "             VEHICLEID,\n" +
+                    "             GROUPID,\n" +
+                    "             HEAD,\n" +
+                    "             TIME,\n" +
+                    "             LAT,\n" +
+                    "             LONGS,\n" +
+                    "             TIME_IN_NUMBER,\n" +
+                    "             POSITION,\n" +
+                    "             SPEED\n" +
+                    "      FROM ".concat(schemaName).concat("nex_historyrecv_gtt\n" +
+                            "      where VEHICLEID = to_char(?)\n" +
+                            "        and TIME_IN_NUMBER between ? and ?)\n" +
+                            "order by time_in_number ASC");
             return jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
                 @Override
                 public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 
                     return new HistoriesItem(
 
-                            rs.getString("MAX_SPEED"),
+                            /*rs.getString("MAX_SPEED"),*/
                             rs.getInt("ROWNO"),
                             rs.getLong("ID"),
                             rs.getString("VEHICLEID"),
                             rs.getString("GROUPID"),
-                            rs.getString("DEVICEID"),
+                            rs.getString("HEAD"),
                             rs.getString("TIME_STAMP"),
                             rs.getDouble("LAT"),
                             rs.getDouble("LONGS"),
@@ -113,12 +96,13 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
                     );
                 }
 
-            }, new Object[]{vehicleId, vehicleId, fromDateTime, toDateTime});
+            }, new Object[]{/*vehicleId,*/ vehicleId, fromDateTime, toDateTime});
 
         } catch (Exception e) {
 
             logger.error("Unexpected behaviour with param {}", vehicleId, fromDateTime, toDateTime);
             throw new AppCommonException(e.getMessage());
+//            throw new AppCommonException(400 + "##login cred not found##" + "##" + API_VERSION);
         }
     }
 }
