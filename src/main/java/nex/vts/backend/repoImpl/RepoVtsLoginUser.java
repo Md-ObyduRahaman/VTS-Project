@@ -29,6 +29,8 @@ public class RepoVtsLoginUser {
                 "      ORDER BY ID ASC)\n" +
                 "WHERE ROWNUM <= 1";
 
+        System.out.println(query);
+
         try {
             userObj = jdbcTemplate.query(query, new Object[]{userName}, (rs, rowNum) ->
                     new VTS_LOGIN_USER(
