@@ -1,6 +1,7 @@
 package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.exceptions.AppCommonException;
+import nex.vts.backend.models.responses.AccountSummaryInfo;
 import nex.vts.backend.models.responses.UserFullName;
 import nex.vts.backend.repositories.AccountSummaryRepo;
 import org.slf4j.Logger;
@@ -35,23 +36,25 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
     Environment environment;
     private final short API_VERSION = 1;
 
+
     public AccountSummaryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     public Optional<ArrayList<UserFullName>> getUserFullName(Integer profileId, Integer userType, Integer deviceType) {
-        String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
+        String schemaName = environment.getProperty("application.profiles.shcemaName");
 
-
-         String sql = null;
+        String sql = null;
 
         switch (userType) {
+
             case 1:
                 //profileId=1
+
                 sql = "SELECT NCC.COMPANY_NAME FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM "+shcemaName+"NEX_CORPORATE_CLIENT NCC\n" +
+                        "  FROM " + schemaName + "NEX_CORPORATE_CLIENT NCC\n" +
                         " WHERE NCC.ID = " + profileId;
 
                 break;
@@ -59,88 +62,72 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                 //profileId=29
                 sql = "SELECT\n" +
                         "    NVD.DEPT_NAME as FULL_NAME, NVD.CONTACT_NAME, NVD.CONTACT_EMAIL,\n" +
-                        "    NVD.COMPANY_ID, get_client_name(NVD.COMPANY_ID) as MOTHER_ACC_NAME     \n" +
-                        "FROM "+shcemaName+"NEX_VEHICLE_DEPT NVD\n" +
-                        "WHERE NVD.ID ="+profileId;
+                        "    NVD.COMPANY_ID, "+schemaName+"get_client_name(NVD.COMPANY_ID) as MOTHER_ACC_NAME     \n" +
+                        "FROM " + schemaName + "NEX_VEHICLE_DEPT NVD\n" +
+                        "WHERE NVD.ID =" + profileId;
                 break;
             case 3:
                 //profileId=127
                 sql = "SELECT \n" +
                         "    NIC.USERID  as FULL_NAME,\n" +
-                        "    NIC.COMPANY_ID, "+shcemaName+"get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
-                        "FROM "+shcemaName+"NEX_INDIVIDUAL_CLIENT NIC   \n" +
-                        "WHERE NIC.ID ="+profileId;
+                        "    NIC.COMPANY_ID,"+schemaName+"get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
+                        "FROM " + schemaName + "NEX_INDIVIDUAL_CLIENT NIC   \n" +
+                        "WHERE NIC.ID =" + profileId;
                 break;
 
             case 4:
                 //profileId=127
                 sql = "SELECT NIC.FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM "+shcemaName+"NEX_INDIVIDUAL_CLIENT  NIC\n" +
+                        "  FROM " + schemaName + "NEX_INDIVIDUAL_CLIENT  NIC\n" +
                         "       JOIN NEX_CORPORATE_CLIENT NCC ON NCC.ID = NIC.COMPANY_ID\n" +
-                        " WHERE NIC.ID ="+profileId;
+                        " WHERE NIC.ID =" + profileId;
                 break;
             default:
-                throw new AppCommonException(8001 + "##UserType is Wrong##"+deviceType+"##"+API_VERSION);
+                throw new AppCommonException(8001 + "##UserType is Wrong##" + deviceType + "##" + API_VERSION);
         }
 
 
         Optional<ArrayList<UserFullName>> accountSummaries = Optional.empty();
 
         try {
+            logger.trace(sql);
 
             accountSummaries = Optional.of((ArrayList<UserFullName>) jdbcTemplate.query(sql,
                     BeanPropertyRowMapper.newInstance(UserFullName.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception##"+deviceType+"##"+API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         } catch (TransientDataAccessException f) {
             logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable"+deviceType+"##"+API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
         } catch (CannotGetJdbcConnectionException g) {
             logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained"+deviceType+"##"+API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
         }
 
-        if (accountSummaries.get().isEmpty())
-        {
+        if (accountSummaries.get().isEmpty()) {
             return Optional.empty();
-        }
-        else {
+        } else {
             return accountSummaries;
         }
 
     }
 
     @Override
-    public double getVehicleData(String p_info_type,String columnName,Integer profileType,Integer profileId,Integer parentId,String dateFrom,String dateTo,Integer deviceType,String packageName) {
+    public Optional<ArrayList<AccountSummaryInfo>> getVehicleData(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
         Integer result = 0;
         String sql = null;
         String schemaName = environment.getProperty("application.profiles.shcemaName");
 
-        Connection connection = null;
-        PreparedStatement statement = null;
+        sql = "select "+schemaName+"get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, "+schemaName+"get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, "+schemaName+"get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, "+schemaName+"get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, "+schemaName+"get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, "+schemaName+"get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, "+schemaName+"get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, "+schemaName+"get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, "+schemaName+"get_summary_info('DS'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
+
+        System.out.println(sql);
+        logger.trace(sql);
+
+        Optional<ArrayList<AccountSummaryInfo>> accountSummaries;
         try {
-            if (p_info_type.equals("todayDistance")) {
-                sql = "SELECT " + schemaName + packageName + "( ?, ?, ?, ?, ?) AS " + columnName + " FROM DUAL";
-            } else {
-                p_info_type = "'" + p_info_type + "'";
-                sql = "SELECT " + schemaName + packageName + "(" + p_info_type + ", ?, ?, ?, ?, ?) AS " + columnName + " FROM DUAL";
-            }
-            System.out.println(sql);
-            connection = dataSource.getConnection();
-             statement = connection.prepareStatement(sql);
-            statement.setInt(1, profileType);
-            statement.setInt(2, profileId);
-            statement.setInt(3, parentId);
-            statement.setString(4, dateFrom);
-            statement.setString(5, dateTo);
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                result = Integer.valueOf(rs.getString(columnName));
-            }
-
+            accountSummaries = Optional.of((ArrayList<AccountSummaryInfo>) jdbcTemplate.query(sql,
+                    BeanPropertyRowMapper.newInstance(AccountSummaryInfo.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
             throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
@@ -150,25 +137,11 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
         } catch (CannotGetJdbcConnectionException g) {
             logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
             throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }  finally {
-            try {
-
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                logger.error("Error occurred while closing connection or statement: {}", e.getMessage());
-            }
         }
 
-        return result;
-    }
 
+        return accountSummaries;
+    }
 
 
 }

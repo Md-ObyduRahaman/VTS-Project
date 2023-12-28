@@ -23,11 +23,8 @@ public class RepoVtsLoginUser {
         logger.trace("Executing query to find user by username: {}", userName);
         Optional<VTS_LOGIN_USER> userObj = Optional.empty();
         String query = "SELECT *\n" +
-                "FROM (SELECT *\n" +
-                "      FROM "+shcemaName+"VTS_LOGIN_USER\n" +
-                "      WHERE USERNAME = ?\n" +
-                "      ORDER BY ID ASC)\n" +
-                "WHERE ROWNUM <= 1";
+                "      FROM VTS_LOGIN_USER\n" +
+                "      WHERE USERNAME = ?";
 
         try {
             userObj = jdbcTemplate.query(query, new Object[]{userName}, (rs, rowNum) ->
