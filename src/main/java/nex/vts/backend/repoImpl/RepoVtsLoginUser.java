@@ -26,6 +26,8 @@ public class RepoVtsLoginUser {
                 "      FROM VTS_LOGIN_USER\n" +
                 "      WHERE USERNAME = ?";
 
+        System.out.println(query);
+
         try {
             userObj = jdbcTemplate.query(query, new Object[]{userName}, (rs, rowNum) ->
                     new VTS_LOGIN_USER(
