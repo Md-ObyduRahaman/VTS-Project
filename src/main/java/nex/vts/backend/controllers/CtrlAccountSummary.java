@@ -66,8 +66,8 @@ public class CtrlAccountSummary {
 
         UserFullName fullName;
       try {
-           //fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
-           fullName = accountSummaryRepo.getUserFullName(8575, 1, deviceType).get().get(0);
+           fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
+          // fullName = accountSummaryRepo.getUserFullName(8575, 1, deviceType).get().get(0);
       }catch (NoSuchElementException e)
       {
           logger.error("Data not found in your array: ", e);
@@ -102,8 +102,19 @@ public class CtrlAccountSummary {
 
     private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME,String motherAccountName) throws IOException {
 
+        String operatorid = environment.getProperty("application.profiles.operatorid");
 
-        Optional<ArrayList<AccountSummaryInfo>> data=accountSummaryRepo.getVehicleData(profileType,profileId,p_profile_p_id,deviceType);
+        Optional<ArrayList<AccountSummaryInfo>> data = null;
+
+        if (operatorid.equals("1"))
+        {
+            data=accountSummaryRepo.getVehicleDataforGP(profileType,profileId,p_profile_p_id,deviceType);
+        }  else if (operatorid.equals("3"))
+        {
+            System.out.println("dd");
+            data=accountSummaryRepo.getVehicleDataforM2m(profileType,profileId,p_profile_p_id,deviceType);
+        }
+
 
         System.out.println(data.get().get(0));
         AccountSummaryInfo accountSummaryInfo=new AccountSummaryInfo();

@@ -26,17 +26,13 @@ public class AccountSummaryInfo {
   private Integer TODAYS_DISTANCE;
   @JsonProperty("todayAlert")
   private Integer TODAYS_ALERT;
-  @JsonProperty("todaySpeedAlert")
+  @JsonProperty("overSpeed")
   private Integer TODAYS_SPEED_ALERT;
-  @JsonProperty("driverScore")
+  @JsonProperty("consultationDriver")
   private Integer DRIVERSCORE;
-
   private String full_NAME;
   @JsonProperty("billingInfo")
   private DetailsOfClientDue detailsOfClientDue;
-  @Value("${consultationDriver.type:0}")
-  private  int consultationDriver;
   private  String motherAccountName;
-  @Value("${overSpeed.type:0}")
-  private  int overSpeed;
+
 }

@@ -46,47 +46,10 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
 
-        String sql = null;
-
-        switch (userType) {
-
-            case 1:
-                //profileId=1
-
-                sql = "SELECT NCC.COMPANY_NAME FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM " + schemaName + "NEX_CORPORATE_CLIENT NCC\n" +
-                        " WHERE NCC.ID = " + profileId;
-
-                break;
-            case 2:
-                //profileId=29
-                sql = "SELECT\n" +
-                        "    NVD.DEPT_NAME as FULL_NAME, NVD.CONTACT_NAME, NVD.CONTACT_EMAIL,\n" +
-                        "    NVD.COMPANY_ID, "+schemaName+"get_client_name(NVD.COMPANY_ID) as MOTHER_ACC_NAME     \n" +
-                        "FROM " + schemaName + "NEX_VEHICLE_DEPT NVD\n" +
-                        "WHERE NVD.ID =" + profileId;
-                break;
-            case 3:
-                //profileId=127
-                sql = "SELECT \n" +
-                        "    NIC.USERID  as FULL_NAME,\n" +
-                        "    NIC.COMPANY_ID,"+schemaName+"get_client_name(NIC.COMPANY_ID) as MOTHER_ACC_NAME  \n" +
-                        "FROM " + schemaName + "NEX_INDIVIDUAL_CLIENT NIC   \n" +
-                        "WHERE NIC.ID =" + profileId;
-                break;
-
-            case 4:
-                //profileId=127
-                sql = "SELECT NIC.FULL_NAME, NCC.CONTACT_NAME\n" +
-                        "  FROM " + schemaName + "NEX_INDIVIDUAL_CLIENT  NIC\n" +
-                        "       JOIN NEX_CORPORATE_CLIENT NCC ON NCC.ID = NIC.COMPANY_ID\n" +
-                        " WHERE NIC.ID =" + profileId;
-                break;
-            default:
-                throw new AppCommonException(8001 + "##UserType is Wrong##" + deviceType + "##" + API_VERSION);
-        }
+        String sql = "SELECT "+schemaName+"get_client_name ("+profileId+")    AS MOTHER_ACC_NAME, "+schemaName+"get_profile_name ("+userType+", "+profileId+", 0, 0)         AS FULL_NAME FROM DUAL";
 
 
+        logger.trace(sql);
         Optional<ArrayList<UserFullName>> accountSummaries = Optional.empty();
 
         try {
@@ -114,10 +77,11 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
     }
 
     @Override
-    public Optional<ArrayList<AccountSummaryInfo>> getVehicleData(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
+    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforM2m(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
         Integer result = 0;
         String sql = null;
         String schemaName = environment.getProperty("application.profiles.shcemaName");
+
 
         sql = "select "+schemaName+"get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, "+schemaName+"get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, "+schemaName+"get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, "+schemaName+"get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, "+schemaName+"get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, "+schemaName+"get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, "+schemaName+"get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, "+schemaName+"get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, "+schemaName+"get_summary_info('DS'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
 
@@ -142,6 +106,38 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
         return accountSummaries;
     }
+    @Override
+    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforGP(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
+        Integer result = 0;
+        String sql = null;
+        String schemaName = environment.getProperty("application.profiles.shcemaName");
+
+
+        sql = "select "+schemaName+"get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, "+schemaName+"get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, "+schemaName+"get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, "+schemaName+"get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, "+schemaName+"get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, "+schemaName+"get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, "+schemaName+"get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, "+schemaName+"get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, "+schemaName+"get_summary_info('DC'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
+
+        System.out.println(sql);
+        logger.trace(sql);
+
+        Optional<ArrayList<AccountSummaryInfo>> accountSummaries;
+        try {
+            accountSummaries = Optional.of((ArrayList<AccountSummaryInfo>) jdbcTemplate.query(sql,
+                    BeanPropertyRowMapper.newInstance(AccountSummaryInfo.class)));
+        } catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+        } catch (TransientDataAccessException f) {
+            logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+        } catch (CannotGetJdbcConnectionException g) {
+            logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+        }
+
+
+        return accountSummaries;
+    }
+
+
 
 
 }
