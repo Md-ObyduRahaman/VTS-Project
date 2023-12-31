@@ -66,8 +66,14 @@ public class CtrlVehicleList {
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
-        Object getVehicleInfo = Vehicle_List_Service.getVehicles(loginUser.getPROFILE_ID(),
-                loginUser.getUSER_TYPE(), operatorId, schemaName, Integer.valueOf(loginUser.getPARENT_PROFILE_ID()));
+        Object getVehicleInfo = Vehicle_List_Service.getVehicles(
+                loginUser.getPROFILE_ID(),
+                loginUser.getUSER_TYPE(),
+                operatorId,
+                schemaName,
+                Integer.valueOf(loginUser.getPARENT_PROFILE_ID()),
+                deviceType,
+                API_VERSION);
 
         if (!getVehicleInfo.equals(null)) {
 

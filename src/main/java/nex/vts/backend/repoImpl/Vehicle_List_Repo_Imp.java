@@ -53,7 +53,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 } catch (Exception e) {
 
                     logger.error(e.getCause().getMessage());
-                    throw new AppCommonException(e.getMessage());
+                    /*throw new AppCommonException(e.getMessage());*/
                 }
             case 2:
                 try {
@@ -119,7 +119,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 } catch (Exception e) {
 
                     logger.error(e.getCause().getMessage());
-                    throw new AppCommonException(e.getMessage());
+                    /*throw new AppCommonException(e.getMessage());*/
                 }
 
             case 3:
@@ -158,7 +158,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 } catch (Exception e) {
 
                     logger.error(e.getCause().getMessage());
-                    throw new AppCommonException(e.getMessage());
+                   /* throw new AppCommonException(e.getMessage());*/
                 }
             default:
                 return "vehicle list is empty";
