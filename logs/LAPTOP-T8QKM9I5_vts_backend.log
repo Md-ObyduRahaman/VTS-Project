@@ -317,3 +317,29 @@ nex.vts.backend.exceptions.AppCommonException: 4051##Token is Expired##1##1
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 16:50:57.417 [http-nio-8009-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - logException:207 - Resolved [org.springframework.security.authentication.InsufficientAuthenticationException: Full authentication is required to access this resource]
+16:53:22.231 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-4 - Shutdown initiated...
+16:53:22.303 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-4 - Shutdown completed.
+16:53:32.272 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 17.0.8 with PID 8004 (C:\Users\obydu\InteljProject\vts_backend\target\classes started by obydu in C:\Users\obydu\InteljProject\vts_backend)
+16:53:32.275 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+16:53:32.276 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+16:53:32.320 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+16:53:32.334 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\obydu\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/obydu/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+16:53:32.334 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:53:32.335 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:53:33.034 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+16:53:33.097 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 59 ms. Found 1 JDBC repository interfaces.
+16:53:33.620 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - initialize:108 - Tomcat initialized with port(s): 8009 (http)
+16:53:33.627 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Initializing ProtocolHandler ["http-nio-8009"]
+16:53:33.628 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Starting service [Tomcat]
+16:53:33.629 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
+16:53:33.676 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
+16:53:33.677 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1342 ms
+16:53:33.915 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+16:53:34.362 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@b840c17
+16:53:34.365 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+16:53:34.420 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+16:53:34.733 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@60ec8f79, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9ca7570, org.springframework.security.web.context.SecurityContextHolderFilter@4900726, org.springframework.security.web.header.HeaderWriterFilter@49c5f2c0, org.springframework.security.web.authentication.logout.LogoutFilter@2706c1e0, nex.vts.backend.filter.JwtAuthFilter@7e367413, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3616d4e9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50f8cf7a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b6a8337, org.springframework.security.web.session.SessionManagementFilter@404a8812, org.springframework.security.web.access.ExceptionTranslationFilter@d336a60, org.springframework.security.web.access.intercept.AuthorizationFilter@5fc6c13d]
+16:53:34.937 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+16:53:35.059 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Starting ProtocolHandler ["http-nio-8009"]
+16:53:35.075 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - start:220 - Tomcat started on port(s): 8009 (http) with context path ''
+16:53:35.082 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 3.346 seconds (process running for 4.081)

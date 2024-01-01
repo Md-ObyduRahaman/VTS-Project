@@ -33,6 +33,7 @@ public class VehicleHistory_Service {
 
                 List<HistoriesItem> historiesItemList = (List<HistoriesItem>) history_repo.getVehicleHistoryForGpAndM2M(vehicleId,
                         Long.parseLong(fromDateTime(fromDateTime)), Long.parseLong(toDateTime(toDateTime)), schemaName);
+
                 history.setHistories(historiesItemResponse(historiesItemList));
                 history.setTotalCount(historiesItemList.size());
                 history.setCode(200);

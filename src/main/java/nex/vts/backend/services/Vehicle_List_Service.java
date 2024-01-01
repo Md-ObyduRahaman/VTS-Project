@@ -31,7 +31,13 @@ public class Vehicle_List_Service {
         }
     }
 
-    public Object getVehicles(Integer id,/* String limit, Integer offset,*/ Integer userType,Integer operatorId,String shcemaName,Integer deptId) {
+    public Object getVehicles(Integer id,/* String limit, Integer offset,*/
+                              Integer userType,
+                              Integer operatorId,
+                              String shcemaName,
+                              Integer deptId,
+                              Integer deviceType,
+                              short apiVersion) {
 //        VehicleListResponse vehicleListResponse = new VehicleListResponse();
 /*        if (userType.equals(1)) {
             List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId);
@@ -45,18 +51,38 @@ public class Vehicle_List_Service {
              individualVehicleListResponse.setIndividualAccVehicleListList((IndividualAccVehicleList) getVehicleList(id*//*, limit, offset*//*, userType, operatorId, shcemaName, deptId));*/
         switch (userType) {
             case 1:/*TODO parent profile*/
-                List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
-                motherVehicleListResponse.setMotherAccVehicleLists((List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
-                motherVehicleListResponse.setTotalVehicle(totalVehicleList.size());
-                return motherVehicleListResponse;
+                try {
+
+                    List<MotherAccVehicleList> totalVehicleList = (List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
+                    motherVehicleListResponse.setMotherAccVehicleLists((List<MotherAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                    motherVehicleListResponse.setTotalVehicle(totalVehicleList.size());
+                    return motherVehicleListResponse;
+                }
+                catch (Exception e){
+
+                    logger.error(e.getMessage());
+                    throw new AppCommonException(600 + "##Could not fetch  vehicleList" + deviceType + "##" + apiVersion);
+                }
             case 2:/*TODO child/department profile*/
-                departmentVehicleListResponse.setDeptAccVehicleLists((List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
-                List<DeptAccVehicleList> totalDeptAccVehicleList = (List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
-                departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
-                return departmentVehicleListResponse;
+                try {
+
+                    departmentVehicleListResponse.setDeptAccVehicleLists((List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                    List<DeptAccVehicleList> totalDeptAccVehicleList = (List<DeptAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId);
+                    departmentVehicleListResponse.setTotalVehicle(totalDeptAccVehicleList.size());
+                    return departmentVehicleListResponse;
+                }catch (Exception e){
+                    logger.error(e.getMessage());
+                    throw new AppCommonException(600 + "##Could not fetch  vehicleList" + deviceType + "##" + apiVersion);
+                }
             case 3:/*TODO indivisual profile*/
-                individualVehicleListResponse.setIndividualAccVehicleListList((List<IndividualAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
-                return individualVehicleListResponse;
+                try {
+                    individualVehicleListResponse.setIndividualAccVehicleListList((List<IndividualAccVehicleList>) getVehicleList(id/*, limit, offset*/, userType, operatorId, shcemaName, deptId));
+                    return individualVehicleListResponse;
+                }catch (Exception e)
+                {
+                    logger.error(e.getMessage());
+                    throw new AppCommonException(600 + "##Could not fetch  vehicleList" + deviceType + "##" + apiVersion);
+                }
             default:
                 return "this" + userType + " is not registered";
         }

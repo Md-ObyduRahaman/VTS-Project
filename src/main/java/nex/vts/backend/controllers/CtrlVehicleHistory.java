@@ -49,10 +49,10 @@ public class CtrlVehicleHistory {
         AESEncryptionDecryption encryptionDecryption = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
         Integer vehicleIds = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
-        Long    fromDateTimes = deObfuscateId(fromDateTime);
-        Long    toDateTimes = deObfuscateId(toDateTime);
+//        Long    fromDateTimes = deObfuscateId(fromDateTime);
+//        Long    toDateTimes = deObfuscateId(toDateTime);
 
-        VehicleHistoryResponse historyResponse = historyService.getVehicleHistory(vehicleIds,String.valueOf(fromDateTimes),String.valueOf(toDateTimes),schemaName,operatorId);
+        VehicleHistoryResponse historyResponse = historyService.getVehicleHistory(vehicleIds,String.valueOf(fromDateTime),String.valueOf(toDateTime),schemaName,operatorId);
 
         if (!historyResponse.getHistory().equals(null)){
 
