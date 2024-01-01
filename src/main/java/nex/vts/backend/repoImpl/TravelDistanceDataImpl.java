@@ -70,9 +70,11 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
         // Step 1: Call the stored procedure with parameters
         String callProcedureSql = "CALL "+shcemaName+"GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
-
+//("DISTANCE", "D",1,7215,7215,0,27476,20230801,20230831)
 
         try {
+            logger.trace(callProcedureSql);
+            logger.trace(sql);
           jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
           // Step 2: Run a SELECT query to fetch the results
           results = jdbcTemplate.queryForList(sql);
