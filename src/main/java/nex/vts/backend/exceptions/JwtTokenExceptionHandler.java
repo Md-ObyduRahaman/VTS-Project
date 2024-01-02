@@ -28,33 +28,34 @@ public class JwtTokenExceptionHandler {
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = ex.getMessage();
 
-        }
-        if (ex instanceof AccessDeniedException) {
+        } else if (ex instanceof AccessDeniedException) {
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = ex.getMessage();
 
-        }
-        if (ex instanceof MalformedJwtException) {
+        } else if (ex instanceof MalformedJwtException) {
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT signature is being tempered! Please input valid json-web-token";
 
-        }
-
-        if (ex instanceof SignatureException) {
+        } else if (ex instanceof SignatureException) {
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT Signature not valid! Please input valid json-web-token";
-        }
-        if (ex instanceof ExpiredJwtException) {
+        } else if (ex instanceof ExpiredJwtException) {
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT Token already expired !";
+        } else if (ex.getMessage() != null) {
+            baseResponse.apiName = null;
+            baseResponse.status = false;
+            baseResponse.errorCode = 403;
+            baseResponse.errorMsg = "Something went to wrong.Internal server Error! Please check Back-End Code";
+            ex.printStackTrace();
         }
         String clientResponse = null;
         clientResponse = objectMapper.writeValueAsString(baseResponse);
