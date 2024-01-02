@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import nex.vts.backend.exceptions.AppCommonException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -28,21 +27,9 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-
-        try {
-            final Claims claims = extractAllClaims(token);
-            return claimsResolver.apply(claims);
-        } catch (Exception e) {
-            if (e instanceof SignatureException || e instanceof MalformedJwtException) { // io.jsonwebtoken.security.SignatureException
-                System.out.println("Signature is being tempered");
-                throw new AppCommonException(4051 + "##Signature is being tempered##" + 1 + "##" + 1);
-            } else if (e instanceof ExpiredJwtException) { // io.jsonwebtoken.ExpiredJwtException
-                System.out.println("Token Expired");
-                throw new AppCommonException(4051 + "##Token is Expired##" + 1 + "##" + 1);
-            }
-            return null;
-        }
+   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
     }
 
 
