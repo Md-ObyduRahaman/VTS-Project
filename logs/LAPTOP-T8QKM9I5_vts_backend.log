@@ -1337,3 +1337,53 @@ nex.vts.backend.exceptions.AppCommonException: 4051##Token is Expired##1##1
 11:10:18.412 [http-nio-8009-exec-9] DEBUG org.springframework.jdbc.core.JdbcTemplate - update:958 - Executing prepared SQL update
 11:10:18.412 [http-nio-8009-exec-9] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [CALL PROC_HIS_DATA_TD(?, ?,?,?)]
 11:10:18.930 [http-nio-8009-exec-9] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:440 - Executing SQL query [select ID,TIME_IN_NUMBER date_time,POSITION, SPEED FROM nex_historyrecv_gtt where VEHICLEID = to_char(32350) and TIME_IN_NUMBER between 20231225020000 and 20231226015959 order by id asc]
+11:38:30.683 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 4 class path changes (0 additions, 0 deletions, 4 modifications)
+11:38:30.853 [Thread-6] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Pausing ProtocolHandler ["http-nio-8009"]
+11:38:30.856 [Thread-6] INFO  org.apache.catalina.core.StandardService - log:173 - Stopping service [Tomcat]
+11:38:30.871 [Thread-6] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+11:38:30.896 [Thread-6] WARN  org.apache.catalina.loader.WebappClassLoaderBase - log:173 - The web application [ROOT] appears to have started a thread named [oracle.jdbc.driver.BlockSource.ThreadedCachingBlockSource.BlockReleaser] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.8/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.8/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ app//oracle.jdbc.internal.Monitor$WaitableMonitor.monitorWait(Monitor.java:258)
+ app//oracle.jdbc.internal.Monitor$WaitableMonitor.monitorWait(Monitor.java:240)
+ app//oracle.jdbc.driver.BlockSource$ThreadedCachingBlockSource$BlockReleaser.run(BlockSource.java:345)
+11:38:30.897 [Thread-6] WARN  org.apache.catalina.loader.WebappClassLoaderBase - log:173 - The web application [ROOT] appears to have started a thread named [InterruptTimer] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8/java.lang.Object.wait(Native Method)
+ java.base@17.0.8/java.util.TimerThread.mainLoop(Timer.java:563)
+ java.base@17.0.8/java.util.TimerThread.run(Timer.java:516)
+11:38:30.897 [Thread-6] WARN  org.apache.catalina.loader.WebappClassLoaderBase - log:173 - The web application [ROOT] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.8/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.8/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.8/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.8/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.8/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.8/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.8/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.8/java.lang.Thread.run(Thread.java:833)
+11:38:30.904 [Thread-6] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Stopping ProtocolHandler ["http-nio-8009"]
+11:38:30.915 [Thread-6] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Destroying ProtocolHandler ["http-nio-8009"]
+11:38:30.952 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+11:38:31.006 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
+11:38:31.251 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 17.0.8 with PID 12008 (C:\Users\obydu\InteljProject\vts_backend\target\classes started by obydu in C:\Users\obydu\InteljProject\vts_backend)
+11:38:31.251 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+11:38:31.251 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+11:38:31.535 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+11:38:31.559 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 22 ms. Found 1 JDBC repository interfaces.
+11:38:31.735 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - initialize:108 - Tomcat initialized with port(s): 8009 (http)
+11:38:31.736 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Initializing ProtocolHandler ["http-nio-8009"]
+11:38:31.736 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Starting service [Tomcat]
+11:38:31.736 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
+11:38:31.776 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
+11:38:31.776 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 523 ms
+11:38:31.871 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-2 - Starting...
+11:38:31.998 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-2 - Added connection oracle.jdbc.driver.T4CConnection@4dcc6a09
+11:38:31.998 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-2 - Start completed.
+11:38:32.017 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+11:38:32.145 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@8338c3b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a43a547, org.springframework.security.web.context.SecurityContextHolderFilter@72c0549f, org.springframework.security.web.header.HeaderWriterFilter@797bf576, org.springframework.security.web.authentication.logout.LogoutFilter@2b620ebc, nex.vts.backend.filter.JwtAuthFilter@57f99faa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a60ceb9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3c1658c6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@39b963a0, org.springframework.security.web.session.SessionManagementFilter@77219670, org.springframework.security.web.access.ExceptionTranslationFilter@2ad5cb2, org.springframework.security.web.access.intercept.AuthorizationFilter@48d4e11c]
+11:38:32.216 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+11:38:32.260 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Starting ProtocolHandler ["http-nio-8009"]
+11:38:32.262 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - start:220 - Tomcat started on port(s): 8009 (http) with context path ''
+11:38:32.267 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 1.053 seconds (process running for 2049.154)
+11:38:32.268 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:63 - Condition evaluation unchanged
