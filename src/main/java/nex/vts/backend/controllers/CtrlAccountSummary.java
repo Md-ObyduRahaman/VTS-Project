@@ -67,12 +67,12 @@ public class CtrlAccountSummary {
         UserFullName fullName;
       try {
            fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
+          // fullName = accountSummaryRepo.getUserFullName(8575, 1, deviceType).get().get(0);
       }catch (NoSuchElementException e)
       {
           logger.error("Data not found in your array: ", e);
           throw new AppCommonException(4041 + "##Data not found##" + deviceType + "##" + API_VERSION);
       }
-
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
@@ -102,24 +102,32 @@ public class CtrlAccountSummary {
 
     private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME,String motherAccountName) throws IOException {
 
-        Integer runningVehicle= (int) accountSummaryRepo.getVehicleData("RV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
-        Integer stoppedVehicle= (int) accountSummaryRepo.getVehicleData("SV","stopped_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
-        Integer todaySpeedAlert= (int) accountSummaryRepo.getVehicleData("SPEED","speed_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss"), getEndOfDay("yyyyMMddHHmmss"),deviceType,"get_alert_summary");
-        Integer todayGEOAlert= (int) accountSummaryRepo.getVehicleData("GEO","geo_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss"), getEndOfDay("yyyyMMddHHmmss"),deviceType,"get_alert_summary");
-        Integer todayOthersAlert= (int) accountSummaryRepo.getVehicleData("OTHERS","geo_alert",profileType,profileId,p_profile_p_id, getStartOfDay("yyyyMMddHHmmss").substring(0, 8), getEndOfDay("yyyyMMddHHmmss").substring(0, 8),deviceType,"get_alert_summary");
-        double todayDistance=accountSummaryRepo.getVehicleData("todayDistance","distance",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_distance_summary");
-        Integer availableSMS= (int) accountSummaryRepo.getVehicleData("AS","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
-        Integer todayRunningVehicle= (int) accountSummaryRepo.getVehicleData("TRV","running_vehicle",profileType,profileId,p_profile_p_id, getStartOfDay("yyyy-MM-dd HH:mm:ss"), getEndOfDay("yyyy-MM-dd HH:mm:ss"),deviceType,"get_summary_info");
+        String operatorid = environment.getProperty("application.profiles.operatorid");
+
+        Optional<ArrayList<AccountSummaryInfo>> data = null;
+
+        if (operatorid.equals("1"))
+        {
+            data=accountSummaryRepo.getVehicleDataforGP(profileType,profileId,p_profile_p_id,deviceType);
+        }  else if (operatorid.equals("3"))
+        {
+            System.out.println("dd");
+            data=accountSummaryRepo.getVehicleDataforM2m(profileType,profileId,p_profile_p_id,deviceType);
+        }
 
 
+        System.out.println(data.get().get(0));
         AccountSummaryInfo accountSummaryInfo=new AccountSummaryInfo();
-        accountSummaryInfo.setTotalVehicle(runningVehicle+stoppedVehicle);
-        accountSummaryInfo.setTodayAlert(todaySpeedAlert+todayGEOAlert+todayOthersAlert);
-        accountSummaryInfo.setTodayDistance(todayDistance);
-        accountSummaryInfo.setAvailableSMS(availableSMS);
-        accountSummaryInfo.setRunningVehicle(runningVehicle);
-        accountSummaryInfo.setStoppedVehicle(stoppedVehicle);
-        accountSummaryInfo.setRunningVehicle(todayRunningVehicle);
+        accountSummaryInfo.setTOTAL_VEHICLE(data.get().get(0).getTOTAL_VEHICLE());
+        accountSummaryInfo.setTODAYS_ALERT(data.get().get(0).getTODAYS_ALERT());
+        accountSummaryInfo.setTODAYS_DISTANCE(data.get().get(0).getTODAYS_DISTANCE());
+        accountSummaryInfo.setAVAILABLE_SMS(data.get().get(0).getAVAILABLE_SMS());
+        accountSummaryInfo.setRUNNING_NOW(data.get().get(0).getRUNNING_NOW());
+        accountSummaryInfo.setSTOP_NOW(data.get().get(0).getSTOP_NOW());
+        accountSummaryInfo.setRUNNING_NOW(data.get().get(0).getRUNNING_NOW());
+        accountSummaryInfo.setTODAY_RUNNING(data.get().get(0).getTODAY_RUNNING());
+        accountSummaryInfo.setTODAYS_SPEED_ALERT(data.get().get(0).getTODAYS_SPEED_ALERT());
+        accountSummaryInfo.setDRIVERSCORE(data.get().get(0).getDRIVERSCORE());
         accountSummaryInfo.setFull_NAME(full_NAME);
         accountSummaryInfo.setMotherAccountName(motherAccountName);
 

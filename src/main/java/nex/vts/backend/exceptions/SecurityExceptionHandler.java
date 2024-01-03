@@ -29,7 +29,7 @@ public class SecurityExceptionHandler extends ResponseEntityExceptionHandler {
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.status = false;
         baseResponse.errorCode = 401;
-        baseResponse.errorMsg = "Token is expired or you are unauthorized to access this resource. If you are valid user then request for token again.";
+        baseResponse.errorMsg = "Something went to wrong.Internal server Error! Please check Back-End Code";
         String clientResponse = objectMapper.writeValueAsString(baseResponse);
 
         System.out.println("Exception name " + ex.getClass());

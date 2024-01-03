@@ -111,6 +111,7 @@ public class CtrlLogin {
             loginResponse.profileType = vtsLoginUser.getUSER_TYPE();
             loginResponse.profileId = vtsLoginUser.getPROFILE_ID();
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
+            loginResponse.operatorid=vtsLoginUser.getOPERATORID();
             String dynamicColumnName;
 
             if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";

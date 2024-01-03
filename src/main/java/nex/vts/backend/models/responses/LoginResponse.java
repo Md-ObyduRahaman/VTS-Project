@@ -25,6 +25,8 @@ public class LoginResponse {
 
     public String userName;
 
+    public String operatorid;
+
     //IND_LOGIN,ICON_TYPE,COMPANY_ID
 
 

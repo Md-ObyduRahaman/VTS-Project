@@ -12,15 +12,27 @@ import org.springframework.beans.factory.annotation.Value;
 public class AccountSummaryInfo {
   @Value("${todayRunningVehicle.type:0}")
   private int todayRunningVehicleType;
-  private Integer StoppedVehicle,RunningVehicle,availableSMS,todayAlert,totalVehicle;
-  private double todayDistance;
+  @JsonProperty("RunningVehicle")
+  private Integer RUNNING_NOW;
+  @JsonProperty("todayRunningVehicle")
+  private Integer TODAY_RUNNING;
+  @JsonProperty("StoppedVehicle")
+  private Integer STOP_NOW;
+  @JsonProperty("availableSMS")
+  private Integer AVAILABLE_SMS;
+  @JsonProperty("totalVehicle")
+  private Integer TOTAL_VEHICLE;
+  @JsonProperty("todayDistance")
+  private Integer TODAYS_DISTANCE;
+  @JsonProperty("todayAlert")
+  private Integer TODAYS_ALERT;
+  @JsonProperty("overSpeed")
+  private Integer TODAYS_SPEED_ALERT;
+  @JsonProperty("consultationDriver")
+  private Integer DRIVERSCORE;
   private String full_NAME;
   @JsonProperty("billingInfo")
   private DetailsOfClientDue detailsOfClientDue;
-  @Value("${consultationDriver.type:0}")
-  private  int consultationDriver;
   private  String motherAccountName;
-  @Value("${overSpeed.type:0}")
-  private  int overSpeed;
- // private  int overSpeed;
+
 }
