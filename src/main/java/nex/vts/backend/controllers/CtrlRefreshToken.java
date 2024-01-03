@@ -141,7 +141,7 @@ public class CtrlRefreshToken {
 
                     if (nexDeptClientProfileOpt.isPresent()) {
                         NEX_VEHICLE_DEPT nexIndividualClientProfile = nexDeptClientProfileOpt.get();
-                        Integer c2Value = repoNexVehicleDept.getC2(nexIndividualClientProfile.getPARENT_PROFILE_ID(), shcemaName);
+                        Integer c2Value = repoNexVehicleDept.getC2(nexIndividualClientProfile.getPARENT_PROFILE_ID(), shcemaName,operatorid);
                         if (c2Value == 1) loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                     } else
                         throw new AppCommonException(4008 + "##Sorry we could not found your profile information" + deviceType + "##" + API_VERSION);

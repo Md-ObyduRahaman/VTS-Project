@@ -27,9 +27,19 @@ public class RepoNexVehicleDept {
         return jdbcTemplate.queryForObject("SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM " + schemaName + "NEX_VEHICLE_DEPT  where USERID = ? and GRP_PASS = ? and ACTIVATION = 1 and OPERATORID = ?", new Object[]{userName, password, operatorid}, (rs, rowNum) -> Optional.of(new NEX_VEHICLE_DEPT(rs.getInt("PARENT_PROFILE_ID"))));
     }
 
-    public Integer getC2(Integer operatorid, String shcemaName) {
+    public Integer getC2(Integer PARENT_PROFILE_ID, String shcemaName,Integer operatorid) {
+        Integer result = null;
+        if(operatorid==3)
+        {
+             result = jdbcTemplate.queryForObject("SELECT m2mdev.get_client_stat(?) AS C2 FROM dual", new Object[]{PARENT_PROFILE_ID}, Integer.class);
 
-        Integer result = jdbcTemplate.queryForObject("SELECT " + shcemaName + "get_client_stat(?) AS C2 FROM dual", new Object[]{operatorid}, Integer.class);
+        }
+        else {
+             result = jdbcTemplate.queryForObject("SELECT " + shcemaName + "get_client_stat(?) AS C2 FROM dual", new Object[]{PARENT_PROFILE_ID}, Integer.class);
+
+        }
+
+
         return result;
     }
 }
