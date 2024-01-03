@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import static nex.vts.backend.utilities.UtilityMethods.isNullOrEmpty;
@@ -49,6 +50,7 @@ public class CtrlForgotPassWord {
 
 
         if (forgotPassWordResponseData.getToken()==0) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg = forgotPassWordResponseData.getMessage();
             baseResponse.errorCode = 4042;

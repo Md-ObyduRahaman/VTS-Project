@@ -46,6 +46,7 @@ public class DriverInfoController {
 
 
         if (GetDriverInfo.isEmpty()) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName= "Get Driver Info";
             baseResponse.errorMsg = "Data  not found";

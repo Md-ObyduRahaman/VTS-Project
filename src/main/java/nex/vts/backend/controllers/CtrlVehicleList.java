@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -83,7 +84,7 @@ public class CtrlVehicleList {
             baseResponse.apiName = "Vehicle-List";
         } else {
 
-            baseResponse.data = null;
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "Vehicle-List";
             baseResponse.errorMsg = "The resource or endpoint was not found";

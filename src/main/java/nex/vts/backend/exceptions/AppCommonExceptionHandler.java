@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
+
 @RestControllerAdvice
 public class AppCommonExceptionHandler {
 
@@ -43,6 +45,7 @@ public class AppCommonExceptionHandler {
         int apiVersion = errorMessages[3] != null ? Integer.parseInt(errorMessages[3]) : 0;
 
         BaseResponse baseResponse = new BaseResponse();
+        baseResponse.data=new ArrayList<>();
         baseResponse.status = false;
         baseResponse.errorCode = errorCode;
         baseResponse.errorMsg = errorMsg;

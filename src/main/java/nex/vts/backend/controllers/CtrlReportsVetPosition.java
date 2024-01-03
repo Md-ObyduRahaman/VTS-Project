@@ -17,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping("/api/private")
@@ -57,6 +59,7 @@ public class CtrlReportsVetPosition {
 
 
         if (expenseReportDataList.getEngin().isEmpty()) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;

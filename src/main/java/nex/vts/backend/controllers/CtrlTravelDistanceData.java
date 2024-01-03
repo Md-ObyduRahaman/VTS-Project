@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
@@ -82,6 +83,7 @@ public class CtrlTravelDistanceData {
         MonthTravleDistanceForAll monthTravleDistanceForAll = travelDistanceDataRepo.getTravelDistanceData(reqBody, deviceType);
         BaseResponse baseResponse = new BaseResponse();
         if (monthTravleDistanceForAll.getMonthTravleDistancesList().isEmpty()) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found ";
             baseResponse.errorCode = 4041;

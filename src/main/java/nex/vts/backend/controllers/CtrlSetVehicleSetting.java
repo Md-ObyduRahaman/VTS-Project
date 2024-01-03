@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -82,6 +83,7 @@ public class CtrlSetVehicleSetting {
         }
         BaseResponse baseResponse = new BaseResponse();
         if (!checkBool) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "changeVehicleStatus";
             baseResponse.errorMsg = "Operation Failed. You are not permitted to update vehicle settings";

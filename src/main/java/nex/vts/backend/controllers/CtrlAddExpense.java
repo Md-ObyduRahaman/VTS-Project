@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -100,7 +101,7 @@ public class CtrlAddExpense {
             response.status = true;
             response.apiName = "Add Expense";
         } else {
-            response.data = null;
+            response.data=new ArrayList<>();
             response.status = false;
             response.apiName = "add Expense";
             response.errorMsg = "Required field is missing !!";

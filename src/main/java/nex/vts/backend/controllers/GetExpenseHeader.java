@@ -49,6 +49,7 @@ public class GetExpenseHeader {
 
 
         if (GetExpansesList.isEmpty()) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName= "Get Expense Header";
             baseResponse.errorMsg = "Data  not found";

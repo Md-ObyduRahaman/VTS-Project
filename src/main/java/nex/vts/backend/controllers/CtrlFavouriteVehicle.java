@@ -77,6 +77,7 @@ public class CtrlFavouriteVehicle {
 
 
         if (favouriteVehicleList.isEmpty()){
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg="Data  not found";
             baseResponse.errorCode=4041;

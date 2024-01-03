@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
@@ -68,7 +69,7 @@ public class CtrlTrackNow {
             baseResponse.apiName = "Track Now";
             baseResponse.status = true;
         }else {
-            baseResponse.data = null;
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorCode = 405;
             baseResponse.errorMsg = "No Data found";

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public class CtrlVehicleHistory {
             baseResponse.apiName = "Vehicle History";
             baseResponse.status = true;
         }else {
-
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = "Vehicle History";
             baseResponse.status = true;
             baseResponse.errorCode = 010;

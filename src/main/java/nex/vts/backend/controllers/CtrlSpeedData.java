@@ -78,6 +78,7 @@ public class CtrlSpeedData {
         BaseResponse baseResponse = new BaseResponse();
         if (speedDataResponses.isEmpty()) {
             baseResponse.status = false;
+            baseResponse.data=new ArrayList<>();
             baseResponse.errorMsg = "Data  not found within this time limit";
             baseResponse.errorCode = 4041;
             baseResponse.apiName = "getSpeedData";

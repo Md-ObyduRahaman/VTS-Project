@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
+
 @RestControllerAdvice
 public class JwtTokenExceptionHandler {
     @Autowired
@@ -23,34 +25,40 @@ public class JwtTokenExceptionHandler {
         BaseResponse baseResponse = new BaseResponse();
 
         if (ex instanceof UsernameNotFoundException) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = ex.getMessage();
 
         } else if (ex instanceof AccessDeniedException) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = ex.getMessage();
 
         } else if (ex instanceof MalformedJwtException) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT signature is being tempered! Please input valid json-web-token";
 
         } else if (ex instanceof SignatureException) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT Signature not valid! Please input valid json-web-token";
         } else if (ex instanceof ExpiredJwtException) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT Token already expired !";
         } else if (ex.getMessage() != null) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.naming.ServiceUnavailableException;
 import java.net.ConnectException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
@@ -79,6 +80,7 @@ public class CtrlVehicleDetails {
             baseResponse.status = true;
         }
         else {
+            baseResponse.data=new ArrayList<>();
             baseResponse.apiName = "Vehicle-Details";
             baseResponse.errorMsg = "can not provide required parameter";
             baseResponse.status = false;

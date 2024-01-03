@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
@@ -43,6 +44,7 @@ public class CtrlGetVehicleSetting {
         Optional<VehicleOthersInfoModel> vehicleOthersInfo = vehicleOthersInfoRepo.getVehicleOthersInfo(rowID, deviceType);
         BaseResponse baseResponse = new BaseResponse();
         if (vehicleOthersInfo.isEmpty()) {
+            baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
