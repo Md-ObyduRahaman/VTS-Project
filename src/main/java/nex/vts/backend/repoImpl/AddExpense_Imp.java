@@ -90,8 +90,9 @@ public class AddExpense_Imp implements AddExpense_Repo {
         String out = null;
         Connection connection = dataSource.getConnection();
 
-        CallableStatement statement = connection
-                .prepareCall("{call manage_expense(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+        String storeProcedure = "{call ".concat(schemaName).concat("manage_expense(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+
+        CallableStatement statement = connection.prepareCall(storeProcedure);
 
         statement.setString(1,oparationType);
         statement.setInt(2,profileType);
