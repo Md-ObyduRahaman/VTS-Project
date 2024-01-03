@@ -196,7 +196,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                 "order by t.USERID asc, t.ORDER_INDEX asc";
                         try
                         {
-                        return Optional.of(jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
+                        return jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
                             @Override
                             public VehicleInfos mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -213,7 +213,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                         rs.getInt("ORDERINDEX")
                                 );
                             }
-                        },id,deptId,operatorId));
+                        },deptId,id,operatorId);
 
                         }catch (Exception e){
 
@@ -242,7 +242,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                 "  and t.VEHICLE_ID = d.VEHICLE_ID\n" +
                                 "order by t.USERID asc, t.ORDER_INDEX asc";
                         try{
-                            return Optional.of(jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
+                            return jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
                                 @Override
                                 public VehicleInfos mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -259,7 +259,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             rs.getInt("ORDERINDEX")
                                     );
                                 }
-                            },id,deptId));
+                            },deptId,id);
                         }
                         catch (Exception e){
 
@@ -288,7 +288,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                         "  AND b.ACTIVATION = 1";
 
                 try {
-                    return Optional.of(jdbcTemplate.queryForObject(getQuery, new RowMapper<VehicleInfos>() {
+                    return jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
                         @Override
                         public VehicleInfos mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -306,7 +306,7 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
 
                             );
                         }
-                    },id,operatorId));
+                    },id,operatorId);
                 }
                 catch (Exception e){
 
