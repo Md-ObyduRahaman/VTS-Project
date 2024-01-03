@@ -12,33 +12,26 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Types;
+import java.sql.*;
 import java.util.Map;
 
 @Repository
 public class AddExpense_Imp implements AddExpense_Repo {
 
     private static Logger logger = LoggerFactory.getLogger(AddExpense_Imp.class);
-
-    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     private DataSource dataSource;
 
     SqlParameterSource parameterSource = new MapSqlParameterSource();
 
-
-
-/*    @Autowired
-    public AddExpense_Imp(JdbcTemplate jdbcTemplate,SimpleJdbcCall jdbcCall,DataSource dataSource) {
-
-        this.jdbcTemplate = jdbcTemplate;
-        this.jdbcCall = jdbcCall;
+    @Autowired
+    public AddExpense_Imp(DataSource dataSource,JdbcTemplate jdbcTemplate) {
         this.dataSource = dataSource;
-    }*/
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
-    @Override
+
+/*    @Override
     public int addExpenseForM2M(String vehicleId, String profileId, String expenseId, String dateTime, String amount, String description, Integer expenseId2, Integer deptId, String schemaName) {
 
         try {
@@ -56,26 +49,26 @@ public class AddExpense_Imp implements AddExpense_Repo {
             throw new AppCommonException(e.getMessage());
         }
 
-    }
+    }*/
 
     @Override
-    public int addExpenseForGp(            String oparationType,
-                                           Integer profileType,
-                                           Integer profileId,
-                                           Integer parentProfileId,
-                                           String  vehicleId,
-                                           Integer expenseId,
-                                           String dateTime,
-                                           String amount,
-                                           String expenseDescription,
-                                           String expenseRowId,
-                                           Integer expenseUnit,
-                                           Integer expenseUnitPrice,
-                                           String schemaName) {
+    public String addExpenseForGpAndM2M(String oparationType,
+                                     Integer profileType,
+                                     Integer profileId,
+                                     Integer parentProfileId,
+                                     String  vehicleId,
+                                     Integer expenseId,
+                                     String dateTime,
+                                     String amount,
+                                     String expenseDescription,
+                                     String expenseRowId,
+                                     Integer expenseUnit,
+                                     Integer expenseUnitPrice,
+                                     String schemaName) throws SQLException {
 
-        String response = new String();
+/*        String response = new String();
 
-        SimpleJdbcCall  jdbcCall = new SimpleJdbcCall(dataSource).withSchemaName(schemaName).withProcedureName("manage_expense");
+        SimpleJdbcCall  jdbcCall = new SimpleJdbcCall(dataSource).withProcedureName("manage_expense");
 
         parameterSource = new MapSqlParameterSource()
                 .addValue("p_operation_type",oparationType)
@@ -92,9 +85,45 @@ public class AddExpense_Imp implements AddExpense_Repo {
                 .addValue("p_expense_unit",expenseUnit)
                 .addValue("p_expense_unit_price",expenseUnitPrice);
 
-        Map<String, Object> outParam = jdbcCall.execute(parameterSource);
+        Map<String, Object> outParam = jdbcCall.execute(parameterSource);*/
 
+        String out = null;
+        Connection connection = dataSource.getConnection();
 
-        return 1;
+        CallableStatement statement = connection
+                .prepareCall("{call manage_expense(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+
+        statement.setString(1,oparationType);
+        statement.setInt(2,profileType);
+        statement.setInt(3,profileId);
+        statement.setInt(4,parentProfileId);
+        statement.setString(5,vehicleId);
+        statement.setInt(6,expenseId);
+        statement.setString(7,dateTime);
+        statement.setString(8,amount);
+        statement.setString(9,expenseDescription);
+        statement.setString(10,expenseRowId);
+        statement.registerOutParameter(11,Types.VARCHAR);
+        statement.setInt(12,expenseUnit);
+        statement.setInt(13,expenseUnitPrice);
+
+        try {
+
+            boolean result = statement.execute();
+            out =    statement.getString(11);
+
+            if (result){
+                ResultSet resultSet = statement.getResultSet();
+            }
+        }catch (Exception e){
+
+            e.getMessage();
+        }finally {
+
+            statement.close();
+            connection.close();
+        }
+
+        return out;
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
@@ -38,7 +39,7 @@ public class CtrlAddExpense {
     private AddExpense_Service addExpenseService;
 
     @PostMapping(value = "/{deviceType}/add/expense", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addExpense(@PathVariable(value = "deviceType") Integer deviceType, @RequestParam(value = "data") String reqBody) throws JsonProcessingException {
+    public ResponseEntity<?> addExpense(@PathVariable(value = "deviceType") Integer deviceType, @RequestParam(value = "data") String reqBody) throws JsonProcessingException, SQLException {
 
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));

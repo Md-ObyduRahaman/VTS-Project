@@ -4,7 +4,8 @@ import nex.vts.backend.models.responses.AddExpenseResponse;
 import nex.vts.backend.models.responses.ExpenseResponse;
 import nex.vts.backend.repoImpl.AddExpense_Imp;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
 
 @Component
 public class AddExpense_Service {
@@ -29,14 +30,16 @@ public class AddExpense_Service {
                                                             Integer expenseUnit,
                                                             Integer expenseUnitPrice,
                                                             Integer operatorId,
-                                                            String schemaName) {
+                                                            String schemaName) throws SQLException {
 
         dateTime = dateTime.replace("-", "");
-        int flag = 0;
+        String responseMassage = null;
         switch (operatorId) {
 
             case 1:/*TODO GP*/
-                flag = addExpenseImp.addExpenseForGp(
+            case 3:/*TODO M2M*/
+
+                responseMassage = addExpenseImp.addExpenseForGpAndM2M(
                         oparationType,
                         profileType,
                         profileId,
@@ -51,23 +54,15 @@ public class AddExpense_Service {
                         expenseUnitPrice,
                         schemaName);
 
-                if (flag == 1) {
-                    response.setExpenseSubmitted(true);
-                    response.setMessage("Operation Success");
-                } else {
-                    response.setExpenseSubmitted(false);
-                    response.setMessage("Operation Did not Success for Gp");
-                }
-            case 3:/*TODO M2M*/
-                flag = addExpenseImp.addExpenseForM2M(vehicleId, schemaName, oparationType, dateTime, amount, expenseDescription, expenseId, expenseUnit,schemaName);
+                if (!responseMassage.isEmpty()) {
 
-                if (flag == 1) {
                     response.setExpenseSubmitted(true);
-                    response.setMessage("Operation Success");
+                    response.setMessage(responseMassage);
                     expenseResponse.setResponse(response);
                 } else {
+
                     response.setExpenseSubmitted(false);
-                    response.setMessage("Operation Did not Success for M2M");
+                    response.setMessage("Operation Did not Success for" + operatorId);
                     expenseResponse.setResponse(response);
                 }
         }

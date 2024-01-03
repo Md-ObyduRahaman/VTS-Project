@@ -1,9 +1,9 @@
 package nex.vts.backend.repositories;
 
-import javax.sql.DataSource;
+import java.sql.SQLException;
 
 public interface AddExpense_Repo {
-    int addExpenseForGp(
+    String addExpenseForGpAndM2M(
             String oparationType,
             Integer profileType,
             Integer profileId,
@@ -17,10 +17,10 @@ public interface AddExpense_Repo {
             Integer expenseUnit,
             Integer expenseUnitPrice,
             String schemaName
-    );
+    ) throws SQLException;
 
-    int addExpenseForM2M(String vehicleId, String profileId, String expenseId, String dateTime,
-                         String amount, String description, Integer expenseId2, Integer deptId,String schemaName);
+/*    int addExpenseForM2M(String vehicleId, String profileId, String expenseId, String dateTime,
+                         String amount, String description, Integer expenseId2, Integer deptId,String schemaName);*/
 
 
 }

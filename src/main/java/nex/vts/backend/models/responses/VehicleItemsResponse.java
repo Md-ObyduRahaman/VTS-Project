@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MotherVehicleListResponse {
+public class VehicleItemsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("total vehicle")
@@ -17,6 +17,6 @@ public class MotherVehicleListResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("Vehicle Details")
-    private List<MotherAccVehicleList> motherAccVehicleLists;
+    private List<VehicleInfos> vehicleInfos;
 
 }

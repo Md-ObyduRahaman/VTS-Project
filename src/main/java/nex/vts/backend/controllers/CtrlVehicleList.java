@@ -42,6 +42,7 @@ public class CtrlVehicleList {
     Environment environment;
     private final short API_VERSION = 1;
 
+    @Autowired
     public CtrlVehicleList(Vehicle_List_Service Vehicle_List_Service, Vehicle_Location_Service locationService, Environment environment) {
         this.Vehicle_List_Service = Vehicle_List_Service;
         this.locationService = locationService;

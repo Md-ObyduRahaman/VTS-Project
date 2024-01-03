@@ -32,7 +32,7 @@ public class TrackNowRepository_Imp implements TrackNowRepository {
                 "       a.LAT                LAT,\n" +
                 "       a.LON                LONGS,\n" +
                 "       a.SPEED              SPEED,\n" +
-                "       null                 HEAD,\n" +
+                "       get_track_data_head(a.max_id)                 HEAD,\n" +
                 "       a.vdate              TIME_STAMP,\n" +
                 "       a.vdate              DATETIME,\n" +
                 "       a.ENGIN              ENGIN\n" +
