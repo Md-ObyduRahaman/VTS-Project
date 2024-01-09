@@ -80,7 +80,7 @@ public class CtrlLogin {
         if (operatorid == 1 || operatorid == 8)
             reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
 
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username, shcemaName);
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username, reqBody.password);
 
         if (vtsLoginUserOpt.isPresent()) {
             vtsLoginUser = vtsLoginUserOpt.get();
@@ -112,6 +112,7 @@ public class CtrlLogin {
             loginResponse.profileId = vtsLoginUser.getPROFILE_ID();
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
             loginResponse.operatorid=vtsLoginUser.getOPERATORID();
+            loginResponse.customerId=vtsLoginUser.getCUSTOMER_ID();
             String dynamicColumnName;
 
             if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";
