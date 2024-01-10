@@ -60,7 +60,8 @@ public class TrackHistoryService {
         String newTimes = dateTime.substring(11);
         LocalTime NewTimes = LocalTime.parse(newTimes);
 
-       String newDateTimes = newDates.concat(" ").concat(String.valueOf(NewTimes.minusHours(2)));
+       String newDateTimes = newDates.concat(" ")
+               .concat(String.valueOf(NewTimes.minusHours(2)));
 
 //        LocalDate newDate = LocalDate.parse(String.valueOf(dateTime).substring(0, 8),
 //                DateTimeFormatter.ofPattern("yyyyMMdd"));

@@ -4,10 +4,11 @@ import nex.vts.backend.models.responses.AddExpenseResponse;
 import nex.vts.backend.models.responses.ExpenseResponse;
 import nex.vts.backend.repoImpl.AddExpense_Imp;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
-@Component
+@Service
 public class AddExpense_Service {
     AddExpenseResponse expenseResponse = new AddExpenseResponse();
     ExpenseResponse response = new ExpenseResponse();
