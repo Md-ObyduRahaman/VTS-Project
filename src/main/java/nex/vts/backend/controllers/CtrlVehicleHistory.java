@@ -41,8 +41,8 @@ public class CtrlVehicleHistory {
     @GetMapping(value = "/{deviceType}/user/vehicle/{vehicleId}/{fromDateTime}/{toDateTime}/history", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getVehicleHistory(@PathVariable("deviceType") Integer deviceType,
                                                @PathVariable("vehicleId")Integer vehicleId,
-                                               @PathVariable("fromDateTime")Long fromDateTime,
-                                               @PathVariable("toDateTime")Long toDateTime) throws JsonProcessingException {
+                                               @PathVariable("fromDateTime")String fromDateTime,
+                                               @PathVariable("toDateTime")String toDateTime) throws JsonProcessingException {
 
         String activeProfile = environment.getProperty("spring.profiles.active");
         Integer operatorId = Integer.valueOf(environment.getProperty("application.profiles.operatorid"));
