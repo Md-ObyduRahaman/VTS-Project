@@ -22,6 +22,8 @@ public class AddExpense_Imp implements AddExpense_Repo {
     private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
 
+    private final short API_VERSION = 1;
+
     SqlParameterSource parameterSource = new MapSqlParameterSource();
 
     @Autowired
@@ -119,6 +121,8 @@ public class AddExpense_Imp implements AddExpense_Repo {
         }catch (Exception e){
 
             e.getMessage();
+            throw new AppCommonException(600 + "##Required parameter is missing" + profileId + "##" + API_VERSION);
+
         }finally {
 
             statement.close();
