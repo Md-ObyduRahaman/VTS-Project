@@ -15,6 +15,7 @@ public class VehicleStateInfo_RowMapper implements RowMapper<VehicleStateInfoOra
         vehicleStateInfo.setEnginStat(rs.getString("ENGIN"));
         vehicleStateInfo.setVehStat(getVehicleMaintenanceStatus(rs.getInt("VEH_MAINTENANCE")));
         vehicleStateInfo.setDateTime(rs.getString("VDATE"));
+        vehicleStateInfo.setVehIconType(rs.getString("ICON_TYPE"));
         vehicleStateInfo.setLocationDetails(rs.getString("LAT") + "," + rs.getString("LON"));
         // Map other columns as needed
 

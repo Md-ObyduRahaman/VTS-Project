@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,13 +31,20 @@ public class CtrlVehicleState {
     @Autowired
     VehicleStateRepo vehicleStateRepo;
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/getVehicleStateInfo/{mainAccountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> getVehicleStateInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("userId") Integer userId, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/getVehicleStateInfo/{mainAccountId}/{SPECIFIC_VEHICLE_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<String> getVehicleStateInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID, @PathVariable("userId") Integer userId, @PathVariable("userType") Integer userType, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
 
         BaseResponse baseResponse = new BaseResponse();
 
+        if (SPECIFIC_VEHICLE_ID.equals("0"))
+        {
+            SPECIFIC_VEHICLE_ID=null;
+        }
 
-        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId);
+
+        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId,userType,userId,SPECIFIC_VEHICLE_ID);
+        int demo = vehicleStateRepo.Demo(mainAccountId);
+        System.out.println("Test Data: "+demo);
 
 
         if (vehicleStateInfo.get().isEmpty()) {

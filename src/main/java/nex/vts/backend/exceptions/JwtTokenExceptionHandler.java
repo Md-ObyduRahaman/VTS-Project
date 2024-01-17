@@ -63,7 +63,8 @@ public class JwtTokenExceptionHandler {
             baseResponse.apiName = null;
             baseResponse.status = false;
             baseResponse.errorCode = 403;
-            baseResponse.errorMsg = "You have to put json web token into your Authorization Header!";
+            baseResponse.errorMsg = "You have to put json web token into your Authorization Header! And check actual URL address";
+            ex.printStackTrace();
         } else if (ex.getMessage() != null) {
             baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;
