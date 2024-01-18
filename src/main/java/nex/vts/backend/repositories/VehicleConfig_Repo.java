@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public interface VehicleConfig_Repo {
 
-    Object getVehicleSetings(Integer vehicleId);
+    Object getVehicleSettings(Integer vehicleId);
 
-    void setVehicleSetings(String cellPhone,String email,String maxCarSpeed,boolean isFavourite);
+    int setVehicleSettings(String cellPhone,String email,String maxCarSpeed,int isFavourite,Integer vehicleId);
 
 }

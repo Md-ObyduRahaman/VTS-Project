@@ -1,0 +1,136 @@
+17:00:02.705 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 17.0.8 with PID 9396 (C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo\target\classes started by maruf in C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo)
+17:00:02.713 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+17:00:02.715 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+17:00:02.755 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+17:00:02.775 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\maruf\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/maruf/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+17:00:02.775 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+17:00:02.775 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+17:00:04.795 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+17:00:04.864 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 68 ms. Found 1 JDBC repository interfaces.
+17:00:05.503 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - initialize:108 - Tomcat initialized with port(s): 8009 (http)
+17:00:05.503 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Initializing ProtocolHandler ["http-nio-8009"]
+17:00:05.503 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Starting service [Tomcat]
+17:00:05.503 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
+17:00:05.567 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
+17:00:05.567 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 2792 ms
+17:00:05.819 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+17:00:06.228 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@1bcb24da
+17:00:06.228 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+17:00:06.275 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+17:00:06.642 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f34050a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2d142733, org.springframework.security.web.context.SecurityContextHolderFilter@5b4eccfa, org.springframework.security.web.header.HeaderWriterFilter@4fe93d67, org.springframework.security.web.authentication.logout.LogoutFilter@73c492a9, nex.vts.backend.filter.JwtAuthFilter@3b070104, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5956d086, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@643180f6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37ae7cd0, org.springframework.security.web.session.SessionManagementFilter@7bb25ceb, org.springframework.security.web.access.ExceptionTranslationFilter@c06fd93, org.springframework.security.web.access.intercept.AuthorizationFilter@7c09d36c]
+17:00:06.905 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+17:00:07.081 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Starting ProtocolHandler ["http-nio-8009"]
+17:00:07.103 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - start:220 - Tomcat started on port(s): 8009 (http) with context path ''
+17:00:07.114 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 5.085 seconds (process running for 6.012)
+17:01:26.567 [http-nio-8009-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:01:26.598 [http-nio-8009-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+17:01:26.704 [http-nio-8009-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 104 ms
+17:01:27.082 [http-nio-8009-exec-1] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:01:27.093 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:01:27.096 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:01:27.581 [http-nio-8009-exec-1] DEBUG nex.vts.backend.repoImpl.RepoNexIndividualClient - getParentProfileIdOfIndividualClient:20 - Executing query to get parent profile id of individual client 17167
+17:01:27.583 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:01:27.584 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM NEX_INDIVIDUAL_CLIENT WHERE ID = ? AND USERID = ? AND PASSWORD = ? AND ACTIVATION = 1 AND IND_LOGIN = 1 AND OPERATORID = ?]
+17:02:23.155 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+17:02:23.223 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
+17:54:56.341 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 17.0.8 with PID 8432 (C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo\target\classes started by maruf in C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo)
+17:54:56.344 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+17:54:56.345 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+17:54:56.390 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+17:54:56.406 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\maruf\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/maruf/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+17:54:56.407 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+17:54:56.407 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+17:54:57.482 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+17:54:57.590 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 96 ms. Found 1 JDBC repository interfaces.
+17:54:58.297 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - initialize:108 - Tomcat initialized with port(s): 8009 (http)
+17:54:58.306 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Initializing ProtocolHandler ["http-nio-8009"]
+17:54:58.307 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Starting service [Tomcat]
+17:54:58.307 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
+17:54:58.361 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
+17:54:58.361 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1953 ms
+17:54:58.680 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+17:54:59.146 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@1006559e
+17:54:59.148 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+17:54:59.212 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+17:54:59.655 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@137e9214, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@260a7881, org.springframework.security.web.context.SecurityContextHolderFilter@3384652e, org.springframework.security.web.header.HeaderWriterFilter@68bd317f, org.springframework.security.web.authentication.logout.LogoutFilter@d1c48c4, nex.vts.backend.filter.JwtAuthFilter@61ce4a79, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@37ddfbf0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@201e1282, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1cd2c2ab, org.springframework.security.web.session.SessionManagementFilter@aa933e6, org.springframework.security.web.access.ExceptionTranslationFilter@10259397, org.springframework.security.web.access.intercept.AuthorizationFilter@4ccf21c3]
+17:54:59.937 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+17:55:00.109 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Starting ProtocolHandler ["http-nio-8009"]
+17:55:00.127 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - start:220 - Tomcat started on port(s): 8009 (http) with context path ''
+17:55:00.136 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 4.474 seconds (process running for 5.589)
+17:55:14.659 [http-nio-8009-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:55:14.660 [http-nio-8009-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+17:55:14.662 [http-nio-8009-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
+17:55:14.874 [http-nio-8009-exec-2] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:55:14.884 [http-nio-8009-exec-2] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:55:14.886 [http-nio-8009-exec-2] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:55:15.334 [http-nio-8009-exec-2] DEBUG nex.vts.backend.repoImpl.RepoNexIndividualClient - getParentProfileIdOfIndividualClient:20 - Executing query to get parent profile id of individual client 17167
+17:55:15.337 [http-nio-8009-exec-2] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:55:15.338 [http-nio-8009-exec-2] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT COMPANY_ID AS PARENT_PROFILE_ID FROM NEX_INDIVIDUAL_CLIENT WHERE ID = ? AND USERID = ? AND PASSWORD = ? AND ACTIVATION = 1 AND IND_LOGIN = 1 AND OPERATORID = ?]
+17:55:33.879 [http-nio-8009-exec-4] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:55:33.880 [http-nio-8009-exec-4] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:55:33.881 [http-nio-8009-exec-4] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:55:33.962 [http-nio-8009-exec-4] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:55:33.963 [http-nio-8009-exec-4] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:55:33.963 [http-nio-8009-exec-4] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:55:33.990 [http-nio-8009-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - logException:207 - Resolved [com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `nex.vts.backend.models.responses.VehicleConfigModel` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)<EOL> at [Source: (String)"{<EOL>    "cellPhone": "01319641837",<EOL>    "email": "123@gmail.com",<EOL>    "maxCarSpeed": "40",<EOL>    "isFavourite": 1<EOL>}"; line: 2, column: 5]]
+17:56:03.729 [http-nio-8009-exec-3] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:56:03.731 [http-nio-8009-exec-3] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:56:03.735 [http-nio-8009-exec-3] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:56:16.344 [http-nio-8009-exec-3] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:56:16.345 [http-nio-8009-exec-3] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:56:16.346 [http-nio-8009-exec-3] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:56:38.966 [http-nio-8009-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - logException:207 - Resolved [com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `nex.vts.backend.models.responses.VehicleConfigModel` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)<EOL> at [Source: (String)"{<EOL>    "cellPhone": "01319641837",<EOL>    "email": "123@gmail.com",<EOL>    "maxCarSpeed": "40",<EOL>    "isFavourite": 1<EOL>}"; line: 2, column: 5]]
+17:56:39.082 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+17:56:39.172 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
+17:58:51.814 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 17.0.8 with PID 18908 (C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo\target\classes started by maruf in C:\Users\maruf\Documents\intelllij_code\Team_Work_Project\vts_back-end_repo)
+17:58:51.814 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+17:58:51.814 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+17:58:51.858 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+17:58:51.869 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\maruf\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/maruf/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+17:58:51.869 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+17:58:51.869 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+17:58:52.672 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+17:58:52.734 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 58 ms. Found 1 JDBC repository interfaces.
+17:58:53.410 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - initialize:108 - Tomcat initialized with port(s): 8009 (http)
+17:58:53.419 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Initializing ProtocolHandler ["http-nio-8009"]
+17:58:53.419 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Starting service [Tomcat]
+17:58:53.420 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
+17:58:53.476 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
+17:58:53.476 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1607 ms
+17:58:53.804 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+17:58:54.214 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@56c5f921
+17:58:54.217 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+17:58:54.282 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+17:58:54.729 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@43674728, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@239ebe67, org.springframework.security.web.context.SecurityContextHolderFilter@45b89ddb, org.springframework.security.web.header.HeaderWriterFilter@1c4483fa, org.springframework.security.web.authentication.logout.LogoutFilter@14e55a9e, nex.vts.backend.filter.JwtAuthFilter@c89b315, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34747d33, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@45328f97, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@56dff86a, org.springframework.security.web.session.SessionManagementFilter@9948620, org.springframework.security.web.access.ExceptionTranslationFilter@40ddc083, org.springframework.security.web.access.intercept.AuthorizationFilter@191f20db]
+17:58:55.031 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+17:58:55.184 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - log:173 - Starting ProtocolHandler ["http-nio-8009"]
+17:58:55.200 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - start:220 - Tomcat started on port(s): 8009 (http) with context path ''
+17:58:55.208 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 4.009 seconds (process running for 5.087)
+17:58:57.177 [http-nio-8009-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:58:57.178 [http-nio-8009-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+17:58:57.184 [http-nio-8009-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 3 ms
+17:58:57.292 [http-nio-8009-exec-1] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:58:57.297 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:58:57.299 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:59:13.554 [http-nio-8009-exec-1] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:23 - Executing query to find user by username: QCTESTMITHU
+17:59:13.555 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+17:59:13.556 [http-nio-8009-exec-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT *
+      FROM VTS_LOGIN_USER
+      WHERE USERNAME = ?]
+17:59:26.291 [http-nio-8009-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - logException:207 - Resolved [com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `nex.vts.backend.models.responses.VehicleConfigModel` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)<EOL> at [Source: (String)"{<EOL>    "cellPhone": "01319641837",<EOL>    "email": "123@gmail.com",<EOL>    "maxCarSpeed": "40",<EOL>    "isFavourite": 1<EOL>}"; line: 2, column: 5]]
+18:02:35.358 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+18:02:35.442 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.

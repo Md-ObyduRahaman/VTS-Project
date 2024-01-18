@@ -24,7 +24,7 @@ public class VehicleConfigModel{
 	private String email;
 
 	@JsonProperty("isFavourite")
-	private boolean isFavourite;
+	private int isFavourite;
 
 	@JsonProperty("maxCarSpeed")
 	private String maxCarSpeed;

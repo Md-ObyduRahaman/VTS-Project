@@ -7,7 +7,7 @@ import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.Vehicle_List_Service;
-import nex.vts.backend.services.Vehicle_Location_Service;
+import nex.vts.backend.services.VehicleLocation_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ import java.util.Optional;
 public class CtrlVehicleList {
     private final Logger logger = LoggerFactory.getLogger(CtrlVehicleList.class.getName());
     private final Vehicle_List_Service Vehicle_List_Service;
-    private final Vehicle_Location_Service locationService;
+    private final VehicleLocation_Service locationService;
     BaseResponse baseResponse = new BaseResponse();
     ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
@@ -44,7 +44,7 @@ public class CtrlVehicleList {
     private final short API_VERSION = 1;
 
     @Autowired
-    public CtrlVehicleList(Vehicle_List_Service Vehicle_List_Service, Vehicle_Location_Service locationService, Environment environment) {
+    public CtrlVehicleList(Vehicle_List_Service Vehicle_List_Service, VehicleLocation_Service locationService, Environment environment) {
         this.Vehicle_List_Service = Vehicle_List_Service;
         this.locationService = locationService;
         this.environment = environment;

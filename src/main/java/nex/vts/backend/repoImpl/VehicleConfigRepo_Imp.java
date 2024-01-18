@@ -26,7 +26,7 @@ public class VehicleConfigRepo_Imp implements VehicleConfig_Repo {
     @Retryable(retryFor = {ConnectException.class, DataAccessException.class},
             maxAttempts = 5, backoff = @Backoff(delay = 2000, multiplier = 2))
     @Override
-    public Object getVehicleSetings(Integer vehicleId) {
+    public Object getVehicleSettings(Integer vehicleId) {
 
         String query = "SELECT v.ID             ID,\n" +
                 "       v.USERID         USERID,\n" +
@@ -40,15 +40,21 @@ public class VehicleConfigRepo_Imp implements VehicleConfig_Repo {
                 "  and v.ID = d.USERID";
         try{
 
-            return jdbcTemplate.query(query,new Object[]{vehicleId}, (rs, rowNum) -> new VehicleConfigModel(
+            return jdbcTemplate.query(query, new Object[]{vehicleId}, new RowMapper<VehicleConfigModel>() {
+                @Override
+                public VehicleConfigModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-                    rs.getInt("ID"),
-                    rs.getString("USERID"),
-                    rs.getString("CELL_PHONE"),
-                    rs.getString("EMAIL"),
-                    rs.getBoolean("FAVORITE"),
-                    rs.getString("MAX_CAR_SPEED")
-            ));
+                    return new VehicleConfigModel(
+
+                            rs.getInt("ID"),
+                            rs.getString("USERID"),
+                            rs.getString("CELL_PHONE"),
+                            rs.getString("EMAIL"),
+                            rs.getInt("FAVORITE"),
+                            rs.getString("MAX_CAR_SPEED")
+                    );
+                }
+            });
 
         }catch (Exception e){
 
@@ -59,7 +65,55 @@ public class VehicleConfigRepo_Imp implements VehicleConfig_Repo {
 
 
     @Override
-    public void setVehicleSetings(String cellPhone, String email, String maxCarSpeed, boolean isFavourite) {
+    public int setVehicleSettings(String cellPhone, String email, String maxCarSpeed, int isFavourite,Integer vehicleId) {
 
+        int flag;
+
+        if (!cellPhone.isEmpty() && !email.isEmpty()) {
+
+            String setQuery = "update nex_individual_client SET cell_phone=?, email=? where ID = ?";
+
+            try {
+
+              return  flag = jdbcTemplate.update(setQuery, new Object[]{cellPhone, email, vehicleId});
+
+            }catch (Exception e){
+
+                e.getMessage();
+                throw new AppCommonException(929 + "## vehicleid not correct ##" + vehicleId + API_VERSION);
+            }
+        }
+
+        if (!maxCarSpeed.isEmpty()){
+
+            String setQuery = "update nex_driverinfo SET max_car_speed=? where userid =?";
+
+            try {
+
+              return   flag = jdbcTemplate.update(setQuery,new Object[]{maxCarSpeed,vehicleId});
+
+            }catch (Exception e){
+
+                e.getMessage();
+                throw new AppCommonException(929 + "## vehicleid not correct ##"+vehicleId+API_VERSION);
+            }
+        }
+
+        if (!Integer.valueOf(isFavourite).equals("")){
+
+            String setQuery = "update nex_individual_temp SET favorite=? where vehicle_id = ?";
+
+            try {
+
+               return flag = jdbcTemplate.update(setQuery,new Object[]{isFavourite,vehicleId});
+
+            }catch (Exception e){
+
+                e.getMessage();
+                throw new AppCommonException(929 + "## vehicleid not correct ##"+vehicleId+API_VERSION);
+            }
+        }
+
+        return 0;
     }
 }

@@ -4,7 +4,7 @@ import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
-import nex.vts.backend.services.Vehicle_Location_Service;
+import nex.vts.backend.services.VehicleLocation_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/private")
 public class VehicleLocation_Controller {
-    private final Vehicle_Location_Service locationService;
+    private final VehicleLocation_Service locationService;
 
     @Autowired
     Environment environment;
@@ -30,7 +30,7 @@ public class VehicleLocation_Controller {
 
 
 
-    public VehicleLocation_Controller(Vehicle_Location_Service locationService) {
+    public VehicleLocation_Controller(VehicleLocation_Service locationService) {
         this.locationService = locationService;
     }
 
