@@ -51,7 +51,7 @@ public class LoginUserInformation_Imp implements LoginUserInformation {
                 "       AND "+dynamicColumnName+" = "+password+"\n" +
                 "       AND ACTIVATION = 1\n" +
                 "       AND OPERATORID = 1";  //ID = "+profileId+"\n"
-        System.out.println(sql2);
+        System.out.println(sql);
 
 
             logger.debug("Executing query to get parent profile id of extended type client {}", profileId);

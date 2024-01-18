@@ -27,7 +27,7 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<VTS_LOGIN_USER> userInfo = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
+        Optional<VTS_LOGIN_USER> userInfo = repoVtsLoginUser.findByUserName(username,"");
         return userInfo.map(UserInfoUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
 

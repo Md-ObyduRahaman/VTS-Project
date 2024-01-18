@@ -9,6 +9,7 @@ import nex.vts.backend.models.responses.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -57,6 +58,13 @@ public class JwtTokenExceptionHandler {
             baseResponse.status = false;
             baseResponse.errorCode = 403;
             baseResponse.errorMsg = "JWT Token already expired !";
+        } else if (ex instanceof InsufficientAuthenticationException) {
+            baseResponse.data=new ArrayList<>();
+            baseResponse.apiName = null;
+            baseResponse.status = false;
+            baseResponse.errorCode = 403;
+            baseResponse.errorMsg = "You have to put json web token into your Authorization Header! And check actual URL address";
+            ex.printStackTrace();
         } else if (ex.getMessage() != null) {
             baseResponse.data=new ArrayList<>();
             baseResponse.apiName = null;

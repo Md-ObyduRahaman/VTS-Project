@@ -80,7 +80,7 @@ public class CtrlLogin {
         if (operatorid == 1 || operatorid == 8)
             reqBody.password = PasswordHashUtility.generateSHA256Hash(reqBody.password);
 
-        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username, shcemaName);
+        Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(reqBody.username, reqBody.password);
 
         if (vtsLoginUserOpt.isPresent()) {
             vtsLoginUser = vtsLoginUserOpt.get();
@@ -112,6 +112,7 @@ public class CtrlLogin {
             loginResponse.profileId = vtsLoginUser.getPROFILE_ID();
             loginResponse.mainAccountId = vtsLoginUser.getMAIN_ACCOUNT_ID();
             loginResponse.operatorid=vtsLoginUser.getOPERATORID();
+            loginResponse.customerId=vtsLoginUser.getCUSTOMER_ID();
             String dynamicColumnName;
 
             if (operatorid == 1 || operatorid == 8) dynamicColumnName = "CORP_PASS";
@@ -144,7 +145,7 @@ public class CtrlLogin {
                     if (nexDeptClientProfileOpt.isPresent()) {
                         NEX_VEHICLE_DEPT nexIndividualClientProfile = nexDeptClientProfileOpt.get();
                         Integer c2Value = repoNexVehicleDept.getC2(nexIndividualClientProfile.getPARENT_PROFILE_ID(), shcemaName,operatorid);
-                        if (c2Value == 1) loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
+                        if (c2Value == 1) loginResponse.mainAccountId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                     } else
                         throw new AppCommonException(4008 + "##Sorry we could not found your profile information" + deviceType + "##" + API_VERSION);
 
@@ -167,7 +168,7 @@ public class CtrlLogin {
                         }
                         if (nexIndividualClientProfileOpt.isPresent()) {
                             NEX_INDIVIDUAL_CLIENT nexIndividualClientProfile = nexIndividualClientProfileOpt.get();
-                            loginResponse.profileId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
+                            loginResponse.mainAccountId = nexIndividualClientProfile.getPARENT_PROFILE_ID();
                         } else
                             throw new AppCommonException(4014 + "##Individual client profile not found" + deviceType + "##" + API_VERSION);
                     }
@@ -181,7 +182,7 @@ public class CtrlLogin {
                     }
                     if (nexExtendedClientProfileOpt.isPresent()) {
                         VTS_EXTENDED_USER_PROFILE nexExtendedClientProfile = nexExtendedClientProfileOpt.get();
-                        loginResponse.profileId = nexExtendedClientProfile.getPARENT_PROFILE_ID();
+                        loginResponse.mainAccountId = nexExtendedClientProfile.getPARENT_PROFILE_ID();
                     } else
                         throw new AppCommonException(4010 + "##Individual client profile not found" + deviceType + "##" + API_VERSION);
                     break;
