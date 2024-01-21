@@ -23,7 +23,39 @@ public class VehicleHistory_Service {
     }
 
     @SuppressWarnings("unchecked")
-    public VehicleHistoryResponse getVehicleHistory(Integer vehicleId,String fromDateTime,String toDateTime,String schemaName,Integer operatorId){
+    public VehicleHistoryResponse getVehicleHistory(Integer vehicleId,String fromDate,String fromTime,String schemaName,Integer operatorId){
+
+        String newFromDateTime,newToDateTime;
+
+        if (Integer.parseInt(fromTime) != 24){
+
+            String newStartTime = fromTime.concat("0000");
+            LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+
+            if (String.valueOf(newTime).replace(":","").length() == 4)
+                newFromDateTime = fromDate.concat(String.valueOf(newTime).replace(":","").concat("00"));
+            else
+                newFromDateTime = fromDate.concat(String.valueOf(newTime).concat("00"));
+
+            String newEndTime = fromTime.concat("5959");
+            LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+            newToDateTime = fromDate.concat(String.valueOf(endTime).replace(":",""));
+
+        }else {
+
+            String newStartTime = fromTime.concat("0000");
+            LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+
+            if (String.valueOf(newTime).replace(":","").length() == 4)
+                newFromDateTime = fromDate.concat(String.valueOf(newTime).replace(":","").concat("00"));
+            else
+                newFromDateTime = fromDate.concat(String.valueOf(newTime));
+
+            String newEndTime = "235959";
+            LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+            newToDateTime = fromDate.concat(String.valueOf(endTime));
+
+        }
 
         try {
 
@@ -32,7 +64,7 @@ public class VehicleHistory_Service {
             case 3: /*TODO M2M*/
 
                 List<HistoriesItem> historiesItemList = (List<HistoriesItem>) history_repo.getVehicleHistoryForGpAndM2M(vehicleId,
-                        Long.parseLong(fromDateTime(fromDateTime)), Long.parseLong(toDateTime(toDateTime)), schemaName);
+                        Long.parseLong(newFromDateTime), Long.parseLong(newToDateTime), schemaName);
 
                 history.setHistories(historiesItemResponse(historiesItemList));
                 history.setTotalCount(historiesItemList.size());
@@ -59,7 +91,7 @@ public class VehicleHistory_Service {
         return historiesItemList;
     }
 
-    public String fromDateTime(String fromDateTime){
+/*    public String fromDateTime(String fromDateTime){
 
         LocalDate newfromDate = LocalDate.parse(fromDateTime.substring(0, 8),
                 DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -81,9 +113,9 @@ public class VehicleHistory_Service {
                 .concat(fromTime.replace(":", ""));
 
         return fromDateTimes;
-    }
+    }*/
 
-    public String toDateTime(String toDateTime){
+/*    public String toDateTime(String toDateTime){
 
         LocalDate newToDate = LocalDate.parse(toDateTime.substring(0, 8),
                 DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -105,7 +137,7 @@ public class VehicleHistory_Service {
                 .concat(toTime.replace(":", ""));
 
         return toDateTimes;
-    }
+    }*/
 
     public Long responseDateTime(Long dateTime){
 
