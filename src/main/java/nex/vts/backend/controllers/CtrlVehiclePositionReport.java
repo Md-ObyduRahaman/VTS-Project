@@ -56,7 +56,6 @@ public class CtrlVehiclePositionReport {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-
         boolean flag = dateChecker(fromDate, toDate);
 
 
