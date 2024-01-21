@@ -75,7 +75,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                     "                 E_LAT,\n" +
                     "                 E_LON,\n" +
                     "                 E_TIME\n" +
-                    "            FROM GPSNEXM2M.NEX_ENGIN_STAT_MW\n" +
+                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW\n" +
                     "           WHERE     GROUPID = '" + userId + "'\n" +
 
                     "\n" + innerSql +

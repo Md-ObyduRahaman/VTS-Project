@@ -44,7 +44,8 @@ public class VehicleLocation_Controller {
         Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(userDetails.getUsername(),environment.getProperty("application.profiles.shcemaName"));
         if (vtsLoginUser.isPresent()) loginUser = vtsLoginUser.get();
         else throw new AppCommonException(400 + "##login cred not found##" + "##" + API_VERSION);
-        baseResponse.data = locationService.getVehicleLocationDetails(loginUser.getPROFILE_ID());
+        //baseResponse.data = locationService.getVehicleLocationDetails(loginUser.getPROFILE_ID());
+        baseResponse.data = null;
         baseResponse.status = true;
         baseResponse.apiName = "Vehicle location";
         return ResponseEntity.ok(baseResponse);
