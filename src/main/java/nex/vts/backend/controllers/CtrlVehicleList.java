@@ -63,10 +63,11 @@ public class CtrlVehicleList {
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
         Optional<VTS_LOGIN_USER> vtsLoginUserOpt = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
 
-        if (vtsLoginUserOpt.isPresent())
+        if (vtsLoginUserOpt.isPresent()) {
             loginUser = vtsLoginUserOpt.get();
-        else
+        }else {
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
+        }
 
         Object getVehicleInfo = Vehicle_List_Service.getVehicles(
                 loginUser.getPROFILE_ID(),
@@ -83,12 +84,12 @@ public class CtrlVehicleList {
             baseResponse.status = true;
             baseResponse.apiName = "Vehicle-List";
         } else {
-
             baseResponse.data=new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "Vehicle-List";
             baseResponse.errorMsg = "The resource or endpoint was not found";
         } /*        } else throw new AppCommonException(400 + "##BAD REQUEST 2##" + userId + "##" + API_VERSION); return ResponseEntity.ok(baseResponse);*/
+
         return ResponseEntity.ok(baseResponse);
     }
 }

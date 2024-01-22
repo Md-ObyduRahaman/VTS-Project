@@ -31,11 +31,14 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
 
     @Override
     public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType) {
+
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
         Optional<ArrayList<VehiclePositionReportData>> datalList;
+
         String sql = null;
         String outterSql, innerSql = null;
+
         if (userType == 1) {
 
             if (locationStat.equals("1")) {
@@ -85,6 +88,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
 
 
         }
+
         try {
             ArrayList<VehiclePositionReportData> vehiclePositionReportDataList = (ArrayList<VehiclePositionReportData>) jdbcTemplate.query(sql, (rs, rowNum) -> {
                 VehiclePositionReportData vehiclePositionReportData = new VehiclePositionReportData();
