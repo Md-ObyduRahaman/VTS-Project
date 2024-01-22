@@ -10,13 +10,12 @@
     </parent>
     <groupId>nex.vts.backend</groupId>
     <artifactId>vts_backend</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.10_m2m</version>
     <name>vts_backend</name>
     <description>Back-End project for vts_backend</description>
     <properties>
         <java.version>17</java.version>
-        <jakarta-servlet.version>5.0.0
-        </jakarta-servlet.version> <!-- Jetty does not yet support Servlet 6.0. To use Jetty with Spring Boot 3.0, so we had to downgrade the Servlet API to 5.0. -->
+        <jakarta-servlet.version>5.0.0</jakarta-servlet.version> <!-- Jetty does not yet support Servlet 6.0. To use Jetty with Spring Boot 3.0, so we had to downgrade the Servlet API to 5.0. -->
     </properties>
     <dependencies>
         <dependency>
