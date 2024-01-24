@@ -133,9 +133,9 @@ public class VehicleStateImpl implements VehicleStateRepo {
         //String sql1 = "INSERT INTO my_temp_table VALUES (1, 'ONE') SELECT COUNT(*) FROM my_temp_table; commit";
         String sql = "INSERT INTO my_temp_table (ID, DESCRIPTION) VALUES (?, ?)";
         Object[] params = {1, "ONE"};
-        performTransaction();
+      //  performTransaction();
 
-      /*  try {
+        try {
             jdbcTemplate.update(sql, params);
             System.out.println("Data inserted successfully.");
         } catch (Exception e) {
@@ -148,8 +148,8 @@ public class VehicleStateImpl implements VehicleStateRepo {
         int countSecondtQuery = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM my_temp_table", Integer.class);
         System.out.println("countSecondtQuery:" + countSecondtQuery);
 
-        return countSecondtQuery;*/
-        return 1564;
+        return countSecondtQuery;
+
     }
 
     public void performTransaction() {

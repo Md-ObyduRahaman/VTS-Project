@@ -18,6 +18,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -30,6 +33,9 @@ public class SpeedDataImpl implements SpeedDataRepo {
 
     private final Logger logger = LoggerFactory.getLogger(SpeedDataImpl.class);
     private final short API_VERSION = 1;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -93,11 +99,15 @@ public class SpeedDataImpl implements SpeedDataRepo {
     @Override
     public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForgr(String finalToTime, String finalFromTime, Integer vehicleId, Integer deviceType) {
 
+        // Define transaction attributes
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = transactionManager.getTransaction(def);
+
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
-        String sql="select ID,TIME_IN_NUMBER date_time,POSITION, SPEED FROM "+shcemaName+"nex_historyrecv_gtt where VEHICLEID = to_char("+vehicleId+") and TIME_IN_NUMBER between "+finalFromTime+" and "+finalToTime+" order by id asc";
+        String sql="select ID,TIME_IN_NUMBER date_time,POSITION, SPEED FROM "+shcemaName+"NEX_HISTORYRECV_GTT_EX where VEHICLEID = to_char("+vehicleId+") and TIME_IN_NUMBER between "+finalFromTime+" and "+finalToTime+" order by id asc";
         logger.trace(sql);
-        String callProcedureSql = "CALL "+shcemaName+"PROC_HIS_DATA_TD(?, ?,?,?)"; // Replace with your procedure name and parameter placeholders
+        String callProcedureSql = "CALL "+shcemaName+"PROC_HIS_DATA_TD_EX(?, ?,?,?)"; // Replace with your procedure name and parameter placeholders
 
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses = Optional.empty();
 
@@ -106,6 +116,8 @@ public class SpeedDataImpl implements SpeedDataRepo {
             speedDataResponses = Optional.of((ArrayList<SpeedDataResponse>) jdbcTemplate.query(sql,
                     BeanPropertyRowMapper.newInstance(SpeedDataResponse.class)));
            // results = jdbcTemplate.queryForList(sql);
+            transactionManager.commit(status);
+
 
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", vehicleId);

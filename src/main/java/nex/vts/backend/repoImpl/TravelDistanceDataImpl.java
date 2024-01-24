@@ -15,6 +15,9 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
@@ -37,6 +40,8 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
     SimpleJdbcCall getAllStatesJdbcCall;
     @Autowired
     Environment environment;
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     List<Map<String, Object>> results;
 
@@ -73,11 +78,15 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 //("DISTANCE", "D",1,7215,7215,0,27476,20230801,20230831)
 
         try {
+            // Define transaction attributes
+            DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+            TransactionStatus status = transactionManager.getTransaction(def);
             logger.trace(callProcedureSql);
             logger.trace(sql);
           jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
           // Step 2: Run a SELECT query to fetch the results
           results = jdbcTemplate.queryForList(sql);
+            transactionManager.commit(status);
       }
       catch (BadSqlGrammarException e) {
           logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", t.getVehicleId());
