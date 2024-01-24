@@ -41,10 +41,13 @@ public class VehicleHistory_Service {
             LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
             newToDateTime = fromDate.concat(String.valueOf(endTime).replace(":",""));
 
-        }else {
+        }
+
+        else {
 
             String newStartTime = fromTime.concat("0000");
-            LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+            LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss"))
+                    .minusHours(2);
 
             if (String.valueOf(newTime).replace(":","").length() == 4)
                 newFromDateTime = fromDate.concat(String.valueOf(newTime).replace(":","").concat("00"));
@@ -83,8 +86,8 @@ public class VehicleHistory_Service {
 
         historiesItemList.forEach(
                 historiesItem -> {
-                    Long aLong = responseDateTime(historiesItem.getTimeInNumber());
-                    historiesItem.setTimeInNumber(aLong);
+                    Long responseDateTime = responseDateTime(historiesItem.getTimeInNumber());
+                    historiesItem.setTimeInNumber(responseDateTime);
                 }
         );
 
