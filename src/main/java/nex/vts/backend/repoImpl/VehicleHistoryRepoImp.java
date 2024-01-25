@@ -14,6 +14,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.math.BigInteger;
@@ -41,10 +44,16 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
         this.dataSource = dataSource;
     }
 
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+
     @Override
     public Object getVehicleHistoryForGpAndM2M(Integer vehicleId, Long fromDateTime, Long toDateTime, String schemaName) {
 
         try {
+
+            DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+            TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
 
             jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
 
@@ -73,6 +82,9 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
                             "      where VEHICLEID = to_char(?)\n" +
                             "        and TIME_IN_NUMBER between ? and ?)\n" +
                             "order by time_in_number ASC");
+
+            transactionManager.commit(transactionStatus);
+
             return jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
                 @Override
                 public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {

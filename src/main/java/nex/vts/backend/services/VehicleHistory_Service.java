@@ -45,7 +45,7 @@ public class VehicleHistory_Service {
 
         else {
 
-            String newStartTime = fromTime.concat("0000");
+            String newStartTime ="030000" /*fromTime.concat("0000")*/;
             LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss"))
                     .minusHours(2);
 
@@ -55,8 +55,8 @@ public class VehicleHistory_Service {
                 newFromDateTime = fromDate.concat(String.valueOf(newTime));
 
             String newEndTime = "235959";
-            LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
-            newToDateTime = fromDate.concat(String.valueOf(endTime));
+            LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss"));
+            newToDateTime = fromDate.concat(String.valueOf(endTime).replace(":",""));
 
         }
 
