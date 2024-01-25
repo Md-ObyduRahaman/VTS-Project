@@ -90,6 +90,8 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
         }
 
         try {
+
+            System.out.println("Here is Sql......"+sql);
             ArrayList<VehiclePositionReportData> vehiclePositionReportDataList = (ArrayList<VehiclePositionReportData>) jdbcTemplate.query(sql, (rs, rowNum) -> {
                 VehiclePositionReportData vehiclePositionReportData = new VehiclePositionReportData();
                 vehiclePositionReportData.setSl(rs.getString("SL"));
@@ -105,7 +107,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                     vehiclePositionReportData.setEngStat(rs.getString("E_ENGINE_STAT"));
                     vehiclePositionReportData.setLocationDetails(rs.getString("E_LAT")+","+rs.getString("E_LON"));
                 }
-                vehiclePositionReportData.setVehName(rs.getString("V_CAR_MODEL"));
+                vehiclePositionReportData.setVehName(rs.getString("V_NAME"));
                 vehiclePositionReportData.setVehId(rs.getString("VEHICLEID"));
 
 
