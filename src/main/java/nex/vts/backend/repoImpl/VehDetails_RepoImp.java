@@ -73,7 +73,7 @@ public class VehDetails_RepoImp implements VehicleDetails_Repo {
 //            throw new AppCommonException(e.getMessage());
 //        }
 
-
+return null;
 //        return jdbcTemplate.queryForObject(getQuery, new Vehicle_Details_RowMapper(),new Object[]{userType,profileId,profileId});
     }
 

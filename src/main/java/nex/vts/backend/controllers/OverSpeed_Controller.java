@@ -2,18 +2,15 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.OverSpeedData;
-import nex.vts.backend.models.responses.VehDriverInfo;
-import nex.vts.backend.repositories.DriverInfoRepo;
+import nex.vts.backend.repositories.DriverInfo_Repo;
 import nex.vts.backend.repositories.OverSpeedRepo;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +36,8 @@ public class OverSpeed_Controller {
 
 
     @Autowired
-    DriverInfoRepo DriveRepo;
+    DriverInfo_Repo DriveRepo;
+
     @Autowired
     Environment environment;
 
