@@ -49,38 +49,20 @@ public class OverSpeed_Controller {
 
     ///v1/1/users/14461/1/overSpeed/0/20240125000000
     ///v1/1/users/38356386/0/1/overSpeed/0/20240125000000
+    ///v1/{deviceType}/users/{userId}/{p_userId}/{userType}/overSpeed/details/{vehicleId}/{fromDate}/{toDate}
+    ///v1/1/users/7215/7215/1/overSpeed/details/34108/20240125000000/20240125235959
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userId}/{p_userId}/{userType}/overSpeed/{vehicleId}/{dateTime}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/{deviceType}/users/{userId}/{p_userId}/{userType}/overSpeed/details/{vehicleId}/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> overSpeed(@PathVariable("vehicleId") Long vehicleId, @PathVariable("userId") Long userId,
                                             @PathVariable("p_userId") Long p_userId, @PathVariable("deviceType") int deviceType,
-                                            @PathVariable("userType") int userType, @PathVariable("dateTime") String dateTime) throws JsonProcessingException {
+                                            @PathVariable("userType") int userType, @PathVariable("fromDate") String fromDate,@PathVariable("toDate") String toDate) throws JsonProcessingException {
 
 
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-        userId = deObfuscateId(userId);
-        // p_userId = deObfuscateId(p_userId);
-       // vehicleId = deObfuscateId(vehicleId);
+     //   userId = deObfuscateId(userId);
 
-        String fromDate = null,toDate = null;
-        try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyyMMdd");
-
-            // Parse the given date and time
-            Date date = inputFormat.parse(dateTime);
-
-            // Format the date to the desired format
-            fromDate = outputFormat.format(date) + "000000";
-             toDate = outputFormat.format(date) + "235959";
-
-            System.out.println("From Date: " + fromDate);
-            System.out.println("To Date: " + toDate);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         OverSpeedData overSpeedData = overSpeedRepo.getOverSpeedInfo("SPEED", "D", userType, userId, p_userId, 1, vehicleId, fromDate, toDate, deviceType);
 

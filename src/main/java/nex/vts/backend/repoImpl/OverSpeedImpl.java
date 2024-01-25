@@ -53,7 +53,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
 
         String sql = null;
 
-        if (p_profile_type == 2) {
+        if (p_profile_type == 1) {
             sql = "SELECT * from \n" +
                     "(\n" +
                     "    select \n" +
@@ -68,6 +68,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     "      row_number() over (order by VEHICLEID DESC) rowno \n" +
                     "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA \n" +
                     "    WHERE BREAK_TIME BETWEEN '" + p_date_from + "' AND '" + p_date_to + "'\n" +
+                    " and VEHICLEID="+p_vehicle_id+
                     ") \n" +
                     "order by rowno";
         } else {
