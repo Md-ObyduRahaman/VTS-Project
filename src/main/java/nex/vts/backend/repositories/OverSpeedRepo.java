@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface OverSpeedRepo {
 
 
-    Optional<ArrayList<OverSpeedData>> getOverSpeedInfo(String p_alert_type, String p_report_type, int p_profile_type,
+    OverSpeedData getOverSpeedInfo(String p_alert_type, String p_report_type, int p_profile_type,
                                                         Long p_profile_id,
                                                         Long p_profile_p_id,
                                                         int p_all_vehicle_flag,

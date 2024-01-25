@@ -84,10 +84,10 @@ public class OverSpeed_Controller {
             e.printStackTrace();
         }
 
-        Optional<ArrayList<OverSpeedData>> overSpeedData = overSpeedRepo.getOverSpeedInfo("SPEED", "D", userType, userId, p_userId, 1, vehicleId, fromDate, toDate, deviceType);
+        OverSpeedData overSpeedData = overSpeedRepo.getOverSpeedInfo("SPEED", "D", userType, userId, p_userId, 1, vehicleId, fromDate, toDate, deviceType);
 
 
-        if (overSpeedData.isEmpty()) {
+        if (overSpeedData.getSpeedReportDetails().isEmpty()) {
             baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "Over Speeding";
