@@ -7,18 +7,14 @@ import nex.vts.backend.repositories.VehicleDetails_Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 @Repository
-public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
-    private final static Logger logger = LoggerFactory.getLogger(VehicleDetailRepo_Imp.class);
+public class VehDetails_RepoImp implements VehicleDetails_Repo {
+    private final static Logger logger = LoggerFactory.getLogger(VehDetails_RepoImp.class);
     private final JdbcTemplate jdbcTemplate;
 
-    public VehicleDetailRepo_Imp(JdbcTemplate jdbcTemplate) {
+    public VehDetails_RepoImp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

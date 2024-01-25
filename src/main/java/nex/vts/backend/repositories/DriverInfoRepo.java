@@ -1,9 +1,6 @@
 package nex.vts.backend.repositories;
 
-import nex.vts.backend.models.responses.DriverInfoModel;
-import nex.vts.backend.models.responses.GetExpansesModel;
 import nex.vts.backend.models.responses.VehDriverInfo;
-import nex.vts.backend.models.responses.VehProfileChangePermision;
 
 import java.util.ArrayList;
 import java.util.Optional;

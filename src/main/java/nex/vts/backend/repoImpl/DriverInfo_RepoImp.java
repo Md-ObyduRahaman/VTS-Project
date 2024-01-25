@@ -20,17 +20,18 @@ import java.util.Optional;
 
 @Service
 @Repository
-public class DriverInfoImpl implements DriverInfoRepo {
+public class DriverInfo_RepoImp implements DriverInfoRepo {
+
+    private final Logger logger = LoggerFactory.getLogger(DriverInfo_RepoImp.class);
 
     private final short API_VERSION = 1;
 
-    private final Logger logger = LoggerFactory.getLogger(DriverInfoImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     @Autowired
     Environment environment;
 
-    public DriverInfoImpl(JdbcTemplate jdbcTemplate) {
+    public DriverInfo_RepoImp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -45,7 +46,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
         String sel_Query = "select "+
                                 "ID, USERID,"+
                                 "D_NAME, D_FNAME, D_LICENSE,"+
-                                "D_ADDRESS, D_CELL, D_DOB," +
+                                "D_ADDRESS, D_CELL, D_DOB, D_NID," +
                                 "D_IMAGE," +
                                 "MAX_CAR_SPEED," +
                                 "DRIVER_PHOTO,DRIVER_LICENSE " +
@@ -65,6 +66,7 @@ public class DriverInfoImpl implements DriverInfoRepo {
                 vehDriverInfo.setDriverFather(rs.getString("D_FNAME"));
                 vehDriverInfo.setDriverAddress(rs.getString("D_ADDRESS"));
                 vehDriverInfo.setDriverCell(rs.getString("D_CELL"));
+                vehDriverInfo.setDriverNID(rs.getString("D_NID"));
 
                 String _xy_DriverDOB =VtsDateTimeLib.get_DateFormatter(rs.getString("D_DOB"));
                 vehDriverInfo.setDriverDOB(_xy_DriverDOB);

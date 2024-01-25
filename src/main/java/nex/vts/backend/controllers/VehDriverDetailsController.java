@@ -2,42 +2,30 @@ package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.VehDriverInfo;
-import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.repositories.DriverInfoRepo;
-import nex.vts.backend.services.VehicleDetails_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.ServiceUnavailableException;
-import java.net.ConnectException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
 
 @RestController
 @RequestMapping("/api/private")
-public class VehDriverDetails_Controller {
+public class VehDriverDetailsController {
 
-    private final Logger logger = LoggerFactory.getLogger(VehDriverDetails_Controller.class);
+    private final Logger logger = LoggerFactory.getLogger(VehDriverDetailsController.class);
     private final BaseResponse baseResponse = new BaseResponse();
     private final short API_VERSION = 1;
 
@@ -53,12 +41,13 @@ public class VehDriverDetails_Controller {
 
     //http://localhost:8009/api/private/v1/1/users/1/1/DriverProfile/13293
 
+//    @RequestMapping(value = "/api/v1/{deviceType}/users/{userId}/{userType}/DriverProfile/{vehicleId}", produces = "application/json; charset=UTF-8;", method = RequestMethod.GET)
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/{userType}/DriverProfile/{vehicleId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @RequestMapping(value = "/api/v1/content/live-tv/playing-data", produces = "application/json; charset=UTF-8;", method = RequestMethod.POST)
-    public ResponseEntity<String> DriverList(@PathVariable("vehicleId") Long vehicleId,
-                                             @PathVariable("userId") Long userId,
-                                             @PathVariable("deviceType") int deviceType,
-                                             @PathVariable("userType") int userType) throws JsonProcessingException {
+    public ResponseEntity<String> Get_DriverInfo(
+            @PathVariable("vehicleId") Long vehicleId,
+            @PathVariable("userId") Long userId,
+            @PathVariable("deviceType") int deviceType,
+            @PathVariable("userType") int userType) throws JsonProcessingException {
         //
         //
         String _API_NAME = "GetDriverInfo";
@@ -69,14 +58,13 @@ public class VehDriverDetails_Controller {
         vehicleId = deObfuscateId(vehicleId);
         //
         //
-
         //-----------FIELD-VALIDATION---------------->>>
         Optional<ArrayList<VehDriverInfo>> Get_DriverInfo = DriveRepo.get_DriverInfo(
                 String.valueOf(userId), Math.toIntExact(vehicleId), deviceType, userType
         );
         //-----------FIELD-VALIDATION----------------<<<
-
-
+        //
+        //
         // SET:: RESPONSE DATA --->> /start/
         if (Get_DriverInfo.isEmpty()) {
             baseResponse.data = new ArrayList<>();
@@ -87,7 +75,8 @@ public class VehDriverDetails_Controller {
         } else {
             baseResponse.status = true;
             baseResponse.apiName = _API_NAME;
-            baseResponse.data = Get_DriverInfo;
+            baseResponse.data = Get_DriverInfo.flatMap(list -> list.stream().findFirst()).orElse(null); // [Without Array Data]
+//            baseResponse.data = Get_DriverInfo;  // [Array Data]
         }
         // SET:: RESPONSE DATA ---<< /end/
         //

@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @JsonPropertyOrder({"driverRowId","driverName","driverFather"})
 public class VehDriverInfo {
     private String driverRowId;
-    private String driverName, driverFather, driverAddress, driverCell, driverDOB ,driverLicense;
-//    private String DRIVER_PHOTO, D_IMAGE;
+    private String driverName, driverFather, driverAddress, driverCell;
+    private String driverDOB ,driverNID, driverLicense;
+
+    //    private String DRIVER_PHOTO, D_IMAGE;
 //    private String MAX_CAR_SPEED;
 
 }
