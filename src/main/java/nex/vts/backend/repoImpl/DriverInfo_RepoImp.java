@@ -2,7 +2,7 @@ package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.*;
-import nex.vts.backend.repositories.DriverInfoRepo;
+import nex.vts.backend.repositories.DriverInfo_Repo;
 import nex.vts.backend.utilities.VtsDateTimeLib;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @Repository
-public class DriverInfo_RepoImp implements DriverInfoRepo {
+public class DriverInfo_RepoImp implements DriverInfo_Repo {
 
     private final Logger logger = LoggerFactory.getLogger(DriverInfo_RepoImp.class);
 

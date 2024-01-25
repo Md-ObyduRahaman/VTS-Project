@@ -22,7 +22,7 @@ public class VehicleDetails_Service {
         switch (operatorId){
             case 1:/*TODO Gp*/
             case 3:/*TODO M2M*/
-                VehicleDetailInfo detailInfo = (VehicleDetailInfo)vehicleDetailsRepo.getVehicleDetailForGpAndM2M(userType,profileId,schemaName);
+                VehicleDetailInfo detailInfo = (VehicleDetailInfo)vehicleDetailsRepo.get_VehicleDetail_For_GpAndM2M(userType,profileId,schemaName);
                 infoResponse.setVehicleDetailInfo(detailInfo);
         }
 
