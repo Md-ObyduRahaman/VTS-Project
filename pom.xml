@@ -10,7 +10,7 @@
     </parent>
     <groupId>nex.vts.backend</groupId>
     <artifactId>vts_backend</artifactId>
-    <version>0.0.10_m2m</version>
+    <version>0.0.11_M2M</version>
     <name>vts_backend</name>
     <description>Back-End project for vts_backend</description>
     <properties>
@@ -74,10 +74,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
