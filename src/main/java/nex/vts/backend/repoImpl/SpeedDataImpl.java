@@ -106,7 +106,6 @@ public class SpeedDataImpl implements SpeedDataRepo {
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
         String sql="select ID,TIME_IN_NUMBER date_time,POSITION, SPEED FROM "+shcemaName+"NEX_HISTORYRECV_GTT_EX where VEHICLEID = to_char("+vehicleId+") and TIME_IN_NUMBER between "+finalFromTime+" and "+finalToTime+" order by id asc";
-        logger.trace(sql);
         String callProcedureSql = "CALL "+shcemaName+"PROC_HIS_DATA_TD_EX(?, ?,?,?)"; // Replace with your procedure name and parameter placeholders
 
         Optional<ArrayList<SpeedDataResponse>> speedDataResponses = Optional.empty();
