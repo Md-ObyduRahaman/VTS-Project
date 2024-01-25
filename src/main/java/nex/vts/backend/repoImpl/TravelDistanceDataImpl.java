@@ -53,12 +53,12 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
 
 
     @Override
-    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t,Integer deviceType) throws SQLException {
+    public MonthTravleDistanceForAll getTravelDistanceData(TravelDistanceDataModel t, Integer deviceType) throws SQLException {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
 
-        String sql="SELECT\n" +
+        String sql = "SELECT\n" +
                 "   ROW_NUMBER() OVER (ORDER BY DATETIME) AS key,\n" +
                 "    GROUPID AS profile_id,\n" +
                 "    VEHICLEID AS VEHICLE_ID,\n" +
@@ -71,43 +71,40 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                 "    ROUND(MAX(DISTANCE) OVER (), 3) AS MAX_DISTANCE,\n" +
                 "    ROUND(MIN(DISTANCE) OVER (), 3) AS MIN_DISTANCE,\n" +
                 "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount\n" +
-                "FROM "+shcemaName+"NEX_DISTANCE_REPOT_DATA";
+                "FROM " + shcemaName + "NEX_DISTANCE_REPOT_DATA_EX";
 
         // Step 1: Call the stored procedure with parameters
-        String callProcedureSql = "CALL "+shcemaName+"GENERATE_DISTANCE_REPORT_DATA(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
+        String callProcedureSql = "CALL " + shcemaName + "GEN_DISTANCE_REPORT_DATA_EX(?, ?,?,?,?,?,?,?,?)"; // Replace with your procedure name and parameter placeholders
 //("DISTANCE", "D",1,7215,7215,0,27476,20230801,20230831)
 
         try {
             // Define transaction attributes
             DefaultTransactionDefinition def = new DefaultTransactionDefinition();
             TransactionStatus status = transactionManager.getTransaction(def);
-            logger.trace(callProcedureSql);
-            logger.trace(sql);
-          jdbcTemplate.update(callProcedureSql, "DISTANCE", "D",t.getProfileType(),t.getProfileId(),t.getParentId(),t.getP_all_vehicle_flag(),t.getVehicleId(),t.getP_date_from(),t.getP_date_to()); // Set actual parameter values
-          // Step 2: Run a SELECT query to fetch the results
-          results = jdbcTemplate.queryForList(sql);
+
+            jdbcTemplate.update(callProcedureSql, "DISTANCE", "D", t.getProfileType(), t.getProfileId(), t.getParentId(), t.getP_all_vehicle_flag(), t.getVehicleId(), t.getP_date_from(), t.getP_date_to()); // Set actual parameter values
+            results = jdbcTemplate.queryForList(sql);
             transactionManager.commit(status);
-      }
-      catch (BadSqlGrammarException e) {
-          logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", t.getVehicleId());
-          throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
-      }catch (TransientDataAccessException f){
-          logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", t.getVehicleId());
-          throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
-      }catch (CannotGetJdbcConnectionException g){
-          logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", t.getVehicleId());
-          throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
-      }
+        } catch (BadSqlGrammarException e) {
+            logger.trace("No Data found with vehicleId is {}  Sql Grammar Exception", t.getVehicleId());
+            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+        } catch (TransientDataAccessException f) {
+            logger.trace("No Data found with vehicleId is {} network or driver issue or db is temporarily unavailable  ", t.getVehicleId());
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+        } catch (CannotGetJdbcConnectionException g) {
+            logger.trace("No Data found with vehicleId is {} could not acquire a jdbc connection  ", t.getVehicleId());
+            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+        }
 
         //Map Data
-        ArrayList<MonthTravleDistance> monthTravleDistanceList=new ArrayList<>();
-        MonthTravleDistanceForAll monthTravleDistanceForAllin=new MonthTravleDistanceForAll();
-        Boolean flag=true;
+        ArrayList<MonthTravleDistance> monthTravleDistanceList = new ArrayList<>();
+        MonthTravleDistanceForAll monthTravleDistanceForAllin = new MonthTravleDistanceForAll();
+        Boolean flag = true;
 
         for (Map<String, Object> map : results) {
 
-            MonthTravleDistance monthTravleDistance=new MonthTravleDistance();
-            if(flag) {
+            MonthTravleDistance monthTravleDistance = new MonthTravleDistance();
+            if (flag) {
                 BigDecimal AVERAGE_DISTANCE = (BigDecimal) map.get("AVERAGE_DISTANCE");
                 monthTravleDistanceForAllin.setAverage(AVERAGE_DISTANCE.doubleValue());
                 BigDecimal TOTAL_DISTANCE = (BigDecimal) map.get("TOTAL_DISTANCE");
@@ -118,9 +115,9 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                 monthTravleDistanceForAllin.setMin(MIN_DISTANCE.doubleValue());
                 BigDecimal TOTALROWCOUNT = (BigDecimal) map.get("TOTALROWCOUNT");
                 monthTravleDistanceForAllin.setTotalCount(TOTALROWCOUNT.intValue());
-                flag=false;
+                flag = false;
 
-}
+            }
             String PROFILE_ID = (String) map.get("PROFILE_ID");
             String VEHICLE_ID = (String) map.get("VEHICLE_ID");
             String DATE_TIME = (String) map.get("DATE_TIME");
@@ -134,7 +131,6 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                     DISTANCE.toString(), MAIN_ACCOUNT_ID, KEY.intValue()));
         }
         monthTravleDistanceForAllin.setMonthTravleDistancesList(monthTravleDistanceList);
-
 
 
         return monthTravleDistanceForAllin;
