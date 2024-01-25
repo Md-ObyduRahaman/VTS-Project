@@ -5,7 +5,7 @@ import nex.vts.backend.models.responses.VehDriverInfo;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public interface DriverInfoRepo
+public interface DriverInfo_Repo
 {
 //    Optional<DriverInfoModel> findDriverInfo(Integer id);
 ////    public Optional<DriverInfoModel> findAllDriverinfo(Integer Id);
