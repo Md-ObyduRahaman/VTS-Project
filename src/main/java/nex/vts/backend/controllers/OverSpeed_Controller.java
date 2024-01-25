@@ -61,7 +61,8 @@ public class OverSpeed_Controller {
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
-     //   userId = deObfuscateId(userId);
+        userId = deObfuscateId(userId);
+        p_userId = deObfuscateId(p_userId);
 
 
         OverSpeedData overSpeedData = overSpeedRepo.getOverSpeedInfo("SPEED", "D", userType, userId, p_userId, 1, vehicleId, fromDate, toDate, deviceType);
