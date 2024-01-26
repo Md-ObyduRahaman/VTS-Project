@@ -94,4 +94,7 @@ public class VehicleInfos {
     @JsonProperty("orderIndex")
     private int orderIndex;
 
+    @JsonProperty("userId")
+    private String userId;
+
 }

@@ -19,17 +19,12 @@ import java.util.Map;
 public class AddExpense_Imp implements AddExpense_Repo {
 
     private static Logger logger = LoggerFactory.getLogger(AddExpense_Imp.class);
-    private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
-
     private final short API_VERSION = 1;
 
-    SqlParameterSource parameterSource = new MapSqlParameterSource();
-
     @Autowired
-    public AddExpense_Imp(DataSource dataSource,JdbcTemplate jdbcTemplate) {
+    public AddExpense_Imp(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 
@@ -120,7 +115,7 @@ public class AddExpense_Imp implements AddExpense_Repo {
             }
         }catch (Exception e){
 
-            e.getMessage();
+            logger.error(e.getMessage());
             throw new AppCommonException(600 + "##Required parameter is missing" + profileId + "##" + API_VERSION);
 
         }finally {

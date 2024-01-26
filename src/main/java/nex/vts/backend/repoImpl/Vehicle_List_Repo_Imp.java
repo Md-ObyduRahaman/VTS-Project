@@ -70,7 +70,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                         "       t.LON         LON,\n" +
                         "       t.FAVORITE    FAVORITE,\n" +
                         "       t.ICON_TYPE   ICONTYPE,\n" +
-                        "       t.ORDER_INDEX ORDERINDEX\n" +
+                        "       t.ORDER_INDEX ORDERINDEX,\n" +
+                        "       t.USERID      USERID\n"+
                         "FROM nex_individual_temp t\n" +
                         "where t.VEHICLE_ID IN\n" +
                         "      (select ID\n" +
@@ -94,7 +95,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                     rs.getFloat("LON"),
                                     rs.getInt("FAVORITE"),
                                     rs.getInt("ICONTYPE"),
-                                    rs.getInt("ORDERINDEX")
+                                    rs.getInt("ORDERINDEX"),
+                                    rs.getString("USERID")
 
                             );
                         }
@@ -184,7 +186,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                 "       t.LON         LON,\n" +
                                 "       t.FAVORITE    FAVORITE,\n" +
                                 "       t.ICON_TYPE   ICONTYPE,\n" +
-                                "       t.ORDER_INDEX ORDERINDEX\n" +
+                                "       t.ORDER_INDEX ORDERINDEX,\n" +
+                                "       t.USERID      USERID\n"+
                                 "FROM nex_individual_temp t,\n" +
                                 "     nex_dept_wise_vehicle d\n" +
                                 "where d.COMPANY_ID = ?\n" +
@@ -210,7 +213,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                         rs.getFloat("LON"),
                                         rs.getInt("FAVORITE"),
                                         rs.getInt("ICONTYPE"),
-                                        rs.getInt("ORDERINDEX")
+                                        rs.getInt("ORDERINDEX"),
+                                        rs.getString("USERID")
                                 );
                             }
                         },deptId,id,operatorId);
@@ -231,7 +235,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                 "       t.LON         LON,\n" +
                                 "       t.FAVORITE    FAVORITE,\n" +
                                 "       t.ICON_TYPE   ICONTYPE,\n" +
-                                "       t.ORDER_INDEX ORDERINDEX\n" +
+                                "       t.ORDER_INDEX ORDERINDEX,\n" +
+                                "       t.USERID      USERID\n" +
                                 "FROM nex_individual_temp t,\n" +
                                 "     GPSNEXGP.nex_dept_wise_vehicle d\n" +
                                 "where d.COMPANY_ID = ?\n" +
@@ -256,7 +261,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                             rs.getFloat("LON"),
                                             rs.getInt("FAVORITE"),
                                             rs.getInt("ICONTYPE"),
-                                            rs.getInt("ORDERINDEX")
+                                            rs.getInt("ORDERINDEX"),
+                                            rs.getString("USERID")
                                     );
                                 }
                             },deptId,id);
@@ -279,7 +285,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                         "       t.LON         LON,\n" +
                         "       t.FAVORITE    FAVORITE,\n" +
                         "       t.ICON_TYPE   ICONTYPE,\n" +
-                        "       t.ORDER_INDEX ORDERINDEX\n" +
+                        "       t.ORDER_INDEX ORDERINDEX,\n" +
+                        "       t.USERID      USERID\n" +
                         "from nex_individual_temp t,\n" +
                         "     nex_individual_client b\n" +
                         "where t.vehicle_id = b.id\n" +
@@ -302,7 +309,8 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                                     rs.getFloat("LON"),
                                     rs.getInt("FAVORITE"),
                                     rs.getInt("ICONTYPE"),
-                                    rs.getInt("ORDERINDEX")
+                                    rs.getInt("ORDERINDEX"),
+                                    rs.getString("USERID")
 
                             );
                         }
