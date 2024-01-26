@@ -89,7 +89,6 @@ public class RepoVtsLoginUser {
                     "         WHERE USERNAME = '" + userName + "' )";
         }
 
-        System.out.println(query);
 
         try {
             userObj = jdbcTemplate.query(query, new Object[]{}, (rs, rowNum) ->
