@@ -6,33 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Blob;
+
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class VehicleDetailInfo {
 
-    @JsonProperty("id")
-    private int id;
+    @JsonProperty("vehicleId")
+    private Integer vehicleId;
 
-    @JsonProperty("iconType")
-    private int iconType;
-
-    @JsonProperty("iconTypeOnMap")
-    private int iconTypeOnMap;
-
-    @JsonProperty("iconTypeRunning")
-    private int iconTypeRunning;
-
-    @JsonProperty("iconTypeStopped")
-    private int iconTypeStopped;
-
-    @JsonProperty("iconTypeStationary")
-    private int iconTypeStationary;
-
-    @JsonProperty("iconTypeOverSpeed")
-    private int iconTypeOverSpeed;
-
-    @JsonProperty("userId")
     private String userId;
 
     @JsonProperty("fullName")
@@ -41,51 +24,46 @@ public class VehicleDetailInfo {
     @JsonProperty("cellPhone")
     private String cellPhone;
 
-    @JsonProperty("carColor")
     private String carColor;
 
-    @JsonProperty("carVendor")
     private String carVendor;
 
-    @JsonProperty("carModel")
     private String carModel;
 
-    @JsonProperty("customUserId")
     private String customUserId;
 
-    @JsonProperty("email")
     private String email;
 
-    @JsonProperty("vehicleImage")
-    private int vehicleImage;
+    private Integer iconType;
 
-    @JsonProperty("driverId")
-    private String driverId;
+    private Integer iconTypeOnMap;
 
-    @JsonProperty("name")
-    private String name;
+    private Integer iconTypeRunning;
 
-    @JsonProperty("fName")
+    private Integer iconTypeStopped;
+
+    private Integer iconTypeStationary;
+
+    private Integer iconTypeOverSpeed;
+
+    private Blob vehicleImage;
+
+    private Integer driverId;
+
+    private String dName;
+
     private String fName;
 
-    @JsonProperty("licence")
-    private String licence;
+    private String dLicense;
 
-    @JsonProperty("address")
-    private String address;
+    private String dAddress;
 
-    @JsonProperty("cell")
-    private String cell;
+    private String dCell;
 
-    @JsonProperty("maxCarSpeed")
-    private String maxCarSpeed;
+    private Integer maxCarSpeed;
 
-    @JsonProperty("driverPhoto")
-    private int driverPhoto;
+    private String driverPhoto;
 
-    @JsonProperty("carImage")
     private String carImage;
 
-    @JsonProperty("carOption")
-    private String carOption;
 }

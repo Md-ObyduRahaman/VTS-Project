@@ -17,12 +17,12 @@ public class VehicleDetails_Service {
         this.vehicleDetailsRepo = vehicleDetailsRepo;
     }
 
-    public VehicleInfoResponse getVehicleDetail(Integer userType, Integer profileId, String schemaName,Integer operatorId) {
+    public VehicleInfoResponse getVehicleDetail(Integer vehicleId, String schemaName, Integer operatorId) {
 
-        switch (operatorId){
+        switch (operatorId) {
             case 1:/*TODO Gp*/
             case 3:/*TODO M2M*/
-                VehicleDetailInfo detailInfo = (VehicleDetailInfo)vehicleDetailsRepo.get_VehicleDetail_For_GpAndM2M(userType,profileId,schemaName);
+                VehicleDetailInfo detailInfo = (VehicleDetailInfo) vehicleDetailsRepo.getVehicleDetailForGpAndM2M(vehicleId, schemaName);
                 infoResponse.setVehicleDetailInfo(detailInfo);
         }
 
