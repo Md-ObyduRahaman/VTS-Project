@@ -49,7 +49,7 @@ public class DriverInfo_RepoImp implements DriverInfo_Repo {
                                 "D_ADDRESS, D_CELL, D_DOB, D_NID," +
                                 "D_IMAGE," +
                                 "MAX_CAR_SPEED," +
-                                "DRIVER_PHOTO,DRIVER_LICENSE " +
+                                "DRIVER_PHOTO, DRIVER_LICENSE " +
                         "FROM nex_driverinfo " +
                         "WHERE (USERID = '" + vehRowId + "')";
 
