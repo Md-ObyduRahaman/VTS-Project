@@ -1,19 +1,19 @@
-17:33:28.435 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 16312 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:33:28.441 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:33:28.442 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:33:28.504 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-17:33:28.560 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-17:33:28.561 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:33:28.563 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:33:29.714 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:33:29.767 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 47 ms. Found 0 JDBC repository interfaces.
-17:33:30.455 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:33:30.457 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:33:30.506 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:33:30.507 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1941 ms
-17:33:30.833 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-17:33:31.976 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
-java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=/dIl8giJTMypF4+ve0myJQ==)
+02:11:12.734 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 5488 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+02:11:12.738 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+02:11:12.739 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+02:11:12.788 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+02:11:12.820 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+02:11:12.820 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+02:11:12.820 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+02:11:13.866 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+02:11:13.910 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 40 ms. Found 0 JDBC repository interfaces.
+02:11:14.556 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+02:11:14.560 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+02:11:14.616 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+02:11:14.617 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1795 ms
+02:11:14.935 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+02:11:37.119 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=2kTtQZWaS/6h8aIwaFl9vw==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
@@ -129,7 +129,7 @@ java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establ
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
-Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=/dIl8giJTMypF4+ve0myJQ==)
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=2kTtQZWaS/6h8aIwaFl9vw==)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
 	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
 	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
@@ -137,7 +137,7 @@ Caused by: oracle.net.ns.NetException: The Network Adapter could not establish t
 	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
 	... 113 common frames omitted
-Caused by: java.io.IOException: Network is unreachable: connect, socket connect lapse 6 ms. 10.16.75.4 1521  50000 (1/1) true
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21041 ms. 10.16.75.4 1521  50000 (1/1) true
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
 	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
 	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
@@ -145,7 +145,7 @@ Caused by: java.io.IOException: Network is unreachable: connect, socket connect 
 	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
 	... 118 common frames omitted
-Caused by: java.net.SocketException: Network is unreachable: connect
+Caused by: java.net.ConnectException: Connection timed out: connect
 	at java.base/sun.nio.ch.Net.connect0(Native Method)
 	at java.base/sun.nio.ch.Net.connect(Net.java:579)
 	at java.base/sun.nio.ch.Net.connect(Net.java:586)
@@ -155,13 +155,13 @@ Caused by: java.net.SocketException: Network is unreachable: connect
 	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
 	... 123 common frames omitted
-17:33:32.110 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:33:32.123 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@504645ed{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.3622374650593381960/],AVAILABLE}
-17:33:32.132 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@37ae39e6{STARTING}[11.0.13,sto=0] @6507ms
-17:33:32.861 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7e312cb2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@260f95c6, org.springframework.security.web.context.SecurityContextHolderFilter@1b6d8c12, org.springframework.security.web.header.HeaderWriterFilter@70c14b7a, org.springframework.security.web.authentication.logout.LogoutFilter@afd5ac7, nex.vts.backend.filter.JwtAuthFilter@50c58d68, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ea0bc22, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@683502e3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@665629be, org.springframework.security.web.session.SessionManagementFilter@22d12321, org.springframework.security.web.access.ExceptionTranslationFilter@ff7ddc7, org.springframework.security.web.access.intercept.AuthorizationFilter@72e55072]
-17:33:33.023 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-17:33:34.039 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
-java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=XDk+qhV3SrieKTWiPwZPAg==)
+02:11:38.198 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+02:11:38.231 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@23089e0b{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13393729669530380948/],AVAILABLE}
+02:11:38.239 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@3f3c605c{STARTING}[11.0.13,sto=0] @27936ms
+02:11:39.785 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@859be9b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7504362a, org.springframework.security.web.context.SecurityContextHolderFilter@79a7bc1f, org.springframework.security.web.header.HeaderWriterFilter@330b3a17, org.springframework.security.web.authentication.logout.LogoutFilter@392d5f3a, nex.vts.backend.filter.JwtAuthFilter@39d1c33, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e4da5b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a625db0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1157b859, org.springframework.security.web.session.SessionManagementFilter@3f284087, org.springframework.security.web.access.ExceptionTranslationFilter@7ebcd150, org.springframework.security.web.access.intercept.AuthorizationFilter@3ca83113]
+02:11:40.006 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+02:12:02.136 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=sFXnTIanQIGLMBWvLTi0EQ==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
@@ -254,7 +254,7 @@ java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establ
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
-Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=XDk+qhV3SrieKTWiPwZPAg==)
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=sFXnTIanQIGLMBWvLTi0EQ==)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
 	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
 	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
@@ -262,7 +262,7 @@ Caused by: oracle.net.ns.NetException: The Network Adapter could not establish t
 	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
 	... 90 common frames omitted
-Caused by: java.io.IOException: Network is unreachable: connect, socket connect lapse 0 ms. 10.16.75.4 1521  50000 (1/1) true
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21124 ms. 10.16.75.4 1521  50000 (1/1) true
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
 	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
 	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
@@ -270,7 +270,7 @@ Caused by: java.io.IOException: Network is unreachable: connect, socket connect 
 	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
 	... 95 common frames omitted
-Caused by: java.net.SocketException: Network is unreachable: connect
+Caused by: java.net.ConnectException: Connection timed out: connect
 	at java.base/sun.nio.ch.Net.connect0(Native Method)
 	at java.base/sun.nio.ch.Net.connect(Net.java:579)
 	at java.base/sun.nio.ch.Net.connect(Net.java:586)
@@ -280,13 +280,13 @@ Caused by: java.net.SocketException: Network is unreachable: connect
 	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
 	... 100 common frames omitted
-17:33:34.048 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jdbcMappingContext' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Unsatisfied dependency expressed through method 'jdbcMappingContext' parameter 1: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
-17:33:34.062 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@37ae39e6{STOPPING}[11.0.13,sto=0]
-17:33:34.068 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@504645ed{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.3622374650593381960/],STOPPED}
-17:33:34.092 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - logMessage:82 - 
+02:12:02.140 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jdbcMappingContext' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Unsatisfied dependency expressed through method 'jdbcMappingContext' parameter 1: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+02:12:02.151 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@3f3c605c{STOPPING}[11.0.13,sto=0]
+02:12:02.154 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@23089e0b{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13393729669530380948/],STOPPED}
+02:12:02.174 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - logMessage:82 - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-17:33:34.156 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
+02:12:02.201 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
 org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jdbcMappingContext' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Unsatisfied dependency expressed through method 'jdbcMappingContext' parameter 1: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:548)
@@ -380,7 +380,7 @@ Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to 
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
 	... 58 common frames omitted
-Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=XDk+qhV3SrieKTWiPwZPAg==)
+Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=sFXnTIanQIGLMBWvLTi0EQ==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
@@ -398,7 +398,7 @@ Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could
 	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117)
 	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
 	... 76 common frames omitted
-Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=XDk+qhV3SrieKTWiPwZPAg==)
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=sFXnTIanQIGLMBWvLTi0EQ==)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
 	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
 	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
@@ -406,7 +406,7 @@ Caused by: oracle.net.ns.NetException: The Network Adapter could not establish t
 	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
 	... 90 common frames omitted
-Caused by: java.io.IOException: Network is unreachable: connect, socket connect lapse 0 ms. 10.16.75.4 1521  50000 (1/1) true
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21124 ms. 10.16.75.4 1521  50000 (1/1) true
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
 	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
 	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
@@ -414,7 +414,7 @@ Caused by: java.io.IOException: Network is unreachable: connect, socket connect 
 	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
 	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
 	... 95 common frames omitted
-Caused by: java.net.SocketException: Network is unreachable: connect
+Caused by: java.net.ConnectException: Connection timed out: connect
 	at java.base/sun.nio.ch.Net.connect0(Native Method)
 	at java.base/sun.nio.ch.Net.connect(Net.java:579)
 	at java.base/sun.nio.ch.Net.connect(Net.java:586)
@@ -424,216 +424,127 @@ Caused by: java.net.SocketException: Network is unreachable: connect
 	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
 	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
 	... 100 common frames omitted
-17:34:01.273 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 6576 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:34:01.277 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:34:01.277 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:34:01.325 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-17:34:01.365 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-17:34:01.366 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:34:01.366 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:34:02.399 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:34:02.440 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 36 ms. Found 0 JDBC repository interfaces.
-17:34:03.122 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:34:03.125 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:34:03.179 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:34:03.179 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1812 ms
-17:34:03.476 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-17:34:06.953 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@14369d7
-17:34:06.965 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
-17:34:07.151 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:34:07.160 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@6f5361a0{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.7656637086727602510/],AVAILABLE}
-17:34:07.162 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@1127e1c6{STARTING}[11.0.13,sto=0] @7802ms
-17:34:07.682 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2acaa91d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@368b8ce4, org.springframework.security.web.context.SecurityContextHolderFilter@377197eb, org.springframework.security.web.header.HeaderWriterFilter@5a82ef8c, org.springframework.security.web.authentication.logout.LogoutFilter@62872582, nex.vts.backend.filter.JwtAuthFilter@7c40daa9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ec98bad, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@bb8a1e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1823579f, org.springframework.security.web.session.SessionManagementFilter@38bdb36d, org.springframework.security.web.access.ExceptionTranslationFilter@1ce5fd00, org.springframework.security.web.access.intercept.AuthorizationFilter@f395dd]
-17:34:08.049 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-17:34:08.079 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-17:34:08.082 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:34:08.084 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-17:34:08.091 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-17:34:08.115 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@711729c2{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:34:08.118 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-17:34:08.130 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 7.685 seconds (process running for 8.77)
-17:37:59.991 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 210 class path changes (0 additions, 210 deletions, 0 modifications)
-17:37:59.994 [Thread-16] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@1127e1c6{STOPPING}[11.0.13,sto=0]
-17:37:59.999 [Thread-16] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@711729c2{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:38:00.002 [Thread-16] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-17:38:00.003 [Thread-16] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@6f5361a0{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.7656637086727602510/],STOPPED}
-17:38:00.011 [Thread-16] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
-17:38:00.088 [Thread-16] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
-17:38:18.425 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 6576 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:38:18.427 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:38:18.428 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:38:18.816 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:38:18.817 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 0 ms. Found 0 JDBC repository interfaces.
-17:38:19.400 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:38:19.401 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:38:19.404 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:38:19.404 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 972 ms
-17:38:19.424 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:38:19.426 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@4fe2b0f{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.8453273369526939893/],AVAILABLE}
-17:38:19.427 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@1c70d39{STARTING}[11.0.13,sto=0] @260066ms
-17:38:19.861 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-2 - Starting...
-17:38:20.092 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-2 - Added connection oracle.jdbc.driver.T4CConnection@318d8d41
-17:38:20.093 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-2 - Start completed.
-17:38:20.195 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - getOrDeducePassword:86 - 
-
-Using generated security password: e0778998-4d61-47d7-b310-691887149857
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-17:38:20.243 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@30f02b4f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1564b267, org.springframework.security.web.context.SecurityContextHolderFilter@1fe30846, org.springframework.security.web.header.HeaderWriterFilter@1dfd62bb, org.springframework.security.web.csrf.CsrfFilter@2050ccc3, org.springframework.security.web.authentication.logout.LogoutFilter@10dbeab8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@41f490e0, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@569c67c3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4f30fb2a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7c610de6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@39f3f9ad, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@208221d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b4ad117, org.springframework.security.web.access.ExceptionTranslationFilter@25d797e6, org.springframework.security.web.access.intercept.AuthorizationFilter@185672c3]
-17:38:20.308 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-17:38:20.356 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:38:20.357 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-17:38:20.358 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
-17:38:20.381 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@168d7e65{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:38:20.382 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-17:38:20.439 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 2.204 seconds (process running for 261.079)
-17:38:20.463 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:58 - Condition evaluation delta:
-
-
-==========================
-CONDITION EVALUATION DELTA
-==========================
-
-
-Positive matches:
------------------
-
-   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration matched:
-      - AllNestedConditions 2 matched 0 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) did not find any beans; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
-
-   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration matched:
-      - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
-      - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) did not find any beans (OnBeanCondition)
-
-   UserDetailsServiceAutoConfiguration matched:
-      - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
-      - @ConditionalOnBean (types: org.springframework.security.config.annotation.ObjectPostProcessor; SearchStrategy: all) found bean 'objectPostProcessor'; @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) did not find any beans (OnBeanCondition)
-
-
-Negative matches:
------------------
-
-    None
-
-
-Exclusions:
------------
-
-    None
-
-
-Unconditional classes:
-----------------------
-
-    None
-
-
-
-17:38:33.733 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 201 class path changes (201 additions, 0 deletions, 0 modifications)
-17:38:33.735 [Thread-18] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@1c70d39{STOPPING}[11.0.13,sto=0]
-17:38:33.738 [Thread-18] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@168d7e65{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:38:33.740 [Thread-18] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-17:38:33.741 [Thread-18] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@4fe2b0f{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.8453273369526939893/],STOPPED}
-17:38:33.745 [Thread-18] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-2 - Shutdown initiated...
-17:38:33.837 [Thread-18] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-2 - Shutdown completed.
-17:38:33.956 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 6576 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:38:33.956 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:38:33.956 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:38:34.179 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:38:34.191 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 11 ms. Found 0 JDBC repository interfaces.
-17:38:34.462 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:38:34.463 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:38:34.465 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:38:34.466 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 508 ms
-17:38:34.589 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-3 - Starting...
-17:38:35.281 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-3 - Added connection oracle.jdbc.driver.T4CConnection@da3dab7
-17:38:35.282 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-3 - Start completed.
-17:38:35.326 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:38:35.327 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@4bc68a3d{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13728067073208493603/],AVAILABLE}
-17:38:35.328 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@4db079dc{STARTING}[11.0.13,sto=0] @275968ms
-17:38:35.587 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6a25dd71, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@640c9a86, org.springframework.security.web.context.SecurityContextHolderFilter@21593d13, org.springframework.security.web.header.HeaderWriterFilter@55d540a7, org.springframework.security.web.authentication.logout.LogoutFilter@46490dce, nex.vts.backend.filter.JwtAuthFilter@4cd4c720, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c044d51, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23abee0e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11d49da2, org.springframework.security.web.session.SessionManagementFilter@3f764811, org.springframework.security.web.access.ExceptionTranslationFilter@50c5acad, org.springframework.security.web.access.intercept.AuthorizationFilter@44feec08]
-17:38:35.704 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-17:38:35.719 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-17:38:35.719 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:38:35.719 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-17:38:35.721 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-17:38:35.726 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@570b086d{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:38:35.726 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-17:38:35.732 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 1.815 seconds (process running for 276.372)
-17:38:35.736 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:58 - Condition evaluation delta:
-
-
-==========================
-CONDITION EVALUATION DELTA
-==========================
-
-
-Positive matches:
------------------
-
-    None
-
-
-Negative matches:
------------------
-
-   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration:
-      Did not match:
-         - AllNestedConditions 1 matched 1 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.web.SecurityFilterChain' securityFilterChain; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
-
-   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration:
-      Did not match:
-         - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) found beans named springSecurityFilterChain (OnBeanCondition)
-      Matched:
-         - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
-
-   UserDetailsServiceAutoConfiguration:
-      Did not match:
-         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) found beans of type 'org.springframework.security.authentication.AuthenticationManager' authenticationManager and found beans of type 'org.springframework.security.core.userdetails.UserDetailsService' userInfoUserDetailsService, userDetailsService and found beans of type 'org.springframework.security.authentication.AuthenticationProvider' authenticationProvider (OnBeanCondition)
-      Matched:
-         - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
-
-
-Exclusions:
------------
-
-    None
-
-
-Unconditional classes:
-----------------------
-
-    None
-
-
-
-17:39:38.650 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 201 class path changes (0 additions, 201 deletions, 0 modifications)
-17:39:38.653 [Thread-42] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@4db079dc{STOPPING}[11.0.13,sto=0]
-17:39:38.654 [Thread-42] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@570b086d{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:39:38.655 [Thread-42] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-17:39:38.656 [Thread-42] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@4bc68a3d{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13728067073208493603/],STOPPED}
-17:39:38.661 [Thread-42] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-3 - Shutdown initiated...
-17:39:38.730 [Thread-42] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-3 - Shutdown completed.
-17:39:39.001 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 6576 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:39:39.284 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:39:39.284 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:39:40.039 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:39:40.044 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
-17:39:40.187 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
-java.lang.NullPointerException: Cannot read field "generatedClass" because "data" is null
-	at org.springframework.cglib.proxy.Enhancer.nextInstance(Enhancer.java:783)
-	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
-	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
-	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
-	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
-	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+12:47:58.923 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 17440 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+12:47:58.927 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+12:47:58.928 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+12:47:59.001 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+12:47:59.031 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+12:47:59.032 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+12:47:59.033 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+12:48:01.803 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+12:48:02.003 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 189 ms. Found 0 JDBC repository interfaces.
+12:48:04.319 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+12:48:04.327 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+12:48:04.425 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+12:48:04.426 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 5392 ms
+12:48:05.239 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+12:48:27.765 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=lDeLwv/tRXaAO0NpGoRkag==)
+	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:89)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:732)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:648)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330)
+	at org.springframework.boot.jdbc.EmbeddedDatabaseConnection.isEmbedded(EmbeddedDatabaseConnection.java:166)
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.isEmbeddedDatabase(DataSourceScriptDatabaseInitializer.java:67)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.isEnabled(AbstractScriptDatabaseInitializer.java:84)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyScripts(AbstractScriptDatabaseInitializer.java:107)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applySchemaScripts(AbstractScriptDatabaseInitializer.java:98)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:76)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:709)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:692)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:127)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:709)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:692)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:127)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:709)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:692)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:127)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:208)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:171)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:166)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:151)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:86)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:261)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:235)
+	at org.springframework.boot.web.embedded.jetty.ServletContextInitializerConfiguration.callInitializers(ServletContextInitializerConfiguration.java:64)
+	at org.springframework.boot.web.embedded.jetty.ServletContextInitializerConfiguration.configure(ServletContextInitializerConfiguration.java:53)
+	at org.eclipse.jetty.webapp.Configurations.configure(Configurations.java:514)
+	at org.eclipse.jetty.webapp.WebAppContext.configure(WebAppContext.java:515)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1301)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:901)
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171)
+	at org.eclipse.jetty.server.Server.start(Server.java:470)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93)
+	at org.springframework.boot.web.embedded.jetty.JettyWebServer.initialize(JettyWebServer.java:123)
+	at org.springframework.boot.web.embedded.jetty.JettyWebServer.<init>(JettyWebServer.java:90)
+	at org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory.getJettyWebServer(JettyServletWebServerFactory.java:437)
+	at org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory.getWebServer(JettyServletWebServerFactory.java:179)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:183)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:161)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:578)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
@@ -644,36 +555,332 @@ java.lang.NullPointerException: Cannot read field "generatedClass" because "data
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
-17:39:59.027 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:39:59.028 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:39:59.055 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 6576 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:39:59.055 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:39:59.055 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:40:01.233 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:40:01.260 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 25 ms. Found 0 JDBC repository interfaces.
-17:40:02.518 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:40:02.519 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:40:03.069 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:40:03.070 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 4011 ms
-17:40:04.040 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-4 - Starting...
-17:40:04.201 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-4 - Added connection oracle.jdbc.driver.T4CConnection@4c8d5bed
-17:40:04.201 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-4 - Start completed.
-17:40:04.253 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:40:04.255 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@6592f5a{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.4983346040847879643/],AVAILABLE}
-17:40:04.256 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@62cbd212{STARTING}[11.0.13,sto=0] @364896ms
-17:40:04.668 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@463b0ea3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5529d07b, org.springframework.security.web.context.SecurityContextHolderFilter@715fc13e, org.springframework.security.web.header.HeaderWriterFilter@6de918e8, org.springframework.security.web.authentication.logout.LogoutFilter@6fbf97c8, nex.vts.backend.filter.JwtAuthFilter@55430519, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13648bfe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@366fff22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1389267e, org.springframework.security.web.session.SessionManagementFilter@338cba7e, org.springframework.security.web.access.ExceptionTranslationFilter@7732bd66, org.springframework.security.web.access.intercept.AuthorizationFilter@116ca861]
-17:40:04.890 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-17:40:04.909 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-17:40:04.910 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:40:04.910 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-17:40:04.911 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
-17:40:04.916 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@77096d27{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:40:04.916 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-17:40:04.922 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 5.951 seconds (process running for 365.562)
-17:40:04.924 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:63 - Condition evaluation unchanged
-17:40:34.596 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@62cbd212{STOPPING}[11.0.13,sto=0]
-17:40:34.597 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@77096d27{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:40:34.598 [SpringApplicationShutdownHook] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-17:40:34.598 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@6592f5a{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.4983346040847879643/],STOPPED}
-17:40:34.601 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-4 - Shutdown initiated...
-17:40:35.106 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-4 - Shutdown completed.
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=lDeLwv/tRXaAO0NpGoRkag==)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:349)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
+	... 113 common frames omitted
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21201 ms. 10.16.75.4 1521  50000 (1/1) true
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
+	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:243)
+	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
+	... 118 common frames omitted
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:586)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:880)
+	at java.base/java.nio.channels.SocketChannel.open(SocketChannel.java:285)
+	at oracle.net.nt.TimeoutSocketChannel.connect(TimeoutSocketChannel.java:183)
+	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
+	... 123 common frames omitted
+12:48:28.279 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+12:48:28.324 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@56774829{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.17427323432883435683/],AVAILABLE}
+12:48:28.331 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@3a5793d{STARTING}[11.0.13,sto=0] @36918ms
+12:48:29.487 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@bda6a83, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3e623b44, org.springframework.security.web.context.SecurityContextHolderFilter@4e6b090b, org.springframework.security.web.header.HeaderWriterFilter@90b8427, org.springframework.security.web.authentication.logout.LogoutFilter@65f30b42, nex.vts.backend.filter.JwtAuthFilter@4816a85f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e60626a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fab8b84, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@286a00d3, org.springframework.security.web.session.SessionManagementFilter@6fe4f22b, org.springframework.security.web.access.ExceptionTranslationFilter@386c4e52, org.springframework.security.web.access.intercept.AuthorizationFilter@2322c5f1]
+12:48:29.838 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+12:48:51.899 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - throwPoolInitializationException:594 - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=nD+PWhOWTs20riXkk8Kpsw==)
+	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:89)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:732)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:648)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330)
+	at org.springframework.data.jdbc.repository.config.DialectResolver$DefaultDialectProvider.getDialect(DialectResolver.java:108)
+	at org.springframework.data.jdbc.repository.config.DialectResolver.lambda$getDialect$0(DialectResolver.java:78)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1602)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:647)
+	at org.springframework.data.jdbc.repository.config.DialectResolver.getDialect(DialectResolver.java:80)
+	at org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration.jdbcDialect(AbstractJdbcConfiguration.java:223)
+	at org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.jdbcDialect(JdbcRepositoriesAutoConfiguration.java:144)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1298)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1259)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:338)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:331)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1148)
+	at org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration.jdbcCustomConversions(AbstractJdbcConfiguration.java:154)
+	at org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.jdbcCustomConversions(JdbcRepositoriesAutoConfiguration.java:121)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:491)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:548)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:961)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:915)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at nex.vts.backend.VtsBackendApplication.main(VtsBackendApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=nD+PWhOWTs20riXkk8Kpsw==)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:349)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
+	... 90 common frames omitted
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21055 ms. 10.16.75.4 1521  50000 (1/1) true
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
+	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:243)
+	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
+	... 95 common frames omitted
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:586)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:880)
+	at java.base/java.nio.channels.SocketChannel.open(SocketChannel.java:285)
+	at oracle.net.nt.TimeoutSocketChannel.connect(TimeoutSocketChannel.java:183)
+	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
+	... 100 common frames omitted
+12:48:51.902 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jdbcMappingContext' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Unsatisfied dependency expressed through method 'jdbcMappingContext' parameter 1: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+12:48:51.912 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@3a5793d{STOPPING}[11.0.13,sto=0]
+12:48:51.917 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@56774829{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.17427323432883435683/],STOPPED}
+12:48:51.932 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - logMessage:82 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+12:48:51.959 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jdbcMappingContext' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Unsatisfied dependency expressed through method 'jdbcMappingContext' parameter 1: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:548)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:961)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:915)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at nex.vts.backend.VtsBackendApplication.main(VtsBackendApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jdbcCustomConversions' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:491)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789)
+	... 22 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.data.jdbc.core.convert.JdbcCustomConversions]: Factory method 'jdbcCustomConversions' threw exception with message: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 36 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jdbcDialect' defined in class path resource [org/springframework/boot/autoconfigure/data/jdbc/JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.class]: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1298)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1259)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:338)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:331)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1148)
+	at org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration.jdbcCustomConversions(AbstractJdbcConfiguration.java:154)
+	at org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.jdbcCustomConversions(JdbcRepositoriesAutoConfiguration.java:121)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	... 37 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.data.relational.core.dialect.Dialect]: Factory method 'jdbcDialect' threw exception with message: Failed to obtain JDBC Connection
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 57 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:83)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330)
+	at org.springframework.data.jdbc.repository.config.DialectResolver$DefaultDialectProvider.getDialect(DialectResolver.java:108)
+	at org.springframework.data.jdbc.repository.config.DialectResolver.lambda$getDialect$0(DialectResolver.java:78)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1602)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:647)
+	at org.springframework.data.jdbc.repository.config.DialectResolver.getDialect(DialectResolver.java:80)
+	at org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration.jdbcDialect(AbstractJdbcConfiguration.java:223)
+	at org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration$SpringBootJdbcConfiguration.jdbcDialect(JdbcRepositoriesAutoConfiguration.java:144)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	... 58 common frames omitted
+Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection (CONNECTION_ID=nD+PWhOWTs20riXkk8Kpsw==)
+	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:892)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:697)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1041)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:89)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:732)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:648)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
+	... 76 common frames omitted
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection (CONNECTION_ID=nD+PWhOWTs20riXkk8Kpsw==)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:694)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:584)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:349)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2442)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:656)
+	... 90 common frames omitted
+Caused by: java.io.IOException: Connection timed out: connect, socket connect lapse 21055 ms. 10.16.75.4 1521  50000 (1/1) true
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:425)
+	at oracle.net.nt.TcpNTAdapter.doLocalDNSLookupConnect(TcpNTAdapter.java:307)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:269)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:243)
+	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:980)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:655)
+	... 95 common frames omitted
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:586)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:880)
+	at java.base/java.nio.channels.SocketChannel.open(SocketChannel.java:285)
+	at oracle.net.nt.TimeoutSocketChannel.connect(TimeoutSocketChannel.java:183)
+	at oracle.net.nt.TimeoutSocketChannel.<init>(TimeoutSocketChannel.java:157)
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:384)
+	... 100 common frames omitted
+15:29:10.007 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 21200 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+15:29:10.243 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+15:29:10.245 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+15:29:10.308 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+15:29:10.327 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+15:29:10.328 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+15:29:10.329 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+15:29:18.685 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+15:29:18.747 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 52 ms. Found 0 JDBC repository interfaces.
+15:29:19.662 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+15:29:19.666 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+15:29:19.742 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+15:29:19.743 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 9411 ms
+15:29:20.163 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+15:29:21.669 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@72817fad
+15:29:21.673 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+15:29:21.870 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+15:29:21.882 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@5aa9ca91{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.15191853067640759570/],AVAILABLE}
+15:29:21.887 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@6c693344{STARTING}[11.0.13,sto=0] @15195ms
+15:29:22.485 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@69d7ff5d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a335c2a, org.springframework.security.web.context.SecurityContextHolderFilter@1b46ddca, org.springframework.security.web.header.HeaderWriterFilter@642ee718, org.springframework.security.web.authentication.logout.LogoutFilter@1134b635, nex.vts.backend.filter.JwtAuthFilter@78931c3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@754fedb3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ede2b68, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@472b4d09, org.springframework.security.web.session.SessionManagementFilter@6b88ba8c, org.springframework.security.web.access.ExceptionTranslationFilter@7880e711, org.springframework.security.web.access.intercept.AuthorizationFilter@48bb7994]
+15:29:23.274 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+15:29:23.304 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+15:29:23.306 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:29:23.307 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+15:29:23.309 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
+15:29:23.336 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@2497a8a0{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+15:29:23.338 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+15:29:23.349 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 14.952 seconds (process running for 16.658)
+15:29:26.264 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@6c693344{STOPPING}[11.0.13,sto=0]
+15:29:26.271 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@2497a8a0{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+15:29:26.273 [SpringApplicationShutdownHook] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+15:29:26.274 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@5aa9ca91{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.15191853067640759570/],STOPPED}
+15:29:26.283 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+15:29:26.812 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.

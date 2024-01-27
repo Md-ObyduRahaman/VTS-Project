@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/private/v1")
+@RequestMapping("/api/private")
 public class CtrlModifyVehicleSetting {
 
     private final short API_VERSION = 1;
@@ -40,7 +40,7 @@ public class CtrlModifyVehicleSetting {
         this.vehicleSettingService = vehicleSettingService;
     }
 
-    @PostMapping("/{deviceType}/vehicle/{vehicleId}/settings")
+    @PostMapping("/v1/{deviceType}/vehicle/{vehicleId}/settings")
     public ResponseEntity<?> modifyVehicleSetting(@PathVariable(value = "deviceType")Integer deviceType,
                                                   @PathVariable(value = "vehicleId")Integer vehicleId,
                                                   @RequestParam(value = "data") String reqBody) throws JsonProcessingException, SQLException {
