@@ -57,7 +57,8 @@ public class CtrlAddExpense {
         else
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
-        ExpenseModel expenseModel = mapper.readValue(encryptionDecryption.aesDecrypt(reqBody,API_VERSION), ExpenseModel.class);
+        ExpenseModel expenseModel = mapper.
+                readValue(encryptionDecryption.aesDecrypt(reqBody,API_VERSION), ExpenseModel.class);
 
         String oparationType =expenseModel.oparationType;
         Integer profileType = expenseModel.profileType;

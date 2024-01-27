@@ -53,7 +53,8 @@ public class CtrlVehicleHistory {
 //        Long    fromDateTimes = deObfuscateId(fromDateTime);
 //        Long    toDateTimes = deObfuscateId(toDateTime);
 
-        VehicleHistoryResponse historyResponse = historyService.getVehicleHistory(vehicleIds,String.valueOf(fromDateTime),String.valueOf(toDateTime),schemaName,operatorId);
+        VehicleHistoryResponse historyResponse = historyService.getVehicleHistory(vehicleIds,
+                String.valueOf(fromDateTime),String.valueOf(toDateTime),schemaName,operatorId);
 
         if (!historyResponse.getHistory().equals(null)){
 

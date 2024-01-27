@@ -34,7 +34,7 @@ public class ModifyVehicleSettingsRepo_Imp implements ModifyVehicleSettings_Repo
 
         Connection connection = dataSource.getConnection();
 
-        String storeProcedure = "{call ".concat(schemaName).concat("call modify_vehicle_profile_ex(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+        String storeProcedure = "{call ".concat(schemaName).concat("modify_vehicle_profile_ex(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
         CallableStatement statement = connection.prepareCall(storeProcedure);
 
@@ -52,7 +52,7 @@ public class ModifyVehicleSettingsRepo_Imp implements ModifyVehicleSettings_Repo
         try {
 
             boolean result = statement.execute();
-            outResponse = statement.getString(11);
+            outResponse = statement.getString(10);
 
             if (result){
 
