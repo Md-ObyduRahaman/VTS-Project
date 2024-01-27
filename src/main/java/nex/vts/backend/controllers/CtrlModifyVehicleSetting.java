@@ -63,7 +63,7 @@ public class CtrlModifyVehicleSetting {
 
         Integer vehicleIds = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
         String profileId = String.valueOf(loginUser.getPROFILE_ID());
-        String parentProfileId = String.valueOf(loginUser.getPARENT_PROFILE_ID());
+        String parentProfileId = String.valueOf(loginUser.getMAIN_ACCOUNT_ID());
         Integer profileType = loginUser.getUSER_TYPE();
 
         VehicleSettingMapping vehicleSettingMapping = mapper.readValue(encryptionDecryption.aesDecrypt(reqBody,API_VERSION),VehicleSettingMapping.class);
@@ -73,12 +73,14 @@ public class CtrlModifyVehicleSetting {
         String email = vehicleSettingMapping.email;
         int isFavourite = vehicleSettingMapping.isFavourite;
 
-        vehicleSettingService.modifyVehicleSettingResponse(profileType,
-                Integer.valueOf(profileId),Integer.valueOf(parentProfileId)
-                ,vehicleIds,maxSpeed,cellPhone,email,isFavourite,schemaName);
+        response.data = vehicleSettingService.modifyVehicleSettingResponse(profileType, Integer.valueOf(profileId),
+                Integer.valueOf(parentProfileId), vehicleIds, maxSpeed, cellPhone, email, isFavourite, schemaName);
+
+        response.apiName = "Modify Vehicle Settings";
+        response.status = true;
 
 
-        return null;
+        return ResponseEntity.ok(response);
 
     }
 }

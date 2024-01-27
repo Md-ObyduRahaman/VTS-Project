@@ -47,13 +47,13 @@ public class CtrlExpenseReport {
                                               @PathVariable(value = "toDate")String toDate
                                               ){
 
-        fromDate = fromDate.substring(0,2).
+/*        fromDate = fromDate.substring(0,2).
                    concat("-".concat(fromDate.substring(2,4)))
                 .concat("-".concat(fromDate.substring(4)));
 
         toDate = toDate.substring(0,2)
                 .concat("-".concat(toDate.substring(2,4)))
-                .concat("-".concat(toDate.substring(4)));
+                .concat("-".concat(toDate.substring(4)));*/
 
         vehicleId = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
 
