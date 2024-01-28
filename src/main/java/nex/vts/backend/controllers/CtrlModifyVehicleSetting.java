@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.responses.VehicleConfigModel;
 import nex.vts.backend.models.responses.VehicleSettingMapping;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.ModifyVehicleSetting_Service;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -73,6 +75,7 @@ public class CtrlModifyVehicleSetting {
         String email = vehicleSettingMapping.email;
         int isFavourite = vehicleSettingMapping.isFavourite;
 
+
         response.data = vehicleSettingService.modifyVehicleSettingResponse(profileType, Integer.valueOf(profileId),
                 Integer.valueOf(parentProfileId), vehicleIds, maxSpeed, cellPhone, email, isFavourite, schemaName);
 
@@ -82,5 +85,27 @@ public class CtrlModifyVehicleSetting {
 
         return ResponseEntity.ok(response);
 
+    }
+
+    @GetMapping("/{deviceType}/vehicle/{vehicleId}/setting")
+    public ResponseEntity<?> getVehicleSetting(@PathVariable(value = "deviceType")Integer deviceType,
+                                               @PathVariable(value = "vehicleId")Integer vehicleId){
+
+        vehicleId = Math.toIntExact(deObfuscateId(Long.valueOf(vehicleId)));
+
+        VehicleConfigModel configModel =  vehicleSettingService.getVehicleSetting(vehicleId);
+
+        if (!configModel.equals(null)) {
+
+            response.data = configModel;
+            response.status = true;
+            response.apiName = "Get Vehicle Setting";
+        }else {
+            response.data = null;
+            response.status = false;
+            response.errorMsg = "failed to load setting";
+        }
+
+       return ResponseEntity.ok(response);
     }
 }

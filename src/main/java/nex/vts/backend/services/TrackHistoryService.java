@@ -43,6 +43,8 @@ public class TrackHistoryService {
                     currentLocation.get().setTimeStamp(responseDateTime(dateTime));
 
                     trackNowResponse.setVehicleCurrentLocation(currentLocation);
+                    trackNowResponse.setLocDetails(String.valueOf(currentLocation.get().getLat())
+                            .concat(String.valueOf(currentLocation.get().getLongs())));
 
                 } else {
 

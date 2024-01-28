@@ -15,7 +15,7 @@ public class VehicleCurrentLocation {
     @JsonProperty("lat")
     private Double lat;
 
-    @JsonProperty("longs")
+    @JsonProperty("lon")
     private Double longs;
 
     @JsonProperty("speed")
@@ -32,4 +32,5 @@ public class VehicleCurrentLocation {
 
     @JsonProperty("engine")
     private String engine;
+
 }

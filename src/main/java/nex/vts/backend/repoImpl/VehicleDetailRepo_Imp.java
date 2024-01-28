@@ -24,7 +24,8 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
     @Override
     public VehicleDetailInfo getVehicleDetailForGpAndM2M( Integer vehicleId, String schemaName) {
 
-        String query = "select v.ID                      VEHICLEID,\n" +
+        String query = "select v.ID               VEHICLEID,\n" +
+                "       v.CAR_NO                  CAR_NO,\n"+
                 "       v.USERID                  USERID,\n" +
                 "       v.FULL_NAME               FULL_NAME,\n" +
                 "       v.CELL_PHONE              CELL_PHONE,\n" +
@@ -61,6 +62,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
                     return new VehicleDetailInfo(
 
                             rs.getInt("VEHICLEID"),
+                            rs.getString("CAR_NO"),
                             rs.getString("USERID"),
                             rs.getString("FULL_NAME"),
                             rs.getString("CELL_PHONE"),
