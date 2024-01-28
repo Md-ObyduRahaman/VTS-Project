@@ -1,5 +1,6 @@
 package nex.vts.backend.models.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +9,14 @@ import java.util.Optional;
 
 @Getter
 @Setter
-public class TrackNowResponse{
+public class TrackNowResponse {
 
-	@JsonProperty("vehicle current location")
-	private Optional<VehicleCurrentLocation> vehicleCurrentLocation;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("vehicleCurrentLocation")
+    private Optional<TrackNowResponseTwo> vehicleCurrentLocation;
+
+/*    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("vehicle current location")
+    private Optional<VehicleCurrentLocation> vehicleCurrentLocation;*/
+
 }

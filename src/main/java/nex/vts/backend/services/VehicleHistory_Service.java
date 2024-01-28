@@ -3,6 +3,7 @@ package nex.vts.backend.services;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.HistoriesItem;
 import nex.vts.backend.models.responses.History;
+import nex.vts.backend.models.responses.VehicleConfigModel;
 import nex.vts.backend.models.responses.VehicleHistoryResponse;
 import nex.vts.backend.repositories.VehicleHistoryRepo;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class VehicleHistory_Service {
@@ -29,17 +31,20 @@ public class VehicleHistory_Service {
 
         if (Integer.parseInt(fromTime) != 24){
 
-            String newStartTime = fromTime.concat("0000");
-            LocalTime newTime = LocalTime.parse(newStartTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
 
-            if (String.valueOf(newTime).replace(":","").length() == 4)
-                newFromDateTime = fromDate.concat(String.valueOf(newTime).replace(":","").concat("00"));
-            else
-                newFromDateTime = fromDate.concat(String.valueOf(newTime).concat("00"));
 
-            String newEndTime = fromTime.concat("5959");
-            LocalTime endTime = LocalTime.parse(newEndTime,DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
-            newToDateTime = fromDate.concat(String.valueOf(endTime).replace(":",""));
+                String newStartTime = fromTime.concat("0000");
+                LocalTime newTime = LocalTime.parse(newStartTime, DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+
+                if (String.valueOf(newTime).replace(":", "").length() == 4)
+                    newFromDateTime = fromDate.concat(String.valueOf(newTime).replace(":", "").concat("00"));
+                else
+                    newFromDateTime = fromDate.concat(String.valueOf(newTime).concat("00"));
+
+                String newEndTime = fromTime.concat("5959");
+                LocalTime endTime = LocalTime.parse(newEndTime, DateTimeFormatter.ofPattern("HHmmss")).minusHours(2);
+                newToDateTime = fromDate.concat(String.valueOf(endTime).replace(":", ""));
+
 
         }
 
@@ -62,19 +67,33 @@ public class VehicleHistory_Service {
 
         try {
 
-            switch (operatorId){
+            switch (operatorId)
+            {
             case 1: /*TODO GP*/
             case 3: /*TODO M2M*/
 
-                List<HistoriesItem> historiesItemList = (List<HistoriesItem>) history_repo.getVehicleHistoryForGpAndM2M(vehicleId,
+                List<HistoriesItem> historiesItemList = (List<HistoriesItem>)
+                        history_repo.getVehicleHistoryForGpAndM2M(vehicleId,
                         Long.parseLong(newFromDateTime), Long.parseLong(newToDateTime), schemaName);
 
-                history.setHistories(historiesItemResponse(historiesItemList));
-                history.setTotalCount(historiesItemList.size());
-                history.setCode(200);
-                vehicleHistoryResponse.setHistory(history);
+                if (!historiesItemList.isEmpty()) {
+
+                    history.setHistories(historiesItemResponse(historiesItemList));
+                    history.setTotalCount(historiesItemList.size());
+                    history.setCode(200);
+                    vehicleHistoryResponse.setHistory(history);
+                }
+                else {
+
+                    history.setHistories(historiesItemResponse(null));
+                    history.setTotalCount(historiesItemList.size());
+                    history.setCode(200);
+                    vehicleHistoryResponse.setHistory(history);
+                }
             }
-        }catch (Exception e){
+
+        }
+        catch (Exception e){
 
             throw new AppCommonException(e.getMessage());
         }

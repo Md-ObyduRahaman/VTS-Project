@@ -2,6 +2,7 @@ package nex.vts.backend.services;
 
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.TrackNowResponse;
+import nex.vts.backend.models.responses.TrackNowResponseTwo;
 import nex.vts.backend.models.responses.VehicleCurrentLocation;
 import nex.vts.backend.repositories.TrackNowRepository;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class TrackHistoryService {
 
     TrackNowResponse trackNowResponse = new TrackNowResponse();
     TrackNowRepository trackNowRepository;
+    TrackNowResponseTwo responseTwo = new TrackNowResponseTwo();
 
     @Autowired
     public TrackHistoryService(TrackNowRepository trackNowRepository) {
@@ -39,10 +41,23 @@ public class TrackHistoryService {
 
                     String dateTime = currentLocation.get().getDatetime();
 //                    dateTime =  responseDateTime(dateTime);
+
+                    responseTwo.setId(currentLocation.get().getId());
+                    responseTwo.setHead(currentLocation.get().getHead());
+                    responseTwo.setEngine(currentLocation.get().getEngine());
+                    responseTwo.setLongs(currentLocation.get().getLongs());
+                    responseTwo.setLat(currentLocation.get().getLat());
+                    responseTwo.setHead(currentLocation.get().getHead());
                     currentLocation.get().setDatetime(responseDateTime(dateTime));
                     currentLocation.get().setTimeStamp(responseDateTime(dateTime));
+                    responseTwo.setDatetime(currentLocation.get().getDatetime());
+                    responseTwo.setTimeStamp(currentLocation.get().getTimeStamp());
+                    responseTwo.setLocDetails(String.valueOf(currentLocation.get().getLat())
+                            .concat(String.valueOf(currentLocation.get().getLongs())));
 
-                    trackNowResponse.setVehicleCurrentLocation(currentLocation);
+                    trackNowResponse.setVehicleCurrentLocation(Optional.ofNullable(responseTwo));
+
+
 
                 } else {
 

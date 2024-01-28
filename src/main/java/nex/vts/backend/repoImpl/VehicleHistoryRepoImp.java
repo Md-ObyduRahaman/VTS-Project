@@ -55,7 +55,7 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
             DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
             TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
 
-            jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
+            jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD_ex (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
 
             String query = "select ROWNUM                                 ROWNO,\n" +
                     "       ID,\n" +
@@ -78,14 +78,12 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
                     "             TIME_IN_NUMBER,\n" +
                     "             POSITION,\n" +
                     "             SPEED\n" +
-                    "      FROM ".concat(schemaName).concat("nex_historyrecv_gtt\n" +
+                    "      FROM ".concat(schemaName).concat("nex_historyrecv_gtt_ex\n" +
                             "      where VEHICLEID = to_char(?)\n" +
                             "        and TIME_IN_NUMBER between ? and ?)\n" +
                             "order by time_in_number ASC");
 
-            transactionManager.commit(transactionStatus);
-
-            return jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
+            Object vehicleHistory = jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {
                 @Override
                 public HistoriesItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -109,11 +107,15 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
             }, new Object[]{/*vehicleId,*/ vehicleId, fromDateTime, toDateTime});
 
+            transactionManager.commit(transactionStatus);
+            return vehicleHistory;
+
         } catch (Exception e) {
 
             logger.error("Unexpected behaviour with param {}", vehicleId, fromDateTime, toDateTime);
             throw new AppCommonException(e.getMessage());
 
         }
+
     }
 }
