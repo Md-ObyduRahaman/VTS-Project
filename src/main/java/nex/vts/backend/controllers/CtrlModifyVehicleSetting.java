@@ -25,7 +25,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/private")
 public class CtrlModifyVehicleSetting {
-
     private final short API_VERSION = 1;
 
     @Autowired
@@ -86,8 +85,9 @@ public class CtrlModifyVehicleSetting {
         return ResponseEntity.ok(response);
 
     }
+    // localhost:8009/api/private/v1/1/vehicle/14079978/setting
 
-    @GetMapping("/{deviceType}/vehicle/{vehicleId}/setting")
+    @GetMapping("/v1/{deviceType}/vehicle/{vehicleId}/setting")
     public ResponseEntity<?> getVehicleSetting(@PathVariable(value = "deviceType")Integer deviceType,
                                                @PathVariable(value = "vehicleId")Integer vehicleId){
 
