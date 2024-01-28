@@ -12,11 +12,12 @@ public class VehicleStateInfo_RowMapper implements RowMapper<VehicleStateInfoOra
     public VehicleStateInfoOra mapRow(ResultSet rs, int rowNum) throws SQLException {
         VehicleStateInfoOra vehicleStateInfo = new VehicleStateInfoOra();
         vehicleStateInfo.setVehId(rs.getInt("VEHICLE_ID"));
+        vehicleStateInfo.setVehName(rs.getString("VEHICLE_NAME"));
         vehicleStateInfo.setEnginStat(rs.getString("ENGIN"));
         vehicleStateInfo.setVehStat(getVehicleMaintenanceStatus(rs.getInt("VEH_MAINTENANCE")));
         vehicleStateInfo.setDateTime(rs.getString("VDATE"));
         vehicleStateInfo.setVehIconType(rs.getString("ICON_TYPE"));
-        vehicleStateInfo.setLocationDetails(rs.getString("LAT") + "," + rs.getString("LON"));
+        vehicleStateInfo.setLocationPoi(rs.getString("LAT") + "," + rs.getString("LON"));
         // Map other columns as needed
 
         return vehicleStateInfo;

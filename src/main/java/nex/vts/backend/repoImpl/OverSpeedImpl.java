@@ -63,7 +63,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     "      LAT, \n" +
                     "      LON, \n" +
                     "      ALERT_TYPE, \n" +
-                    "      BREAK_TIME, \n" +
+                    "      to_char(to_date(BREAK_TIME,'YYYY-MM-DD HH24:MI:SS'),'DD-MM-YYYY HH24:MI:SS') as BREAK_TIME, \n" +
                     "      SPEED, \n" +
                     "      row_number() over (order by VEHICLEID DESC) rowno \n" +
                     "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX \n" +
@@ -72,20 +72,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     ") \n" +
                     "order by rowno";
         } else {
-            sql = "select " +
-                    "VEHICLEID,VEHICLE_NAME,ALERT_TYPE,TOTAL_ALERT,row_number() over (order by VEHICLE_NAME, ALERT_TYPE) rowno\n" +
-                    "        from\n" +
-                    "        (\n" +
-                    "       select VEHICLEID," + shcemaName + "GET_VEHICLE_NAME(0, VEHICLEID) VEHICLE_NAME,ALERT_TYPE,TOTAL_ALERT\n" +
-                    "       from\n" +
-                    "       (\n" +
-                    "       SELECT VEHICLEID,ALERT_TYPE,COUNT(VEHICLEID) TOTAL_ALERT\n" +
-                    "       FROM  " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX\n" +
-                    "       WHERE BREAK_TIME BETWEEN " + p_date_from + " AND " + p_date_to + "\n" +
-                    "       GROUP BY VEHICLEID, ALERT_TYPE\n" +
-                    "       )\n" +
-                    "       )\n" +
-                    "       order by rowno";
+            sql = "";
         }
 
 

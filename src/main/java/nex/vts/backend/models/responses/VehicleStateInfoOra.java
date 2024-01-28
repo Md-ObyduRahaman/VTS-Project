@@ -6,12 +6,13 @@ import lombok.ToString;
 
 @Data
 @ToString
-@JsonPropertyOrder({"vehId","vehStat","vehIconType", "dateTime", "locationDetails","vehIconType"})
+@JsonPropertyOrder({"vehId","vehName","vehIconType", "dateTime","vehStat", "locationPoi"})
 public class VehicleStateInfoOra {
 
     private Integer vehId;
+    private String vehName;
     private String enginStat;
-    private String locationDetails;
+    private String locationPoi;
     private String dateTime;
     private String vehStat;
     private String vehIconType;

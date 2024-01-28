@@ -31,10 +31,11 @@ public class CtrlVehicleState {
     @Autowired
     VehicleStateRepo vehicleStateRepo;
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/getVehicleStateInfo/{mainAccountId}/{SPECIFIC_VEHICLE_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehicleStateInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID, @PathVariable("userId") Integer userId, @PathVariable("userType") Integer userType, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
 
         BaseResponse baseResponse = new BaseResponse();
+        //userId ofFuscade
 
         if (SPECIFIC_VEHICLE_ID.equals("0"))
         {
@@ -43,8 +44,6 @@ public class CtrlVehicleState {
 
 
         Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId,userType,userId,SPECIFIC_VEHICLE_ID);
-        int demo = vehicleStateRepo.Demo(mainAccountId);
-        System.out.println("Test Data: "+demo);
 
 
         if (vehicleStateInfo.get().isEmpty()) {

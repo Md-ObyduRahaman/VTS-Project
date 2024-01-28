@@ -40,68 +40,87 @@ public class VehicleStateImpl implements VehicleStateRepo {
         logger.debug("Executing query to get client profile by client parentProfileId: {}", parentProfileId);
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
-        String sql;
+        String sql=null;
 
         if(userType==1) {
-            sql = "SELECT \n" +
-                    "    ROWNUM ROWNO, \n" +
-                    "    ID, \n" +
-                    "    VEHICLE_ID, \n" +
-                    "    ENGIN, \n" +
-                    "    LAT, \n" +
-                    "    LON, \n" +
-                    "    VDATE, \n" +
-                    "    VEH_MAINTENANCE, \n" +
-                    "    ICON_TYPE\n" +
-                    "FROM (\n" +
-                    "    SELECT \n" +
-                    "        ROWNUM ROWNO, \n" +
-                    "        t.ID, \n" +
-                    "        t.VEHICLE_ID, \n" +
-                    "        t.ENGIN, \n" +
-                    "        t.LAT, \n" +
-                    "        t.LON, \n" +
-                    "        TO_CHAR(TO_DATE(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') AS VDATE,\n" +
-                    "        "+schemaName+"GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE,\n" +
-                    "        t.ICON_TYPE\n" +
-                    "    FROM \n" +
-                    "        "+schemaName+"NEX_INDIVIDUAL_TEMP t\n" +
-                    "    WHERE \n" +
-                    "        t.GROUP_ID = "+parentProfileId+" \n" +
-                    "        AND (\n" +
-                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+"\n" +
-                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL\n" +
-                    "        )\n" +
-                    ") \n" +
-                    "ORDER BY \n" +
+            sql = "SELECT  " +
+                    "    ROWNUM ROWNO,  " +
+                    "    ID,  " +
+                    "    VEHICLE_ID,  " +
+                    "    ENGIN,  " +
+                    "    LAT,  " +
+                    "    LON,  " +
+                    "    VDATE,  " +
+                    "    VEH_MAINTENANCE,  " +
+                    "    ICON_TYPE,GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME " +
+                    "FROM ( " +
+                    "    SELECT  " +
+                    "        ROWNUM ROWNO,  " +
+                    "        t.ID,  " +
+                    "        t.VEHICLE_ID,  " +
+                    "        t.ENGIN,  " +
+                    "        t.LAT,  " +
+                    "        t.LON,  " +
+                    "        TO_CHAR(TO_DATE(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') AS VDATE, " +
+                    "        "+schemaName+"GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE, " +
+                    "        t.ICON_TYPE " +
+                    "    FROM  " +
+                    "        "+schemaName+"NEX_INDIVIDUAL_TEMP t " +
+                    "    WHERE  " +
+                    "        t.GROUP_ID = "+parentProfileId+"  " +
+                    "        AND ( " +
+                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+" " +
+                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
+                    "        ) " +
+                    ")  " +
+                    "ORDER BY  " +
                     "    ID ASC";
-        }else {
-            sql="select \n" +
-                    "    ROWNUM ROWNO, \n" +
-                    "    VEHICLE_ID, ENGIN, LAT, LON, VDATE, VEH_MAINTENANCE, ICON_TYPE,\n" +
-                    "    DEPT_ID\n" +
-                    "FROM\n" +
-                    "   (\n" +
-                    "    select \n" +
-                    "        ROWNUM ROWNO, \n" +
-                    "        t.VEHICLE_ID, t.ENGIN, t.LAT, t.LON, \n" +
-                    "        to_char(to_date(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') as VDATE,\n" +
-                    "        "+schemaName+"get_vehicle_service_stat(t.VEHICLE_ID) as VEH_MAINTENANCE,\n" +
-                    "        t.ICON_TYPE,        \n" +
-                    "        d.profile_id as DEPT_ID\n" +
-                    "    FROM "+schemaName+" nex_individual_temp t, "+schemaName+"NEX_EXTENDED_USER_VS_VEHICLE d     \n" +
-                    "    where d.profile_id = "+userId+"\n" +
-                    "    and d.profile_type = '2'\n" +
-                    "    and d.parent_profile_id = "+parentProfileId+"     \n" +
-                    "    and t.VEHICLE_ID = d.VEHICLE_ID \n" +
-                    "     AND (\n" +
-                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+"\n" +
-                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL\n" +
-                    "        )   \n" +
-                    "    order by t.ID asc\n" +
+        }else if(userType==2) {
+            sql="select  " +
+                    "    ROWNUM ROWNO,  " +
+                    "    VEHICLE_ID, ENGIN, LAT, LON, VDATE, VEH_MAINTENANCE, ICON_TYPE, " +
+                    "    DEPT_ID,GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME " +
+                    "FROM " +
+                    "   ( " +
+                    "    select  " +
+                    "        ROWNUM ROWNO,  " +
+                    "        t.VEHICLE_ID, t.ENGIN, t.LAT, t.LON,  " +
+                    "        to_char(to_date(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') as VDATE, " +
+                    "        "+schemaName+"get_vehicle_service_stat(t.VEHICLE_ID) as VEH_MAINTENANCE, " +
+                    "        t.ICON_TYPE,         " +
+                    "        d.profile_id as DEPT_ID " +
+                    "    FROM "+schemaName+" nex_individual_temp t, "+schemaName+"NEX_EXTENDED_USER_VS_VEHICLE d      " +
+                    "    where d.profile_id = "+userId+" " +
+                    "    and d.profile_type = '2' " +
+                    "    and d.parent_profile_id = "+parentProfileId+"      " +
+                    "    and t.VEHICLE_ID = d.VEHICLE_ID  " +
+                    "     AND ( " +
+                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+" " +
+                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
+                    "        )    " +
+                    "    order by t.ID asc " +
                     ")";
+        } else if (userType==3) {
+            sql="SELECT   " +
+                    "    ROWNUM ROWNO,   " +
+                    "    ID, VEHICLE_ID,  " +
+                    "    ENGIN, LAT, LON, VDATE, VEH_MAINTENANCE,  " +
+                    "    ICON_TYPE, "+schemaName+"GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME   " +
+                    "FROM (  " +
+                    "    SELECT   " +
+                    "        ROWNUM ROWNO,  " +
+                    "        t.ID, t.VEHICLE_ID,   " +
+                    "        t.ENGIN, t.LAT, t.LON,   " +
+                    "        TO_CHAR(TO_DATE(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') AS VDATE,  " +
+                    "       "+schemaName+" GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE,  " +
+                    "        t.ICON_TYPE  " +
+                    "    FROM "+schemaName+" NEX_INDIVIDUAL_TEMP t  " +
+                    "    WHERE t.GROUP_ID =    " +parentProfileId+
+                    "    and t.VEHICLE_ID =       " +SPECIFIC_VEHICLE_ID+
+                    ")";
+
         }
-        System.out.println(sql);
+        System.out.println("..........."+sql);
 
         Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfoList;
 
@@ -128,43 +147,6 @@ public class VehicleStateImpl implements VehicleStateRepo {
         }
     }
 
-    @Override
-    public int Demo(Integer parentProfileId) {
-        //String sql1 = "INSERT INTO my_temp_table VALUES (1, 'ONE') SELECT COUNT(*) FROM my_temp_table; commit";
-        String sql = "INSERT INTO my_temp_table (ID, DESCRIPTION) VALUES (?, ?)";
-        Object[] params = {1, "ONE"};
-      //  performTransaction();
-
-        try {
-            jdbcTemplate.update(sql, params);
-            System.out.println("Data inserted successfully.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle exception as needed
-        }
-        int countFirstQuery = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM my_temp_table", Integer.class);
-        System.out.println("countFirstQuery:" + countFirstQuery);
-      //  jdbcTemplate.execute("COMMIT");
-        int countSecondtQuery = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM my_temp_table", Integer.class);
-        System.out.println("countSecondtQuery:" + countSecondtQuery);
-
-        return countSecondtQuery;
-
-    }
-
-    public void performTransaction() {
-        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-            @Override
-            protected void doInTransactionWithoutResult(TransactionStatus status) {
-                // Perform multiple JDBC operations (queries, updates, etc.) here
-                //jdbcTemplate.update("INSERT INTO my_temp_table VALUES (?, ?)", 1, "ONE");
-              //  int countFirstQuery = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM my_temp_table", Integer.class);
-              //  System.out.println("countFirstQuery:" + countFirstQuery);
-                // If an exception occurs, the transaction will be rolled back automatically
-                // If no exception occurs, the transaction will be committed automatically
-            }
-        });
-    }
 
 
 }
