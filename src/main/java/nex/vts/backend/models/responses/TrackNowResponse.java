@@ -12,4 +12,7 @@ public class TrackNowResponse{
 
 	@JsonProperty("vehicle current location")
 	private Optional<VehicleCurrentLocation> vehicleCurrentLocation;
+
+	@JsonProperty("location Details")
+	private String locDetails;
 }
