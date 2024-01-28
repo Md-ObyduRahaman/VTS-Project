@@ -83,7 +83,7 @@ public class CtrlTravelDistanceData {
         MonthTravleDistanceForAll monthTravleDistanceForAll = travelDistanceDataRepo.getTravelDistanceData(reqBody, deviceType);
         BaseResponse baseResponse = new BaseResponse();
         if (monthTravleDistanceForAll.getMonthTravleDistancesList().isEmpty()) {
-            baseResponse.data=new ArrayList<>();
+            baseResponse.data=monthTravleDistanceForAll;
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found ";
             baseResponse.errorCode = 4041;

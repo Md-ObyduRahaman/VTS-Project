@@ -47,7 +47,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
 
         OverSpeedData overSpeedData = new OverSpeedData();
 
-        String callProcedureSql = "CALL " + shcemaName + "GENERATE_ALERT_REPORT_DATA('SPEED', 'D'," + p_profile_type + "," + p_profile_id + ","
+        String callProcedureSql = "CALL " + shcemaName + "GENERATE_ALERT_REPORT_DATA_EX('SPEED', 'D'," + p_profile_type + "," + p_profile_id + ","
                 + p_profile_p_id + "," + p_all_vehicle_flag + "," + p_vehicle_id + ",'" + p_date_from + "','" + p_date_to + "')";
         System.out.println(callProcedureSql);
 
@@ -66,7 +66,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     "      BREAK_TIME, \n" +
                     "      SPEED, \n" +
                     "      row_number() over (order by VEHICLEID DESC) rowno \n" +
-                    "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA \n" +
+                    "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX \n" +
                     "    WHERE BREAK_TIME BETWEEN '" + p_date_from + "' AND '" + p_date_to + "'\n" +
                     " and VEHICLEID="+p_vehicle_id+
                     ") \n" +
@@ -80,7 +80,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     "       from\n" +
                     "       (\n" +
                     "       SELECT VEHICLEID,ALERT_TYPE,COUNT(VEHICLEID) TOTAL_ALERT\n" +
-                    "       FROM  " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA\n" +
+                    "       FROM  " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX\n" +
                     "       WHERE BREAK_TIME BETWEEN " + p_date_from + " AND " + p_date_to + "\n" +
                     "       GROUP BY VEHICLEID, ALERT_TYPE\n" +
                     "       )\n" +
