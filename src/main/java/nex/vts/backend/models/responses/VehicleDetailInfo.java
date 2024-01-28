@@ -9,22 +9,25 @@ import java.sql.Blob;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class VehicleDetailInfo {
 
-    @JsonProperty("vehicleId")
+    @JsonProperty("vehId")
     private Integer vehicleId;
 
-    @JsonProperty("registrationNumber")
+    @JsonProperty("carRegistrationNo")
     private String carNo;
 
-    @JsonProperty("userId")
-    private String userId;
+    @JsonProperty("vehName")
+    private String userId; /*todo not used*/
 
     @JsonProperty("fullName")
     private String fullName;
 
-    @JsonProperty("cellPhone")
+    @JsonProperty("contactCell")
     private String cellPhone;
 
-    @JsonProperty("carColor")
+    @JsonProperty("contactEmail")
+    private String email;
+
+    @JsonProperty("vehColor")
     private String carColor;
 
     @JsonProperty("carVendor")
@@ -33,49 +36,46 @@ public class VehicleDetailInfo {
     @JsonProperty("carModel")
     private String carModel;
 
-    @JsonProperty("customUserId")
-    private String customUserId;
+/*    @JsonProperty("customUserId")
+    private String customUserId; *//*todo not used*/
 
-    @JsonProperty("email")
-    private String email;
-
-    @JsonProperty("iconType")
+    @JsonProperty("vehIconType")
     private Integer iconType;
 
-    @JsonProperty("iconTypeOnMap")
+    @JsonProperty("vehIconTypeOnMap")
     private Integer iconTypeOnMap;
 
-    @JsonProperty("iconTypeRunning")
+    @JsonProperty("vehIconTypeRunning")
     private Integer iconTypeRunning;
 
-    @JsonProperty("iconTypeStopped")
+    @JsonProperty("vehIconTypeStopped")
     private Integer iconTypeStopped;
 
-    @JsonProperty("iconTypeStationary")
+    @JsonProperty("vehIconTypeStationary")
     private Integer iconTypeStationary;
 
-    @JsonProperty("iconTypeOverSpeed")
+    @JsonProperty("vehIconTypeOverSpeed")
     private Integer iconTypeOverSpeed;
 
-    @JsonProperty("vehicleImage")
+    @JsonProperty("vehImage")
     private Blob vehicleImage;
 
-    @JsonProperty("driverId")
+    @JsonProperty("driverRowId")
     private Integer driverId;
 
-    @JsonProperty("dName")
+    @JsonProperty("driverName")
     private String dName;
 
-    @JsonProperty("fName")
+    @JsonProperty("driverFather")
     private String fName;
 
-    @JsonProperty("dLicense")
+    @JsonProperty("driverLicense")
     private String dLicense;
 
-    @JsonProperty("dAddress")
+    @JsonProperty("driverAddress")
     private String dAddress;
 
-    @JsonProperty("dCell")
+    @JsonProperty("driverCell")
     private String dCell;
 
     @JsonProperty("maxCarSpeed")

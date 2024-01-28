@@ -32,7 +32,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
                 "       v.CAR_COLOUR              CAR_COLOUR,\n" +
                 "       v.CAR_VENDOR              CAR_VENDOR,\n" +
                 "       v.CAR_MODEL               CAR_MODEL,\n" +
-                "       v.CUSTOM_USERID           CUSTOM_USERID,\n" +
+                /*"       v.CUSTOM_USERID           CUSTOM_USERID,\n" +*/
                 "       v.EMAIL                   EMAIL,\n" +
                 "       v.ICON_TYPE               ICON_TYPE,\n" +
                 "       v.ICON_TYPE_ON_MAP        ICON_TYPE_ON_MAP,\n" +
@@ -66,11 +66,11 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
                             rs.getString("USERID"),
                             rs.getString("FULL_NAME"),
                             rs.getString("CELL_PHONE"),
+                            rs.getString("EMAIL"),
                             rs.getString("CAR_COLOUR"),
                             rs.getString("CAR_VENDOR"),
                             rs.getString("CAR_MODEL"),
-                            rs.getString("CUSTOM_USERID"),
-                            rs.getString("EMAIL"),
+                           /* rs.getString("CUSTOM_USERID"),*/
                             rs.getInt("ICON_TYPE"),
                             rs.getInt("ICON_TYPE_ON_MAP"),
                             rs.getInt("ICON_TYPE_RUNNING"),
