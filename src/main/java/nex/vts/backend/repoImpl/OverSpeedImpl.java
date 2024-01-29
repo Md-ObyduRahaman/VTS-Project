@@ -74,6 +74,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
         } else {
             sql = "";
         }
+        System.out.println(".............................."+sql);
 
 
         try {

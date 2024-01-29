@@ -43,10 +43,11 @@ public class CtrlVehiclePositionReport {
 
     //v1/1/users/13365/1/vehiclePositionReport/25819/20240110/20240117/1
     //v1/1/users/35449794/1/vehiclePositionReport/25819/20240110/20240117/1
-    @GetMapping(value = "v1/{deviceType}/{userType}/users/{userId}/vehiclePositionReport/{vehicleId}/{fromDate}/{toDate}/{locationStat}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/{deviceType}/{userType}/users/{userId}/{p_userId}/vehiclePositionReport/{vehicleId}/{fromDate}/{toDate}/{locationStat}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehiclePositionReport(@PathVariable("vehicleId") Integer vehicleId,
                                                             @PathVariable("deviceType") Integer deviceType,
                                                             @PathVariable("userType") Integer userType,
+                                                            @PathVariable("p_userId") String p_userId,
                                                             @PathVariable("fromDate") String fromDate,
                                                             @PathVariable("toDate") String toDate,
                                                             @PathVariable("locationStat") String locationStat,
@@ -63,7 +64,7 @@ public class CtrlVehiclePositionReport {
 
         Optional<ArrayList<VehiclePositionReportData>> vehiclePositionReportData;
         if (flag) {
-            vehiclePositionReportData = vehiclePositionRepo.findVehiclePositionRepo(String.valueOf(userId), vehicleId, fromDate, toDate, locationStat, deviceType, userType);
+            vehiclePositionReportData = vehiclePositionRepo.findVehiclePositionRepo(String.valueOf(userId),p_userId, vehicleId, fromDate, toDate, locationStat, deviceType, userType);
         } else {
             vehiclePositionReportData = Optional.empty();
         }

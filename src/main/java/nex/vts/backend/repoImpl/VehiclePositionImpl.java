@@ -30,7 +30,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType) {
+    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId,String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType) {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
@@ -79,13 +79,91 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                     "                 E_LON,\n" +
                     "                 E_TIME\n" +
                     "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW\n" +
-                    "           WHERE     GROUPID = '" + userId + "'\n" +
+                    "           WHERE     GROUPID = '" + p_userId + "'\n" +
 
                     "\n" + innerSql +
                     "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
                     "         NEX_INDIVIDUAL_CLIENT v\n" +
                     "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 \n" + outterSql;
 
+
+        } else if (userType==2) {
+            sql="SELECT VEHICLEID,\n" +
+                    "         GROUPID,\n" +
+                    "         DATE_IN_NUMBER,\n" +
+                    "         S_ENGINE_STAT,\n" +
+                    "         S_LAT,\n" +
+                    "         S_LON,\n" +
+                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME,\n" +
+                    "         E_ENGINE_STAT,\n" +
+                    "         E_LAT,\n" +
+                    "         E_LON,\n" +
+                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME,\n" +
+                    "    "+shcemaName+"     get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME,\n" +
+                    "       "+shcemaName+"  get_driver_name (VEHICLEID)              AS V_DRIVER_NAME,\n" +
+                    "         v.CAR_MODEL                              AS V_CAR_MODEL\n" +
+                    "    FROM (SELECT VEHICLEID,\n" +
+                    "                 GROUPID,\n" +
+                    "                 DATE_IN_NUMBER,\n" +
+                    "                 S_ENGINE_STAT,\n" +
+                    "                 S_LAT,\n" +
+                    "                 S_LON,\n" +
+                    "                 S_TIME,\n" +
+                    "                 E_ENGINE_STAT,\n" +
+                    "                 E_LAT,\n" +
+                    "                 E_LON,\n" +
+                    "                 E_TIME\n" +
+                    "            FROM "+shcemaName+" NEX_ENGIN_STAT_MW\n" +
+                    "           WHERE     GROUPID = '" + p_userId + "'\n" +
+                    "                \n" +
+                    "                 AND VEHICLEID IN\n" +
+                    "                         (SELECT VEHICLE_ID\n" +
+                    "                            FROM NEX_DEPT_WISE_VEHICLE\n" +
+                    "                           WHERE     COMPANY_ID = '"+p_userId+"'\n" +
+                    "                                 AND ACTIVATION = 1\n" +
+                    "                                 AND DEPT_ID = '"+userId+"')\n" +
+                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
+                    "     "+shcemaName+"    NEX_INDIVIDUAL_CLIENT v\n" +
+                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')\n" +
+                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC";
+
+        } else if (userType==3) {
+            sql=" SELECT VEHICLEID,\n" +
+                    "         GROUPID,\n" +
+                    "         DATE_IN_NUMBER,\n" +
+                    "         S_ENGINE_STAT,\n" +
+                    "         S_LAT,\n" +
+                    "         S_LON,\n" +
+                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME,\n" +
+                    "         E_ENGINE_STAT,\n" +
+                    "         E_LAT,\n" +
+                    "         E_LON,\n" +
+                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME,\n" +
+                    "        "+shcemaName+" get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME,\n" +
+                    "        "+shcemaName+" get_driver_name (VEHICLEID)              AS V_DRIVER_NAME,\n" +
+                    "         v.CAR_MODEL                              AS V_CAR_MODEL\n" +
+                    "    FROM (SELECT VEHICLEID,\n" +
+                    "                 GROUPID,\n" +
+                    "                 DATE_IN_NUMBER,\n" +
+                    "                 S_ENGINE_STAT,\n" +
+                    "                 S_LAT,\n" +
+                    "                 S_LON,\n" +
+                    "                 S_TIME,\n" +
+                    "                 E_ENGINE_STAT,\n" +
+                    "                 E_LAT,\n" +
+                    "                 E_LON,\n" +
+                    "                 E_TIME\n" +
+                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW\n" +
+                    "           WHERE    GROUPID = '" + p_userId + "'\n" +
+                    "                 AND VEHICLEID = '" + vehicleId + "'\n" +
+                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
+                    "         NEX_INDIVIDUAL_CLIENT v\n" +
+                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')\n" +
+                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC";
 
         }
 
@@ -117,13 +195,13 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
             datalList = Optional.ofNullable(vehiclePositionReportDataList);
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with userId is {}  Sql Grammar Exception", userId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         } catch (TransientDataAccessException f) {
             logger.trace("No Data found with userId is {} network or driver issue or db is temporarily unavailable  ", userId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
         } catch (CannotGetJdbcConnectionException g) {
             logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", userId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
 
         return datalList;
