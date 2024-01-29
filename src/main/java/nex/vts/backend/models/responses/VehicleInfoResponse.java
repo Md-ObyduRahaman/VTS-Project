@@ -11,4 +11,7 @@ public class VehicleInfoResponse {
 	@JsonProperty("vehicleDetails")
 	private VehicleDetailInfo vehicleDetailInfo;
 
+	@JsonProperty("massage")
+	private String massage;
+
 }
