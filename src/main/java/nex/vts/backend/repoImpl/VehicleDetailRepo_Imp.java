@@ -17,6 +17,8 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
     private final static Logger logger = LoggerFactory.getLogger(VehicleDetailRepo_Imp.class);
     private final JdbcTemplate jdbcTemplate;
 
+    private final static short API_VERSION = 1;
+
     public VehicleDetailRepo_Imp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -40,7 +42,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
                 "       v.ICON_TYPE_STOPPED       ICON_TYPE_STOPPED,\n" +
                 "       v.ICON_TYPE_STATIONARY    ICON_TYPE_STATIONARY,\n" +
                 "       v.ICON_TYPE_OVERSPEED     ICON_TYPE_OVERSPEED,\n" +
-                "       v.VEHICLE_IMAGE           VEHICLE_IMAGE,\n" +
+                /*"       v.VEHICLE_IMAGE           VEHICLE_IMAGE,\n" +*/
                 "       d.ID                      DRIVER_ID,\n" +
                 "       d.D_NAME                  D_NAME,\n" +
                 "       d.D_FNAME                 D_FNAME,\n" +
@@ -77,7 +79,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
                             rs.getInt("ICON_TYPE_STOPPED"),
                             rs.getInt("ICON_TYPE_STATIONARY"),
                             rs.getInt("ICON_TYPE_OVERSPEED"),
-                            rs.getBlob("VEHICLE_IMAGE"),
+                            /*String.valueOf(rs.getBinaryStream("VEHICLE_IMAGE")),*/
                             rs.getInt("DRIVER_ID"),
                             rs.getString("D_NAME"),
                             rs.getString("D_FNAME"),
@@ -95,7 +97,7 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
         }catch (Exception e){
 
             logger.error(e.getMessage());
-            throw new AppCommonException(e.getMessage());
+            throw new AppCommonException(403 + "##Vehicle details is empty"+ vehicleId + API_VERSION);
         }
     }
 

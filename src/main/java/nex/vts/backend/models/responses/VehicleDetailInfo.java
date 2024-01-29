@@ -1,8 +1,10 @@
 package nex.vts.backend.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.websocket.Decoder;
 import lombok.*;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 @Data
@@ -57,8 +59,10 @@ public class VehicleDetailInfo {
     @JsonProperty("vehIconTypeOverSpeed")
     private Integer iconTypeOverSpeed;
 
+/*
     @JsonProperty("vehImage")
-    private Blob vehicleImage;
+    private String vehicleImage;
+*/
 
     @JsonProperty("driverRowId")
     private Integer driverId;

@@ -112,8 +112,8 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
         } catch (Exception e) {
 
-            logger.error("Unexpected behaviour with param {}", vehicleId, fromDateTime, toDateTime);
-            throw new AppCommonException(e.getMessage());
+            logger.error(e.getMessage());
+            throw new AppCommonException(403 + "##Unexpected behaviour with param {}" + vehicleId + fromDateTime + toDateTime);
 
         }
 
