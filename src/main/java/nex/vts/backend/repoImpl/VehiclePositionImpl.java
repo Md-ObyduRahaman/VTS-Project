@@ -88,7 +88,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
 
 
         } else if (userType==2) {
-            sql="SELECT VEHICLEID,\n" +
+            sql="SELECT ROW_NUMBER() OVER (ORDER BY e.VEHICLEID ASC, e.S_TIME ASC) AS SL, VEHICLEID,\n" +
                     "         GROUPID,\n" +
                     "         DATE_IN_NUMBER,\n" +
                     "         S_ENGINE_STAT,\n" +
