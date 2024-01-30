@@ -53,7 +53,6 @@ public class OverSpeedImpl implements OverSpeedRepo {
 
         String sql = null;
 
-        if (p_profile_type == 1) {
             sql = "SELECT * from \n" +
                     "(\n" +
                     "    select \n" +
@@ -71,10 +70,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                     " and VEHICLEID="+p_vehicle_id+
                     ") \n" +
                     "order by rowno";
-        } else {
-            sql = "";
-        }
-        System.out.println(".............................."+sql);
+
 
 
         try {
