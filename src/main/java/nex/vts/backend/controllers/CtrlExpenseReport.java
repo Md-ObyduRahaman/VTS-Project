@@ -73,7 +73,7 @@ public class CtrlExpenseReport {
             throw new AppCommonException(400 + "##login cred not found##" + loginUser.getPROFILE_ID() + "##" + API_VERSION);
 
 
-        response.data = expenseReportService.getExpenseReport(String.valueOf(loginUser.getPROFILE_ID()),
+        response.data = expenseReportService.getExpenseReport(String.valueOf(loginUser.getMAIN_ACCOUNT_ID()),
                 String.valueOf(vehicleId),fromDate,toDate,schemaName);
 
         response.status = true;
