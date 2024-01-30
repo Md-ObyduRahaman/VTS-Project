@@ -203,8 +203,13 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
             logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", userId);
             throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
+        if(datalList.get().isEmpty())
+        {
+            return Optional.empty();
+        }else {
+            return datalList;
+        }
 
-        return datalList;
 
     }
 }
