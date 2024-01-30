@@ -84,7 +84,7 @@ public class VehicleHistory_Service {
                 }
                 else {
 
-                    history.setHistories(historiesItemResponse(null));
+                    history.setHistories(historiesItemResponse(historiesItemList));
                     history.setTotalCount(historiesItemList.size());
                     history.setCode(200);
                     vehicleHistoryResponse.setHistory(history);
