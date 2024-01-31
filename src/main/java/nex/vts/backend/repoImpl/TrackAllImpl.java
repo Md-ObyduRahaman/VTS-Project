@@ -20,6 +20,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
+
 @Service
 public class TrackAllImpl implements TrackAllRepo {
 
@@ -88,7 +90,7 @@ public class TrackAllImpl implements TrackAllRepo {
                 trackAllInfo.setDate(rs.getString("VDATE").substring(0,10));
                 trackAllInfo.setEngin(rs.getString("ENGIN"));
                 trackAllInfo.setTime(rs.getString("VDATE").substring(11,19));
-                trackAllInfo.setDirection(rs.getString("ENGIN"));
+                trackAllInfo.setDirection(get_Location(rs.getString("LAT"),rs.getString("LON")));
                 return trackAllInfo;
             });
             trackAllInfos = Optional.of(trackAllInfoList);

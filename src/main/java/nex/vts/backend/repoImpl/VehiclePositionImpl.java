@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
+
 @Service
 public class VehiclePositionImpl implements VehiclePositionRepo {
     private final short API_VERSION = 1;
@@ -179,11 +181,11 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                 if (locationStat.equals("1")) {
                     vehiclePositionReportData.setDateTime(rs.getString("S_TIME"));
                     vehiclePositionReportData.setEngStat(rs.getString("S_ENGINE_STAT"));
-                    vehiclePositionReportData.setLocationDetails(rs.getString("S_LAT")+","+rs.getString("S_LON"));
+                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("S_LAT"),rs.getString("S_LON")));
                 } else {
                     vehiclePositionReportData.setDateTime(rs.getString("E_TIME"));
                     vehiclePositionReportData.setEngStat(rs.getString("E_ENGINE_STAT"));
-                    vehiclePositionReportData.setLocationDetails(rs.getString("E_LAT")+","+rs.getString("E_LON"));
+                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("E_LAT"),rs.getString("E_LON")));
                 }
                 vehiclePositionReportData.setVehName(rs.getString("V_NAME"));
                 vehiclePositionReportData.setVehId(rs.getString("VEHICLEID"));

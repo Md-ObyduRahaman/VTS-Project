@@ -64,7 +64,7 @@ public class TrackAllController {
 
         Optional<ArrayList<TrackAllInfo>> trackAllInfos = trackAllRepo.getOverSpeedInfo(userType, userId, p_userId, deviceType, API_VERSION);
 
-        if (trackAllInfos.isPresent()) {
+        if (trackAllInfos.isEmpty()) {
             baseResponse.data = trackAllInfos;
             baseResponse.status = false;
             baseResponse.apiName = "trackAllInfos";

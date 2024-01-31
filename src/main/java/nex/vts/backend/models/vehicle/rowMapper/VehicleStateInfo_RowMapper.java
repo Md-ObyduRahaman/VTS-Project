@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
+
 public class VehicleStateInfo_RowMapper implements RowMapper<VehicleStateInfoOra> {
     @Override
     public VehicleStateInfoOra mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -17,7 +19,7 @@ public class VehicleStateInfo_RowMapper implements RowMapper<VehicleStateInfoOra
         vehicleStateInfo.setVehStat(getVehicleMaintenanceStatus(rs.getInt("VEH_MAINTENANCE")));
         vehicleStateInfo.setDateTime(rs.getString("VDATE"));
         vehicleStateInfo.setVehIconType(rs.getString("ICON_TYPE"));
-        vehicleStateInfo.setLocationPoi(rs.getString("LAT") + "," + rs.getString("LON"));
+        vehicleStateInfo.setLocationPoi(get_Location(rs.getString("LAT") , rs.getString("LON")));
         // Map other columns as needed
 
         return vehicleStateInfo;
