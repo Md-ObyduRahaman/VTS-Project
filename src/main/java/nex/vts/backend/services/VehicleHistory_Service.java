@@ -1,23 +1,25 @@
 package nex.vts.backend.services;
 
 import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.HistoriesItem;
-import nex.vts.backend.models.responses.History;
-import nex.vts.backend.models.responses.VehicleConfigModel;
-import nex.vts.backend.models.responses.VehicleHistoryResponse;
+import nex.vts.backend.models.responses.*;
 import nex.vts.backend.repositories.VehicleHistoryRepo;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
 
 @Component
 public class VehicleHistory_Service {
     private final VehicleHistoryRepo history_repo;
     History history = new History();
+
+    HistoriesItemTwo historiesItemTwo = new HistoriesItemTwo();
     VehicleHistoryResponse vehicleHistoryResponse = new VehicleHistoryResponse();
 
     public VehicleHistory_Service(VehicleHistoryRepo historyRepo) {
@@ -75,17 +77,42 @@ public class VehicleHistory_Service {
                         history_repo.getVehicleHistoryForGpAndM2M(vehicleId,
                         Long.parseLong(newFromDateTime), Long.parseLong(newToDateTime), schemaName);
 
-                if (!historiesItemList.isEmpty()) {
+                List<HistoriesItemTwo> historiesItemTwos = new ArrayList<>();
 
-                    history.setHistories(historiesItemResponse(historiesItemList));
-                    history.setTotalCount(historiesItemList.size());
+                historiesItemList.forEach(historiesItem ->
+
+                {
+
+                    historiesItemTwo.setId(historiesItem.getId());
+                    historiesItemTwo.setVehicleId(historiesItem.getVehicleId());
+                    historiesItemTwo.setLatitude(historiesItem.getLatitude());
+                    historiesItemTwo.setTime(historiesItem.getTime());
+                    historiesItemTwo.setPosition(historiesItem.getPosition());
+                    historiesItemTwo.setGroupId(historiesItem.getGroupId());
+                    historiesItemTwo.setSpeed(historiesItem.getSpeed());
+                    historiesItemTwo.setDeviceId(historiesItem.getDeviceId());
+                    historiesItemTwo.setRowNo(historiesItem.getRowNo());
+                    historiesItemTwo.setTimeInNumber(responseDateTime(historiesItem.getTimeInNumber()));
+                    historiesItemTwo.setLongitude(historiesItem.getLongitude());
+                    historiesItemTwo.setLocDetails(get_Location(
+                            String.valueOf(historiesItem.getLatitude()),
+                            String.valueOf(historiesItem.getLongitude())));
+
+                    historiesItemTwos.add(historiesItemTwo);
+
+                });
+
+                if (!historiesItemTwos.isEmpty()) {
+
+                    history.setItemTwos(historiesItemTwos);
+                    history.setTotalCount(historiesItemTwos.size());
                     history.setCode(200);
                     vehicleHistoryResponse.setHistory(history);
                 }
                 else {
 
-                    history.setHistories(historiesItemResponse(historiesItemList));
-                    history.setTotalCount(historiesItemList.size());
+                    history.setItemTwos(historiesItemTwos);
+                    history.setTotalCount(historiesItemTwos.size());
                     history.setCode(200);
                     vehicleHistoryResponse.setHistory(history);
                 }
@@ -103,7 +130,8 @@ public class VehicleHistory_Service {
     public List<HistoriesItem> historiesItemResponse(List<HistoriesItem> historiesItemList){
 
         historiesItemList.forEach(
-                historiesItem -> {
+                historiesItem ->
+                {
                     Long responseDateTime = responseDateTime(historiesItem.getTimeInNumber());
                     historiesItem.setTimeInNumber(responseDateTime);
                 }

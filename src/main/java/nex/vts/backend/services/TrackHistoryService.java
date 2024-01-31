@@ -15,6 +15,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
+
 @Component
 public class TrackHistoryService {
     private final short API_VERSION = 1;
@@ -52,8 +54,10 @@ public class TrackHistoryService {
                     currentLocation.get().setTimeStamp(responseDateTime(dateTime));
                     responseTwo.setDatetime(currentLocation.get().getDatetime());
                     responseTwo.setTimeStamp(currentLocation.get().getTimeStamp());
-                    responseTwo.setLocDetails(String.valueOf(currentLocation.get().getLat())
-                            .concat(String.valueOf(currentLocation.get().getLongs())));
+                    responseTwo.setLocDetails(get_Location(
+                            String.valueOf(currentLocation.get().getLat()),
+                            String.valueOf(currentLocation.get().getLongs())
+                    ));
 
                     trackNowResponse.setVehicleCurrentLocation(Optional.ofNullable(responseTwo));
 
