@@ -86,6 +86,7 @@ public class OverSpeedImpl implements OverSpeedRepo {
                 speedReportDetails.setLocationDetails(rs.getString("LOCATION"));
                 speedReportDetails.setVehName(rs.getString("VEHICLE_NAME"));
                 speedReportDetails.setDateTime(rs.getString("BREAK_TIME"));
+                speedReportDetails.setUnit("km/h");
                 return speedReportDetails;
             });
             // Sum the vehSpeed values

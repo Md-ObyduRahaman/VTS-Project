@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SpeedReportDetails {
 
-    private String sl,vehId,vehName,dateTime,locationDetails,vehSpeed;
+    private String sl,vehId,vehName,dateTime,locationDetails,vehSpeed,unit;
 }
