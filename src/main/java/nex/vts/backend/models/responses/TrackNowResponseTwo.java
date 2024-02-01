@@ -16,7 +16,7 @@ public class TrackNowResponseTwo {
     private Double longs;
 
     @JsonProperty("speed")
-    private Double speed;
+    private Float speed;
 
     @JsonProperty("head")
     private String head;
