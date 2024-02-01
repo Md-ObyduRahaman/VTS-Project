@@ -19,7 +19,11 @@ public class ExtractLocationLib {
 
     public static String get_Location(String _lat, String _lon)  {
 
-        String res = get_Location_HTTP(_lat, _lon);
+        String res = null;
+
+
+            res = get_Location_HTTP(_lat, _lon);
+
 
         return res; //_lat + "," + _lon;
     }
@@ -27,12 +31,15 @@ public class ExtractLocationLib {
 
     public static String get_Location_HTTP(String _lat, String _lon)  {
 
+
         String areaValue=null;
 
         try {
+
         // Starting fetch data
         HttpClient httpClient = HttpClients.createDefault();
-        String apiUrl = "https://vts2.m2mbd.com/m_backend/rev_geocoder.php?lat="+_lat+"&lon="+_lon;
+        String apiUrl = "https://vts2.m2mbd.com/m_backend/rev_geocoder.php?lat=" + _lat + "&lon=" + _lon;
+
         HttpGet httpGet = new HttpGet(apiUrl);
         //  httpGet.setHeader(HttpHeaders.AUTHORIZATION, jwtToken);
         HttpResponse response = httpClient.execute(httpGet);
@@ -64,12 +71,10 @@ public class ExtractLocationLib {
     }
 
 
-
     private static String _XY() {
 
         return null;
     }
-
 
 
 }
