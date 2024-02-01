@@ -16,14 +16,14 @@ public class History {
 	@JsonProperty("code")
 	private int code;
 
-/*	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("histories")
-	private List<HistoriesItem> histories;*/
+	private List<HistoriesItem> histories;
 
 	@JsonProperty("totalCount")
 	private int totalCount;
 
-	@JsonProperty("histories")
+/*	@JsonProperty("histories")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private List<HistoriesItemTwo> itemTwos;
+	private List<HistoriesItemTwo> itemTwos;*/
 }
