@@ -58,7 +58,7 @@ public class TrackHistoryService {
                             String.valueOf(currentLocation.get().getLat()),
                             String.valueOf(currentLocation.get().getLongs())
                     ));
-                    responseTwo.setSpeed(currentLocation.get().getSpeed());
+                    responseTwo.setSpeed(Float.valueOf(String.valueOf(currentLocation.get().getSpeed())));
 
                     trackNowResponse.setVehicleCurrentLocation(Optional.ofNullable(responseTwo));
 
