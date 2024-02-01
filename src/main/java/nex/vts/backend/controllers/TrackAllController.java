@@ -49,8 +49,8 @@ public class TrackAllController {
     ObjectMapper objectMapper;
 
     //v1/1/users/11118/4035/2/track_all
-    @GetMapping(value = "v1/{deviceType}/users/{userId}/{p_userId}/{userType}/track_all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> trackAll(@PathVariable("userId") Long userId,
+    @GetMapping(value = "v1/{deviceType}/users/{userId}/{p_userId}/{userType}/track-multiple/track/{veh_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> trackAll(@PathVariable("userId") Long userId,@PathVariable("veh_id") Long veh_id,
                                            @PathVariable("p_userId") Long p_userId, @PathVariable("deviceType") int deviceType,
                                            @PathVariable("userType") int userType) throws JsonProcessingException {
 

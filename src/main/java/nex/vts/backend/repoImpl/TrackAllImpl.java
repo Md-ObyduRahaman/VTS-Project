@@ -89,8 +89,10 @@ public class TrackAllImpl implements TrackAllRepo {
                 trackAllInfo.setLng(rs.getString("LON"));
                 trackAllInfo.setDate(rs.getString("VDATE").substring(0,10));
                 trackAllInfo.setEngin(rs.getString("ENGIN"));
+                trackAllInfo.setIconType(rs.getString("ICON_TYPE"));
+                trackAllInfo.setVehId(rs.getString("VEHICLE_ID"));
+                trackAllInfo.setVehName(rs.getString("USERID"));
                 trackAllInfo.setTime(rs.getString("VDATE").substring(11,19));
-                trackAllInfo.setDirection(get_Location(rs.getString("LAT"),rs.getString("LON")));
                 return trackAllInfo;
             });
             trackAllInfos = Optional.of(trackAllInfoList);
