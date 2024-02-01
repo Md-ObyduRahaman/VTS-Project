@@ -71,10 +71,6 @@ public class ExtractLocationLib {
     }
 
 
-    private static String _XY() {
-
-        return null;
-    }
 
 
 }
