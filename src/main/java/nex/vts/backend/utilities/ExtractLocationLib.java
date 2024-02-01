@@ -45,14 +45,13 @@ public class ExtractLocationLib {
         HttpResponse response = httpClient.execute(httpGet);
         HttpEntity entity = response.getEntity();
         String xmlResponse  = EntityUtils.toString(entity);
-
-
-
+            //
+            //
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             ByteArrayInputStream input = new ByteArrayInputStream(xmlResponse.getBytes("UTF-8"));
             Document doc = builder.parse(input);
-
+            //
             // Get the value of the 'area' attribute
             NodeList markerList = doc.getElementsByTagName("marker");
             if (markerList.getLength() > 0) {
