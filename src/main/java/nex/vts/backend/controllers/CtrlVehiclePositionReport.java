@@ -75,10 +75,11 @@ public class CtrlVehiclePositionReport {
         if (vehiclePositionReportData.isEmpty()) {
             baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
+            baseResponse.apiName="VehiclePositionReport";
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
         } else {
-            baseResponse.apiName = "VehiclePositionReportAPI";
+            baseResponse.apiName = "VehiclePositionReport";
             baseResponse.status = true;
             baseResponse.data = vehiclePositionReportData;
         }

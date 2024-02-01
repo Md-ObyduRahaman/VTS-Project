@@ -58,7 +58,6 @@ public class ExtractLocationLib {
             if (markerList.getLength() > 0) {
                 Element markerElement = (Element) markerList.item(0);
                  areaValue = markerElement.getAttribute("area");
-                System.out.println("Area Value: " + areaValue);
             } else {
                 System.out.println("No marker element found in the XML response.");
             }

@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class VehiclePositionReportData {
     private String sl,vehId,vehName,dateTime,locationDetails,engStat;
 
+
 }
