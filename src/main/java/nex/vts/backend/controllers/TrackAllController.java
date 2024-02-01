@@ -50,7 +50,7 @@ public class TrackAllController {
 
     //v1/1/users/11118/4035/2/track_all
     @GetMapping(value = "v1/{deviceType}/users/{userId}/{p_userId}/{userType}/track-multiple/track/{veh_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> trackAll(@PathVariable("userId") Long userId,@PathVariable("veh_id") Long veh_id,
+    public ResponseEntity<String> trackAll(@PathVariable("userId") Long userId,@PathVariable("veh_id") String veh_id,
                                            @PathVariable("p_userId") Long p_userId, @PathVariable("deviceType") int deviceType,
                                            @PathVariable("userType") int userType) throws JsonProcessingException {
 
@@ -62,7 +62,7 @@ public class TrackAllController {
         //p_userId = deObfuscateId(p_userId);
 
 
-        Optional<ArrayList<TrackAllInfo>> trackAllInfos = trackAllRepo.getOverSpeedInfo(userType, userId, p_userId, deviceType, API_VERSION);
+        Optional<ArrayList<TrackAllInfo>> trackAllInfos = trackAllRepo.getOverSpeedInfo(userType, userId, p_userId, deviceType, API_VERSION,veh_id);
 
         if (trackAllInfos.isEmpty()) {
             baseResponse.data = trackAllInfos;

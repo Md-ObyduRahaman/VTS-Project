@@ -32,7 +32,7 @@ public class TrackAllImpl implements TrackAllRepo {
     private final Logger logger = LoggerFactory.getLogger(TrackAllImpl.class);
 
     @Override
-    public Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType,Long userId, Long p_userId, int deviceType, int apiVersion) {
+    public Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType,Long userId, Long p_userId, int deviceType, int apiVersion,String vehicleId) {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
@@ -43,7 +43,36 @@ public class TrackAllImpl implements TrackAllRepo {
         String sql = null;
         if(userType==1)
         {
-            sql="";
+            sql="/* Formatted on 2/1/2024 3:32:16 PM (QP5 v5.362) */\n" +
+                    "SELECT ROWNUM     ROWNO,\n" +
+                    "       ID,\n" +
+                    "       VEHICLE_ID,\n" +
+                    "       USERID,\n" +
+                    "       GROUP_ID,\n" +
+                    "       LAT,\n" +
+                    "       LON,\n" +
+                    "       SPEED,\n" +
+                    "       ENGIN,\n" +
+                    "       VDATE,\n" +
+                    "       FAVORITE,\n" +
+                    "       ICON_TYPE\n" +
+                    "  FROM (  SELECT t.ID,\n" +
+                    "                 t.VEHICLE_ID,\n" +
+                    "                 t.USERID,\n" +
+                    "                 t.GROUP_ID,\n" +
+                    "                 t.LAT,\n" +
+                    "                 t.LON,\n" +
+                    "                 t.SPEED,\n" +
+                    "                 t.ENGIN,\n" +
+                    "                 t.VDATE,\n" +
+                    "                 t.FAVORITE,\n" +
+                    "                 t.ICON_TYPE\n" +
+                    "            FROM nex_individual_temp t\n" +
+                    "           WHERE t.GROUP_ID IN\n" +
+                    "                     (SELECT COMPANY_ID\n" +
+                    "                        FROM NEX_INDIVIDUAL_CLIENT\n" +
+                    "                       WHERE (COMPANY_ID = '"+p_userId+"' AND ACTIVATION = 1))\n" +
+                    "        ORDER BY t.USERID ASC)";
 
         }
         else if(userType==2){

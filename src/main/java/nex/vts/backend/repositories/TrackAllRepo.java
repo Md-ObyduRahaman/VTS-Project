@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface TrackAllRepo {
 
 
-    Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType,Long userId, Long p_userId, int deviceType, int apiVersion);
+    Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType,Long userId, Long p_userId, int deviceType, int apiVersion,String vehicleId);
 
 }
