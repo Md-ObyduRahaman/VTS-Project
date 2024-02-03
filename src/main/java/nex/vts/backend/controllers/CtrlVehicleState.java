@@ -31,8 +31,8 @@ public class CtrlVehicleState {
     @Autowired
     VehicleStateRepo vehicleStateRepo;
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> getVehicleStateInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID, @PathVariable("userId") Integer userId, @PathVariable("userType") Integer userType, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
+    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}/{offSet}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<String> getVehicleStateInfo(@PathVariable("deviceType") Integer deviceType, @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID, @PathVariable("offSet") Integer offSet,@PathVariable("userId") Integer userId, @PathVariable("userType") Integer userType, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
 
         BaseResponse baseResponse = new BaseResponse();
         //userId ofFuscade
@@ -41,9 +41,13 @@ public class CtrlVehicleState {
         {
             SPECIFIC_VEHICLE_ID=null;
         }
+        if (offSet<0)
+        {
+            offSet=0;
+        }
 
 
-        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId,userType,userId,SPECIFIC_VEHICLE_ID);
+        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId,userType,userId,SPECIFIC_VEHICLE_ID,offSet);
 
 
         if (vehicleStateInfo.get().isEmpty()) {
