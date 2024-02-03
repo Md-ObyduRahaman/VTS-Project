@@ -50,10 +50,11 @@ public class VehRevGeocoderController {
     private final short API_VERSION = 1;
     private final Logger logger = LoggerFactory.getLogger(VehRevGeocoderController.class);
 
-    @GetMapping(value = "/v1/{deviceType}/{veh_id}/veh_rev_geocoder/location/{lat}/{lon}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/{deviceType}/{veh_id}/rev_geocoder/location/{lat}/{lon}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getLocation(@PathVariable("veh_id") Integer veh_id, @PathVariable("deviceType") Integer deviceType, @PathVariable("lat") String lat, @PathVariable("lon") String lon) throws IOException {
 
         BaseResponse baseResponse = new BaseResponse();
+
 
         String area=get_Location(lat,lon);
 

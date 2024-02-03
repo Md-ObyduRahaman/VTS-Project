@@ -36,13 +36,15 @@ public class VehicleStateImpl implements VehicleStateRepo {
     private final Logger logger = LoggerFactory.getLogger(VehicleStateImpl.class);
 
     @Override
-    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId,Integer userType,Integer userId,String SPECIFIC_VEHICLE_ID) {
+    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId,Integer userType,Integer userId,String SPECIFIC_VEHICLE_ID,int offSet) {
         logger.debug("Executing query to get client profile by client parentProfileId: {}", parentProfileId);
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
         String sql=null;
+        int limit=15;
 
         if(userType==1) {
+
             sql = "SELECT  " +
                     "    ROWNUM ROWNO,  " +
                     "    ID,  " +
@@ -72,9 +74,12 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+" " +
                     "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
                     "        ) " +
-                    ")  " +
+                    " " +
                     "ORDER BY  " +
-                    "    ID ASC";
+                    "    ID ASC \n" +
+                    "    OFFSET "+offSet+" ROWS \n" +
+                    "    FETCH NEXT "+limit+" ROWS ONLY \n" +
+                    ")";
         }else if(userType==2) {
             sql="select  " +
                     "    ROWNUM ROWNO,  " +
@@ -99,7 +104,8 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
                     "        )    " +
                     "    order by t.ID asc " +
-                    ")";
+                    " OFFSET "+offSet+" ROWS\n" +
+                    "           FETCH NEXT "+limit+" ROWS ONLY)";
         } else if (userType==3) {
             sql="SELECT   " +
                     "    ROWNUM ROWNO,   " +
