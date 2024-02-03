@@ -153,6 +153,63 @@ public class VehicleStateImpl implements VehicleStateRepo {
         }
     }
 
+    @Override
+    public int findTotalNumber(Integer parentProfileId, Integer userType, Integer userId, String SPECIFIC_VEHICLE_ID, int offSet) {
+
+        int count=0;
+        String sql=null;
+
+        if(userType==1){
+
+            sql="SELECT COUNT(*) AS total_rows\n" +
+                    "FROM (\n" +
+                    "    SELECT t.ID\n" +
+                    "    FROM NEX_INDIVIDUAL_TEMP t\n" +
+                    "    WHERE t.GROUP_ID = "+parentProfileId+" AND (t.VEHICLE_ID = NULL OR NULL IS NULL)\n" +
+                    ")";
+
+        } else {
+            sql="SELECT COUNT(*) AS total_rows\n" +
+                    "FROM (\n" +
+                    "    SELECT ROWNUM                               ROWNO,\n" +
+                    "           VEHICLE_ID,\n" +
+                    "           ENGIN,\n" +
+                    "           LAT,\n" +
+                    "           LON,\n" +
+                    "           VDATE,\n" +
+                    "           VEH_MAINTENANCE,\n" +
+                    "           ICON_TYPE,\n" +
+                    "           DEPT_ID,\n" +
+                    "           GET_VEHICLE_NAME (0, VEHICLE_ID)     AS VEHICLE_NAME\n" +
+                    "    FROM (\n" +
+                    "        SELECT ROWNUM                                     ROWNO,\n" +
+                    "               t.VEHICLE_ID,\n" +
+                    "               t.ENGIN,\n" +
+                    "               t.LAT,\n" +
+                    "               t.LON,\n" +
+                    "               TO_CHAR (TO_DATE (t.VDATE, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
+                    "                        'YYYY-MM-DD HH24:MI:SS')          AS VDATE,\n" +
+                    "               get_vehicle_service_stat (t.VEHICLE_ID)    AS VEH_MAINTENANCE,\n" +
+                    "               t.ICON_TYPE,\n" +
+                    "               d.profile_id                               AS DEPT_ID\n" +
+                    "        FROM nex_individual_temp t, NEX_EXTENDED_USER_VS_VEHICLE d\n" +
+                    "        WHERE     d.profile_id = "+userId+"\n" +
+                    "              AND d.profile_type = '2'\n" +
+                    "              AND d.parent_profile_id = "+parentProfileId+"\n" +
+                    "              AND t.VEHICLE_ID = d.VEHICLE_ID\n" +
+                    "              AND (t.VEHICLE_ID IS NULL OR NULL IS NULL)\n" +
+                    "        ORDER BY t.ID ASC \n" +
+                    "        OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY\n" +
+                    "    )\n" +
+                    ")";
+
+        }
+
+
+         count = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        return count;
+    }
 
 
 }
