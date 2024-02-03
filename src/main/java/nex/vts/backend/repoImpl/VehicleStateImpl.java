@@ -54,7 +54,7 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "    LON,  " +
                     "    VDATE,  " +
                     "    VEH_MAINTENANCE,  " +
-                    "    ICON_TYPE,GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME " +
+                    "    ICON_TYPE, GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME " +
                     "FROM ( " +
                     "    SELECT  " +
                     "        ROWNUM ROWNO,  " +
@@ -107,7 +107,7 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "        )    " +
                     "    order by t.ID asc " +
                     " OFFSET " + offSet + " ROWS\n" +
-                    "           FETCH NEXT " + rowLimit + " ROWS ONLY)";
+                    "FETCH NEXT " + rowLimit + " ROWS ONLY)";
             //
         } else if (userType == 3) {
             //

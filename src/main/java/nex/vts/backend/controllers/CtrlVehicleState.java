@@ -69,9 +69,10 @@ public class CtrlVehicleState {
 
 
         if (vehicleStateInfo.get().isEmpty()) {
-            baseResponse.data = new ArrayList<>();
+//            baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "Get vehicleStateInfo Info";
+            baseResponse.data = vehicleStateReport;
             baseResponse.errorMsg = "Data not found";
             baseResponse.errorCode = 4041;
         } else {
