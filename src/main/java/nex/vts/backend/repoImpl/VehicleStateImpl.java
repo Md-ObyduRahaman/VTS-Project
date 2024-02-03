@@ -36,15 +36,15 @@ public class VehicleStateImpl implements VehicleStateRepo {
     private final Logger logger = LoggerFactory.getLogger(VehicleStateImpl.class);
 
     @Override
-    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId,Integer userType,Integer userId,String SPECIFIC_VEHICLE_ID,int offSet) {
+    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId, Integer userType, Integer userId, String SPECIFIC_VEHICLE_ID, int offSet) {
         logger.debug("Executing query to get client profile by client parentProfileId: {}", parentProfileId);
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
-        String sql=null;
-        int limit=15;
+        String sql = null;
+        int rowLimit = 20;
 
-        if(userType==1) {
-
+        if (userType == 1) {
+            //
             sql = "SELECT  " +
                     "    ROWNUM ROWNO,  " +
                     "    ID,  " +
@@ -64,24 +64,26 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "        t.LAT,  " +
                     "        t.LON,  " +
                     "        TO_CHAR(TO_DATE(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') AS VDATE, " +
-                    "        "+schemaName+"GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE, " +
+                    "        " + schemaName + "GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE, " +
                     "        t.ICON_TYPE " +
                     "    FROM  " +
-                    "        "+schemaName+"NEX_INDIVIDUAL_TEMP t " +
+                    "        " + schemaName + "NEX_INDIVIDUAL_TEMP t " +
                     "    WHERE  " +
-                    "        t.GROUP_ID = "+parentProfileId+"  " +
+                    "        t.GROUP_ID = " + parentProfileId + "  " +
                     "        AND ( " +
-                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+" " +
-                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
+                    "            t.VEHICLE_ID = " + SPECIFIC_VEHICLE_ID + " " +
+                    "            OR " + SPECIFIC_VEHICLE_ID + " IS NULL " +
                     "        ) " +
                     " " +
                     "ORDER BY  " +
                     "    ID ASC \n" +
-                    "    OFFSET "+offSet+" ROWS \n" +
-                    "    FETCH NEXT "+limit+" ROWS ONLY \n" +
+                    "    OFFSET " + offSet + " ROWS \n" +
+                    "    FETCH NEXT " + rowLimit + " ROWS ONLY \n" +
                     ")";
-        }else if(userType==2) {
-            sql="select  " +
+            //
+        } else if (userType == 2) {
+            //
+            sql = "select  " +
                     "    ROWNUM ROWNO,  " +
                     "    VEHICLE_ID, ENGIN, LAT, LON, VDATE, VEH_MAINTENANCE, ICON_TYPE, " +
                     "    DEPT_ID,GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME " +
@@ -91,49 +93,51 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "        ROWNUM ROWNO,  " +
                     "        t.VEHICLE_ID, t.ENGIN, t.LAT, t.LON,  " +
                     "        to_char(to_date(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') as VDATE, " +
-                    "        "+schemaName+"get_vehicle_service_stat(t.VEHICLE_ID) as VEH_MAINTENANCE, " +
+                    "        " + schemaName + "get_vehicle_service_stat(t.VEHICLE_ID) as VEH_MAINTENANCE, " +
                     "        t.ICON_TYPE,         " +
                     "        d.profile_id as DEPT_ID " +
-                    "    FROM "+schemaName+" nex_individual_temp t, "+schemaName+"NEX_EXTENDED_USER_VS_VEHICLE d      " +
-                    "    where d.profile_id = "+userId+" " +
+                    "    FROM " + schemaName + " nex_individual_temp t, " + schemaName + "NEX_EXTENDED_USER_VS_VEHICLE d      " +
+                    "    where d.profile_id = " + userId + " " +
                     "    and d.profile_type = '2' " +
-                    "    and d.parent_profile_id = "+parentProfileId+"      " +
+                    "    and d.parent_profile_id = " + parentProfileId + "      " +
                     "    and t.VEHICLE_ID = d.VEHICLE_ID  " +
                     "     AND ( " +
-                    "            t.VEHICLE_ID = "+SPECIFIC_VEHICLE_ID+" " +
-                    "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
+                    "            t.VEHICLE_ID = " + SPECIFIC_VEHICLE_ID + " " +
+                    "            OR " + SPECIFIC_VEHICLE_ID + " IS NULL " +
                     "        )    " +
                     "    order by t.ID asc " +
-                    " OFFSET "+offSet+" ROWS\n" +
-                    "           FETCH NEXT "+limit+" ROWS ONLY)";
-        } else if (userType==3) {
-            sql="SELECT   " +
+                    " OFFSET " + offSet + " ROWS\n" +
+                    "           FETCH NEXT " + rowLimit + " ROWS ONLY)";
+            //
+        } else if (userType == 3) {
+            //
+            sql = "SELECT   " +
                     "    ROWNUM ROWNO,   " +
                     "    ID, VEHICLE_ID,  " +
                     "    ENGIN, LAT, LON, VDATE, VEH_MAINTENANCE,  " +
-                    "    ICON_TYPE, "+schemaName+"GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME   " +
+                    "    ICON_TYPE, " + schemaName + "GET_VEHICLE_NAME(0, VEHICLE_ID) as VEHICLE_NAME   " +
                     "FROM (  " +
                     "    SELECT   " +
                     "        ROWNUM ROWNO,  " +
                     "        t.ID, t.VEHICLE_ID,   " +
                     "        t.ENGIN, t.LAT, t.LON,   " +
                     "        TO_CHAR(TO_DATE(t.VDATE, 'YYYY-MM-DD HH24:MI:SS')-2 / 24, 'YYYY-MM-DD HH24:MI:SS') AS VDATE,  " +
-                    "       "+schemaName+" GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE,  " +
+                    "       " + schemaName + " GET_VEHICLE_SERVICE_STAT(t.VEHICLE_ID) AS VEH_MAINTENANCE,  " +
                     "        t.ICON_TYPE  " +
-                    "    FROM "+schemaName+" NEX_INDIVIDUAL_TEMP t  " +
-                    "    WHERE t.GROUP_ID =    " +parentProfileId+
-                    "    and t.VEHICLE_ID =       " +SPECIFIC_VEHICLE_ID+
+                    "    FROM " + schemaName + " NEX_INDIVIDUAL_TEMP t  " +
+                    "    WHERE t.GROUP_ID =    " + parentProfileId +
+                    "    and t.VEHICLE_ID =       " + SPECIFIC_VEHICLE_ID +
                     ")";
-
+            //
         }
-        System.out.println("..........."+sql);
+        System.out.println("..........." + sql);
 
         Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfoList;
 
         try {
-
+            //
             vehicleStateInfoList = Optional.of((ArrayList<VehicleStateInfoOra>) jdbcTemplate.query(sql, new VehicleStateInfo_RowMapper(), new Object[]{}));
-
+            //
         } catch (BadSqlGrammarException e) {
             e.printStackTrace();
             logger.trace("No Data found with parentProfileId is {}  Sql Grammar Exception", parentProfileId);
@@ -151,25 +155,26 @@ public class VehicleStateImpl implements VehicleStateRepo {
         } else {
             return vehicleStateInfoList;
         }
+        //
     }
 
     @Override
     public int findTotalNumber(Integer parentProfileId, Integer userType, Integer userId, String SPECIFIC_VEHICLE_ID, int offSet) {
 
-        int count=0;
-        String sql=null;
+        int count = 0;
+        String sql_Count = null;
 
-        if(userType==1){
+        if (userType == 1) {
 
-            sql="SELECT COUNT(*) AS total_rows\n" +
+            sql_Count = "SELECT COUNT(*) AS total_rows\n" +
                     "FROM (\n" +
                     "    SELECT t.ID\n" +
                     "    FROM NEX_INDIVIDUAL_TEMP t\n" +
-                    "    WHERE t.GROUP_ID = "+parentProfileId+" AND (t.VEHICLE_ID = NULL OR NULL IS NULL)\n" +
+                    "    WHERE t.GROUP_ID = " + parentProfileId + " AND (t.VEHICLE_ID = NULL OR NULL IS NULL)\n" +
                     ")";
 
         } else {
-            sql="SELECT COUNT(*) AS total_rows\n" +
+            sql_Count = "SELECT COUNT(*) AS total_rows\n" +
                     "FROM (\n" +
                     "    SELECT ROWNUM                               ROWNO,\n" +
                     "           VEHICLE_ID,\n" +
@@ -193,9 +198,9 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "               t.ICON_TYPE,\n" +
                     "               d.profile_id                               AS DEPT_ID\n" +
                     "        FROM nex_individual_temp t, NEX_EXTENDED_USER_VS_VEHICLE d\n" +
-                    "        WHERE     d.profile_id = "+userId+"\n" +
+                    "        WHERE     d.profile_id = " + userId + "\n" +
                     "              AND d.profile_type = '2'\n" +
-                    "              AND d.parent_profile_id = "+parentProfileId+"\n" +
+                    "              AND d.parent_profile_id = " + parentProfileId + "\n" +
                     "              AND t.VEHICLE_ID = d.VEHICLE_ID\n" +
                     "              AND (t.VEHICLE_ID IS NULL OR NULL IS NULL)\n" +
                     "        ORDER BY t.ID ASC \n" +
@@ -206,7 +211,7 @@ public class VehicleStateImpl implements VehicleStateRepo {
         }
 
 
-         count = jdbcTemplate.queryForObject(sql, Integer.class);
+        count = jdbcTemplate.queryForObject(sql_Count, Integer.class);
 
         return count;
     }
