@@ -210,7 +210,6 @@ public class VehicleStateImpl implements VehicleStateRepo {
 
         }
 
-
         count = jdbcTemplate.queryForObject(sql_Count, Integer.class);
 
         return count;
