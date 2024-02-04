@@ -46,7 +46,7 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
 
-        String sql = "SELECT "+schemaName+"get_client_name ("+profileId+")    AS MOTHER_ACC_NAME, "+schemaName+"get_profile_name ("+userType+", "+profileId+", 0, 0)         AS FULL_NAME FROM DUAL";
+        String sql = "SELECT " + schemaName + "get_client_name (" + profileId + ")    AS MOTHER_ACC_NAME, " + schemaName + "get_profile_name (" + userType + ", " + profileId + ", 0, 0)         AS FULL_NAME FROM DUAL";
 
 
         logger.trace(sql);
@@ -77,13 +77,23 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
     }
 
     @Override
-    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforM2m(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
+    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforM2m(Integer profileType, Integer profileId, Integer parentId, Integer deviceType) {
+
         Integer result = 0;
         String sql = null;
         String schemaName = environment.getProperty("application.profiles.shcemaName");
 
 
-        sql = "select "+schemaName+"get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, "+schemaName+"get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, "+schemaName+"get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, "+schemaName+"get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, "+schemaName+"get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, "+schemaName+"get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, "+schemaName+"get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, "+schemaName+"get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, "+schemaName+"get_summary_info('DS'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
+        sql = "select " +
+                schemaName + "get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE," +
+                schemaName + "get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, " +
+                schemaName + "get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, " +
+                schemaName + "get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, " +
+                schemaName + "get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, " +
+                schemaName + "get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, " +
+                schemaName + "get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, " +
+                schemaName + "get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, " +
+                schemaName + "get_summary_info('DS'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
 
         System.out.println(sql);
         logger.trace(sql);
@@ -106,14 +116,15 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
         return accountSummaries;
     }
+
     @Override
-    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforGP(Integer profileType, Integer profileId, Integer parentId,  Integer deviceType) {
+    public Optional<ArrayList<AccountSummaryInfo>> getVehicleDataforGP(Integer profileType, Integer profileId, Integer parentId, Integer deviceType) {
         Integer result = 0;
         String sql = null;
         String schemaName = environment.getProperty("application.profiles.shcemaName");
 
 
-        sql = "select "+schemaName+"get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, "+schemaName+"get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, "+schemaName+"get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, "+schemaName+"get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, "+schemaName+"get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, "+schemaName+"get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, "+schemaName+"get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, "+schemaName+"get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, "+schemaName+"get_summary_info('DC'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
+        sql = "select " + schemaName + "get_summary_info('TV'," + profileType + "," + profileId + "," + parentId + ",0,0) TOTAL_VEHICLE, " + schemaName + "get_summary_info('AS'," + profileType + "," + profileId + "," + parentId + ",0,0) available_sms, " + schemaName + "get_summary_info('RV'," + profileType + "," + profileId + "," + parentId + ",0,0) running_now, " + schemaName + "get_summary_info('SV'," + profileType + "," + profileId + "," + parentId + ",0,0) stop_now, " + schemaName + "get_summary_info('TRV'," + profileType + "," + profileId + "," + parentId + ",0,0) today_running, " + schemaName + "get_distance_summary(" + profileType + ", " + profileId + "," + parentId + ", to_char(sysdate,'YYYYMMDD'),to_char(sysdate,'YYYYMMDD')) todays_distance, " + schemaName + "get_alert_summary('SPEED', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_speed_alert, " + schemaName + "get_alert_summary('ALLALERT', " + profileType + ", " + profileId + ", " + parentId + ", to_char(trunc(sysdate),'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS')) todays_alert, " + schemaName + "get_summary_info('DC'," + profileType + "," + profileId + "," + parentId + ",0,0) driverScore from dual";
 
         System.out.println(sql);
         logger.trace(sql);
@@ -136,8 +147,6 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
 
         return accountSummaries;
     }
-
-
 
 
 }

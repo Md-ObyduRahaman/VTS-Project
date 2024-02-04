@@ -1,6 +1,5 @@
 package nex.vts.backend.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
@@ -58,34 +57,44 @@ public class CtrlAccountSummary {
     private final Logger logger = LoggerFactory.getLogger(CtrlAccountSummary.class);
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> getAccountSummary(@PathVariable("userType") Integer userType, @PathVariable("deviceType") Integer deviceType, @PathVariable("profileId") Integer profileId, @PathVariable("userId") Long userId) throws IOException {
+    private ResponseEntity<String> getAccountSummary(
+            @PathVariable("userType") Integer userType,
+            @PathVariable("deviceType") Integer deviceType,
+            @PathVariable("profileId") Integer profileId,
+            @PathVariable("userId") Long userId) throws IOException {
+        //
+        //
         profileId = Math.toIntExact(deObfuscateId(Long.valueOf(profileId)));
         userId = (long) Math.toIntExact(deObfuscateId(userId));
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
 
         UserFullName fullName;
-      try {
-           fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
-          // fullName = accountSummaryRepo.getUserFullName(8575, 1, deviceType).get().get(0);
-      }catch (NoSuchElementException e)
-      {
-          logger.error("Data not found in your array: ", e);
-          throw new AppCommonException(4041 + "##Data not found##" + deviceType + "##" + API_VERSION);
-      }
+
+
+        try {
+            fullName = accountSummaryRepo.getUserFullName(profileId, userType, deviceType).get().get(0);
+            // fullName = accountSummaryRepo.getUserFullName(8575, 1, deviceType).get().get(0);
+        } catch (NoSuchElementException e) {
+            logger.error("Data not found in your array: ", e);
+            throw new AppCommonException(4041 + "##Data not found##" + deviceType + "##" + API_VERSION);
+        }
+
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         String username = userDetails.getUsername();
         System.out.println("username: " + username);
         VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
-        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username,environment.getProperty("application.profiles.shcemaName"));
-        AccountSummaryInfo summary= getAccountSummary( userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(),deviceType,fullName.getFULL_NAME(),fullName.getMOTHER_ACC_NAME());
+
+        Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
+        AccountSummaryInfo summary = getAccountSummary(userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(), deviceType, fullName.getFULL_NAME(), fullName.getMOTHER_ACC_NAME());
 
         BaseResponse baseResponse = new BaseResponse();
 
 
         if (summary.getFull_NAME().isEmpty()) {
-            baseResponse.data=new ArrayList<>();
+            baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
             baseResponse.errorMsg = "Data  not found";
             baseResponse.errorCode = 4041;
@@ -101,24 +110,24 @@ public class CtrlAccountSummary {
 
     }
 
-    private AccountSummaryInfo getAccountSummary(Integer profileType,Integer profileId,Integer  p_profile_p_id, Integer deviceType,String full_NAME,String motherAccountName) throws IOException {
+    private AccountSummaryInfo getAccountSummary(Integer profileType, Integer profileId, Integer p_profile_p_id, Integer deviceType, String full_NAME, String motherAccountName) throws IOException {
 
         String operatorid = environment.getProperty("application.profiles.operatorid");
 
         Optional<ArrayList<AccountSummaryInfo>> data = null;
 
-        if (operatorid.equals("1"))
-        {
-            data=accountSummaryRepo.getVehicleDataforGP(profileType,profileId,p_profile_p_id,deviceType);
-        }  else if (operatorid.equals("3"))
-        {
-            System.out.println("dd");
-            data=accountSummaryRepo.getVehicleDataforM2m(profileType,profileId,p_profile_p_id,deviceType);
+        if (operatorid.equals("1")) {
+            data = accountSummaryRepo.getVehicleDataforGP(profileType, profileId, p_profile_p_id, deviceType);
+            //
+        } else if (operatorid.equals("3")) {
+            data = accountSummaryRepo.getVehicleDataforM2m(profileType, profileId, p_profile_p_id, deviceType);
         }
 
 
         System.out.println(data.get().get(0));
-        AccountSummaryInfo accountSummaryInfo=new AccountSummaryInfo();
+
+        AccountSummaryInfo accountSummaryInfo = new AccountSummaryInfo();
+
         accountSummaryInfo.setTOTAL_VEHICLE(data.get().get(0).getTOTAL_VEHICLE());
         accountSummaryInfo.setTODAYS_ALERT(data.get().get(0).getTODAYS_ALERT());
         accountSummaryInfo.setTODAYS_DISTANCE(data.get().get(0).getTODAYS_DISTANCE());
@@ -140,7 +149,7 @@ public class CtrlAccountSummary {
         HttpClient httpClient = HttpClients.createDefault();
         String apiUrl = "https://65641ef1ceac41c0761d748a.mockapi.io/api/v3/ClientDuePaymentForApps/data/1";
         HttpGet httpGet = new HttpGet(apiUrl);
-      //  httpGet.setHeader(HttpHeaders.AUTHORIZATION, jwtToken);
+        //  httpGet.setHeader(HttpHeaders.AUTHORIZATION, jwtToken);
         HttpResponse response = httpClient.execute(httpGet);
         HttpEntity entity = response.getEntity();
         String responseBody = EntityUtils.toString(entity);
@@ -150,10 +159,10 @@ public class CtrlAccountSummary {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode ofClientDue = objectMapper.readTree(responseBody);
 
-        DetailsOfClientDue detailsOfClientDue=new DetailsOfClientDue(
-                ofClientDue.get("currentDueLable").toString().replace("\"", "") ,
-                ofClientDue.get("currentDue").toString().replace("\"", "") ,
-                ofClientDue.get("lastReceivedDate").toString().replace("\"", "") ,
+        DetailsOfClientDue detailsOfClientDue = new DetailsOfClientDue(
+                ofClientDue.get("currentDueLable").toString().replace("\"", ""),
+                ofClientDue.get("currentDue").toString().replace("\"", ""),
+                ofClientDue.get("lastReceivedDate").toString().replace("\"", ""),
                 Integer.parseInt(ofClientDue.get("lastReceivedAmount").toString()), Integer.parseInt(ofClientDue.get("lastBilled").toString())
         );
 
@@ -173,6 +182,7 @@ public class CtrlAccountSummary {
         return formattedStartOfDay;
 
     }
+
     public static String getEndOfDay(String format) {
 
 
