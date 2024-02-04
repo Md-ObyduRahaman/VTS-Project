@@ -26,7 +26,7 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
     }
 
     @Override
-    public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName) {
+    public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName,Integer offSet,Integer limit) {
 
         String query = "select ROWNUM                          ROWNO," +
                 "       EXPENSE_ID                      EXPENSE_ID," +
@@ -37,16 +37,26 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
                                 "             sum(AMOUNT)               as EXPENSE_AMOUNT," +
                                 "             NVL(SUM(EXPENSE_UNIT), 0) as EXPENSE_UNIT" +
                                 "      from ")
+<<<<<<< HEAD
                         .concat(schemaName).concat("NEX_ALL_EXPENDITURE" +
                                 "      where GROUPID = ?" +
                                 "        and USER_ID = ?" +
                                 "        and DATE_TIME between (?) and (?)" +
                                 "      group by EXPENSE_ID)" +
                                 "order by EXPENSE_NAME asc");
+=======
+                        .concat(schemaName).concat("NEX_ALL_EXPENDITURE\n" +
+                                "      where GROUPID = ?\n" +
+                                "        and USER_ID = ?\n" +
+                                "        and DATE_TIME between (?) and (?)\n" +
+                                "      group by EXPENSE_ID)\n" +
+                                "order by EXPENSE_NAME asc\n").concat("OFFSET ? ROWS \n" +
+                                "FETCH NEXT ? ROWS ONLY");
+>>>>>>> vehicleList
 
         try {
 
-            return jdbcTemplate.query(query, new Object[]{groupId, userId, fromDate, toDate},
+            return jdbcTemplate.query(query, new Object[]{groupId, userId, fromDate, toDate, offSet, limit},
                     new RowMapper<DetailsOfExpense>() {
                 @Override
                 public DetailsOfExpense mapRow(ResultSet rs, int rowNum) throws SQLException {

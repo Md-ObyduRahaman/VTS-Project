@@ -27,27 +27,6 @@ public class AddExpense_Imp implements AddExpense_Repo {
         this.dataSource = dataSource;
     }
 
-
-/*    @Override
-    public int addExpenseForM2M(String vehicleId, String profileId, String expenseId, String dateTime, String amount, String description, Integer expenseId2, Integer deptId, String schemaName) {
-
-        try {
-            String query = "INSERT INTO ".concat(schemaName).concat("nex_all_expenditure (USER_ID, GROUPID," +
-                    "                                 EXPENSE_ID, DATE_TIME, AMOUNT, DESCRIPTION, EXPENSE_ID_N," +
-                    "                                 DEPT_ID)" +
-                    "VALUES (?,?,?,?,?,?,?,?)");
-            Object[] param = new Object[]{vehicleId, profileId, expenseId, dateTime, amount, description, expenseId2, deptId};
-            int[] types = new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER};
-            int flag = jdbcTemplate.update(query, param, types);
-            return flag;
-        } catch (Exception e) {
-
-            logger.error("An exception occured when execute the insert query",vehicleId,profileId,expenseId);
-            throw new AppCommonException(e.getMessage());
-        }
-
-    }*/
-
     @Override
     public String addExpenseForGpAndM2M(String oparationType,
                                      Integer profileType,
@@ -62,28 +41,6 @@ public class AddExpense_Imp implements AddExpense_Repo {
                                      Integer expenseUnit,
                                      Integer expenseUnitPrice,
                                      String schemaName) throws SQLException {
-
-/*        String response = new String();
-
-        SimpleJdbcCall  jdbcCall = new SimpleJdbcCall(dataSource).withProcedureName("manage_expense");
-
-        parameterSource = new MapSqlParameterSource()
-                .addValue("p_operation_type",oparationType)
-                .addValue("p_profile_type",profileType)
-                .addValue("p_profile_id",profileId)
-                .addValue("p_parent_profile_id",parentProfileId)
-                .addValue("p_vehice_id",vehicleId)
-                .addValue("p_expense_id",expenseId)
-                .addValue("p_date_time",dateTime)
-                .addValue("p_amount",amount)
-                .addValue("p_expense_desc",expenseDescription)
-                .addValue("p_expense_rowid",expenseRowId)
-                .addValue("p_response",response)
-                .addValue("p_expense_unit",expenseUnit)
-                .addValue("p_expense_unit_price",expenseUnitPrice);
-
-        Map<String, Object> outParam = jdbcCall.execute(parameterSource);*/
-
         String out = null;
         Connection connection = dataSource.getConnection();
 
