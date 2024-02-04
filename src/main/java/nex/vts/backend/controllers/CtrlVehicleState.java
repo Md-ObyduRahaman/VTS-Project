@@ -34,11 +34,12 @@ public class CtrlVehicleState {
     //localhost:8009/api/private/v1/1/users/2/18/getVehicleStateInfo/7215/14505/0
     //localhost:8009/api/private/v1/1/users/2/2/localhost:8009/api/private/v1/1/users/2/2/vehicle_state/4035/0/0/4035/0/0
 
-    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}/{offSet}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}/{offSet}/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehicleStateInfo(
             @PathVariable("deviceType") Integer deviceType,
             @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID,
             @PathVariable("offSet") Integer offSet,
+            @PathVariable("limit") Integer rowLimit,
             @PathVariable("userId") Integer userId,
             @PathVariable("userType") Integer userType,
             @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
@@ -62,7 +63,7 @@ public class CtrlVehicleState {
             count = vehicleStateRepo.findTotalNumber(mainAccountId, userType, userId, SPECIFIC_VEHICLE_ID, offSet);
         }
 
-        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId, userType, userId, SPECIFIC_VEHICLE_ID, offSet);
+        Optional<ArrayList<VehicleStateInfoOra>> vehicleStateInfo = vehicleStateRepo.findVehicleStateInfoInfo(mainAccountId, userType, userId, SPECIFIC_VEHICLE_ID, offSet,rowLimit);
 
         vehicleStateReport.setVehicleStateInfo(vehicleStateInfo);
         vehicleStateReport.setNumberOfRecord(count);

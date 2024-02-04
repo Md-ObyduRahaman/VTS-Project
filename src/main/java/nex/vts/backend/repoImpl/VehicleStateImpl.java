@@ -36,12 +36,12 @@ public class VehicleStateImpl implements VehicleStateRepo {
     private final Logger logger = LoggerFactory.getLogger(VehicleStateImpl.class);
 
     @Override
-    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId, Integer userType, Integer userId, String SPECIFIC_VEHICLE_ID, int offSet) {
+    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId, Integer userType, Integer userId, String SPECIFIC_VEHICLE_ID, int offSet,int limit) {
         logger.debug("Executing query to get client profile by client parentProfileId: {}", parentProfileId);
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
         String sql = null;
-        int rowLimit = 20;
+        int rowLimit = limit;
 
         if (userType == 1) {
             //
