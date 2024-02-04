@@ -1,6 +1,7 @@
 package nex.vts.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.VehiclePositionReportData;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
@@ -27,6 +28,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import static nex.vts.backend.utilities.UtilityMethods.deObfuscateId;
+import static nex.vts.backend.utilities.VehPaginationLib.is_Valid_Limit;
+import static nex.vts.backend.utilities.VehPaginationLib.is_Valid_OffSet;
 
 @RestController
 @RequestMapping("/api/private")
@@ -59,6 +62,14 @@ public class CtrlVehiclePositionReport {
         userId = (long) Math.toIntExact(deObfuscateId(userId));
         String activeProfile = environment.getProperty("spring.profiles.active");
         AESEncryptionDecryption aesCrypto = new AESEncryptionDecryption(activeProfile, deviceType, API_VERSION);
+
+        if(!is_Valid_Limit(limit))
+        {
+            throw new AppCommonException(5002 + "##Invalid or incorrect limit!##" + deviceType + "##" + API_VERSION);
+        }  if(!is_Valid_OffSet(offSet))
+        {
+            throw new AppCommonException(5002 + "##Invalid or incorrect offSet!##" + deviceType + "##" + API_VERSION);
+        }
 
         boolean flag = dateChecker(fromDate, toDate);
 
