@@ -23,13 +23,13 @@ public class ExpenseReport_Service {
         this.reportRepo = reportRepo;
     }
 
-    public ExpenseReportResponse getExpenseReport(String groupId,String userId,String fromDate,String toDate,String schemaName){
+    public ExpenseReportResponse getExpenseReport(String groupId,String userId,String fromDate,String toDate,String schemaName,Integer offSet,Integer limit){
 
         int totalSum;
 
         try {
 
-            List<DetailsOfExpense> detailsOfExpense = (List<DetailsOfExpense>) reportRepo.getExpenseInfo(groupId, userId, fromDate, toDate, schemaName);
+            List<DetailsOfExpense> detailsOfExpense = (List<DetailsOfExpense>) reportRepo.getExpenseInfo(groupId, userId, fromDate, toDate, schemaName,offSet,limit);
             totalSum = detailsOfExpense.stream().mapToInt(DetailsOfExpense::getExpAmount).sum();
             response.setDateTime(fromDate.concat("/ ").concat(toDate));
             response.setTotalExpense(totalSum);

@@ -26,7 +26,7 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
     }
 
     @Override
-    public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName) {
+    public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName,Integer offSet,Integer limit) {
 
         String query = "select ROWNUM                          ROWNO,\n" +
                 "       EXPENSE_ID                      EXPENSE_ID,\n" +
@@ -42,11 +42,12 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
                                 "        and USER_ID = ?\n" +
                                 "        and DATE_TIME between (?) and (?)\n" +
                                 "      group by EXPENSE_ID)\n" +
-                                "order by EXPENSE_NAME asc");
+                                "order by EXPENSE_NAME asc\n").concat("OFFSET ? ROWS \n" +
+                                "FETCH NEXT ? ROWS ONLY");
 
         try {
 
-            return jdbcTemplate.query(query, new Object[]{groupId, userId, fromDate, toDate},
+            return jdbcTemplate.query(query, new Object[]{groupId, userId, fromDate, toDate, offSet, limit},
                     new RowMapper<DetailsOfExpense>() {
                 @Override
                 public DetailsOfExpense mapRow(ResultSet rs, int rowNum) throws SQLException {

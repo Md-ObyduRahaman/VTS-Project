@@ -40,11 +40,13 @@ public class CtrlExpenseReport {
     }
 
 
-    @GetMapping("{deviceType}/vehicle/{vehicleId}/report/{fromDate}/{toDate}")
+    @GetMapping("{deviceType}/vehicle/{vehicleId}/report/{fromDate}/{toDate}/{offset}/{limit}")
     public ResponseEntity<?> getExpenseReport(@PathVariable(value = "deviceType")Integer deviceType,
                                               @PathVariable(value = "vehicleId")Integer vehicleId,
                                               @PathVariable(value = "fromDate")String fromDate,
-                                              @PathVariable(value = "toDate")String toDate
+                                              @PathVariable(value = "toDate")String toDate,
+                                              @PathVariable(value = "offset")Integer offset,
+                                              @PathVariable(value = "limit")Integer limit
                                               ){
 
 /*        fromDate = fromDate.substring(0,2).
@@ -74,7 +76,7 @@ public class CtrlExpenseReport {
 
 
         response.data = expenseReportService.getExpenseReport(String.valueOf(loginUser.getMAIN_ACCOUNT_ID()),
-                String.valueOf(vehicleId),fromDate,toDate,schemaName);
+                String.valueOf(vehicleId),fromDate,toDate,schemaName,offset,limit);
 
         response.status = true;
         response.apiName = "Expense Report";
