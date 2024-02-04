@@ -32,79 +32,76 @@ public class TrackAllImpl implements TrackAllRepo {
     private final Logger logger = LoggerFactory.getLogger(TrackAllImpl.class);
 
     @Override
-    public Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType,Long userId, Long p_userId, int deviceType, int apiVersion,String vehicleId) {
+    public Optional<ArrayList<TrackAllInfo>> getOverSpeedInfo(int userType, Long userId, Long parent_UserId, int deviceType, int apiVersion, String vehicleId) {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
 
+        String sql = null;
         Optional<ArrayList<TrackAllInfo>> trackAllInfos;
 
-
-        String sql = null;
-        if(userType==1)
-        {
-            sql="/* Formatted on 2/1/2024 3:32:16 PM (QP5 v5.362) */" +
-                    "SELECT ROWNUM     ROWNO," +
-                    "       ID," +
-                    "       VEHICLE_ID," +
-                    "       USERID," +
-                    "       GROUP_ID," +
-                    "       LAT," +
-                    "       LON," +
-                    "       SPEED," +
-                    "       ENGIN," +
-                    "       VDATE," +
-                    "       FAVORITE," +
-                    "       ICON_TYPE" +
-                    "  FROM (  SELECT t.ID," +
-                    "                 t.VEHICLE_ID," +
-                    "                 t.USERID," +
-                    "                 t.GROUP_ID," +
-                    "                 t.LAT," +
-                    "                 t.LON," +
-                    "                 t.SPEED," +
-                    "                 t.ENGIN," +
-                    "                 t.VDATE," +
-                    "                 t.FAVORITE," +
-                    "                 t.ICON_TYPE" +
-                    "            FROM nex_individual_temp t" +
-                    "           WHERE t.GROUP_ID IN" +
-                    "                     (SELECT COMPANY_ID" +
-                    "                        FROM NEX_INDIVIDUAL_CLIENT" +
-                    "                       WHERE (COMPANY_ID = '"+p_userId+"' AND ACTIVATION = 1))" +
+        if (userType == 1) {
+            sql = "/* Formatted on 2/1/2024 3:32:16 PM (QP5 v5.362) */\n" +
+                    "SELECT ROWNUM     ROWNO,\n" +
+                    "       ID,\n" +
+                    "       VEHICLE_ID,\n" +
+                    "       USERID,\n" +
+                    "       GROUP_ID,\n" +
+                    "       LAT,\n" +
+                    "       LON,\n" +
+                    "       SPEED,\n" +
+                    "       ENGIN,\n" +
+                    "       VDATE,\n" +
+                    "       FAVORITE,\n" +
+                    "       ICON_TYPE\n" +
+                    "  FROM (  SELECT t.ID,\n" +
+                    "                 t.VEHICLE_ID,\n" +
+                    "                 t.USERID,\n" +
+                    "                 t.GROUP_ID,\n" +
+                    "                 t.LAT,\n" +
+                    "                 t.LON,\n" +
+                    "                 t.SPEED,\n" +
+                    "                 t.ENGIN,\n" +
+                    "                 t.VDATE,\n" +
+                    "                 t.FAVORITE,\n" +
+                    "                 t.ICON_TYPE\n" +
+                    "            FROM nex_individual_temp t\n" +
+                    "           WHERE t.GROUP_ID IN\n" +
+                    "                     (SELECT COMPANY_ID\n" +
+                    "                        FROM NEX_INDIVIDUAL_CLIENT\n" +
+                    "                       WHERE (COMPANY_ID = '" + parent_UserId + "' AND ACTIVATION = 1))\n" +
                     "        ORDER BY t.USERID ASC)";
 
-        }
-        else if(userType==2){
-            sql="SELECT ROWNUM     ROWNO," +
-                    "       ID," +
-                    "       VEHICLE_ID," +
-                    "       USERID," +
-                    "       GROUP_ID," +
-                    "       LAT," +
-                    "       LON," +
-                    "       SPEED," +
-                    "       ENGIN," +
-                    "       VDATE," +
-                    "       FAVORITE," +
-                    "       ICON_TYPE" +
-                    "  FROM (  SELECT t.ID," +
-                    "                 t.VEHICLE_ID," +
-                    "                 t.USERID," +
-                    "                 t.GROUP_ID," +
-                    "                 t.LAT," +
-                    "                 t.LON," +
-                    "                 t.SPEED," +
-                    "                 t.ENGIN," +
-                    "                 t.VDATE," +
-                    "                 t.FAVORITE," +
-                    "                 t.ICON_TYPE" +
-                    "            FROM nex_individual_temp t, nex_dept_wise_vehicle d" +
-                    "           WHERE     (    d.COMPANY_ID ="+p_userId+"" +
-                    "                      AND d.DEPT_ID = "+userId+"" +
-                    "                      AND d.ACTIVATION = 1)" +
-                    "                 AND t.GROUP_ID = d.COMPANY_ID" +
-                    "                 AND t.VEHICLE_ID = d.VEHICLE_ID" +
+        } else if (userType == 2) {
+            sql = "SELECT ROWNUM     ROWNO,\n" +
+                    "       ID,\n" +
+                    "       VEHICLE_ID,\n" +
+                    "       USERID,\n" +
+                    "       GROUP_ID,\n" +
+                    "       LAT,\n" +
+                    "       LON,\n" +
+                    "       SPEED,\n" +
+                    "       ENGIN,\n" +
+                    "       VDATE,\n" +
+                    "       FAVORITE,\n" +
+                    "       ICON_TYPE\n" +
+                    "  FROM (  SELECT t.ID,\n" +
+                    "                 t.VEHICLE_ID,\n" +
+                    "                 t.USERID,\n" +
+                    "                 t.GROUP_ID,\n" +
+                    "                 t.LAT,\n" +
+                    "                 t.LON,\n" +
+                    "                 t.SPEED,\n" +
+                    "                 t.ENGIN,\n" +
+                    "                 t.VDATE,\n" +
+                    "                 t.FAVORITE,\n" +
+                    "                 t.ICON_TYPE\n" +
+                    "            FROM nex_individual_temp t, nex_dept_wise_vehicle d\n" +
+                    "           WHERE     (d.COMPANY_ID =" + parent_UserId + "\n" +
+                    "                      AND d.DEPT_ID = " + userId + "\n" +
+                    "                      AND d.ACTIVATION = 1)\n" +
+                    "                 AND t.GROUP_ID = d.COMPANY_ID\n" +
+                    "                 AND t.VEHICLE_ID = d.VEHICLE_ID\n" +
                     "        ORDER BY t.USERID ASC)";
         }
 
@@ -114,14 +111,14 @@ public class TrackAllImpl implements TrackAllRepo {
             ArrayList<TrackAllInfo> trackAllInfoList = (ArrayList<TrackAllInfo>) jdbcTemplate.query(sql, (rs, rowNum) -> {
                 TrackAllInfo trackAllInfo = new TrackAllInfo();
                 trackAllInfo.setLat(rs.getString("LAT"));
-                trackAllInfo.setSpeed(rs.getString("SPEED"));
                 trackAllInfo.setLng(rs.getString("LON"));
-                trackAllInfo.setDate(rs.getString("VDATE").substring(0,10));
+                trackAllInfo.setSpeed(rs.getString("SPEED"));
+                trackAllInfo.setDate(rs.getString("VDATE").substring(0, 10));
+                trackAllInfo.setTime(rs.getString("VDATE").substring(11, 19));
                 trackAllInfo.setEngin(rs.getString("ENGIN"));
                 trackAllInfo.setIconType(rs.getString("ICON_TYPE"));
                 trackAllInfo.setVehId(rs.getString("VEHICLE_ID"));
                 trackAllInfo.setVehName(rs.getString("USERID"));
-                trackAllInfo.setTime(rs.getString("VDATE").substring(11,19));
                 return trackAllInfo;
             });
             trackAllInfos = Optional.of(trackAllInfoList);

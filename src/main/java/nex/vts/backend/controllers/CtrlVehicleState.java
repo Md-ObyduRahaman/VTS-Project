@@ -34,27 +34,27 @@ public class CtrlVehicleState {
     //localhost:8009/api/private/v1/1/users/2/18/getVehicleStateInfo/7215/14505/0
     //localhost:8009/api/private/v1/1/users/2/2/localhost:8009/api/private/v1/1/users/2/2/vehicle_state/4035/0/0/4035/0/0
 
+
     @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}/{offSet}/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehicleStateInfo(@PathVariable("limit") Integer limit,@PathVariable("deviceType") Integer deviceType, @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID, @PathVariable("offSet") Integer offSet,@PathVariable("userId") Integer userId, @PathVariable("userType") Integer userType, @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
 
+
         BaseResponse baseResponse = new BaseResponse();
         //userId ofFuscade
-        Integer flag= Integer.valueOf(SPECIFIC_VEHICLE_ID);
+        Integer flag = Integer.valueOf(SPECIFIC_VEHICLE_ID);
 
 
-        if (SPECIFIC_VEHICLE_ID.equals("0"))
-        {
-            SPECIFIC_VEHICLE_ID=null;
+        if (SPECIFIC_VEHICLE_ID.equals("0")) {
+            SPECIFIC_VEHICLE_ID = null;
         }
-        if (offSet<0)
-        {
-            offSet=0;
+        if (offSet < 0) {
+            offSet = 0;
         }
 
-        int count=1;
-        VehicleStateReport vehicleStateReport=new VehicleStateReport();
+        int count = 1;
+        VehicleStateReport vehicleStateReport = new VehicleStateReport();
 
-        if(flag==0) {
+        if (flag == 0) {
             count = vehicleStateRepo.findTotalNumber(mainAccountId, userType, userId, SPECIFIC_VEHICLE_ID, offSet);
         }
 
@@ -63,18 +63,18 @@ public class CtrlVehicleState {
         vehicleStateReport.setVehicleStateInfo(vehicleStateInfo);
         vehicleStateReport.setNumberOfRecord(count);
 
+
         if (vehicleStateInfo.get().isEmpty()) {
-            baseResponse.data=new ArrayList<>();
+//            baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
-            baseResponse.apiName= "Get vehicleStateInfo Info";
+            baseResponse.apiName = "Get vehicleStateInfo Info";
+            baseResponse.data = vehicleStateReport;
             baseResponse.errorMsg = "Data not found";
             baseResponse.errorCode = 4041;
-        }
-        else
-        {
+        } else {
             baseResponse.status = true;
-            baseResponse.apiName= "vehicleStateInfo";
-            baseResponse.data =  vehicleStateReport;
+            baseResponse.apiName = "vehicleStateInfo";
+            baseResponse.data = vehicleStateReport;
         }
 
 

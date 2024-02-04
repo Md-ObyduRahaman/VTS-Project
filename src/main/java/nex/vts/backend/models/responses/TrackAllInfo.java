@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class TrackAllInfo {
-
-    private String lat, lng, speed, time, date, engin,vehId,iconType,vehName;
+    private String vehId,vehName,lat, lng, speed, date, time, engin,iconType;
 }
