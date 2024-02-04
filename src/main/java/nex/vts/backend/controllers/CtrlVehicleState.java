@@ -36,13 +36,13 @@ public class CtrlVehicleState {
 
     @GetMapping(value = "/v1/{deviceType}/users/{userType}/{userId}/vehicle_state/{mainAccountId}/{SPECIFIC_VEHICLE_ID}/{offSet}/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehicleStateInfo(
-            @PathVariable("deviceType") Integer deviceType,
+            @PathVariable("deviceType") int deviceType,
             @PathVariable("SPECIFIC_VEHICLE_ID") String SPECIFIC_VEHICLE_ID,
-            @PathVariable("offSet") Integer offSet,
-            @PathVariable("limit") Integer rowLimit,
-            @PathVariable("userId") Integer userId,
-            @PathVariable("userType") Integer userType,
-            @PathVariable("mainAccountId") Integer mainAccountId) throws JsonProcessingException {
+            @PathVariable("offSet") int offSet,
+            @PathVariable("limit") int rowLimit,
+            @PathVariable("userId") int userId,
+            @PathVariable("userType") int userType,
+            @PathVariable("mainAccountId") int mainAccountId) throws JsonProcessingException {
 
         BaseResponse baseResponse = new BaseResponse();
         //userId ofFuscade
@@ -70,7 +70,6 @@ public class CtrlVehicleState {
 
 
         if (vehicleStateInfo.get().isEmpty()) {
-//            baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName = "Get vehicleStateInfo Info";
             baseResponse.data = vehicleStateReport;

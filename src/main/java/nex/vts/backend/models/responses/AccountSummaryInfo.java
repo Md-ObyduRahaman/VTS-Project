@@ -10,29 +10,42 @@ import org.springframework.beans.factory.annotation.Value;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountSummaryInfo {
-  @Value("${todayRunningVehicle.type:0}")
-  private int todayRunningVehicleType;
-  @JsonProperty("RunningVehicle")
-  private Integer RUNNING_NOW;
-  @JsonProperty("todayRunningVehicle")
-  private Integer TODAY_RUNNING;
-  @JsonProperty("StoppedVehicle")
-  private Integer STOP_NOW;
-  @JsonProperty("availableSMS")
-  private Integer AVAILABLE_SMS;
-  @JsonProperty("totalVehicle")
-  private Integer TOTAL_VEHICLE;
-  @JsonProperty("todayDistance")
-  private Integer TODAYS_DISTANCE;
-  @JsonProperty("todayAlert")
-  private Integer TODAYS_ALERT;
-  @JsonProperty("overSpeed")
-  private Integer TODAYS_SPEED_ALERT;
-  @JsonProperty("consultationDriver")
-  private Integer DRIVERSCORE;
-  private String full_NAME;
-  @JsonProperty("billingInfo")
-  private DetailsOfClientDue detailsOfClientDue;
-  private  String motherAccountName;
+    @Value("${todayRunningVehicle.type:0}")
+    private int todayRunningVehicleType;
+
+    @JsonProperty("runningVehicle")
+    private Integer RUNNING_NOW;
+
+    @JsonProperty("todayRunningVehicle")
+    private Integer TODAY_RUNNING;
+
+    @JsonProperty("stoppedVehicle")
+    private Integer STOP_NOW;
+
+    @JsonProperty("availableSMS")
+    private Integer AVAILABLE_SMS;
+
+    @JsonProperty("totalVehicle")
+    private Integer TOTAL_VEHICLE;
+
+    @JsonProperty("todayDistance")
+    private Integer TODAYS_DISTANCE;
+
+    @JsonProperty("todayAlert")
+    private Integer TODAYS_ALERT;
+
+    @JsonProperty("speedViolation")
+    private Integer TODAYS_SPEED_ALERT;  // Todays_Speed_Violation
+
+    @JsonProperty("consultationDriver")
+    private Integer DRIVERSCORE;
+
+    @JsonProperty("customerName")
+    private String full_NAME;
+
+    @JsonProperty("billingInfo")
+    private DetailsOfClientDue detailsOfClientDue;
+
+    private String motherAccountName;
 
 }
