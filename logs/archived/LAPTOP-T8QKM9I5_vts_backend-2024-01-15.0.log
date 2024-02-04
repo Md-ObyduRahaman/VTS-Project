@@ -3038,7 +3038,7 @@ FROM
 16:27:26.086 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-4 - Added connection oracle.jdbc.driver.T4CConnection@5c07852f
 16:27:26.087 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-4 - Start completed.
 16:27:26.123 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-16:27:26.218 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ctrlVehicleState' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\controllers\CtrlVehicleState.class]: Post-processing of merged bean definition failed
+16:27:26.218 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ctrlVehicleState' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\controllers\CtrlVehicleState.class]: Post-processing of merged bean definition failed
 16:27:26.219 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-4 - Shutdown initiated...
 16:27:26.393 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-4 - Shutdown completed.
 16:27:26.394 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Stopping service [Tomcat]
@@ -3055,7 +3055,7 @@ FROM
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
 16:27:26.458 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ctrlVehicleState' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\controllers\CtrlVehicleState.class]: Post-processing of merged bean definition failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ctrlVehicleState' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\controllers\CtrlVehicleState.class]: Post-processing of merged bean definition failed
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)

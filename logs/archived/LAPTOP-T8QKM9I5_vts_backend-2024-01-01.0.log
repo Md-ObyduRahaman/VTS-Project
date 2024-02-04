@@ -757,13 +757,13 @@ Caused by: nex.vts.backend.services.TokenValidationException: 4051##Token is Exp
 17:40:02.941 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
 17:40:02.961 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
 17:40:02.961 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 490 ms
-17:40:03.054 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\configs\SecurityConfig.class]: Post-processing of merged bean definition failed
+17:40:03.054 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\configs\SecurityConfig.class]: Post-processing of merged bean definition failed
 17:40:03.055 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Stopping service [Tomcat]
 17:40:03.061 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - logMessage:82 - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
 17:40:03.081 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\configs\SecurityConfig.class]: Post-processing of merged bean definition failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\configs\SecurityConfig.class]: Post-processing of merged bean definition failed
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)

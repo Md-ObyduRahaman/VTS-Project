@@ -19,38 +19,38 @@ public class LoginUserInformation_Imp implements LoginUserInformation {
 
     @Override
     public Optional<Case1UserInfo> caseOneAccountInfo(Integer profileId, String userName, String password,String dynamicColumnName,Integer operatorid) {
-        String sql= "SELECT ID,\n" +
-                "       USER_ID,\n" +
-                "       COMPANY_NAME,\n" +
-                "       CLIENT_TYPE,\n" +
-                "       COMPANY_ADDRESS,\n" +
-                "       ADDRESS2,\n" +
-                "       COMPANY_CELL,\n" +
-                "       COMPANY_TEL,\n" +
-                "       COMPANY_EMAIL,\n" +
-                "       ACTIVATION\n" +
-                "  FROM nex_corporate_client\n" +
-                " WHERE     ID = ?\n" +
-                "       AND USER_ID = ?\n" +
-                "       AND "+dynamicColumnName+" = ?\n" +
-                "       AND ACTIVATION = 1\n" +
+        String sql= "SELECT ID," +
+                "       USER_ID," +
+                "       COMPANY_NAME," +
+                "       CLIENT_TYPE," +
+                "       COMPANY_ADDRESS," +
+                "       ADDRESS2," +
+                "       COMPANY_CELL," +
+                "       COMPANY_TEL," +
+                "       COMPANY_EMAIL," +
+                "       ACTIVATION" +
+                "  FROM nex_corporate_client" +
+                " WHERE     ID = ?" +
+                "       AND USER_ID = ?" +
+                "       AND "+dynamicColumnName+" = ?" +
+                "       AND ACTIVATION = 1" +
                 "       AND OPERATORID = "+operatorid;
 
-        String sql2= "SELECT ID,\n" +
-                "       USER_ID,\n" +
-                "       COMPANY_NAME,\n" +
-                "       CLIENT_TYPE,\n" +
-                "       COMPANY_ADDRESS,\n" +
-                "       ADDRESS2,\n" +
-                "       COMPANY_CELL,\n" +
-                "       COMPANY_TEL,\n" +
-                "       COMPANY_EMAIL,\n" +
-                "       ACTIVATION\n" +
-                "  FROM nex_corporate_client\n" +
-                " WHERE  USER_ID = "+userName+"\n" +
-                "       AND "+dynamicColumnName+" = "+password+"\n" +
-                "       AND ACTIVATION = 1\n" +
-                "       AND OPERATORID = 1";  //ID = "+profileId+"\n"
+        String sql2= "SELECT ID," +
+                "       USER_ID," +
+                "       COMPANY_NAME," +
+                "       CLIENT_TYPE," +
+                "       COMPANY_ADDRESS," +
+                "       ADDRESS2," +
+                "       COMPANY_CELL," +
+                "       COMPANY_TEL," +
+                "       COMPANY_EMAIL," +
+                "       ACTIVATION" +
+                "  FROM nex_corporate_client" +
+                " WHERE  USER_ID = "+userName+"" +
+                "       AND "+dynamicColumnName+" = "+password+"" +
+                "       AND ACTIVATION = 1" +
+                "       AND OPERATORID = 1";  //ID = "+profileId+""
         System.out.println(sql);
 
 

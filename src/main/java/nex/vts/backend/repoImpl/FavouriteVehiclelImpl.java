@@ -47,108 +47,108 @@ public class FavouriteVehiclelImpl implements FavouriteVehiclelRepo {
         switch (userType) {
             case 1:
 
-                 sql="SELECT a.VEHICLE_ID                          id,\n" +
-                        "         a.USERID                              vehicle_name,\n" +
-                        "         a.ENGIN                               engine_status,\n" +
-                        "         a.SPEED                               speed,\n" +
-                        "         b.FAVORITE                            is_favorite,\n" +
-                        "         b.ICON_TYPE                           vehicle_icon_type,\n" +
-                        "         b.CUSTOM_USERID                       user_defined_vehicle_name,\n" +
-                        "         b.ICON_TYPE_ON_MAP,\n" +
-                        "         b.ICON_TYPE_RUNNING,\n" +
-                        "         b.ICON_TYPE_STOPPED,\n" +
-                        "         b.ICON_TYPE_STATIONARY,\n" +
-                        "         b.CAR_REG_NO                          registration_number,\n" +
-                        "         b.CAR_COLOUR                          color,\n" +
-                        "         b.CAR_VENDOR                          vendor,\n" +
-                        "         b.CAR_MODEL                           model,\n" +
-                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed\n" +
-                        "    FROM nex_individual_temp a, nex_individual_client b\n" +
-                        "   WHERE     a.VEHICLE_ID = b.ID\n" +
-                        "         AND b.FAVORITE = 1\n" +
+                 sql="SELECT a.VEHICLE_ID                          id," +
+                        "         a.USERID                              vehicle_name," +
+                        "         a.ENGIN                               engine_status," +
+                        "         a.SPEED                               speed," +
+                        "         b.FAVORITE                            is_favorite," +
+                        "         b.ICON_TYPE                           vehicle_icon_type," +
+                        "         b.CUSTOM_USERID                       user_defined_vehicle_name," +
+                        "         b.ICON_TYPE_ON_MAP," +
+                        "         b.ICON_TYPE_RUNNING," +
+                        "         b.ICON_TYPE_STOPPED," +
+                        "         b.ICON_TYPE_STATIONARY," +
+                        "         b.CAR_REG_NO                          registration_number," +
+                        "         b.CAR_COLOUR                          color," +
+                        "         b.CAR_VENDOR                          vendor," +
+                        "         b.CAR_MODEL                           model," +
+                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed" +
+                        "    FROM nex_individual_temp a, nex_individual_client b" +
+                        "   WHERE     a.VEHICLE_ID = b.ID" +
+                        "         AND b.FAVORITE = 1" +
                         "         AND a.GROUP_ID = "+GROUP_ID+
                         "         AND a.OPERATORID = "+OPERATORID+
-                        "         AND a.ACTIVATION = 1\n" +
+                        "         AND a.ACTIVATION = 1" +
                         "ORDER BY a.VEHICLE_ID ASC";
 
                 break;
             case 2:
-                sql=" SELECT a.VEHICLE_ID                 id,\n" +
-                        "         a.USERID                     vehicle_name,\n" +
-                        "         a.ENGIN                      engine_status,\n" +
-                        "         a.SPEED                      speed,\n" +
-                        "         b.FAVORITE                   is_favorite,\n" +
-                        "         b.ICON_TYPE                  vehicle_icon_type,\n" +
-                        "         b.CUSTOM_USERID              user_defined_vehicle_name,\n" +
-                        "         b.ICON_TYPE_ON_MAP,\n" +
-                        "         b.ICON_TYPE_RUNNING,\n" +
-                        "         b.ICON_TYPE_STOPPED,\n" +
-                        "         b.ICON_TYPE_STATIONARY,\n" +
-                        "         b.CAR_REG_NO                 registration_number,\n" +
-                        "         b.CAR_COLOUR                 color,\n" +
-                        "         b.CAR_VENDOR                 vendor,\n" +
-                        "         b.CAR_MODEL                  model,\n" +
-                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed\n" +
-                        "    FROM nex_individual_temp a, nex_individual_client b\n" +
-                        "   WHERE     b.FAVORITE = 1\n" +
+                sql=" SELECT a.VEHICLE_ID                 id," +
+                        "         a.USERID                     vehicle_name," +
+                        "         a.ENGIN                      engine_status," +
+                        "         a.SPEED                      speed," +
+                        "         b.FAVORITE                   is_favorite," +
+                        "         b.ICON_TYPE                  vehicle_icon_type," +
+                        "         b.CUSTOM_USERID              user_defined_vehicle_name," +
+                        "         b.ICON_TYPE_ON_MAP," +
+                        "         b.ICON_TYPE_RUNNING," +
+                        "         b.ICON_TYPE_STOPPED," +
+                        "         b.ICON_TYPE_STATIONARY," +
+                        "         b.CAR_REG_NO                 registration_number," +
+                        "         b.CAR_COLOUR                 color," +
+                        "         b.CAR_VENDOR                 vendor," +
+                        "         b.CAR_MODEL                  model," +
+                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed" +
+                        "    FROM nex_individual_temp a, nex_individual_client b" +
+                        "   WHERE     b.FAVORITE = 1" +
                         "         AND a.GROUP_ID = "+GROUP_ID+
                         "         AND a.OPERATORID = "+OPERATORID+
-                        "         AND a.ACTIVATION = 1\n" +
+                        "         AND a.ACTIVATION = 1" +
                         "ORDER BY a.VEHICLE_ID ASC";
                 break;
             case 3:
-                sql="  SELECT a.VEHICLE_ID                 id,\n" +
-                        "         a.USERID                     vehicle_name,\n" +
-                        "         a.ENGIN                      engine_status,\n" +
-                        "         a.SPEED                      speed,\n" +
-                        "         b.FAVORITE                   is_favorite,\n" +
-                        "         b.ICON_TYPE                  vehicle_icon_type,\n" +
-                        "         b.CUSTOM_USERID              user_defined_vehicle_name,\n" +
-                        "         b.ICON_TYPE_ON_MAP,\n" +
-                        "         b.ICON_TYPE_RUNNING,\n" +
-                        "         b.ICON_TYPE_STOPPED,\n" +
-                        "         b.ICON_TYPE_STATIONARY,\n" +
-                        "         b.CAR_REG_NO                 registration_number,\n" +
-                        "         b.CAR_COLOUR                 color,\n" +
-                        "         b.CAR_VENDOR                 vendor,\n" +
-                        "         b.CAR_MODEL                  model,\n" +
-                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed\n" +
-                        "    FROM nex_individual_temp a, nex_individual_client b\n" +
-                        "   WHERE     b.FAVORITE = 1\n" +
+                sql="  SELECT a.VEHICLE_ID                 id," +
+                        "         a.USERID                     vehicle_name," +
+                        "         a.ENGIN                      engine_status," +
+                        "         a.SPEED                      speed," +
+                        "         b.FAVORITE                   is_favorite," +
+                        "         b.ICON_TYPE                  vehicle_icon_type," +
+                        "         b.CUSTOM_USERID              user_defined_vehicle_name," +
+                        "         b.ICON_TYPE_ON_MAP," +
+                        "         b.ICON_TYPE_RUNNING," +
+                        "         b.ICON_TYPE_STOPPED," +
+                        "         b.ICON_TYPE_STATIONARY," +
+                        "         b.CAR_REG_NO                 registration_number," +
+                        "         b.CAR_COLOUR                 color," +
+                        "         b.CAR_VENDOR                 vendor," +
+                        "         b.CAR_MODEL                  model," +
+                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed" +
+                        "    FROM nex_individual_temp a, nex_individual_client b" +
+                        "   WHERE     b.FAVORITE = 1" +
                         "         AND a.GROUP_ID = "+GROUP_ID +
                         "         AND a.OPERATORID = "+OPERATORID +
-                        "         AND a.ACTIVATION = 1\n" +
+                        "         AND a.ACTIVATION = 1" +
                         "ORDER BY a.VEHICLE_ID ASC";
                 break;
 
             default:
-                sql="SELECT a.VEHICLE_ID                 id,\n" +
-                        "         a.USERID                     vehicle_name,\n" +
-                        "         a.ENGIN                      engine_status,\n" +
-                        "         a.SPEED                      speed,\n" +
-                        "         b.FAVORITE                   is_favorite,\n" +
-                        "         b.ICON_TYPE                  vehicle_icon_type,\n" +
-                        "         b.CUSTOM_USERID              user_defined_vehicle_name,\n" +
-                        "         b.ICON_TYPE_ON_MAP,\n" +
-                        "         b.ICON_TYPE_RUNNING,\n" +
-                        "         b.ICON_TYPE_STOPPED,\n" +
-                        "         b.ICON_TYPE_STATIONARY,\n" +
-                        "         b.CAR_REG_NO                 registration_number,\n" +
-                        "         b.CAR_COLOUR                 color,\n" +
-                        "         b.CAR_VENDOR                 vendor,\n" +
-                        "         b.CAR_MODEL                  model,\n" +
-                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed\n" +
-                        "    FROM nex_individual_temp a, nex_individual_client b\n" +
-                        "   WHERE     a.VEHICLE_ID = b.id\n" +
-                        "         AND VEHICLE_ID IN\n" +
-                        "                 (SELECT TO_CHAR (VEHICLE_ID)\n" +
-                        "                    FROM GPSNEXGP.NEX_EXTENDED_USER_VS_VEHICLE\n" +
+                sql="SELECT a.VEHICLE_ID                 id," +
+                        "         a.USERID                     vehicle_name," +
+                        "         a.ENGIN                      engine_status," +
+                        "         a.SPEED                      speed," +
+                        "         b.FAVORITE                   is_favorite," +
+                        "         b.ICON_TYPE                  vehicle_icon_type," +
+                        "         b.CUSTOM_USERID              user_defined_vehicle_name," +
+                        "         b.ICON_TYPE_ON_MAP," +
+                        "         b.ICON_TYPE_RUNNING," +
+                        "         b.ICON_TYPE_STOPPED," +
+                        "         b.ICON_TYPE_STATIONARY," +
+                        "         b.CAR_REG_NO                 registration_number," +
+                        "         b.CAR_COLOUR                 color," +
+                        "         b.CAR_VENDOR                 vendor," +
+                        "         b.CAR_MODEL                  model," +
+                        "         GPSNEXGP.GET_MAX_CAR_SPEED (b.ID)     max_speed" +
+                        "    FROM nex_individual_temp a, nex_individual_client b" +
+                        "   WHERE     a.VEHICLE_ID = b.id" +
+                        "         AND VEHICLE_ID IN" +
+                        "                 (SELECT TO_CHAR (VEHICLE_ID)" +
+                        "                    FROM GPSNEXGP.NEX_EXTENDED_USER_VS_VEHICLE" +
                         "                   WHERE     PROFILE_ID = "+ GROUP_ID +
                         "                         AND PROFILE_TYPE = "+ userType +
                         "                         AND PARENT_PROFILE_ID = "+PARENT_PROFILE_ID +
                         "       )  AND b.OPERATORID = "+OPERATORID+
-                        "         AND b.ACTIVATION = 1\n" +
-                        "         AND b.FAVORITE = 1\n" +
+                        "         AND b.ACTIVATION = 1" +
+                        "         AND b.FAVORITE = 1" +
                         "ORDER BY a.VEHICLE_ID ASC";
         }
 

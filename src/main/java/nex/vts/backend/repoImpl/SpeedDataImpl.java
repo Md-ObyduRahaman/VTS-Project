@@ -55,17 +55,17 @@ public class SpeedDataImpl implements SpeedDataRepo {
     @Override
     public Optional<ArrayList<SpeedDataResponse>> getSpeedDataForhr(String finalToTime, String finalFromTime, Integer vehicleId,Integer deviceType) {
 
-        String sql=" SELECT ID,\n" +
-                "         to_char(to_date(TIME_IN_NUMBER,'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') as date_time,\n" +
-                "         POSITION,\n" +
-                "         SPEED\n" +
-                "    FROM (SELECT ID,\n" +
-                "                 TIME_IN_NUMBER,\n" +
-                "                 POSITION,\n" +
-                "                 SPEED\n" +
-                "            FROM nex_historyrecv\n" +
-                "           WHERE vehicleid = TO_CHAR ("+vehicleId+"))\n" +
-                "   WHERE TIME_IN_NUMBER BETWEEN "+finalFromTime+" AND "+finalToTime+"\n" +
+        String sql=" SELECT ID," +
+                "         to_char(to_date(TIME_IN_NUMBER,'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') as date_time," +
+                "         POSITION," +
+                "         SPEED" +
+                "    FROM (SELECT ID," +
+                "                 TIME_IN_NUMBER," +
+                "                 POSITION," +
+                "                 SPEED" +
+                "            FROM nex_historyrecv" +
+                "           WHERE vehicleid = TO_CHAR ("+vehicleId+"))" +
+                "   WHERE TIME_IN_NUMBER BETWEEN "+finalFromTime+" AND "+finalToTime+"" +
                 "ORDER BY id ASC";
 
 

@@ -163,15 +163,15 @@ concat_lines() {
     # Remove \r in case we run on Windows within Git Bash
     # and check out the repository with auto CRLF management
     # enabled. Otherwise, we may read lines that are delimited with
-    # \r\n and produce $'-Xarg\r' rather than -Xarg due to word
+    # \r and produce $'-Xarg\r' rather than -Xarg due to word
     # splitting rules.
-    tr -s '\r\n' ' ' < "$1"
+    tr -s '\r' ' ' < "$1"
   fi
 }
 
 log() {
   if [ "$MVNW_VERBOSE" = true ]; then
-    printf '%s\n' "$1"
+    printf '%s' "$1"
   fi
 }
 
@@ -199,7 +199,7 @@ else
       wrapperUrl="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar"
     fi
     while IFS="=" read -r key value; do
-      # Remove '\r' from value to allow usage on windows as IFS does not consider '\r' as a separator ( considers space, tab, new line ('\n'), and custom '=' )
+      # Remove '\r' from value to allow usage on windows as IFS does not consider '\r' as a separator ( considers space, tab, new line (''), and custom '=' )
       safeValue=$(echo "$value" | tr -d '\r')
       case "$key" in (wrapperUrl) wrapperUrl="$safeValue"; break ;;
       esac
