@@ -28,23 +28,15 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
     @Override
     public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName,Integer offSet,Integer limit) {
 
-        String query = "select ROWNUM                          ROWNO," +
-                "       EXPENSE_ID                      EXPENSE_ID," +
-                "       EXPENSE_AMOUNT                  EXPENSE_AMOUNT," +
+        String query = "select ROWNUM                          ROWNO,\n" +
+                "       EXPENSE_ID                      EXPENSE_ID,\n" +
+                "       EXPENSE_AMOUNT                  EXPENSE_AMOUNT,\n" +
                 "       EXPENSE_UNIT                    EXPENSE_UNIT, "
-                        .concat(schemaName).concat("get_expense_name(EXPENSE_ID) as EXPENSE_NAME" +
-                                "from (select EXPENSE_ID," +
-                                "             sum(AMOUNT)               as EXPENSE_AMOUNT," +
-                                "             NVL(SUM(EXPENSE_UNIT), 0) as EXPENSE_UNIT" +
+                        .concat(schemaName).concat("get_expense_name(EXPENSE_ID) as EXPENSE_NAME\n" +
+                                "from (select EXPENSE_ID,\n" +
+                                "             sum(AMOUNT)               as EXPENSE_AMOUNT,\n" +
+                                "             NVL(SUM(EXPENSE_UNIT), 0) as EXPENSE_UNIT\n" +
                                 "      from ")
-<<<<<<< HEAD
-                        .concat(schemaName).concat("NEX_ALL_EXPENDITURE" +
-                                "      where GROUPID = ?" +
-                                "        and USER_ID = ?" +
-                                "        and DATE_TIME between (?) and (?)" +
-                                "      group by EXPENSE_ID)" +
-                                "order by EXPENSE_NAME asc");
-=======
                         .concat(schemaName).concat("NEX_ALL_EXPENDITURE\n" +
                                 "      where GROUPID = ?\n" +
                                 "        and USER_ID = ?\n" +
@@ -52,24 +44,23 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
                                 "      group by EXPENSE_ID)\n" +
                                 "order by EXPENSE_NAME asc\n").concat("OFFSET ? ROWS \n" +
                                 "FETCH NEXT ? ROWS ONLY");
->>>>>>> vehicleList
 
         try {
 
             return jdbcTemplate.query(query, new Object[]{groupId, userId, fromDate, toDate, offSet, limit},
                     new RowMapper<DetailsOfExpense>() {
-                @Override
-                public DetailsOfExpense mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        @Override
+                        public DetailsOfExpense mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-                    return new DetailsOfExpense(
+                            return new DetailsOfExpense(
 
-                            rs.getInt("ROWNO"),
-                            rs.getString("EXPENSE_ID"),
-                            rs.getInt("EXPENSE_AMOUNT"),
-                            rs.getInt("EXPENSE_UNIT"),
-                            rs.getString("EXPENSE_NAME")
-                    );
-                }});
+                                    rs.getInt("ROWNO"),
+                                    rs.getString("EXPENSE_ID"),
+                                    rs.getInt("EXPENSE_AMOUNT"),
+                                    rs.getInt("EXPENSE_UNIT"),
+                                    rs.getString("EXPENSE_NAME")
+                            );
+                        }});
         }
         catch (Exception e){
 
