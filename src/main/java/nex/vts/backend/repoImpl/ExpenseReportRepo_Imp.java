@@ -28,20 +28,20 @@ public class ExpenseReportRepo_Imp implements ExpenseReport_Repo {
     @Override
     public Object getExpenseInfo(String groupId, String userId, String fromDate, String toDate,String schemaName) {
 
-        String query = "select ROWNUM                          ROWNO,\n" +
-                "       EXPENSE_ID                      EXPENSE_ID,\n" +
-                "       EXPENSE_AMOUNT                  EXPENSE_AMOUNT,\n" +
+        String query = "select ROWNUM                          ROWNO," +
+                "       EXPENSE_ID                      EXPENSE_ID," +
+                "       EXPENSE_AMOUNT                  EXPENSE_AMOUNT," +
                 "       EXPENSE_UNIT                    EXPENSE_UNIT, "
-                        .concat(schemaName).concat("get_expense_name(EXPENSE_ID) as EXPENSE_NAME\n" +
-                                "from (select EXPENSE_ID,\n" +
-                                "             sum(AMOUNT)               as EXPENSE_AMOUNT,\n" +
-                                "             NVL(SUM(EXPENSE_UNIT), 0) as EXPENSE_UNIT\n" +
+                        .concat(schemaName).concat("get_expense_name(EXPENSE_ID) as EXPENSE_NAME" +
+                                "from (select EXPENSE_ID," +
+                                "             sum(AMOUNT)               as EXPENSE_AMOUNT," +
+                                "             NVL(SUM(EXPENSE_UNIT), 0) as EXPENSE_UNIT" +
                                 "      from ")
-                        .concat(schemaName).concat("NEX_ALL_EXPENDITURE\n" +
-                                "      where GROUPID = ?\n" +
-                                "        and USER_ID = ?\n" +
-                                "        and DATE_TIME between (?) and (?)\n" +
-                                "      group by EXPENSE_ID)\n" +
+                        .concat(schemaName).concat("NEX_ALL_EXPENDITURE" +
+                                "      where GROUPID = ?" +
+                                "        and USER_ID = ?" +
+                                "        and DATE_TIME between (?) and (?)" +
+                                "      group by EXPENSE_ID)" +
                                 "order by EXPENSE_NAME asc");
 
         try {

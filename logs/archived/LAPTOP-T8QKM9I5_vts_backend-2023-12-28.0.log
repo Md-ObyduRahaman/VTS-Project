@@ -3742,7 +3742,7 @@ WHERE ROWNUM <= 1]
 15:45:00.900 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - log:173 - Starting Servlet engine: [Apache Tomcat/10.1.4]
 15:45:00.926 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - log:173 - Initializing Spring embedded WebApplicationContext
 15:45:00.927 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 629 ms
-15:45:00.946 [restartedMain] ERROR o.s.boot.web.embedded.tomcat.TomcatStarter - onStartup:60 - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
+15:45:00.946 [restartedMain] ERROR o.s.boot.web.embedded.tomcat.TomcatStarter - onStartup:60 - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
 15:45:00.947 [restartedMain] INFO  org.apache.catalina.core.StandardService - log:173 - Stopping service [Tomcat]
 15:45:00.950 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - refresh:592 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
 15:45:00.955 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - logMessage:82 - 
@@ -3772,7 +3772,7 @@ Caused by: org.springframework.boot.web.server.WebServerException: Unable to sta
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:183)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:161)
 	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:712)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:692)
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:127)
@@ -3817,7 +3817,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:485)
 	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123)
 	... 18 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classes\nex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userInfoUserDetailsService' defined in file [C:\Users\obydu\InteljProject\vts_backend\target\classesex\vts\backend\configs\UserInfoUserDetailsService.class]: Post-processing of merged bean definition failed
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)

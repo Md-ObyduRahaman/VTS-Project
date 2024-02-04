@@ -29,63 +29,63 @@ public class RepoVtsLoginUser {
         Optional<VTS_LOGIN_USER> userObj = Optional.empty();
         String query;
         if(!password.isEmpty()) {
-            query = "\n" +
-                    "SELECT ID,\n" +
-                    "       USERNAME,\n" +
-                    "       PASSWORD,\n" +
-                    "       PROFILE_ID,\n" +
-                    "       MAIN_ACCOUNT_ID,\n" +
-                    "       USER_TYPE,\n" +
-                    "       ROLE_ID,\n" +
-                    "       IS_ACCOUNT_ACTIVE,\n" +
-                    "       IS_REMOTE_ACCESS_ENABLED,\n" +
-                    "       PARENT_PROFILE_ID,\n" +
-                    "       OPERATORID,\n" +
-                    "          LPAD (OPERATORID, 2, '0')\n" +
-                    "       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID\n" +
-                    "  FROM (SELECT ID,\n" +
-                    "               USERNAME,\n" +
-                    "               PASSWORD,\n" +
-                    "               PROFILE_ID,\n" +
-                    "               MAIN_ACCOUNT_ID,\n" +
-                    "               USER_TYPE,\n" +
-                    "               ROLE_ID,\n" +
-                    "               IS_ACCOUNT_ACTIVE,\n" +
-                    "               IS_REMOTE_ACCESS_ENABLED,\n" +
-                    "               PARENT_PROFILE_ID,\n" +
-                    "               OPERATORID\n" +
-                    "          FROM vts_login_user\n" +
+            query = "" +
+                    "SELECT ID," +
+                    "       USERNAME," +
+                    "       PASSWORD," +
+                    "       PROFILE_ID," +
+                    "       MAIN_ACCOUNT_ID," +
+                    "       USER_TYPE," +
+                    "       ROLE_ID," +
+                    "       IS_ACCOUNT_ACTIVE," +
+                    "       IS_REMOTE_ACCESS_ENABLED," +
+                    "       PARENT_PROFILE_ID," +
+                    "       OPERATORID," +
+                    "          LPAD (OPERATORID, 2, '0')" +
+                    "       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID" +
+                    "  FROM (SELECT ID," +
+                    "               USERNAME," +
+                    "               PASSWORD," +
+                    "               PROFILE_ID," +
+                    "               MAIN_ACCOUNT_ID," +
+                    "               USER_TYPE," +
+                    "               ROLE_ID," +
+                    "               IS_ACCOUNT_ACTIVE," +
+                    "               IS_REMOTE_ACCESS_ENABLED," +
+                    "               PARENT_PROFILE_ID," +
+                    "               OPERATORID" +
+                    "          FROM vts_login_user" +
                     "         WHERE " +
                     "IS_ACCOUNT_ACTIVE = 1 and OPERATORID = "+operatorid
                     +"and USERNAME = '" + userName + "' AND PASSWORD = '" + password + "')";
         }
         else {
-            query = "\n" +
-                    "SELECT ID,\n" +
-                    "       USERNAME,\n" +
-                    "       PASSWORD,\n" +
-                    "       PROFILE_ID,\n" +
-                    "       MAIN_ACCOUNT_ID,\n" +
-                    "       USER_TYPE,\n" +
-                    "       ROLE_ID,\n" +
-                    "       IS_ACCOUNT_ACTIVE,\n" +
-                    "       IS_REMOTE_ACCESS_ENABLED,\n" +
-                    "       PARENT_PROFILE_ID,\n" +
-                    "       OPERATORID,\n" +
-                    "          LPAD (OPERATORID, 2, '0')\n" +
-                    "       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID\n" +
-                    "  FROM (SELECT ID,\n" +
-                    "               USERNAME,\n" +
-                    "               PASSWORD,\n" +
-                    "               PROFILE_ID,\n" +
-                    "               MAIN_ACCOUNT_ID,\n" +
-                    "               USER_TYPE,\n" +
-                    "               ROLE_ID,\n" +
-                    "               IS_ACCOUNT_ACTIVE,\n" +
-                    "               IS_REMOTE_ACCESS_ENABLED,\n" +
-                    "               PARENT_PROFILE_ID,\n" +
-                    "               OPERATORID\n" +
-                    "          FROM vts_login_user\n" +
+            query = "" +
+                    "SELECT ID," +
+                    "       USERNAME," +
+                    "       PASSWORD," +
+                    "       PROFILE_ID," +
+                    "       MAIN_ACCOUNT_ID," +
+                    "       USER_TYPE," +
+                    "       ROLE_ID," +
+                    "       IS_ACCOUNT_ACTIVE," +
+                    "       IS_REMOTE_ACCESS_ENABLED," +
+                    "       PARENT_PROFILE_ID," +
+                    "       OPERATORID," +
+                    "          LPAD (OPERATORID, 2, '0')" +
+                    "       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID" +
+                    "  FROM (SELECT ID," +
+                    "               USERNAME," +
+                    "               PASSWORD," +
+                    "               PROFILE_ID," +
+                    "               MAIN_ACCOUNT_ID," +
+                    "               USER_TYPE," +
+                    "               ROLE_ID," +
+                    "               IS_ACCOUNT_ACTIVE," +
+                    "               IS_REMOTE_ACCESS_ENABLED," +
+                    "               PARENT_PROFILE_ID," +
+                    "               OPERATORID" +
+                    "          FROM vts_login_user" +
                     "         WHERE USERNAME = '" + userName + "' )";
         }
 

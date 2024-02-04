@@ -102,16 +102,16 @@ public class DriverInfo_RepoImp implements DriverInfo_Repo {
 //
 //        Optional<DriverInfoModel> getAllDriverInfo=Optional.empty();
 //
-//            String sql = "SELECT ID,\n" +
-//                    "       USERID,\n" +
-//                    "       D_NAME,\n" +
-//                    "       D_FNAME,\n" +
-//                    "       D_LICENSE,\n" +
-//                    "       D_ADDRESS,\n" +
-//                    "       D_CELL,\n" +
-//                    "       "+shcemaName+"date_formate_convert (D_DOB, 'YYYYMMDD', 'DD-Mon-YYYY')    D_DOB,\n" +
-//                    "       LENGTH (DRIVER_PHOTO)                                      DRIVER_PHOTO\n" +
-//                    "  FROM NEX_DRIVERINFO\n" +
+//            String sql = "SELECT ID," +
+//                    "       USERID," +
+//                    "       D_NAME," +
+//                    "       D_FNAME," +
+//                    "       D_LICENSE," +
+//                    "       D_ADDRESS," +
+//                    "       D_CELL," +
+//                    "       "+shcemaName+"date_formate_convert (D_DOB, 'YYYYMMDD', 'DD-Mon-YYYY')    D_DOB," +
+//                    "       LENGTH (DRIVER_PHOTO)                                      DRIVER_PHOTO" +
+//                    "  FROM NEX_DRIVERINFO" +
 //                    " WHERE USERID ="+USERID;
 //
 //                   /* jdbcTemplate.queryForObject(sql, new Object[]{USERID}, (rs, rowNum) ->
@@ -157,16 +157,16 @@ public class DriverInfo_RepoImp implements DriverInfo_Repo {
 //
 //        Optional<VehProfileChangePermision> vehProfileChangePermisionList=Optional.empty();
 //
-//            String sql = "SELECT ID,\n" +
-//                    "       IS_VEH_PASS_CHANGE,\n" +
-//                    "       IS_VEH_STAT_CHANGE,\n" +
-//                    "       IS_VEH_SPEED_CHANGE,\n" +
-//                    "       IS_VEH_ALERT_MAIL_CHANGE,\n" +
-//                    "       IS_VEH_ALERT_SMS_CHANGE,\n" +
-//                    "       IS_VEH_D_PROFILE_CHANGE\n" +
-//                    "  FROM VEH_PROFILE_CHANGE_PERMISION\n" +
-//                    " WHERE     VEHICLE_ID = "+vehicle_id+"\n" +
-//                    "       AND PROFILE_TYPE = "+profile_type+"\n" +
+//            String sql = "SELECT ID," +
+//                    "       IS_VEH_PASS_CHANGE," +
+//                    "       IS_VEH_STAT_CHANGE," +
+//                    "       IS_VEH_SPEED_CHANGE," +
+//                    "       IS_VEH_ALERT_MAIL_CHANGE," +
+//                    "       IS_VEH_ALERT_SMS_CHANGE," +
+//                    "       IS_VEH_D_PROFILE_CHANGE" +
+//                    "  FROM VEH_PROFILE_CHANGE_PERMISION" +
+//                    " WHERE     VEHICLE_ID = "+vehicle_id+"" +
+//                    "       AND PROFILE_TYPE = "+profile_type+"" +
 //                    "       AND PROFILE_ID = "+vehicle_id;
 //
 //

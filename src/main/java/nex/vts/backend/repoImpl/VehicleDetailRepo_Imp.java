@@ -26,34 +26,34 @@ public class VehicleDetailRepo_Imp implements VehicleDetails_Repo {
     @Override
     public VehicleDetailInfo getVehicleDetailForGpAndM2M( Integer vehicleId, String schemaName) {
 
-        String query = "select v.ID               VEHICLEID,\n" +
-                "       v.CAR_NO                  CAR_NO,\n"+
-                "       v.USERID                  USERID,\n" +
-                "       v.FULL_NAME               FULL_NAME,\n" +
-                "       v.CELL_PHONE              CELL_PHONE,\n" +
-                "       v.CAR_COLOUR              CAR_COLOUR,\n" +
-                "       v.CAR_VENDOR              CAR_VENDOR,\n" +
-                "       v.CAR_MODEL               CAR_MODEL,\n" +
-                /*"       v.CUSTOM_USERID           CUSTOM_USERID,\n" +*/
-                "       v.EMAIL                   EMAIL,\n" +
-                "       v.ICON_TYPE               ICON_TYPE,\n" +
-                "       v.ICON_TYPE_ON_MAP        ICON_TYPE_ON_MAP,\n" +
-                "       v.ICON_TYPE_RUNNING       ICON_TYPE_RUNNING,\n" +
-                "       v.ICON_TYPE_STOPPED       ICON_TYPE_STOPPED,\n" +
-                "       v.ICON_TYPE_STATIONARY    ICON_TYPE_STATIONARY,\n" +
-                "       v.ICON_TYPE_OVERSPEED     ICON_TYPE_OVERSPEED,\n" +
-                /*"       v.VEHICLE_IMAGE           VEHICLE_IMAGE,\n" +*/
-                "       d.ID                      DRIVER_ID,\n" +
-                "       d.D_NAME                  D_NAME,\n" +
-                "       d.D_FNAME                 D_FNAME,\n" +
-                "       d.D_LICENSE               D_LICENSE,\n" +
-                "       d.D_ADDRESS               D_ADDRESS,\n" +
-                "       d.D_CELL                  D_CELL,\n" +
-                "       d.MAX_CAR_SPEED           MAX_CAR_SPEED,\n" +
-                "       LENGTH(d.DRIVER_PHOTO) as DRIVER_PHOTO,\n" +
-                "       d.CAR_IMAGE\n" +
-                "FROM NEX_INDIVIDUAL_CLIENT v\n" +
-                "         LEFT JOIN NEX_DRIVERINFO d ON v.ID = d.USERID\n" +
+        String query = "select v.ID               VEHICLEID," +
+                "       v.CAR_NO                  CAR_NO,"+
+                "       v.USERID                  USERID," +
+                "       v.FULL_NAME               FULL_NAME," +
+                "       v.CELL_PHONE              CELL_PHONE," +
+                "       v.CAR_COLOUR              CAR_COLOUR," +
+                "       v.CAR_VENDOR              CAR_VENDOR," +
+                "       v.CAR_MODEL               CAR_MODEL," +
+                /*"       v.CUSTOM_USERID           CUSTOM_USERID," +*/
+                "       v.EMAIL                   EMAIL," +
+                "       v.ICON_TYPE               ICON_TYPE," +
+                "       v.ICON_TYPE_ON_MAP        ICON_TYPE_ON_MAP," +
+                "       v.ICON_TYPE_RUNNING       ICON_TYPE_RUNNING," +
+                "       v.ICON_TYPE_STOPPED       ICON_TYPE_STOPPED," +
+                "       v.ICON_TYPE_STATIONARY    ICON_TYPE_STATIONARY," +
+                "       v.ICON_TYPE_OVERSPEED     ICON_TYPE_OVERSPEED," +
+                /*"       v.VEHICLE_IMAGE           VEHICLE_IMAGE," +*/
+                "       d.ID                      DRIVER_ID," +
+                "       d.D_NAME                  D_NAME," +
+                "       d.D_FNAME                 D_FNAME," +
+                "       d.D_LICENSE               D_LICENSE," +
+                "       d.D_ADDRESS               D_ADDRESS," +
+                "       d.D_CELL                  D_CELL," +
+                "       d.MAX_CAR_SPEED           MAX_CAR_SPEED," +
+                "       LENGTH(d.DRIVER_PHOTO) as DRIVER_PHOTO," +
+                "       d.CAR_IMAGE" +
+                "FROM NEX_INDIVIDUAL_CLIENT v" +
+                "         LEFT JOIN NEX_DRIVERINFO d ON v.ID = d.USERID" +
                 "WHERE v.ID = ?";
 
         try{

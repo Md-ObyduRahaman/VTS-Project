@@ -32,7 +32,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId,String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType) {
+    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId,String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType,int offSet,int limit) {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
@@ -53,119 +53,125 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
             } else {
                 innerSql = "";
             }
-            sql = "SELECT VEHICLEID,\n" +
-                    "    ROW_NUMBER() OVER (ORDER BY e.VEHICLEID ASC, e.S_TIME ASC) AS SL,     GROUPID,\n" +
-                    "         DATE_IN_NUMBER,\n" +
-                    "         S_ENGINE_STAT,\n" +
-                    "         S_LAT,\n" +
-                    "         S_LON,\n" +
-                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME,\n" +
-                    "         E_ENGINE_STAT,\n" +
-                    "         E_LAT,\n" +
-                    "         E_LON,\n" +
-                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME,\n" +
-                    "         "+shcemaName+"get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME,\n" +
-                    "         "+shcemaName+"get_driver_name (VEHICLEID)              AS V_DRIVER_NAME,\n" +
-                    "         v.CAR_MODEL                              AS V_CAR_MODEL\n" +
-                    "    FROM (SELECT VEHICLEID,\n" +
-                    "                 GROUPID,\n" +
-                    "                 DATE_IN_NUMBER,\n" +
-                    "                 S_ENGINE_STAT,\n" +
-                    "                 S_LAT,\n" +
-                    "                 S_LON,\n" +
-                    "                 S_TIME,\n" +
-                    "                 E_ENGINE_STAT,\n" +
-                    "                 E_LAT,\n" +
-                    "                 E_LON,\n" +
-                    "                 E_TIME\n" +
-                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW\n" +
-                    "           WHERE     GROUPID = '" + p_userId + "'\n" +
+            sql = "SELECT VEHICLEID," +
+                    "    ROW_NUMBER() OVER (ORDER BY e.VEHICLEID ASC, e.S_TIME ASC) AS SL,     GROUPID," +
+                    "         DATE_IN_NUMBER," +
+                    "         S_ENGINE_STAT," +
+                    "         S_LAT," +
+                    "         S_LON," +
+                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME," +
+                    "         E_ENGINE_STAT," +
+                    "         E_LAT," +
+                    "         E_LON," +
+                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME," +
+                    "         "+shcemaName+"get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME," +
+                    "         "+shcemaName+"get_driver_name (VEHICLEID)              AS V_DRIVER_NAME," +
+                    "         v.CAR_MODEL                              AS V_CAR_MODEL" +
+                    "    FROM (SELECT VEHICLEID," +
+                    "                 GROUPID," +
+                    "                 DATE_IN_NUMBER," +
+                    "                 S_ENGINE_STAT," +
+                    "                 S_LAT," +
+                    "                 S_LON," +
+                    "                 S_TIME," +
+                    "                 E_ENGINE_STAT," +
+                    "                 E_LAT," +
+                    "                 E_LON," +
+                    "                 E_TIME" +
+                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW" +
+                    "           WHERE     GROUPID = '" + p_userId + "'" +
 
-                    "\n" + innerSql +
-                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
-                    "         NEX_INDIVIDUAL_CLIENT v\n" +
-                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 \n" + outterSql;
+                    "" + innerSql +
+                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e," +
+                    "         NEX_INDIVIDUAL_CLIENT v" +
+                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 " + outterSql+
+                    " OFFSET "+offSet+" ROWS " +
+                    "FETCH NEXT "+limit+" ROWS ONLY";
 
 
         } else if (userType==2) {
-            sql="SELECT ROW_NUMBER() OVER (ORDER BY e.VEHICLEID ASC, e.S_TIME ASC) AS SL, VEHICLEID,\n" +
-                    "         GROUPID,\n" +
-                    "         DATE_IN_NUMBER,\n" +
-                    "         S_ENGINE_STAT,\n" +
-                    "         S_LAT,\n" +
-                    "         S_LON,\n" +
-                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME,\n" +
-                    "         E_ENGINE_STAT,\n" +
-                    "         E_LAT,\n" +
-                    "         E_LON,\n" +
-                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME,\n" +
-                    "    "+shcemaName+"     get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME,\n" +
-                    "       "+shcemaName+"  get_driver_name (VEHICLEID)              AS V_DRIVER_NAME,\n" +
-                    "         v.CAR_MODEL                              AS V_CAR_MODEL\n" +
-                    "    FROM (SELECT VEHICLEID,\n" +
-                    "                 GROUPID,\n" +
-                    "                 DATE_IN_NUMBER,\n" +
-                    "                 S_ENGINE_STAT,\n" +
-                    "                 S_LAT,\n" +
-                    "                 S_LON,\n" +
-                    "                 S_TIME,\n" +
-                    "                 E_ENGINE_STAT,\n" +
-                    "                 E_LAT,\n" +
-                    "                 E_LON,\n" +
-                    "                 E_TIME\n" +
-                    "            FROM "+shcemaName+" NEX_ENGIN_STAT_MW\n" +
-                    "           WHERE     GROUPID = '" + p_userId + "'\n" +
-                    "                \n" +
-                    "                 AND VEHICLEID IN\n" +
-                    "                         (SELECT VEHICLE_ID\n" +
-                    "                            FROM NEX_DEPT_WISE_VEHICLE\n" +
-                    "                           WHERE     COMPANY_ID = '"+p_userId+"'\n" +
-                    "                                 AND ACTIVATION = 1\n" +
-                    "                                 AND DEPT_ID = '"+userId+"')\n" +
-                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
-                    "     "+shcemaName+"    NEX_INDIVIDUAL_CLIENT v\n" +
-                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')\n" +
-                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC";
+            sql="SELECT ROW_NUMBER() OVER (ORDER BY e.VEHICLEID ASC, e.S_TIME ASC) AS SL, VEHICLEID," +
+                    "         GROUPID," +
+                    "         DATE_IN_NUMBER," +
+                    "         S_ENGINE_STAT," +
+                    "         S_LAT," +
+                    "         S_LON," +
+                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME," +
+                    "         E_ENGINE_STAT," +
+                    "         E_LAT," +
+                    "         E_LON," +
+                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME," +
+                    "    "+shcemaName+"     get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME," +
+                    "       "+shcemaName+"  get_driver_name (VEHICLEID)              AS V_DRIVER_NAME," +
+                    "         v.CAR_MODEL                              AS V_CAR_MODEL" +
+                    "    FROM (SELECT VEHICLEID," +
+                    "                 GROUPID," +
+                    "                 DATE_IN_NUMBER," +
+                    "                 S_ENGINE_STAT," +
+                    "                 S_LAT," +
+                    "                 S_LON," +
+                    "                 S_TIME," +
+                    "                 E_ENGINE_STAT," +
+                    "                 E_LAT," +
+                    "                 E_LON," +
+                    "                 E_TIME" +
+                    "            FROM "+shcemaName+" NEX_ENGIN_STAT_MW" +
+                    "           WHERE     GROUPID = '" + p_userId + "'" +
+                    "                " +
+                    "                 AND VEHICLEID IN" +
+                    "                         (SELECT VEHICLE_ID" +
+                    "                            FROM NEX_DEPT_WISE_VEHICLE" +
+                    "                           WHERE     COMPANY_ID = '"+p_userId+"'" +
+                    "                                 AND ACTIVATION = 1" +
+                    "                                 AND DEPT_ID = '"+userId+"')" +
+                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e," +
+                    "     "+shcemaName+"    NEX_INDIVIDUAL_CLIENT v" +
+                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')" +
+                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC" +
+                    " OFFSET "+offSet+" ROWS " +
+                    "FETCH NEXT "+limit+" ROWS ONLY";
 
         } else if (userType==3) {
-            sql=" SELECT VEHICLEID,\n" +
-                    "         GROUPID,\n" +
-                    "         DATE_IN_NUMBER,\n" +
-                    "         S_ENGINE_STAT,\n" +
-                    "         S_LAT,\n" +
-                    "         S_LON,\n" +
-                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME,\n" +
-                    "         E_ENGINE_STAT,\n" +
-                    "         E_LAT,\n" +
-                    "         E_LON,\n" +
-                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME,\n" +
-                    "        "+shcemaName+" get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME,\n" +
-                    "        "+shcemaName+" get_driver_name (VEHICLEID)              AS V_DRIVER_NAME,\n" +
-                    "         v.CAR_MODEL                              AS V_CAR_MODEL\n" +
-                    "    FROM (SELECT VEHICLEID,\n" +
-                    "                 GROUPID,\n" +
-                    "                 DATE_IN_NUMBER,\n" +
-                    "                 S_ENGINE_STAT,\n" +
-                    "                 S_LAT,\n" +
-                    "                 S_LON,\n" +
-                    "                 S_TIME,\n" +
-                    "                 E_ENGINE_STAT,\n" +
-                    "                 E_LAT,\n" +
-                    "                 E_LON,\n" +
-                    "                 E_TIME\n" +
-                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW\n" +
-                    "           WHERE    GROUPID = '" + p_userId + "'\n" +
-                    "                 AND VEHICLEID = '" + vehicleId + "'\n" +
-                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e,\n" +
-                    "         NEX_INDIVIDUAL_CLIENT v\n" +
-                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')\n" +
-                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC";
+            sql=" SELECT VEHICLEID," +
+                    "         GROUPID," +
+                    "         DATE_IN_NUMBER," +
+                    "         S_ENGINE_STAT," +
+                    "         S_LAT," +
+                    "         S_LON," +
+                    "         TO_CHAR (TO_DATE (S_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS S_TIME," +
+                    "         E_ENGINE_STAT," +
+                    "         E_LAT," +
+                    "         E_LON," +
+                    "         TO_CHAR (TO_DATE (E_TIME, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                  'YYYY-MM-DD HH24:MI:SS')        AS E_TIME," +
+                    "        "+shcemaName+" get_vehicle_name (GROUPID, VEHICLEID)    AS V_NAME," +
+                    "        "+shcemaName+" get_driver_name (VEHICLEID)              AS V_DRIVER_NAME," +
+                    "         v.CAR_MODEL                              AS V_CAR_MODEL" +
+                    "    FROM (SELECT VEHICLEID," +
+                    "                 GROUPID," +
+                    "                 DATE_IN_NUMBER," +
+                    "                 S_ENGINE_STAT," +
+                    "                 S_LAT," +
+                    "                 S_LON," +
+                    "                 S_TIME," +
+                    "                 E_ENGINE_STAT," +
+                    "                 E_LAT," +
+                    "                 E_LON," +
+                    "                 E_TIME" +
+                    "            FROM "+shcemaName+"NEX_ENGIN_STAT_MW" +
+                    "           WHERE    GROUPID = '" + p_userId + "'" +
+                    "                 AND VEHICLEID = '" + vehicleId + "'" +
+                    "                 AND DATE_IN_NUMBER BETWEEN ('" + fromDate + "') AND ('" + toDate + "')) e," +
+                    "         NEX_INDIVIDUAL_CLIENT v" +
+                    "   WHERE e.VEHICLEID = v.ID AND v.ACTIVATION = 1 AND (e.S_ENGINE_STAT = 'ON')" +
+                    "ORDER BY e.VEHICLEID ASC, e.S_TIME ASC" +
+                    " OFFSET "+offSet+" ROWS " +
+                    "FETCH NEXT "+limit+" ROWS ONLY";
 
         }
 

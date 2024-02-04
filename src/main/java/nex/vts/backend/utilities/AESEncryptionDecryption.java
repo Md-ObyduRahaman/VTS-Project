@@ -90,7 +90,7 @@ public class AESEncryptionDecryption {
 
         String responseString;
         // replacing all new line
-        encryptedData = encryptedData.replace("\n", "");
+        encryptedData = encryptedData.replace("", "");
 
         try {
             String modifiedEncryptedData1 = encryptedData.replace(" ", "+");

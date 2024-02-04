@@ -38,23 +38,23 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
             case 1: /*TODO GP,M2M Mother Account*/
 /*                try {
                     String query = "select ROWNUM ROWNO,ID,VEHICLE_ID,USERID,GROUP_ID,ENGIN,SPEED,LAT,LON,VDATE,FAVORITE,ICON_TYPE,ORDER_INDEX,DISTANCE,"
-                            .concat(shcemaName).concat("get_vehicle_stat_his(VEHICLE_ID) as POSITION_HIS,\n" +
-                                    "                                case\n" +
-                                    "                                    when ENGIN = 'ON' AND SPEED > 0\n" +
-                                    "                                    THEN 1\n" +
-                                    "                                    WHEN ENGIN = 'ON' AND SPEED <= 0\n" +
-                                    "                                    THEN 2\n" +
-                                    "                                    WHEN ENGIN = 'OFF'\n" +
-                                    "                                    THEN 3\n" +
+                            .concat(shcemaName).concat("get_vehicle_stat_his(VEHICLE_ID) as POSITION_HIS," +
+                                    "                                case" +
+                                    "                                    when ENGIN = 'ON' AND SPEED > 0" +
+                                    "                                    THEN 1" +
+                                    "                                    WHEN ENGIN = 'ON' AND SPEED <= 0" +
+                                    "                                    THEN 2" +
+                                    "                                    WHEN ENGIN = 'OFF'" +
+                                    "                                    THEN 3" +
                                     "                                    END iscolor")
-                            .concat("                            FROM (select t.ID,t.VEHICLE_ID,t.USERID,t.GROUP_ID,t.ENGIN,t.SPEED,t.LAT,t.LON,t.VDATE,t.FAVORITE,t.ICON_TYPE,t.ORDER_INDEX,'0' as DISTANCE\n" +
-                                    "                                  FROM nex_individual_temp t\n" +
-                                    "                                  where t.VEHICLE_ID IN (select ID\n" +
-                                    "                                                         from NEX_INDIVIDUAL_CLIENT\n" +
-                                    "                                                         where COMPANY_ID = ?\n" +
-                                    "                                                           and ACTIVATION = 1\n" +
-                                    "                                                           and OPERATORID =?)\n" +
-                                    "                                  order by t.USERID asc, t.ORDER_INDEX asc)\n" +
+                            .concat("                            FROM (select t.ID,t.VEHICLE_ID,t.USERID,t.GROUP_ID,t.ENGIN,t.SPEED,t.LAT,t.LON,t.VDATE,t.FAVORITE,t.ICON_TYPE,t.ORDER_INDEX,'0' as DISTANCE" +
+                                    "                                  FROM nex_individual_temp t" +
+                                    "                                  where t.VEHICLE_ID IN (select ID" +
+                                    "                                                         from NEX_INDIVIDUAL_CLIENT" +
+                                    "                                                         where COMPANY_ID = ?" +
+                                    "                                                           and ACTIVATION = 1" +
+                                    "                                                           and OPERATORID =?)" +
+                                    "                                  order by t.USERID asc, t.ORDER_INDEX asc)" +
                                     "--                               order by ROWNO asc offset ? rows fetch first ? rows only");
                     return jdbcTemplate.query(query, new MotherAccVehicleListRowMapper(), id, operatorId);
                 } catch (Exception e) {
@@ -62,23 +62,23 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                     logger.error(e.getCause().getMessage());
                     *//*throw new AppCommonException(e.getMessage());*//*
                 }*/
-                getQuery = "select t.ID          ID,\n" +
-                        "       t.VEHICLE_ID  VEHICLEID,\n" +
-                        "       t.ENGIN       ENGINE,\n" +
-                        "       t.SPEED       SPEED,\n" +
-                        "       t.LAT         LAT,\n" +
-                        "       t.LON         LON,\n" +
-                        "       t.FAVORITE    FAVORITE,\n" +
-                        "       t.ICON_TYPE   ICONTYPE,\n" +
-                        "       t.ORDER_INDEX ORDERINDEX,\n" +
-                        "       t.USERID      USERID\n"+
-                        "FROM nex_individual_temp t\n" +
-                        "where t.VEHICLE_ID IN\n" +
-                        "      (select ID\n" +
-                        "       from NEX_INDIVIDUAL_CLIENT\n" +
-                        "       where COMPANY_ID = ?\n" +
-                        "         and ACTIVATION = 1\n" +
-                        "         and OPERATORID = ?)\n" +
+                getQuery = "select t.ID          ID," +
+                        "       t.VEHICLE_ID  VEHICLEID," +
+                        "       t.ENGIN       ENGINE," +
+                        "       t.SPEED       SPEED," +
+                        "       t.LAT         LAT," +
+                        "       t.LON         LON," +
+                        "       t.FAVORITE    FAVORITE," +
+                        "       t.ICON_TYPE   ICONTYPE," +
+                        "       t.ORDER_INDEX ORDERINDEX," +
+                        "       t.USERID      USERID"+
+                        "FROM nex_individual_temp t" +
+                        "where t.VEHICLE_ID IN" +
+                        "      (select ID" +
+                        "       from NEX_INDIVIDUAL_CLIENT" +
+                        "       where COMPANY_ID = ?" +
+                        "         and ACTIVATION = 1" +
+                        "         and OPERATORID = ?)" +
                         "order by t.USERID asc, t.ORDER_INDEX asc";
                 try {
 
@@ -108,39 +108,39 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 }
             case 2:/*TODO Department/Child Account*/
 //                try {
-//                    String query = "select a.VEHICLE_ID            id,\n" +
-//                            "       a.USERID                vehicle_name,\n" +
-//                            "       a.ENGIN                 engine_status,\n" +
-//                            "       a.SPEED                 speed,\n" +
-//                            "       b.FAVORITE              is_favorite,\n" +
-//                            "       b.ICON_TYPE             vehicle_icon_type,\n" +
-//                            "       b.CUSTOM_USERID         user_defined_vehicle_name,\n" +
-//                            "       b.ICON_TYPE_ON_MAP,\n" +
-//                            "       b.ICON_TYPE_RUNNING,\n" +
-//                            "       b.ICON_TYPE_STOPPED,\n" +
-//                            "       b.ICON_TYPE_STATIONARY,\n" +
-//                            "       b.CAR_REG_NO            registration_number,\n" +
-//                            "       b.CAR_COLOUR            color,\n" +
-//                            "       b.CAR_VENDOR            vendor,\n" +
+//                    String query = "select a.VEHICLE_ID            id," +
+//                            "       a.USERID                vehicle_name," +
+//                            "       a.ENGIN                 engine_status," +
+//                            "       a.SPEED                 speed," +
+//                            "       b.FAVORITE              is_favorite," +
+//                            "       b.ICON_TYPE             vehicle_icon_type," +
+//                            "       b.CUSTOM_USERID         user_defined_vehicle_name," +
+//                            "       b.ICON_TYPE_ON_MAP," +
+//                            "       b.ICON_TYPE_RUNNING," +
+//                            "       b.ICON_TYPE_STOPPED," +
+//                            "       b.ICON_TYPE_STATIONARY," +
+//                            "       b.CAR_REG_NO            registration_number," +
+//                            "       b.CAR_COLOUR            color," +
+//                            "       b.CAR_VENDOR            vendor," +
 //                            "       b.CAR_MODEL             model,"
-//                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed,\n" +
-//                                            "                                       case\n" +
-//                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0\n" +
-//                                            "                                    THEN 1\n" +
-//                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0\n" +
-//                                            "                                    THEN 2\n" +
-//                                            "                                    WHEN a.ENGIN = 'OFF'\n" +
-//                                            "                                    THEN 3\n" +
-//                                            "                                    END iscolor\n" +
-//                                            "from ").concat(shcemaName).concat("nex_individual_temp a,").concat(shcemaName).concat("nex_individual_client b\n" +
-//                                            "where a.VEHICLE_ID = b.id\n" +
-//                                            "  and a.VEHICLE_ID in\n" +
-//                                            "      (select to_char(VEHICLE_ID)\n" +
-//                                            "       from ").concat(shcemaName).concat("NEX_EXTENDED_USER_VS_VEHICLE\n" +
-//                                            "       WHERE PROFILE_ID = ?\n" +
-//                                            "         AND PROFILE_TYPE = 2\n" +
-//                                            "         AND PARENT_PROFILE_ID =?)\n" +
-//                                            "  AND b.OPERATORID = ?/*1*/\n" +
+//                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed," +
+//                                            "                                       case" +
+//                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0" +
+//                                            "                                    THEN 1" +
+//                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0" +
+//                                            "                                    THEN 2" +
+//                                            "                                    WHEN a.ENGIN = 'OFF'" +
+//                                            "                                    THEN 3" +
+//                                            "                                    END iscolor" +
+//                                            "from ").concat(shcemaName).concat("nex_individual_temp a,").concat(shcemaName).concat("nex_individual_client b" +
+//                                            "where a.VEHICLE_ID = b.id" +
+//                                            "  and a.VEHICLE_ID in" +
+//                                            "      (select to_char(VEHICLE_ID)" +
+//                                            "       from ").concat(shcemaName).concat("NEX_EXTENDED_USER_VS_VEHICLE" +
+//                                            "       WHERE PROFILE_ID = ?" +
+//                                            "         AND PROFILE_TYPE = 2" +
+//                                            "         AND PARENT_PROFILE_ID =?)" +
+//                                            "  AND b.OPERATORID = ?/*1*/" +
 //                                            "  AND b.ACTIVATION = 1"); /*todo somotimes need to off activation for checking data*/
 //                    return jdbcTemplate.query(query, new RowMapper<DeptAccVehicleList>() {
 //                        @Override
@@ -178,24 +178,24 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
 
                     case "m2m":
 
-                        getQuery = "select t.ID          ID,\n" +
-                                "       t.VEHICLE_ID  VEHICLEID,\n" +
-                                "       t.ENGIN       ENGINE,\n" +
-                                "       t.SPEED       SPEED,\n" +
-                                "       t.LAT         LAT,\n" +
-                                "       t.LON         LON,\n" +
-                                "       t.FAVORITE    FAVORITE,\n" +
-                                "       t.ICON_TYPE   ICONTYPE,\n" +
-                                "       t.ORDER_INDEX ORDERINDEX,\n" +
-                                "       t.USERID      USERID\n"+
-                                "FROM nex_individual_temp t,\n" +
-                                "     nex_dept_wise_vehicle d\n" +
-                                "where d.COMPANY_ID = ?\n" +
-                                "  and d.DEPT_ID = ?\n" +
-                                "  and d.ACTIVATION = 1\n" +
-                                "  and d.OPERATORID = ?\n" +
-                                "  and t.GROUP_ID = d.COMPANY_ID\n" +
-                                "  and t.VEHICLE_ID = d.VEHICLE_ID\n" +
+                        getQuery = "select t.ID          ID," +
+                                "       t.VEHICLE_ID  VEHICLEID," +
+                                "       t.ENGIN       ENGINE," +
+                                "       t.SPEED       SPEED," +
+                                "       t.LAT         LAT," +
+                                "       t.LON         LON," +
+                                "       t.FAVORITE    FAVORITE," +
+                                "       t.ICON_TYPE   ICONTYPE," +
+                                "       t.ORDER_INDEX ORDERINDEX," +
+                                "       t.USERID      USERID"+
+                                "FROM nex_individual_temp t," +
+                                "     nex_dept_wise_vehicle d" +
+                                "where d.COMPANY_ID = ?" +
+                                "  and d.DEPT_ID = ?" +
+                                "  and d.ACTIVATION = 1" +
+                                "  and d.OPERATORID = ?" +
+                                "  and t.GROUP_ID = d.COMPANY_ID" +
+                                "  and t.VEHICLE_ID = d.VEHICLE_ID" +
                                 "order by t.USERID asc, t.ORDER_INDEX asc";
                         try
                         {
@@ -227,24 +227,24 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
 
                     case "gp":
 
-                        getQuery = "select t.ID          ID,\n" +
-                                "       t.VEHICLE_ID  VEHICLEID,\n" +
-                                "       t.ENGIN       ENGINE,\n" +
-                                "       t.SPEED       SPEED,\n" +
-                                "       t.LAT         LAT,\n" +
-                                "       t.LON         LON,\n" +
-                                "       t.FAVORITE    FAVORITE,\n" +
-                                "       t.ICON_TYPE   ICONTYPE,\n" +
-                                "       t.ORDER_INDEX ORDERINDEX,\n" +
-                                "       t.USERID      USERID\n" +
-                                "FROM nex_individual_temp t,\n" +
-                                "     GPSNEXGP.nex_dept_wise_vehicle d\n" +
-                                "where d.COMPANY_ID = ?\n" +
-                                "  and d.DEPT_ID = ?\n" +
-                                "  and d.ACTIVATION = 1\n" +
-                                " -- and d.OPERATORID = 1\n" +
-                                "  and t.GROUP_ID = d.COMPANY_ID\n" +
-                                "  and t.VEHICLE_ID = d.VEHICLE_ID\n" +
+                        getQuery = "select t.ID          ID," +
+                                "       t.VEHICLE_ID  VEHICLEID," +
+                                "       t.ENGIN       ENGINE," +
+                                "       t.SPEED       SPEED," +
+                                "       t.LAT         LAT," +
+                                "       t.LON         LON," +
+                                "       t.FAVORITE    FAVORITE," +
+                                "       t.ICON_TYPE   ICONTYPE," +
+                                "       t.ORDER_INDEX ORDERINDEX," +
+                                "       t.USERID      USERID" +
+                                "FROM nex_individual_temp t," +
+                                "     GPSNEXGP.nex_dept_wise_vehicle d" +
+                                "where d.COMPANY_ID = ?" +
+                                "  and d.DEPT_ID = ?" +
+                                "  and d.ACTIVATION = 1" +
+                                " -- and d.OPERATORID = 1" +
+                                "  and t.GROUP_ID = d.COMPANY_ID" +
+                                "  and t.VEHICLE_ID = d.VEHICLE_ID" +
                                 "order by t.USERID asc, t.ORDER_INDEX asc";
                         try{
                             return jdbcTemplate.query(getQuery, new RowMapper<VehicleInfos>() {
@@ -277,21 +277,21 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 }
             case 3:/*TODO Indivisual Account*/
 
-                getQuery = "select t.ID          ID,\n" +
-                        "       t.VEHICLE_ID  VEHICLEID,\n" +
-                        "       t.ENGIN       ENGINE,\n" +
-                        "       t.SPEED       SPEED,\n" +
-                        "       t.LAT         LAT,\n" +
-                        "       t.LON         LON,\n" +
-                        "       t.FAVORITE    FAVORITE,\n" +
-                        "       t.ICON_TYPE   ICONTYPE,\n" +
-                        "       t.ORDER_INDEX ORDERINDEX,\n" +
-                        "       t.USERID      USERID\n" +
-                        "from nex_individual_temp t,\n" +
-                        "     nex_individual_client b\n" +
-                        "where t.vehicle_id = b.id\n" +
-                        "  and t.VEHICLE_ID = ?\n" +
-                        "  AND b.OPERATORID = ?\n" +
+                getQuery = "select t.ID          ID," +
+                        "       t.VEHICLE_ID  VEHICLEID," +
+                        "       t.ENGIN       ENGINE," +
+                        "       t.SPEED       SPEED," +
+                        "       t.LAT         LAT," +
+                        "       t.LON         LON," +
+                        "       t.FAVORITE    FAVORITE," +
+                        "       t.ICON_TYPE   ICONTYPE," +
+                        "       t.ORDER_INDEX ORDERINDEX," +
+                        "       t.USERID      USERID" +
+                        "from nex_individual_temp t," +
+                        "     nex_individual_client b" +
+                        "where t.vehicle_id = b.id" +
+                        "  and t.VEHICLE_ID = ?" +
+                        "  AND b.OPERATORID = ?" +
                         "  AND b.ACTIVATION = 1";
 
                 try {
@@ -326,35 +326,35 @@ public class Vehicle_List_Repo_Imp implements Vehicle_List_Repo {
                 return null;
 //            case 3:
 //                try {
-//                    String query = "select a.VEHICLE_ID            id,\n" +
-//                            "       a.USERID                vehicle_name,\n" +
-//                            "       a.ENGIN                 engine_status,\n" +
-//                            "       a.SPEED                 speed,\n" +
-//                            "       b.FAVORITE              is_favorite,\n" +
-//                            "       b.ICON_TYPE             vehicle_icon_type,\n" +
-//                            "       b.CUSTOM_USERID         user_defined_vehicle_name,\n" +
-//                            "       b.ICON_TYPE_ON_MAP,\n" +
-//                            "       b.ICON_TYPE_RUNNING,\n" +
-//                            "       b.ICON_TYPE_STOPPED,\n" +
-//                            "       b.ICON_TYPE_STATIONARY,\n" +
-//                            "       b.CAR_REG_NO            registration_number,\n" +
-//                            "       b.CAR_COLOUR            color,\n" +
-//                            "       b.CAR_VENDOR            vendor,\n" +
+//                    String query = "select a.VEHICLE_ID            id," +
+//                            "       a.USERID                vehicle_name," +
+//                            "       a.ENGIN                 engine_status," +
+//                            "       a.SPEED                 speed," +
+//                            "       b.FAVORITE              is_favorite," +
+//                            "       b.ICON_TYPE             vehicle_icon_type," +
+//                            "       b.CUSTOM_USERID         user_defined_vehicle_name," +
+//                            "       b.ICON_TYPE_ON_MAP," +
+//                            "       b.ICON_TYPE_RUNNING," +
+//                            "       b.ICON_TYPE_STOPPED," +
+//                            "       b.ICON_TYPE_STATIONARY," +
+//                            "       b.CAR_REG_NO            registration_number," +
+//                            "       b.CAR_COLOUR            color," +
+//                            "       b.CAR_VENDOR            vendor," +
 //                            "       b.CAR_MODEL             model,"
-//                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed,\n" +
-//                                            "                                    case\n" +
-//                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0\n" +
-//                                            "                                    THEN 1\n" +
-//                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0\n" +
-//                                            "                                    THEN 2\n" +
-//                                            "                                    WHEN a.ENGIN = 'OFF'\n" +
-//                                            "                                    THEN 3\n" +
-//                                            "                                    END iscolor\n" +
-//                                            "from nex_individual_temp a,\n" +
-//                                            "     nex_individual_client b\n" +
-//                                            "where a.vehicle_id = b.id\n" +
-//                                            "  and a.VEHICLE_ID = ?\n" +
-//                                            "  AND b.OPERATORID = ?\n" +
+//                                    .concat(shcemaName).concat("GET_MAX_CAR_SPEED(b.ID) max_speed," +
+//                                            "                                    case" +
+//                                            "                                    when a.ENGIN = 'ON' AND a.SPEED > 0" +
+//                                            "                                    THEN 1" +
+//                                            "                                    WHEN a.ENGIN = 'ON' AND a.SPEED <= 0" +
+//                                            "                                    THEN 2" +
+//                                            "                                    WHEN a.ENGIN = 'OFF'" +
+//                                            "                                    THEN 3" +
+//                                            "                                    END iscolor" +
+//                                            "from nex_individual_temp a," +
+//                                            "     nex_individual_client b" +
+//                                            "where a.vehicle_id = b.id" +
+//                                            "  and a.VEHICLE_ID = ?" +
+//                                            "  AND b.OPERATORID = ?" +
 //                                            "  AND b.ACTIVATION = 1");
 //                    return jdbcTemplate.query(query, new IndivisualAccVehicleListRowMapper(), id, operatorId);
 //                } catch (Exception e) {

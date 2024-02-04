@@ -40,14 +40,14 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
     @Override
     public Optional<ArrayList<GetExpansesModel>> findAllExpenses(String date_from, String date_to, Integer vehicleId,Integer deviceType) {
 
-        String sql=" SELECT DATE_TIME                         EXPENSE_DATE,\n" +
-                "         AMOUNT                            EXPENSE_AMOUNT,\n" +
-                "         expense_unit,\n" +
-                "         expense_unit_price,\n" +
-                "         GPSNEXGP.get_expense_name (EXPENSE_ID)     EXPENSE_HEADER,\n" +
-                "         GPSNEXGP.get_vehicle_name (0, USER_ID)     VEHICLE_NAME,\n" +
-                "         description                       expense_notes\n" +
-                "    FROM GPSNEXGP.NEX_ALL_EXPENDITURE\n" +
+        String sql=" SELECT DATE_TIME                         EXPENSE_DATE," +
+                "         AMOUNT                            EXPENSE_AMOUNT," +
+                "         expense_unit," +
+                "         expense_unit_price," +
+                "         GPSNEXGP.get_expense_name (EXPENSE_ID)     EXPENSE_HEADER," +
+                "         GPSNEXGP.get_vehicle_name (0, USER_ID)     VEHICLE_NAME," +
+                "         description                       expense_notes" +
+                "    FROM GPSNEXGP.NEX_ALL_EXPENDITURE" +
                 "   WHERE USER_ID = "+vehicleId+" AND DATE_TIME BETWEEN ' "+date_from+" ' AND '"+date_to +"' ORDER BY DATE_TIME ASC";
 
         Optional<ArrayList<GetExpansesModel>> getExpenseList=Optional.empty();
@@ -83,10 +83,10 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
-        String sql="select ID, EXP_NAME\n" +
-                "FROM "+shcemaName+" nex_expense_name\n" +
-                "where READ_ONLY = '1' \n" +
-                "OR (PROFILE_ID = "+userId+" AND profile_type = "+userType+")\n" +
+        String sql="select ID, EXP_NAME" +
+                "FROM "+shcemaName+" nex_expense_name" +
+                "where READ_ONLY = '1' " +
+                "OR (PROFILE_ID = "+userId+" AND profile_type = "+userType+")" +
                 "order by EXP_NAME ASC";
 
         Optional<ArrayList<ExpenseNameList>> getExpenseList=Optional.empty();

@@ -57,30 +57,30 @@ public class VehicleHistoryRepoImp implements VehicleHistoryRepo {
 
             jdbcTemplate.update("call ".concat(schemaName).concat("PROC_HIS_DATA_TD_ex (?,?, ?,?)"), new Object[]{vehicleId, fromDateTime, toDateTime, 0});
 
-            String query = "select ROWNUM                                 ROWNO,\n" +
-                    "       ID,\n" +
-                    "       VEHICLEID,\n" +
-                    "       GROUPID,\n" +
-                    "       HEAD,\n" +
-                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP,\n" +
-                    "       LAT,\n" +
-                    "       LONGS,\n" +
-                    "       TIME_IN_NUMBER,\n" +
-                    "       POSITION,\n" +
-                    "       SPEED\n" +
-                    "FROM (select ID,\n" +
-                    "             VEHICLEID,\n" +
-                    "             GROUPID,\n" +
-                    "             HEAD,\n" +
-                    "             TIME,\n" +
-                    "             LAT,\n" +
-                    "             LONGS,\n" +
-                    "             TIME_IN_NUMBER,\n" +
-                    "             POSITION,\n" +
-                    "             SPEED\n" +
-                    "      FROM ".concat(schemaName).concat("nex_historyrecv_gtt_ex\n" +
-                            "      where VEHICLEID = to_char(?)\n" +
-                            "        and TIME_IN_NUMBER between ? and ?)\n" +
+            String query = "select ROWNUM                                 ROWNO," +
+                    "       ID," +
+                    "       VEHICLEID," +
+                    "       GROUPID," +
+                    "       HEAD," +
+                    "       to_char(time, 'DD-MM-YYYY HH24:MI:SS') TIME_STAMP," +
+                    "       LAT," +
+                    "       LONGS," +
+                    "       TIME_IN_NUMBER," +
+                    "       POSITION," +
+                    "       SPEED" +
+                    "FROM (select ID," +
+                    "             VEHICLEID," +
+                    "             GROUPID," +
+                    "             HEAD," +
+                    "             TIME," +
+                    "             LAT," +
+                    "             LONGS," +
+                    "             TIME_IN_NUMBER," +
+                    "             POSITION," +
+                    "             SPEED" +
+                    "      FROM ".concat(schemaName).concat("nex_historyrecv_gtt_ex" +
+                            "      where VEHICLEID = to_char(?)" +
+                            "        and TIME_IN_NUMBER between ? and ?)" +
                             "order by time_in_number ASC");
 
             Object vehicleHistory = jdbcTemplate.query(query, new RowMapper<HistoriesItem>() {

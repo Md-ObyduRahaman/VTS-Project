@@ -33,15 +33,15 @@ public class VehicleOthersInfoImpl implements VehicleOthersInfoRepo {
     public Optional<VehicleOthersInfoModel> getVehicleOthersInfo(Integer rowID,Integer deviceType) {
         logger.trace("Executing query to find rowID by rowID: {}", rowID);
         Optional<VehicleOthersInfoModel> userObj = Optional.empty();
-        String query = "SELECT FAVORITE                is_favorite,\n" +
-                "       IND_PASS,\n" +
-                "       IND_LOGIN               vehicle_status,\n" +
-                "       CELL_PHONE,\n" +
-                "       EMAIL,\n" +
-                "       IS_MULTIPLE_N_ALLOW     is_multiple_notification_allow,\n" +
-                "       IS_SAFE_MODE_ACTIVE,\n" +
-                "       MAX_CAR_SPEED\n" +
-                "  FROM NEX_INDIVIDUAL_CLIENT A, NEX_DRIVERINFO B\n" +
+        String query = "SELECT FAVORITE                is_favorite," +
+                "       IND_PASS," +
+                "       IND_LOGIN               vehicle_status," +
+                "       CELL_PHONE," +
+                "       EMAIL," +
+                "       IS_MULTIPLE_N_ALLOW     is_multiple_notification_allow," +
+                "       IS_SAFE_MODE_ACTIVE," +
+                "       MAX_CAR_SPEED" +
+                "  FROM NEX_INDIVIDUAL_CLIENT A, NEX_DRIVERINFO B" +
                 " WHERE A.ID = B.USERID AND A.ID = ?";
 
         try {

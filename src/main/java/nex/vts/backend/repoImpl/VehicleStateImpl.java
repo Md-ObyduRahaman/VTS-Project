@@ -36,12 +36,12 @@ public class VehicleStateImpl implements VehicleStateRepo {
     private final Logger logger = LoggerFactory.getLogger(VehicleStateImpl.class);
 
     @Override
-    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId,Integer userType,Integer userId,String SPECIFIC_VEHICLE_ID,int offSet) {
+    public Optional<ArrayList<VehicleStateInfoOra>> findVehicleStateInfoInfo(Integer parentProfileId,Integer userType,Integer userId,String SPECIFIC_VEHICLE_ID,int offSet,int limit) {
         logger.debug("Executing query to get client profile by client parentProfileId: {}", parentProfileId);
 
         String schemaName = environment.getProperty("application.profiles.shcemaName");
         String sql=null;
-        int limit=15;
+
 
         if(userType==1) {
 
@@ -76,9 +76,9 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "        ) " +
                     " " +
                     "ORDER BY  " +
-                    "    ID ASC \n" +
-                    "    OFFSET "+offSet+" ROWS \n" +
-                    "    FETCH NEXT "+limit+" ROWS ONLY \n" +
+                    "    ID ASC " +
+                    "    OFFSET "+offSet+" ROWS " +
+                    "    FETCH NEXT "+limit+" ROWS ONLY " +
                     ")";
         }else if(userType==2) {
             sql="select  " +
@@ -104,7 +104,7 @@ public class VehicleStateImpl implements VehicleStateRepo {
                     "            OR "+SPECIFIC_VEHICLE_ID+" IS NULL " +
                     "        )    " +
                     "    order by t.ID asc " +
-                    " OFFSET "+offSet+" ROWS\n" +
+                    " OFFSET "+offSet+" ROWS" +
                     "           FETCH NEXT "+limit+" ROWS ONLY)";
         } else if (userType==3) {
             sql="SELECT   " +
@@ -161,46 +161,46 @@ public class VehicleStateImpl implements VehicleStateRepo {
 
         if(userType==1){
 
-            sql="SELECT COUNT(*) AS total_rows\n" +
-                    "FROM (\n" +
-                    "    SELECT t.ID\n" +
-                    "    FROM NEX_INDIVIDUAL_TEMP t\n" +
-                    "    WHERE t.GROUP_ID = "+parentProfileId+" AND (t.VEHICLE_ID = NULL OR NULL IS NULL)\n" +
+            sql="SELECT COUNT(*) AS total_rows" +
+                    "FROM (" +
+                    "    SELECT t.ID" +
+                    "    FROM NEX_INDIVIDUAL_TEMP t" +
+                    "    WHERE t.GROUP_ID = "+parentProfileId+" AND (t.VEHICLE_ID = NULL OR NULL IS NULL)" +
                     ")";
 
         } else {
-            sql="SELECT COUNT(*) AS total_rows\n" +
-                    "FROM (\n" +
-                    "    SELECT ROWNUM                               ROWNO,\n" +
-                    "           VEHICLE_ID,\n" +
-                    "           ENGIN,\n" +
-                    "           LAT,\n" +
-                    "           LON,\n" +
-                    "           VDATE,\n" +
-                    "           VEH_MAINTENANCE,\n" +
-                    "           ICON_TYPE,\n" +
-                    "           DEPT_ID,\n" +
-                    "           GET_VEHICLE_NAME (0, VEHICLE_ID)     AS VEHICLE_NAME\n" +
-                    "    FROM (\n" +
-                    "        SELECT ROWNUM                                     ROWNO,\n" +
-                    "               t.VEHICLE_ID,\n" +
-                    "               t.ENGIN,\n" +
-                    "               t.LAT,\n" +
-                    "               t.LON,\n" +
-                    "               TO_CHAR (TO_DATE (t.VDATE, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24,\n" +
-                    "                        'YYYY-MM-DD HH24:MI:SS')          AS VDATE,\n" +
-                    "               get_vehicle_service_stat (t.VEHICLE_ID)    AS VEH_MAINTENANCE,\n" +
-                    "               t.ICON_TYPE,\n" +
-                    "               d.profile_id                               AS DEPT_ID\n" +
-                    "        FROM nex_individual_temp t, NEX_EXTENDED_USER_VS_VEHICLE d\n" +
-                    "        WHERE     d.profile_id = "+userId+"\n" +
-                    "              AND d.profile_type = '2'\n" +
-                    "              AND d.parent_profile_id = "+parentProfileId+"\n" +
-                    "              AND t.VEHICLE_ID = d.VEHICLE_ID\n" +
-                    "              AND (t.VEHICLE_ID IS NULL OR NULL IS NULL)\n" +
-                    "        ORDER BY t.ID ASC \n" +
-                    "        OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY\n" +
-                    "    )\n" +
+            sql="SELECT COUNT(*) AS total_rows" +
+                    "FROM (" +
+                    "    SELECT ROWNUM                               ROWNO," +
+                    "           VEHICLE_ID," +
+                    "           ENGIN," +
+                    "           LAT," +
+                    "           LON," +
+                    "           VDATE," +
+                    "           VEH_MAINTENANCE," +
+                    "           ICON_TYPE," +
+                    "           DEPT_ID," +
+                    "           GET_VEHICLE_NAME (0, VEHICLE_ID)     AS VEHICLE_NAME" +
+                    "    FROM (" +
+                    "        SELECT ROWNUM                                     ROWNO," +
+                    "               t.VEHICLE_ID," +
+                    "               t.ENGIN," +
+                    "               t.LAT," +
+                    "               t.LON," +
+                    "               TO_CHAR (TO_DATE (t.VDATE, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24," +
+                    "                        'YYYY-MM-DD HH24:MI:SS')          AS VDATE," +
+                    "               get_vehicle_service_stat (t.VEHICLE_ID)    AS VEH_MAINTENANCE," +
+                    "               t.ICON_TYPE," +
+                    "               d.profile_id                               AS DEPT_ID" +
+                    "        FROM nex_individual_temp t, NEX_EXTENDED_USER_VS_VEHICLE d" +
+                    "        WHERE     d.profile_id = "+userId+"" +
+                    "              AND d.profile_type = '2'" +
+                    "              AND d.parent_profile_id = "+parentProfileId+"" +
+                    "              AND t.VEHICLE_ID = d.VEHICLE_ID" +
+                    "              AND (t.VEHICLE_ID IS NULL OR NULL IS NULL)" +
+                    "        ORDER BY t.ID ASC " +
+                    "        OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY" +
+                    "    )" +
                     ")";
 
         }

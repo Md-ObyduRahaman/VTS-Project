@@ -13,12 +13,12 @@ public class VtsBackendApplication {
 
         SpringApplication.run(VtsBackendApplication.class, args);
 
-        System.out.println("\n============================================");
+        System.out.println("============================================");
         System.out.println("Welcome to the VTS APIs Management System");
         System.out.println("Date in GMT: " + new Date());
-        System.out.println("============================================\n");
+        System.out.println("============================================");
 
-        System.out.println("APIs Service start...\n");
+        System.out.println("APIs Service start...");
 
     }
 }

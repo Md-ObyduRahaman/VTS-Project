@@ -53,22 +53,22 @@ public class OverSpeedImpl implements OverSpeedRepo {
 
         String sql = null;
 
-            sql = "SELECT * from \n" +
-                    "(\n" +
-                    "    select \n" +
-                    "      VEHICLEID, \n" +
-                    "      " + shcemaName + "GET_VEHICLE_NAME(0, VEHICLEID) VEHICLE_NAME, \n" +
-                    "      LOCATION, \n" +
-                    "      LAT, \n" +
-                    "      LON, \n" +
-                    "      ALERT_TYPE, \n" +
-                    "      to_char(to_date(BREAK_TIME,'YYYY-MM-DD HH24:MI:SS'),'DD-MM-YYYY HH24:MI:SS') as BREAK_TIME, \n" +
-                    "      SPEED, \n" +
-                    "      row_number() over (order by VEHICLEID DESC) rowno \n" +
-                    "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX \n" +
-                    "    WHERE BREAK_TIME BETWEEN '" + p_date_from + "' AND '" + p_date_to + "'\n" +
+            sql = "SELECT * from " +
+                    "(" +
+                    "    select " +
+                    "      VEHICLEID, " +
+                    "      " + shcemaName + "GET_VEHICLE_NAME(0, VEHICLEID) VEHICLE_NAME, " +
+                    "      LOCATION, " +
+                    "      LAT, " +
+                    "      LON, " +
+                    "      ALERT_TYPE, " +
+                    "      to_char(to_date(BREAK_TIME,'YYYY-MM-DD HH24:MI:SS'),'DD-MM-YYYY HH24:MI:SS') as BREAK_TIME, " +
+                    "      SPEED, " +
+                    "      row_number() over (order by VEHICLEID DESC) rowno " +
+                    "    FROM " + shcemaName + "NEX_ALL_ALERT_REPORT_DATA_EX " +
+                    "    WHERE BREAK_TIME BETWEEN '" + p_date_from + "' AND '" + p_date_to + "'" +
                     " and VEHICLEID="+p_vehicle_id+
-                    ") \n" +
+                    ") " +
                     "order by rowno";
 
 

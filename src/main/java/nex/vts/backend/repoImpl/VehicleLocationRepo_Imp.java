@@ -24,7 +24,7 @@ public class VehicleLocationRepo_Imp implements VehicleLocation_Repo {
 
 /*    @Override
     public VehicleLocation getVehicleLocation(Integer vehicleId) throws SQLException, BadSqlGrammarException, DataAccessException {
-        String getQuery = "select a.vehicle_id    vehicle_id,\n       a.userid             vehicle_name,\n       a.lat                                                                                latitude,\n       a.lon                                                                                longitude,\n       to_char(to_date(a.vdate, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24, 'YYYY-MM-DD HH24:MI:SS') vehicle_time,\n       a.engin                                                                              engine,\n       a.speed                                                                              speed\nFROM GPSNEXGP.NEX_INDIVIDUAL_TEMP a,\n     GPSNEXGP.NEX_INDIVIDUAL_CLIENT b\nwhere a.vehicle_id = b.id\n  AND a.vehicle_id = ?";
+        String getQuery = "select a.vehicle_id    vehicle_id,       a.userid             vehicle_name,       a.lat                                                                                latitude,       a.lon                                                                                longitude,       to_char(to_date(a.vdate, 'YYYY-MM-DD HH24:MI:SS') - 2 / 24, 'YYYY-MM-DD HH24:MI:SS') vehicle_time,       a.engin                                                                              engine,       a.speed                                                                              speedFROM GPSNEXGP.NEX_INDIVIDUAL_TEMP a,     GPSNEXGP.NEX_INDIVIDUAL_CLIENT bwhere a.vehicle_id = b.id  AND a.vehicle_id = ?";
         return  jdbcTemplate.queryForObject(getQuery, new Vehicle_Location_RowMapper(),new Object[]{vehicleId});
 //        return Optional.of(getVehicleLocation);
     }*//*todo ------ get vehicle location ------------*/
@@ -63,7 +63,7 @@ public class VehicleLocationRepo_Imp implements VehicleLocation_Repo {
 
 /*    @Override
     public Optional getVehicleDistrict() throws SQLException, BadSqlGrammarException, DataAccessException {
-        String getQuery = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.DISTRICT";
+        String getQuery = "SELECT ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B" + "FROM GPSNEXGP.DISTRICT";
         List<Vehicle_District> vehicleDistricts = jdbcTemplate.query(getQuery, new Vehicle_District_RowMapper());
         return Optional.of(vehicleDistricts);
     }*/
@@ -71,14 +71,14 @@ public class VehicleLocationRepo_Imp implements VehicleLocation_Repo {
 //    @Override
 //    public Object getVehicleThana(Integer thanaId) throws SQLException, BadSqlGrammarException, DataAccessException {
 //        if (!thanaId.equals(null)) try {
-//            String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana\n".concat("where DIST_ID = ?");
+//            String getQuery = "SELECT /*ID,*/ DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B" + "FROM GPSNEXGP.thana".concat("where DIST_ID = ?");
 //            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper(), thanaId);
 //            return Optional.of(vehicleThanas);
 //        } catch (Exception exception) {
 //            return LOGGER.getName();
 //        }
 //        else {
-//            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.thana";
+//            String getQuery = "SELECT ID, DIST_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B" + "FROM GPSNEXGP.thana";
 //            List<Vehicle_Thana> vehicleThanas = jdbcTemplate.query(getQuery, new Vehicle_Thana_RowMapper());
 //            return Optional.of(vehicleThanas);
 //        }
@@ -87,11 +87,11 @@ public class VehicleLocationRepo_Imp implements VehicleLocation_Repo {
 /*    @Override
     public Optional getVehicleRoad(Integer districtId) throws SQLException, BadSqlGrammarException, DataAccessException {
         if (districtId.equals(null)) {
-            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\nFROM GPSNEXGP.road";
+            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_BFROM GPSNEXGP.road";
             List<Vehicle_Road> vehicleRoads = jdbcTemplate.query(getQuery, new Vehicle_Road_RowMapper());
             return Optional.of(vehicleRoads);
         } else {
-            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B\n" + "FROM GPSNEXGP.road".concat(" where DIST_ID = ?");
+            String getQuery = "SELECT ID, DIST_ID, THANA_ID, DESCRIPTION, POLYX, POLYY, DESCRIPTION_B" + "FROM GPSNEXGP.road".concat(" where DIST_ID = ?");
             List<Vehicle_Road> vehicleRoads = jdbcTemplate.query(getQuery, new Vehicle_Road_RowMapper(), districtId);
             return Optional.of(vehicleRoads);
         }

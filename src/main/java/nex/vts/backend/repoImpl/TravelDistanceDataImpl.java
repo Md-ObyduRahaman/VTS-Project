@@ -58,19 +58,19 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
 
-        String sql = "SELECT\n" +
-                "   ROW_NUMBER() OVER (ORDER BY DATETIME) AS key,\n" +
-                "    GROUPID AS profile_id,\n" +
-                "    VEHICLEID AS VEHICLE_ID,\n" +
-                "    DATETIME AS DATE_TIME,\n" +
-                "    NUM_OF_DAYS,\n" +
-                "    ROUND(DISTANCE,3) as DISTANCE,\n" +
-                "    MOTHER_ACCOUNT_NAME AS main_account_id,\n" +
-                "    ROUND(AVG(DISTANCE) OVER (), 3) AS average_distance,\n" +
-                "    ROUND(SUM(DISTANCE) OVER (), 3)  AS total_distance,\n" +
-                "    ROUND(MAX(DISTANCE) OVER (), 3) AS MAX_DISTANCE,\n" +
-                "    ROUND(MIN(DISTANCE) OVER (), 3) AS MIN_DISTANCE,\n" +
-                "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount\n" +
+        String sql = "SELECT" +
+                "   ROW_NUMBER() OVER (ORDER BY DATETIME) AS key," +
+                "    GROUPID AS profile_id," +
+                "    VEHICLEID AS VEHICLE_ID," +
+                "    DATETIME AS DATE_TIME," +
+                "    NUM_OF_DAYS," +
+                "    ROUND(DISTANCE,3) as DISTANCE," +
+                "    MOTHER_ACCOUNT_NAME AS main_account_id," +
+                "    ROUND(AVG(DISTANCE) OVER (), 3) AS average_distance," +
+                "    ROUND(SUM(DISTANCE) OVER (), 3)  AS total_distance," +
+                "    ROUND(MAX(DISTANCE) OVER (), 3) AS MAX_DISTANCE," +
+                "    ROUND(MIN(DISTANCE) OVER (), 3) AS MIN_DISTANCE," +
+                "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount" +
                 "FROM " + shcemaName + "NEX_DISTANCE_REPOT_DATA_EX";
 
         // Step 1: Call the stored procedure with parameters
