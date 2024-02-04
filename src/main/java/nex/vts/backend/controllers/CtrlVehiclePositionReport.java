@@ -48,11 +48,11 @@ public class CtrlVehiclePositionReport {
     //v1/1/users/35449794/1/vehiclePositionReport/25819/20240110/20240117/1
     ///api/private/v1/1/3/users/45532698/4035/vehiclePositionReport/0/20240119/20240129/2
     @GetMapping(value = "v1/{deviceType}/{userType}/users/{userId}/{p_userId}/vehiclePositionReport/{vehicleId}/{fromDate}/{toDate}/{locationStat}/{offSet}/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> getVehiclePositionReport(@PathVariable("vehicleId") Integer vehicleId,
-                                                            @PathVariable("deviceType") Integer deviceType,
-                                                            @PathVariable("deviceType") Integer offSet,
-                                                            @PathVariable("deviceType") Integer limit,
-                                                            @PathVariable("userType") Integer userType,
+    private ResponseEntity<String> getVehiclePositionReport(@PathVariable("vehicleId") int vehicleId,
+                                                            @PathVariable("deviceType") int deviceType,
+                                                            @PathVariable("offSet") int offSet,
+                                                            @PathVariable("limit") int limit,
+                                                            @PathVariable("userType") int userType,
                                                             @PathVariable("p_userId") String p_userId,
                                                             @PathVariable("fromDate") String fromDate,
                                                             @PathVariable("toDate") String toDate,
