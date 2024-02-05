@@ -70,7 +70,7 @@ public class TravelDistanceDataImpl implements TravelDistanceDataRepo {
                 "    ROUND(SUM(DISTANCE) OVER (), 3)  AS total_distance," +
                 "    ROUND(MAX(DISTANCE) OVER (), 3) AS MAX_DISTANCE," +
                 "    ROUND(MIN(DISTANCE) OVER (), 3) AS MIN_DISTANCE," +
-                "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount" +
+                "    ROUND(COUNT(*) OVER (), 0) AS totalRowCount   " +
                 "FROM " + shcemaName + "NEX_DISTANCE_REPOT_DATA_EX";
 
         // Step 1: Call the stored procedure with parameters
