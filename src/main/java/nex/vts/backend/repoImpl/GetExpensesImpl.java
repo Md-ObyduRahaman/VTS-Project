@@ -83,11 +83,11 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
-        String sql="select ID, EXP_NAME" +
-                "FROM "+shcemaName+" nex_expense_name" +
-                "where READ_ONLY = '1' " +
-                "OR (PROFILE_ID = "+userId+" AND profile_type = "+userType+")" +
-                "order by EXP_NAME ASC";
+        String sql="select ID, EXP_NAME  " +
+                "  FROM "+shcemaName+" nex_expense_name  " +
+                "  where READ_ONLY = '1' " +
+                "  OR (PROFILE_ID = "+userId+" AND profile_type = "+userType+")" +
+                "  order by EXP_NAME ASC";
 
         Optional<ArrayList<ExpenseNameList>> getExpenseList=Optional.empty();
         try {
@@ -97,13 +97,13 @@ public class GetExpensesImpl implements GetExpenseHeaderRepo {
         }
         catch (BadSqlGrammarException e) {
             logger.trace("No Data found with userId is {}  Sql Grammar Exception", userId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         }catch (TransientDataAccessException f){
             logger.trace("No Data found with userId is {} network or driver issue or db is temporarily unavailable  ", userId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
         }catch (CannotGetJdbcConnectionException g){
             logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", userId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
 
 
