@@ -50,8 +50,8 @@ public class CtrlVehiclePositionReport {
     @GetMapping(value = "v1/{deviceType}/{userType}/users/{userId}/{p_userId}/vehiclePositionReport/{vehicleId}/{fromDate}/{toDate}/{locationStat}/{offSet}/{limit}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getVehiclePositionReport(@PathVariable("vehicleId") Integer vehicleId,
                                                             @PathVariable("deviceType") Integer deviceType,
-                                                            @PathVariable("deviceType") Integer offSet,
-                                                            @PathVariable("deviceType") Integer limit,
+                                                            @PathVariable("offSet") Integer offSet,
+                                                            @PathVariable("limit") Integer limit,
                                                             @PathVariable("userType") Integer userType,
                                                             @PathVariable("p_userId") String p_userId,
                                                             @PathVariable("fromDate") String fromDate,
@@ -66,7 +66,9 @@ public class CtrlVehiclePositionReport {
         if(!is_Valid_Limit(limit))
         {
             throw new AppCommonException(5002 + "##Invalid or incorrect limit!##" + deviceType + "##" + API_VERSION);
-        }  if(!is_Valid_OffSet(offSet))
+        }
+
+        if(!is_Valid_OffSet(offSet))
         {
             throw new AppCommonException(5002 + "##Invalid or incorrect offSet!##" + deviceType + "##" + API_VERSION);
         }

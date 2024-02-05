@@ -27,7 +27,7 @@ public class VehPaginationLib {
 
     public static boolean is_Valid_OffSet(int _offSet) {
 
-        if (!String.valueOf(_offSet).equals("") || _offSet < 0) {
+        if (String.valueOf(_offSet).equals("") || _offSet < 0) {
             return false;
 //            "Invalid or incorrect offset!";
         } else {
