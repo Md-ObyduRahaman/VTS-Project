@@ -104,13 +104,13 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                     BeanPropertyRowMapper.newInstance(AccountSummaryInfo.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         } catch (TransientDataAccessException f) {
             logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
         } catch (CannotGetJdbcConnectionException g) {
             logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
 
 
@@ -135,13 +135,13 @@ public class AccountSummaryImpl implements AccountSummaryRepo {
                     BeanPropertyRowMapper.newInstance(AccountSummaryInfo.class)));
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with profileId is {}  Sql Grammar Exception", profileId);
-            throw new AppCommonException(4001 + "##Sql Grammar Exception" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
         } catch (TransientDataAccessException f) {
             logger.trace("No Data found with profileId is {} network or driver issue or db is temporarily unavailable  ", profileId);
-            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4002 + "##Network or driver issue or db is temporarily unavailable##" + deviceType + "##" + API_VERSION);
         } catch (CannotGetJdbcConnectionException g) {
             logger.trace("No Data found with profileId is {} could not acquire a jdbc connection  ", profileId);
-            throw new AppCommonException(4003 + "##A database connection could not be obtained" + deviceType + "##" + API_VERSION);
+            throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
 
 
