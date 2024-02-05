@@ -122,15 +122,15 @@ public class CtrlAccountSummary {
 
         Optional<ArrayList<AccountSummaryInfo>> data = null;
 
-        if (operatorid.equals("1")) {
+        if (operatorid.equals("1")) { // [For -> GP]
             data = accountSummaryRepo.getVehicleDataforGP(profileType, profileId, p_profile_p_id, deviceType);
             //
-        } else if (operatorid.equals("3")) {
+        } else if (operatorid.equals("3")) {// [For -> M2M]
             data = accountSummaryRepo.getVehicleDataforM2m(profileType, profileId, p_profile_p_id, deviceType);
         }
 
 
-        System.out.println(data.get().get(0));
+        // System.out.println(data.get().get(0));
 
         AccountSummaryInfo accountSummaryInfo = new AccountSummaryInfo();
 

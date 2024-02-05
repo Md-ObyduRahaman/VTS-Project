@@ -1,135 +1,3 @@
-<<<<<<< HEAD
-13:34:53.232 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 17744 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-13:34:53.237 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-13:34:53.238 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-13:34:53.312 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-13:34:53.337 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-13:34:53.338 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-13:34:53.338 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-13:34:54.393 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-13:34:54.440 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 40 ms. Found 0 JDBC repository interfaces.
-13:34:55.102 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-13:34:55.104 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-13:34:55.160 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-13:34:55.161 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1822 ms
-13:34:55.460 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-13:34:56.073 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@18a79af5
-13:34:56.080 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
-13:34:56.244 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-13:34:56.253 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@d139f57{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13686980017909147582/],AVAILABLE}
-13:34:56.255 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@9f5765d{STARTING}[11.0.13,sto=0] @5753ms
-13:34:56.720 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2ba72f7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7aed38e4, org.springframework.security.web.context.SecurityContextHolderFilter@7905a69, org.springframework.security.web.header.HeaderWriterFilter@254135f4, org.springframework.security.web.authentication.logout.LogoutFilter@6a0ea973, nex.vts.backend.filter.JwtAuthFilter@69f7ee12, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@488b1926, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@657daaa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@278db882, org.springframework.security.web.session.SessionManagementFilter@66a6e07a, org.springframework.security.web.access.ExceptionTranslationFilter@581747d7, org.springframework.security.web.access.intercept.AuthorizationFilter@6fc2eda1]
-13:34:57.243 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-13:34:57.267 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-13:34:57.270 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-13:34:57.270 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-13:34:57.272 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-13:34:57.294 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@360f0107{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-13:34:57.295 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-13:34:57.305 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 4.924 seconds (process running for 6.803)
-13:48:33.775 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@9f5765d{STOPPING}[11.0.13,sto=0]
-13:48:33.782 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@360f0107{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-13:48:33.784 [SpringApplicationShutdownHook] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-13:48:33.786 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@d139f57{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.13686980017909147582/],STOPPED}
-13:48:33.811 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
-13:48:33.841 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
-17:35:27.013 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 10860 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-17:35:27.018 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-17:35:27.020 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-17:35:27.139 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-17:35:27.159 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-17:35:27.160 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:35:27.161 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:35:30.936 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-17:35:30.975 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 32 ms. Found 0 JDBC repository interfaces.
-17:35:31.950 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-17:35:31.954 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-17:35:32.013 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-17:35:32.015 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 4853 ms
-17:35:32.613 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-17:35:33.225 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@b3a7196
-17:35:33.227 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
-17:35:33.392 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-17:35:33.401 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@7e8446c{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.16719443996159937105/],AVAILABLE}
-17:35:33.405 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@2449aeb6{STARTING}[11.0.13,sto=0] @9543ms
-17:35:34.103 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@439af793, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@252484c0, org.springframework.security.web.context.SecurityContextHolderFilter@31e44c37, org.springframework.security.web.header.HeaderWriterFilter@20f8383c, org.springframework.security.web.authentication.logout.LogoutFilter@65c235f4, nex.vts.backend.filter.JwtAuthFilter@560a84bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@406c6af7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3802f2c9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16c4fee5, org.springframework.security.web.session.SessionManagementFilter@1b035506, org.springframework.security.web.access.ExceptionTranslationFilter@652db7af, org.springframework.security.web.access.intercept.AuthorizationFilter@67803b03]
-17:35:34.535 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-17:35:34.563 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-17:35:34.569 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:35:34.587 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-17:35:34.591 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-17:35:34.637 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@43d7b21d{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-17:35:34.640 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-17:35:34.663 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 8.885 seconds (process running for 10.801)
-18:04:58.919 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@2449aeb6{STOPPING}[11.0.13,sto=0]
-18:04:58.925 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@43d7b21d{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-18:04:58.927 [SpringApplicationShutdownHook] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-18:04:58.930 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@7e8446c{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.16719443996159937105/],STOPPED}
-18:04:58.938 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
-18:04:59.294 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
-18:05:14.395 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 1896 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-18:05:14.398 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-18:05:14.400 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-18:05:14.457 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-18:05:14.484 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-18:05:14.485 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-18:05:14.486 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-18:05:16.344 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-18:05:16.376 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 27 ms. Found 0 JDBC repository interfaces.
-18:05:17.188 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-18:05:17.190 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-18:05:17.237 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-18:05:17.237 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 2749 ms
-18:05:17.572 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-18:05:18.964 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@39b5ebf8
-18:05:18.971 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
-18:05:19.121 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-18:05:19.129 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@5e6cac5{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.1336707238470843271/],AVAILABLE}
-18:05:19.133 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@677e6022{STARTING}[11.0.13,sto=0] @6867ms
-18:05:19.618 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7532f5fe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@44445773, org.springframework.security.web.context.SecurityContextHolderFilter@949e3f1, org.springframework.security.web.header.HeaderWriterFilter@5ed6a8e5, org.springframework.security.web.authentication.logout.LogoutFilter@5b95c273, nex.vts.backend.filter.JwtAuthFilter@4ff66298, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27bc6427, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@356643c3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f1d4b9a, org.springframework.security.web.session.SessionManagementFilter@175e8465, org.springframework.security.web.access.ExceptionTranslationFilter@481eb5fa, org.springframework.security.web.access.intercept.AuthorizationFilter@5e1dfb50]
-18:05:19.985 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-18:05:20.023 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-18:05:20.027 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-18:05:20.028 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-18:05:20.032 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-18:05:20.055 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@3fa0d664{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-18:05:20.057 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-18:05:20.068 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 6.503 seconds (process running for 7.802)
-18:05:14.395 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 1896 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
-18:05:14.398 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
-18:05:14.400 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
-18:05:14.457 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
-18:05:14.484 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
-18:05:14.485 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-18:05:14.486 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-18:05:16.344 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-18:05:16.376 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 27 ms. Found 0 JDBC repository interfaces.
-18:05:17.188 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
-18:05:17.190 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
-18:05:17.237 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
-18:05:17.237 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 2749 ms
-18:05:17.572 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
-18:05:18.964 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@39b5ebf8
-18:05:18.971 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
-18:05:19.121 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
-18:05:19.129 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@5e6cac5{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.1336707238470843271/],AVAILABLE}
-18:05:19.133 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@677e6022{STARTING}[11.0.13,sto=0] @6867ms
-18:05:19.618 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7532f5fe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@44445773, org.springframework.security.web.context.SecurityContextHolderFilter@949e3f1, org.springframework.security.web.header.HeaderWriterFilter@5ed6a8e5, org.springframework.security.web.authentication.logout.LogoutFilter@5b95c273, nex.vts.backend.filter.JwtAuthFilter@4ff66298, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27bc6427, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@356643c3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f1d4b9a, org.springframework.security.web.session.SessionManagementFilter@175e8465, org.springframework.security.web.access.ExceptionTranslationFilter@481eb5fa, org.springframework.security.web.access.intercept.AuthorizationFilter@5e1dfb50]
-18:05:19.985 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
-18:05:20.023 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
-18:05:20.027 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-18:05:20.028 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
-18:05:20.032 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
-18:05:20.055 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@3fa0d664{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-18:05:20.057 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
-18:05:20.068 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 6.503 seconds (process running for 7.802)
-18:09:33.461 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@677e6022{STOPPING}[11.0.13,sto=0]
-18:09:33.466 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@3fa0d664{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
-18:09:33.468 [SpringApplicationShutdownHook] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
-18:09:33.470 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@5e6cac5{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.1336707238470843271/],STOPPED}
-18:09:33.477 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
-18:09:33.559 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
-=======
 13:03:02.269 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 17604 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
 13:03:02.276 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
 13:03:02.280 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
@@ -175,4 +43,627 @@
 13:05:51.863 [SpringApplicationShutdownHook] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@54a0e242{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.4601750470379447217/],STOPPED}
 13:05:51.874 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
 13:05:51.881 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
->>>>>>> 8d3c21388f37efd6b33c4c5bf925ba227beec78a
+13:36:34.816 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:36:34.818 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:36:34.820 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:36:35.000 [restartedMain] WARN  o.s.core.annotation.AnnotationTypeMapping - addConventionMappings:320 - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 6.1. Please annotate the following attributes in @org.springframework.retry.annotation.EnableRetry with appropriate @AliasFor declarations: [proxyTargetClass]
+13:36:35.030 [restartedMain] INFO  o.s.boot.devtools.restart.ChangeableUrls - logTo:250 - The Class-Path manifest attribute in C:\Users\User\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.7.0.0\ojdbc8-21.7.0.0.jar referenced one or more files that do not exist: file:/C:/Users/User/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.7.0.0/oraclepki.jar
+13:36:35.030 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+13:36:35.031 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+13:36:36.470 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:36:36.512 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 35 ms. Found 0 JDBC repository interfaces.
+13:36:37.341 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+13:36:37.343 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+13:36:37.390 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+13:36:37.391 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 2359 ms
+13:36:37.858 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-1 - Starting...
+13:36:38.336 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@22d2c849
+13:36:38.338 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-1 - Start completed.
+13:36:38.465 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+13:36:38.474 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@7494d878{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.786661499451082238/],AVAILABLE}
+13:36:38.476 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@e9b6940{STARTING}[11.0.13,sto=0] @6143ms
+13:36:39.070 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b7426ae, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6dbd4e66, org.springframework.security.web.context.SecurityContextHolderFilter@629b984, org.springframework.security.web.header.HeaderWriterFilter@1739c622, org.springframework.security.web.authentication.logout.LogoutFilter@14154711, nex.vts.backend.filter.JwtAuthFilter@39efb655, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e5863ff, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ad37be9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a1f79c3, org.springframework.security.web.session.SessionManagementFilter@48476320, org.springframework.security.web.access.ExceptionTranslationFilter@4955854d, org.springframework.security.web.access.intercept.AuthorizationFilter@c1942c4]
+13:36:39.481 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+13:36:39.508 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+13:36:39.512 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:36:39.512 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+13:36:39.514 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
+13:36:39.543 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@3afe66db{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:36:39.545 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+13:36:39.558 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 5.911 seconds (process running for 7.225)
+13:37:02.202 [qtp1209877245-47] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - logException:207 - Resolved [io.jsonwebtoken.ExpiredJwtException: JWT expired at 2024-02-05T07:31:35Z. Current time: 2024-02-05T07:37:02Z, a difference of 327108 milliseconds.  Allowed clock skew: 0 milliseconds.]
+13:37:45.603 [qtp1209877245-48] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:28 - Executing query to find user by username: integrated.security
+13:37:45.606 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+13:37:45.607 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT ID,       USERNAME,       PASSWORD,       PROFILE_ID,       MAIN_ACCOUNT_ID,       USER_TYPE,       ROLE_ID,       IS_ACCOUNT_ACTIVE,       IS_REMOTE_ACCESS_ENABLED,       PARENT_PROFILE_ID,       OPERATORID,          LPAD (OPERATORID, 2, '0')       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID  FROM (SELECT ID,               USERNAME,               PASSWORD,               PROFILE_ID,               MAIN_ACCOUNT_ID,               USER_TYPE,               ROLE_ID,               IS_ACCOUNT_ACTIVE,               IS_REMOTE_ACCESS_ENABLED,               PARENT_PROFILE_ID,               OPERATORID          FROM vts_login_user         WHERE USERNAME = 'integrated.security' )]
+13:37:45.938 [qtp1209877245-48] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:28 - Executing query to find user by username: integrated.security
+13:37:45.938 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+13:37:45.938 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT ID,       USERNAME,       PASSWORD,       PROFILE_ID,       MAIN_ACCOUNT_ID,       USER_TYPE,       ROLE_ID,       IS_ACCOUNT_ACTIVE,       IS_REMOTE_ACCESS_ENABLED,       PARENT_PROFILE_ID,       OPERATORID,          LPAD (OPERATORID, 2, '0')       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID  FROM (SELECT ID,               USERNAME,               PASSWORD,               PROFILE_ID,               MAIN_ACCOUNT_ID,               USER_TYPE,               ROLE_ID,               IS_ACCOUNT_ACTIVE,               IS_REMOTE_ACCESS_ENABLED,               PARENT_PROFILE_ID,               OPERATORID          FROM vts_login_user         WHERE USERNAME = 'integrated.security' )]
+13:37:45.951 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+13:37:45.952 [qtp1209877245-48] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [select t.ID          ID,       t.VEHICLE_ID  VEHICLEID,       t.ENGIN       ENGINE,       t.SPEED       SPEED,       t.LAT         LAT,       t.LON         LON,       t.FAVORITE    FAVORITE,       t.ICON_TYPE   ICONTYPE,       t.ORDER_INDEX ORDERINDEX,       t.USERID      USERIDFROM nex_individual_temp twhere t.VEHICLE_ID IN      (select ID       from NEX_INDIVIDUAL_CLIENT       where COMPANY_ID = ?         and ACTIVATION = 1         and OPERATORID = ?)order by t.USERID asc, t.ORDER_INDEX asc]
+13:37:45.973 [qtp1209877245-48] ERROR nex.vts.backend.repoImpl.Vehicle_List_Repo_Imp - getVehicleList:106 - PreparedStatementCallback; bad SQL grammar [select t.ID          ID,       t.VEHICLE_ID  VEHICLEID,       t.ENGIN       ENGINE,       t.SPEED       SPEED,       t.LAT         LAT,       t.LON         LON,       t.FAVORITE    FAVORITE,       t.ICON_TYPE   ICONTYPE,       t.ORDER_INDEX ORDERINDEX,       t.USERID      USERIDFROM nex_individual_temp twhere t.VEHICLE_ID IN      (select ID       from NEX_INDIVIDUAL_CLIENT       where COMPANY_ID = ?         and ACTIVATION = 1         and OPERATORID = ?)order by t.USERID asc, t.ORDER_INDEX asc]
+13:37:45.976 [qtp1209877245-48] ERROR nex.vts.backend.services.Vehicle_List_Service - getVehicles:56 - 606##you have not permission to see the vehicle list7215##1
+13:37:45.978 [qtp1209877245-48] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - doResolveHandlerMethodException:419 - Failure in @ExceptionHandler nex.vts.backend.exceptions.AppCommonExceptionHandler#transparentApiErrorException(AppCommonException)
+java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
+	at nex.vts.backend.exceptions.AppCommonExceptionHandler.transparentApiErrorException(AppCommonExceptionHandler.java:45)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1340)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1151)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1097)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1010)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:902)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:500)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:884)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:587)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:764)
+	at org.eclipse.jetty.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1665)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at nex.vts.backend.filter.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:61)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.eclipse.jetty.websocket.servlet.WebSocketUpgradeFilter.doFilter(WebSocketUpgradeFilter.java:170)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:527)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:131)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:578)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:223)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1570)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1380)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:176)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:484)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1543)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:174)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1302)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
+	at org.eclipse.jetty.server.Server.handle(Server.java:563)
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$0(HttpChannel.java:505)
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:762)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:497)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:282)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:314)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:100)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:53)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.runTask(AdaptiveExecutionStrategy.java:416)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.consumeTask(AdaptiveExecutionStrategy.java:385)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.tryProduce(AdaptiveExecutionStrategy.java:272)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.lambda$new$0(AdaptiveExecutionStrategy.java:140)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:411)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:934)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1078)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+13:37:45.988 [qtp1209877245-48] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - doResolveHandlerMethodException:419 - Failure in @ExceptionHandler nex.vts.backend.exceptions.AppCommonExceptionHandler#transparentApiErrorException(AppCommonException)
+java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
+	at nex.vts.backend.exceptions.AppCommonExceptionHandler.transparentApiErrorException(AppCommonExceptionHandler.java:45)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:413)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80)
+	at nex.vts.backend.filter.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:71)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.eclipse.jetty.websocket.servlet.WebSocketUpgradeFilter.doFilter(WebSocketUpgradeFilter.java:170)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:202)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1635)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:527)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:131)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:578)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:223)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1570)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1380)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:176)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:484)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1543)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:174)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1302)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
+	at org.eclipse.jetty.server.Server.handle(Server.java:563)
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$0(HttpChannel.java:505)
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:762)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:497)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:282)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:314)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:100)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:53)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.runTask(AdaptiveExecutionStrategy.java:416)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.consumeTask(AdaptiveExecutionStrategy.java:385)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.tryProduce(AdaptiveExecutionStrategy.java:272)
+	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.lambda$new$0(AdaptiveExecutionStrategy.java:140)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:411)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:934)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1078)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+13:57:59.469 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 227 class path changes (0 additions, 227 deletions, 0 modifications)
+13:57:59.490 [Thread-16] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@e9b6940{STOPPING}[11.0.13,sto=0]
+13:57:59.494 [Thread-16] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@3afe66db{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:57:59.497 [Thread-16] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+13:57:59.499 [Thread-16] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@7494d878{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.786661499451082238/],STOPPED}
+13:57:59.525 [Thread-16] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-1 - Shutdown initiated...
+13:57:59.538 [Thread-16] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-1 - Shutdown completed.
+13:59:09.584 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:59:09.585 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:59:09.585 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:59:09.845 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:59:09.846 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 0 ms. Found 0 JDBC repository interfaces.
+13:59:10.033 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+13:59:10.033 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+13:59:10.035 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+13:59:10.036 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 448 ms
+13:59:10.048 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+13:59:10.049 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@349ffcec{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.10414663246261018399/],AVAILABLE}
+13:59:10.050 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@2c84564{STARTING}[11.0.13,sto=0] @1357717ms
+13:59:10.295 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-2 - Starting...
+13:59:10.715 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-2 - Added connection oracle.jdbc.driver.T4CConnection@3b776853
+13:59:10.715 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-2 - Start completed.
+13:59:10.789 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - getOrDeducePassword:86 - 
+
+Using generated security password: 943ad242-48f5-4506-983f-05e0b62f8c48
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+13:59:10.822 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5f2d3fa4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3dd37519, org.springframework.security.web.context.SecurityContextHolderFilter@6677e9e9, org.springframework.security.web.header.HeaderWriterFilter@daabe42, org.springframework.security.web.csrf.CsrfFilter@3a7b8529, org.springframework.security.web.authentication.logout.LogoutFilter@1a6d3307, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1f524dc3, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6fb0cbf3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5fa08b10, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@679d965f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c37ac3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@37b02be9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5404d1d5, org.springframework.security.web.access.ExceptionTranslationFilter@5aadbd37, org.springframework.security.web.access.intercept.AuthorizationFilter@437923ef]
+13:59:10.858 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+13:59:10.908 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:59:10.908 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+13:59:10.912 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 3 ms
+13:59:10.932 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@1ea63506{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:10.934 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+13:59:10.940 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 1.473 seconds (process running for 1358.607)
+13:59:10.946 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:58 - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration matched:
+      - AllNestedConditions 2 matched 0 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) did not find any beans; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
+      - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   UserDetailsServiceAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.security.config.annotation.ObjectPostProcessor; SearchStrategy: all) found bean 'objectPostProcessor'; @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+13:59:22.878 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 218 class path changes (218 additions, 0 deletions, 0 modifications)
+13:59:22.888 [Thread-19] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@2c84564{STOPPING}[11.0.13,sto=0]
+13:59:22.890 [Thread-19] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@1ea63506{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:22.891 [Thread-19] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+13:59:22.891 [Thread-19] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@349ffcec{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.10414663246261018399/],STOPPED}
+13:59:22.894 [Thread-19] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-2 - Shutdown initiated...
+13:59:23.127 [Thread-19] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-2 - Shutdown completed.
+13:59:23.246 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:59:23.246 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:59:23.246 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:59:24.694 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:59:24.710 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+13:59:24.928 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+13:59:24.928 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+13:59:24.929 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+13:59:24.930 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1681 ms
+13:59:25.041 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-3 - Starting...
+13:59:25.431 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-3 - Added connection oracle.jdbc.driver.T4CConnection@71671469
+13:59:25.432 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-3 - Start completed.
+13:59:25.484 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+13:59:25.485 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@46dfad84{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.17977505103473985109/],AVAILABLE}
+13:59:25.486 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@2044395b{STARTING}[11.0.13,sto=0] @1373152ms
+13:59:25.781 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@19c7b89f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d01eaa5, org.springframework.security.web.context.SecurityContextHolderFilter@1d61fbd4, org.springframework.security.web.header.HeaderWriterFilter@68985c4, org.springframework.security.web.authentication.logout.LogoutFilter@2d8db51, nex.vts.backend.filter.JwtAuthFilter@5c2f3d5f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@61cc10af, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ba10ef7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59c3a55a, org.springframework.security.web.session.SessionManagementFilter@27a3898a, org.springframework.security.web.access.ExceptionTranslationFilter@2a1ac96e, org.springframework.security.web.access.intercept.AuthorizationFilter@20e58aee]
+13:59:25.922 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+13:59:25.932 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+13:59:25.932 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:59:25.932 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+13:59:25.933 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
+13:59:25.937 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@559ec8f3{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:25.937 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+13:59:25.940 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 2.748 seconds (process running for 1373.608)
+13:59:25.942 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:58 - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration:
+      Did not match:
+         - AllNestedConditions 1 matched 1 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.web.SecurityFilterChain' securityFilterChain; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   SpringBootWebSecurityConfiguration.WebSecurityEnablerConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (names: springSecurityFilterChain; SearchStrategy: all) found beans named springSecurityFilterChain (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.security.config.annotation.web.configuration.EnableWebSecurity' (OnClassCondition)
+
+   UserDetailsServiceAutoConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) found beans of type 'org.springframework.security.authentication.AuthenticationManager' authenticationManager and found beans of type 'org.springframework.security.core.userdetails.UserDetailsService' userInfoUserDetailsService, userDetailsService and found beans of type 'org.springframework.security.authentication.AuthenticationProvider' authenticationProvider (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+13:59:34.833 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 218 class path changes (0 additions, 218 deletions, 0 modifications)
+13:59:34.874 [Thread-43] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@2044395b{STOPPING}[11.0.13,sto=0]
+13:59:34.876 [Thread-43] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@559ec8f3{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:34.877 [Thread-43] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+13:59:34.877 [Thread-43] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@46dfad84{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.17977505103473985109/],STOPPED}
+13:59:34.882 [Thread-43] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-3 - Shutdown initiated...
+13:59:35.198 [Thread-43] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-3 - Shutdown completed.
+13:59:35.434 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:59:35.435 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:59:35.435 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:59:35.800 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:59:35.804 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
+13:59:35.955 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
+java.lang.NullPointerException: Cannot read field "generatedClass" because "data" is null
+	at org.springframework.cglib.proxy.Enhancer.nextInstance(Enhancer.java:783)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at nex.vts.backend.VtsBackendApplication.main(VtsBackendApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+13:59:44.729 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+13:59:44.730 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+13:59:44.749 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:59:44.750 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:59:44.750 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:59:46.027 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:59:46.060 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 32 ms. Found 0 JDBC repository interfaces.
+13:59:46.429 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+13:59:46.430 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+13:59:46.431 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+13:59:46.432 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 1679 ms
+13:59:46.783 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-4 - Starting...
+13:59:47.119 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-4 - Added connection oracle.jdbc.driver.T4CConnection@49e1840e
+13:59:47.121 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-4 - Start completed.
+13:59:47.200 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+13:59:47.202 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@525a60b{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.15995636348294751545/],AVAILABLE}
+13:59:47.203 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@998d8f4{STARTING}[11.0.13,sto=0] @1394870ms
+13:59:47.471 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3bc17d1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74b1f729, org.springframework.security.web.context.SecurityContextHolderFilter@4ecaab7d, org.springframework.security.web.header.HeaderWriterFilter@29490c40, org.springframework.security.web.authentication.logout.LogoutFilter@9a8d2ee, nex.vts.backend.filter.JwtAuthFilter@3378c55e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d1666c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c5c522e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67af99bf, org.springframework.security.web.session.SessionManagementFilter@136fbfee, org.springframework.security.web.access.ExceptionTranslationFilter@6696a33f, org.springframework.security.web.access.intercept.AuthorizationFilter@39757e85]
+13:59:47.602 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+13:59:47.611 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+13:59:47.611 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:59:47.611 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+13:59:47.612 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
+13:59:47.615 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@57dd1e10{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:47.616 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+13:59:47.619 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 2.92 seconds (process running for 1395.286)
+13:59:47.620 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:63 - Condition evaluation unchanged
+13:59:56.437 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 218 class path changes (0 additions, 218 deletions, 0 modifications)
+13:59:56.440 [Thread-56] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@998d8f4{STOPPING}[11.0.13,sto=0]
+13:59:56.442 [Thread-56] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@57dd1e10{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+13:59:56.443 [Thread-56] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+13:59:56.443 [Thread-56] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@525a60b{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.15995636348294751545/],STOPPED}
+13:59:56.449 [Thread-56] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-4 - Shutdown initiated...
+13:59:56.678 [Thread-56] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-4 - Shutdown completed.
+13:59:56.846 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+13:59:56.846 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+13:59:56.847 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+13:59:57.485 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+13:59:57.488 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
+13:59:57.565 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
+java.lang.NullPointerException: Cannot read field "generatedClass" because "data" is null
+	at org.springframework.cglib.proxy.Enhancer.nextInstance(Enhancer.java:783)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at nex.vts.backend.VtsBackendApplication.main(VtsBackendApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+14:00:07.917 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+14:00:07.917 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+14:00:07.950 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+14:00:07.951 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+14:00:07.951 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+14:00:09.302 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+14:00:09.323 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 20 ms. Found 0 JDBC repository interfaces.
+14:00:09.961 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+14:00:09.962 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+14:00:09.964 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+14:00:09.964 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 2010 ms
+14:00:10.347 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-5 - Starting...
+14:00:10.680 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-5 - Added connection oracle.jdbc.driver.T4CConnection@3cd55ce6
+14:00:10.681 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-5 - Start completed.
+14:00:10.777 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+14:00:10.779 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@437948d3{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.4138743440816985367/],AVAILABLE}
+14:00:10.779 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@6a3f7c94{STARTING}[11.0.13,sto=0] @1418446ms
+14:00:11.794 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1286dc71, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32bad868, org.springframework.security.web.context.SecurityContextHolderFilter@51f4754a, org.springframework.security.web.header.HeaderWriterFilter@3f0933e1, org.springframework.security.web.authentication.logout.LogoutFilter@508e1243, nex.vts.backend.filter.JwtAuthFilter@59ed343b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@dc8ef78, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7ba8431b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@144b3596, org.springframework.security.web.session.SessionManagementFilter@7bc442f4, org.springframework.security.web.access.ExceptionTranslationFilter@44e3006c, org.springframework.security.web.access.intercept.AuthorizationFilter@237eaccb]
+14:00:12.018 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+14:00:12.036 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+14:00:12.036 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:00:12.036 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+14:00:12.037 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 1 ms
+14:00:12.044 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@1d3609db{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+14:00:12.045 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+14:00:12.049 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 4.202 seconds (process running for 1419.716)
+14:00:12.052 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:63 - Condition evaluation unchanged
+14:00:36.507 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - onApplicationEvent:211 - Restarting due to 227 class path changes (0 additions, 227 deletions, 0 modifications)
+14:00:36.527 [Thread-72] INFO  org.eclipse.jetty.server.Server - doStop:479 - Stopped Server@6a3f7c94{STOPPING}[11.0.13,sto=0]
+14:00:36.528 [Thread-72] INFO  org.eclipse.jetty.server.AbstractConnector - doStop:431 - Stopped ServerConnector@1d3609db{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+14:00:36.529 [Thread-72] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Destroying Spring FrameworkServlet 'dispatcherServlet'
+14:00:36.530 [Thread-72] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStop:1122 - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@437948d3{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.4138743440816985367/],STOPPED}
+14:00:36.534 [Thread-72] INFO  com.zaxxer.hikari.HikariDataSource - close:350 - HikariPool-5 - Shutdown initiated...
+14:00:36.687 [Thread-72] INFO  com.zaxxer.hikari.HikariDataSource - close:352 - HikariPool-5 - Shutdown completed.
+14:01:40.065 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+14:01:40.067 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+14:01:40.068 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+14:01:40.619 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+14:01:40.625 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+14:01:40.740 [restartedMain] ERROR org.springframework.boot.SpringApplication - reportFailure:820 - Application run failed
+java.lang.NullPointerException: Cannot read field "generatedClass" because "data" is null
+	at org.springframework.cglib.proxy.Enhancer.nextInstance(Enhancer.java:783)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at nex.vts.backend.VtsBackendApplication.main(VtsBackendApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+14:01:52.425 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+14:01:52.428 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - logTo:250 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+14:01:52.454 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarting:51 - Starting VtsBackendApplication using Java 19 with PID 3660 (D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo\target\classes started by User in D:\ATM_Java\Office_Nexdecade\VTS_BackEnd_Repo\VTS_BackEnd_Repo\vts_back-end_repo)
+14:01:52.455 [restartedMain] DEBUG nex.vts.backend.VtsBackendApplication - logStarting:52 - Running with Spring Boot v3.0.1, Spring v6.0.3
+14:01:52.455 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStartupProfileInfo:636 - The following 1 profile is active: "m2m"
+14:01:55.327 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:138 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+14:01:55.349 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - registerRepositoriesIn:208 - Finished Spring Data repository scanning in 21 ms. Found 0 JDBC repository interfaces.
+14:01:55.603 [restartedMain] INFO  o.s.b.w.e.jetty.JettyServletWebServerFactory - getWebServer:164 - Server initialized with port: 8009
+14:01:55.603 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:384 - jetty-11.0.13; built: 2022-12-07T20:47:15.149Z; git: a04bd1ccf844cf9bebc12129335d7493111cbff6; jvm 19+36-2238
+14:01:55.606 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring embedded WebApplicationContext
+14:01:55.606 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - prepareWebApplicationContext:291 - Root WebApplicationContext: initialization completed in 3139 ms
+14:01:56.010 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:110 - HikariPool-7 - Starting...
+14:01:56.385 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - checkFailFast:565 - HikariPool-7 - Added connection oracle.jdbc.driver.T4CConnection@3b6878b8
+14:01:56.385 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - getConnection:123 - HikariPool-7 - Start completed.
+14:01:56.448 [restartedMain] INFO  o.e.jetty.server.session.DefaultSessionIdManager - doStart:332 - Session workerName=node0
+14:01:56.452 [restartedMain] INFO  org.eclipse.jetty.server.handler.ContextHandler - doStart:906 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@469f34b9{application,/,[file:///C:/Users/User/AppData/Local/Temp/jetty-docbase.8009.334667164622771310/],AVAILABLE}
+14:01:56.453 [restartedMain] INFO  org.eclipse.jetty.server.Server - doStart:439 - Started Server@3be5c87c{STARTING}[11.0.13,sto=0] @1524119ms
+14:01:56.994 [restartedMain] INFO  o.s.security.web.DefaultSecurityFilterChain - <init>:54 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6f337ce7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@326dc7df, org.springframework.security.web.context.SecurityContextHolderFilter@d5539fd, org.springframework.security.web.header.HeaderWriterFilter@7ea18cca, org.springframework.security.web.authentication.logout.LogoutFilter@3eec6deb, nex.vts.backend.filter.JwtAuthFilter@21b516f6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d750c85, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f40143d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7b1012f2, org.springframework.security.web.session.SessionManagementFilter@fff5303, org.springframework.security.web.access.ExceptionTranslationFilter@2596b4d6, org.springframework.security.web.access.intercept.AuthorizationFilter@6446533f]
+14:01:57.475 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - startServer:59 - LiveReload server is running on port 35729
+14:01:57.494 [restartedMain] DEBUG nex.vts.backend.filter.JwtAuthFilter - init:240 - Filter 'jwtAuthFilter' configured for use
+14:01:57.494 [restartedMain] INFO  o.e.j.server.handler.ContextHandler.application - log:2349 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:01:57.494 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:532 - Initializing Servlet 'dispatcherServlet'
+14:01:57.496 [restartedMain] INFO  org.springframework.web.servlet.DispatcherServlet - initServletBean:554 - Completed initialization in 2 ms
+14:01:57.502 [restartedMain] INFO  org.eclipse.jetty.server.AbstractConnector - doStart:376 - Started ServerConnector@7ea46b37{HTTP/1.1, (http/1.1)}{0.0.0.0:8009}
+14:01:57.502 [restartedMain] INFO  o.s.boot.web.embedded.jetty.JettyWebServer - start:171 - Jetty started on port(s) 8009 (http/1.1) with context path '/'
+14:01:57.508 [restartedMain] INFO  nex.vts.backend.VtsBackendApplication - logStarted:57 - Started VtsBackendApplication in 5.152 seconds (process running for 1525.175)
+14:01:57.511 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - onApplicationEvent:63 - Condition evaluation unchanged
+14:02:26.261 [qtp642106470-198] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:28 - Executing query to find user by username: integrated.security
+14:02:26.264 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+14:02:26.264 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT ID,       USERNAME,       PASSWORD,       PROFILE_ID,       MAIN_ACCOUNT_ID,       USER_TYPE,       ROLE_ID,       IS_ACCOUNT_ACTIVE,       IS_REMOTE_ACCESS_ENABLED,       PARENT_PROFILE_ID,       OPERATORID,          LPAD (OPERATORID, 2, '0')       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID  FROM (SELECT ID,               USERNAME,               PASSWORD,               PROFILE_ID,               MAIN_ACCOUNT_ID,               USER_TYPE,               ROLE_ID,               IS_ACCOUNT_ACTIVE,               IS_REMOTE_ACCESS_ENABLED,               PARENT_PROFILE_ID,               OPERATORID          FROM vts_login_user         WHERE USERNAME = 'integrated.security' )]
+14:02:26.292 [qtp642106470-198] TRACE nex.vts.backend.repoImpl.RepoVtsLoginUser - findByUserName:28 - Executing query to find user by username: integrated.security
+14:02:26.293 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+14:02:26.293 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [SELECT ID,       USERNAME,       PASSWORD,       PROFILE_ID,       MAIN_ACCOUNT_ID,       USER_TYPE,       ROLE_ID,       IS_ACCOUNT_ACTIVE,       IS_REMOTE_ACCESS_ENABLED,       PARENT_PROFILE_ID,       OPERATORID,          LPAD (OPERATORID, 2, '0')       || LPAD (DECODE (USER_TYPE, 1, PROFILE_ID, MAIN_ACCOUNT_ID), 6, '0')    CUSTOMER_ID  FROM (SELECT ID,               USERNAME,               PASSWORD,               PROFILE_ID,               MAIN_ACCOUNT_ID,               USER_TYPE,               ROLE_ID,               IS_ACCOUNT_ACTIVE,               IS_REMOTE_ACCESS_ENABLED,               PARENT_PROFILE_ID,               OPERATORID          FROM vts_login_user         WHERE USERNAME = 'integrated.security' )]
+14:02:26.310 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+14:02:26.311 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [select t.ID          ID,
+       t.VEHICLE_ID  VEHICLEID,
+       t.ENGIN       ENGINE,
+       t.SPEED       SPEED,
+       t.LAT         LAT,
+       t.LON         LON,
+       t.FAVORITE    FAVORITE,
+       t.ICON_TYPE   ICONTYPE,
+       t.ORDER_INDEX ORDERINDEX,
+       t.USERID      USERID
+FROM nex_individual_temp t
+where t.VEHICLE_ID IN
+      (select ID
+       from NEX_INDIVIDUAL_CLIENT
+       where COMPANY_ID = ?
+         and ACTIVATION = 1
+         and OPERATORID = ?)
+order by t.USERID asc, t.ORDER_INDEX asc]
+14:02:26.436 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - query:711 - Executing prepared SQL query
+14:02:26.436 [qtp642106470-198] DEBUG org.springframework.jdbc.core.JdbcTemplate - execute:643 - Executing prepared SQL statement [select t.ID          ID,
+       t.VEHICLE_ID  VEHICLEID,
+       t.ENGIN       ENGINE,
+       t.SPEED       SPEED,
+       t.LAT         LAT,
+       t.LON         LON,
+       t.FAVORITE    FAVORITE,
+       t.ICON_TYPE   ICONTYPE,
+       t.ORDER_INDEX ORDERINDEX,
+       t.USERID      USERID
+FROM nex_individual_temp t
+where t.VEHICLE_ID IN
+      (select ID
+       from NEX_INDIVIDUAL_CLIENT
+       where COMPANY_ID = ?
+         and ACTIVATION = 1
+         and OPERATORID = ?)
+order by t.USERID asc, t.ORDER_INDEX asc]
