@@ -44,6 +44,12 @@ import static nex.vts.backend.utilities.UtilityMethods.obfuscateId;
 @RestController
 @RequestMapping("/api/private")
 public class CtrlAccountSummary {
+
+    private final Logger logger = LoggerFactory.getLogger(CtrlAccountSummary.class);
+    private final BaseResponse baseResponse = new BaseResponse();
+    private final short API_VERSION = 1;
+
+
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
@@ -53,14 +59,14 @@ public class CtrlAccountSummary {
 
     @Autowired
     RepoVtsLoginUser repoVtsLoginUser;
-    private final short API_VERSION = 1;
-    private final Logger logger = LoggerFactory.getLogger(CtrlAccountSummary.class);
+
+
 
     @GetMapping(value = "/v1/{deviceType}/users/{userId}/accountSummary/{userType}/{profileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String> getAccountSummary(
-            @PathVariable("userType") Integer userType,
-            @PathVariable("deviceType") Integer deviceType,
-            @PathVariable("profileId") Integer profileId,
+            @PathVariable("userType") int userType,
+            @PathVariable("deviceType") int  deviceType,
+            @PathVariable("profileId") int profileId,
             @PathVariable("userId") Long userId) throws IOException {
         //
         //
@@ -90,8 +96,6 @@ public class CtrlAccountSummary {
         Optional<VTS_LOGIN_USER> vtsLoginUser = repoVtsLoginUser.findByUserName(username, environment.getProperty("application.profiles.shcemaName"));
         AccountSummaryInfo summary = getAccountSummary(userType, profileId, vtsLoginUser.get().getMAIN_ACCOUNT_ID(), deviceType, fullName.getFULL_NAME(), fullName.getMOTHER_ACC_NAME());
 
-        BaseResponse baseResponse = new BaseResponse();
-
 
         if (summary.getFull_NAME().isEmpty()) {
             baseResponse.data = new ArrayList<>();
@@ -109,6 +113,8 @@ public class CtrlAccountSummary {
         return ResponseEntity.ok().body(objectMapper.writeValueAsString(baseResponse));
 
     }
+
+
 
     private AccountSummaryInfo getAccountSummary(Integer profileType, Integer profileId, Integer p_profile_p_id, Integer deviceType, String full_NAME, String motherAccountName) throws IOException {
 
