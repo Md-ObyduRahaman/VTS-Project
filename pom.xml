@@ -10,7 +10,7 @@
     </parent>
     <groupId>nex.vts.backend</groupId>
     <artifactId>vts_backend</artifactId>
-    <version>0.0.18_M2M</version>
+    <version>0.0.19_M2M</version>
     <name>vts_backend</name>
     <description>Back-End project for vts_backend</description>
     <properties>
