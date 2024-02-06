@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class VehicleDetailInfo {
 

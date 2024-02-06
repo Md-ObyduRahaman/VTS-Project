@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nex.vts.backend.dbentities.VTS_LOGIN_USER;
 import nex.vts.backend.exceptions.AppCommonException;
 import nex.vts.backend.models.responses.BaseResponse;
+import nex.vts.backend.models.responses.VehicleDetailInfo;
+import nex.vts.backend.models.responses.VehicleInfoResponse;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.services.VehicleDetails_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
@@ -36,6 +38,7 @@ public class CtrlVehicleDetails {
     /*    Map<String, Object> respnse = new LinkedHashMap<>();
         ObjectMapper mapper = new ObjectMapper();*/
     VTS_LOGIN_USER loginUser = new VTS_LOGIN_USER();
+    VehicleInfoResponse infoResponse;
     Environment environment;
     RepoVtsLoginUser repoVtsLoginUser;
     private final short API_VERSION = 1;
@@ -73,17 +76,17 @@ public class CtrlVehicleDetails {
 
 //        VehicleDetailsResponse vehicleDetailsResponse = detailsService.getVehicleDetail(profileType,userId,schemaName,operatorId);
 
-        if (!detailsService.getVehicleDetail(vehicleId,schemaName,operatorId).equals(null)) {
-
+            try {
+            detailsService.getVehicleDetail(vehicleId,schemaName,operatorId);
             baseResponse.data = detailsService.getVehicleDetail(vehicleId,schemaName,operatorId);
             baseResponse.apiName = "Vehicle-Details";
             baseResponse.status = true;
         }
-        else {
-            baseResponse.data=new ArrayList<>();
+        catch (Exception e){
+            baseResponse.data= new ArrayList<>();
             baseResponse.apiName = "Vehicle-Details";
-            baseResponse.errorMsg = "can not provide required parameter";
             baseResponse.status = false;
+            baseResponse.errorMsg = String.valueOf(vehicleId).concat(" has no details");
         }
 /*        baseResponse.apiName = "vehicle-Detail";
         baseResponse.status = true;
