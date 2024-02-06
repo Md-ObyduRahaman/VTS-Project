@@ -6,6 +6,7 @@ import nex.vts.backend.models.responses.BaseResponse;
 import nex.vts.backend.models.responses.VehiclePositionReportData;
 import nex.vts.backend.repoImpl.RepoVtsLoginUser;
 import nex.vts.backend.repositories.VehiclePositionRepo;
+import nex.vts.backend.services.VehiclePositionReport_Service;
 import nex.vts.backend.utilities.AESEncryptionDecryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +40,15 @@ public class CtrlVehiclePositionReport {
     @Autowired
     Environment environment;
 
-    @Autowired
-    VehiclePositionRepo vehiclePositionRepo;
+/*    @Autowired
+    VehiclePositionRepo vehiclePositionRepo;*/
+
+    private VehiclePositionReport_Service positionReportService;
+
+    public CtrlVehiclePositionReport(VehiclePositionReport_Service positionReportService) {
+        this.positionReportService = positionReportService;
+    }
+
     private final short API_VERSION = 1;
     private final Logger logger = LoggerFactory.getLogger(CtrlVehiclePositionReport.class);
 
@@ -74,21 +82,27 @@ public class CtrlVehiclePositionReport {
             throw new AppCommonException(5002 + "##Invalid or incorrect offSet!##" + deviceType + "##" + API_VERSION);
         }
 
-        boolean flag = dateChecker(fromDate, toDate);
+//        boolean flag = dateChecker(fromDate, toDate);
 
 
         BaseResponse baseResponse = new BaseResponse();
 
-        Optional<ArrayList<VehiclePositionReportData>> vehiclePositionReportData;
-        if (flag) {
-            vehiclePositionReportData = vehiclePositionRepo.findVehiclePositionRepo(String.valueOf(userId),p_userId, vehicleId, fromDate, toDate, locationStat, deviceType, userType,offSet,limit);
-        } else {
-            vehiclePositionReportData = Optional.empty();
-        }
+//        Optional<ArrayList<VehiclePositionReportData>> vehiclePositionReportData;
+//        if (flag) {
+
+            positionReportService.getPositionReportResponse(String.valueOf(userId),p_userId,
+                    vehicleId, fromDate, toDate, locationStat, deviceType, userType,offSet,limit);
+
+/*            vehiclePositionReportData = vehiclePositionRepo.findVehiclePositionRepo(String.valueOf(userId),p_userId,
+                    vehicleId, fromDate, toDate, locationStat, deviceType, userType,offSet,limit);*/
+/*        } else {
+            *//*vehiclePositionReportData = Optional.empty();*//*
+        }*/
 
 
 
-        if (vehiclePositionReportData.isEmpty()) {
+        if (positionReportService.getPositionReportResponse(String.valueOf(userId),p_userId,
+                vehicleId, fromDate, toDate, locationStat, deviceType, userType,offSet,limit).equals(null)) {
             baseResponse.data = new ArrayList<>();
             baseResponse.status = false;
             baseResponse.apiName="VehiclePositionReport";
@@ -97,7 +111,8 @@ public class CtrlVehiclePositionReport {
         } else {
             baseResponse.apiName = "VehiclePositionReport";
             baseResponse.status = true;
-            baseResponse.data = vehiclePositionReportData;
+            baseResponse.data =positionReportService.getPositionReportResponse(String.valueOf(userId),p_userId,
+                    vehicleId, fromDate, toDate, locationStat, deviceType, userType,offSet,limit);
         }
 
 

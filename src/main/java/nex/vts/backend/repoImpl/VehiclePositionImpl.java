@@ -1,7 +1,6 @@
 package nex.vts.backend.repoImpl;
 
 import nex.vts.backend.exceptions.AppCommonException;
-import nex.vts.backend.models.responses.VehicleOthersInfoModel;
 import nex.vts.backend.models.responses.VehiclePositionReportData;
 import nex.vts.backend.repositories.VehiclePositionRepo;
 import org.slf4j.Logger;
@@ -12,7 +11,7 @@ import org.springframework.dao.TransientDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.Optional;
 
 import static nex.vts.backend.utilities.ExtractLocationLib.get_Location;
 
-@Service
+@Repository
 public class VehiclePositionImpl implements VehiclePositionRepo {
     private final short API_VERSION = 1;
     @Autowired
@@ -32,11 +31,11 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId,String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType,int offSet,int limit) {
+    public List<VehiclePositionReportData> findVehiclePositionRepo(String userId, String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat, int deviceType, int userType, int offSet, int limit) {
 
         String shcemaName = environment.getProperty("application.profiles.shcemaName");
 
-        Optional<ArrayList<VehiclePositionReportData>> datalList;
+        ArrayList<VehiclePositionReportData> datalList;
 
         String sql = null;
         String outterSql, innerSql = null;
@@ -178,7 +177,8 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
         try {
 
             System.out.println("Here is Sql......"+sql);
-            ArrayList<VehiclePositionReportData> vehiclePositionReportDataList = (ArrayList<VehiclePositionReportData>) jdbcTemplate.query(sql, (rs, rowNum) -> {
+            ArrayList<VehiclePositionReportData> vehiclePositionReportDataList = (ArrayList<VehiclePositionReportData>)
+                    jdbcTemplate.query(sql, (rs, rowNum) -> {
                 VehiclePositionReportData vehiclePositionReportData = new VehiclePositionReportData();
                 vehiclePositionReportData.setSl(rs.getString("SL"));
 
@@ -187,11 +187,13 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                 if (locationStat.equals("1")) {
                     vehiclePositionReportData.setDateTime(rs.getString("S_TIME"));
                     vehiclePositionReportData.setEngStat(rs.getString("S_ENGINE_STAT"));
-                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("S_LAT"),rs.getString("S_LON")));
+                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("S_LAT"),
+                            rs.getString("S_LON")));
                 } else {
                     vehiclePositionReportData.setDateTime(rs.getString("E_TIME"));
                     vehiclePositionReportData.setEngStat(rs.getString("E_ENGINE_STAT"));
-                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("E_LAT"),rs.getString("E_LON")));
+                    vehiclePositionReportData.setLocationDetails(get_Location(rs.getString("E_LAT"),
+                            rs.getString("E_LON")));
                 }
                 vehiclePositionReportData.setVehName(rs.getString("V_NAME"));
                 vehiclePositionReportData.setVehId(rs.getString("VEHICLEID"));
@@ -200,7 +202,7 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
                 return vehiclePositionReportData;
             });
 
-            datalList = Optional.ofNullable(vehiclePositionReportDataList);
+            datalList = vehiclePositionReportDataList;
         } catch (BadSqlGrammarException e) {
             logger.trace("No Data found with userId is {}  Sql Grammar Exception", userId);
             throw new AppCommonException(4001 + "##Sql Grammar Exception##" + deviceType + "##" + API_VERSION);
@@ -211,9 +213,9 @@ public class VehiclePositionImpl implements VehiclePositionRepo {
             logger.trace("No Data found with userId is {} could not acquire a jdbc connection  ", userId);
             throw new AppCommonException(4003 + "##A database connection could not be obtained##" + deviceType + "##" + API_VERSION);
         }
-        if(datalList.get().isEmpty())
+        if(datalList.isEmpty())
         {
-            return Optional.empty();
+            return null;
         }else {
             return datalList;
         }

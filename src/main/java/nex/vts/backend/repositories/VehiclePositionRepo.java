@@ -1,14 +1,12 @@
 package nex.vts.backend.repositories;
 
-
-
 import nex.vts.backend.models.responses.VehiclePositionReportData;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 public interface VehiclePositionRepo {
-
-    public Optional<ArrayList<VehiclePositionReportData>> findVehiclePositionRepo(String userId,String p_userId, Integer vehicleId, String fromDate, String toDate, String locationStat,int deviceType,int userType,int offSet,int limit);
-
+     List<VehiclePositionReportData>
+     findVehiclePositionRepo(String userId, String p_userId, Integer vehicleId,
+                             String fromDate, String toDate, String locationStat, int deviceType,
+                             int userType, int offSet, int limit);
 }
