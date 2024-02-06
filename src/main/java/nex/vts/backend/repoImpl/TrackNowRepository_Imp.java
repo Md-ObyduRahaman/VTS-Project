@@ -28,16 +28,16 @@ public class TrackNowRepository_Imp implements TrackNowRepository {
     @Override
     public Optional<VehicleCurrentLocation> getCurrentLocation(Integer vehicleId) {
 
-        String getQuery = "select a.ID                 ID," +
-                "       a.LAT                LAT," +
-                "       a.LON                LONGS," +
-                "       a.SPEED              SPEED," +
-                "       get_track_data_head(a.max_id)                 HEAD," +
-                "       a.vdate              TIME_STAMP," +
-                "       a.vdate              DATETIME," +
-                "       a.ENGIN              ENGIN" +
-                "from nex_individual_temp a,nex_individual_client b" +
-                "where a.vehicle_id = b.id" +
+        String getQuery = "select a.ID                 ID,\n" +
+                "       a.LAT                LAT,\n" +
+                "       a.LON                LONGS,\n" +
+                "       a.SPEED              SPEED,\n" +
+                "       get_track_data_head(a.max_id)                 HEAD,\n" +
+                "       a.vdate              TIME_STAMP,\n" +
+                "       a.vdate              DATETIME,\n" +
+                "       a.ENGIN              ENGIN\n" +
+                "from nex_individual_temp a,nex_individual_client b\n" +
+                "where a.vehicle_id = b.id\n" +
                 "and b.id = ?";
 
         try
