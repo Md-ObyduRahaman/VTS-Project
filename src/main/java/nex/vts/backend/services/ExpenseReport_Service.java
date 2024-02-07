@@ -23,17 +23,26 @@ public class ExpenseReport_Service {
         this.reportRepo = reportRepo;
     }
 
-    public ExpenseReportResponse getExpenseReport(String groupId,String userId,String fromDate,String toDate,String schemaName,Integer offSet,Integer limit){
+    public ExpenseReportResponse getExpenseReport(String groupId,String userId,String fromDate,String toDate,String schemaName/*,Integer offSet,Integer limit*/){
 
         int totalSum;
 
         try {
 
-            List<DetailsOfExpense> detailsOfExpense = (List<DetailsOfExpense>) reportRepo.getExpenseInfo(groupId, userId, fromDate, toDate, schemaName,offSet,limit);
+            List<DetailsOfExpense> detailsOfExpense = (List<DetailsOfExpense>) reportRepo.getExpenseInfo(groupId, userId, fromDate, toDate, schemaName/*,offSet,limit*/);
             totalSum = detailsOfExpense.stream().mapToInt(DetailsOfExpense::getExpAmount).sum();
-            response.setDateTime(fromDate.concat("/ ").concat(toDate));
-            response.setTotalExpense(totalSum);
-            response.setDetailsOfExpense(detailsOfExpense);
+
+            if (!detailsOfExpense.isEmpty())
+            {
+                response.setDateTime(fromDate.concat("/ ").concat(toDate));
+                response.setTotalExpense(totalSum);
+                response.setDetailsOfExpense(detailsOfExpense);
+            }
+            else {
+                response.setDateTime(null);
+                response.setTotalExpense(totalSum);
+                response.setDetailsOfExpense(null);
+            }
 
         }
         catch (Exception e){

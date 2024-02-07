@@ -66,7 +66,7 @@ public class ModifyVehicleSettingsRepo_Imp implements ModifyVehicleSettings_Repo
         } catch (Exception e) {
 
             logger.error(e.getMessage());
-            throw new AppCommonException(600 + "##Required parameter is missing" + profileId + "##" + API_VERSION);
+            throw new AppCommonException(600 + "##Required parameter is missing##" + profileId + "##" + API_VERSION);
 
         } finally {
 
@@ -83,15 +83,15 @@ public class ModifyVehicleSettingsRepo_Imp implements ModifyVehicleSettings_Repo
     @Override
     public VehicleConfigModel getVehicleSettings(Integer vehicleId) {
 
-        String query = "SELECT v.ID             ID," +
-                "       v.USERID         USERID," +
-                "       v.CELL_PHONE     CELL_PHONE," +
-                "       v.EMAIL          EMAIL," +
-                "       v.FAVORITE       FAVORITE," +
-                "       d.MAX_CAR_SPEED  MAX_CAR_SPEED" +
-                "FROM nex_individual_client v," +
-                "     NEX_DRIVERINFO d" +
-                "where v.ID = ?" +
+        String query = "SELECT v.ID             ID,\n" +
+                "       v.USERID         USERID,\n" +
+                "       v.CELL_PHONE     CELL_PHONE,\n" +
+                "       v.EMAIL          EMAIL,\n" +
+                "       v.FAVORITE       FAVORITE,\n" +
+                "       d.MAX_CAR_SPEED  MAX_CAR_SPEED\n" +
+                "FROM nex_individual_client v,\n" +
+                "     NEX_DRIVERINFO d\n" +
+                "where v.ID = ?\n" +
                 "  and v.ID = d.USERID";
         try {
 
